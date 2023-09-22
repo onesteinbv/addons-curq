@@ -9,7 +9,6 @@
                 <field name="create_date"/>
                 <field name="url"/>
                 <field name="params"/>
-                <field name="res"/>
             </tree>
         </field>
     </record>
