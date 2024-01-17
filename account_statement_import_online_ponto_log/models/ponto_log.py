@@ -1,11 +1,9 @@
 # Copyright 2023 Onestein (<https://www.onestein.nl>)
 # License OPL-1 (https://www.odoo.com/documentation/16.0/legal/licenses.html#odoo-apps).
 
-import json
 import logging
-from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 

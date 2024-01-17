@@ -2,7 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import json
-from odoo import _, fields, models
+
+from odoo import models
 
 
 class PontoInterface(models.AbstractModel):
@@ -13,9 +14,7 @@ class PontoInterface(models.AbstractModel):
         self._log_response_in_action(url, params, res)
         return res
 
-    def _log_response_in_action(
-        self, url, params, res
-    ):
+    def _log_response_in_action(self, url, params, res):
         # Serializing json
         params = json.dumps(params)
         res = json.dumps(res, indent=4)
