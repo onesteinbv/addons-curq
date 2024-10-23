@@ -59,7 +59,7 @@
                                             <button type="object" class="btn btn-primary btn-sm" name="button_immediate_install" states="uninstalled" groups="base.group_system">
                                                 Activate
                                             </button>
-                                            <button type="object" class="btn btn-secondary btn-sm" name="button_uninstall_wizard" states="installed" groups="base.group_system">
+                                            <button type="object" class="btn btn-secondary btn-sm" name="button_immediate_uninstall" states="installed" groups="base.group_system">
                                                 Deactivate
                                             </button>
                                             <button states="to remove" type="object" class="btn btn-sm btn-secondary" name="button_uninstall_cancel" groups="base.group_system">
