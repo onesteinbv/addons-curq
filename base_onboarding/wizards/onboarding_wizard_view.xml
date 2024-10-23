@@ -28,7 +28,55 @@
             </xpath>
             <xpath expr="//footer" position="before">
                 <field name="company_id" invisible="1" />
-                <group name="company" attrs="{'invisible': [('state', '!=', 'start')]}">
+                <group name="installation" attrs="{'invisible': [('state', '!=', 'start')]}" >
+                    <p colspan="2">Activating apps can take some time</p>
+                    <field
+                        name="module_ids"
+                        mode="kanban" nolabel="1" colspan="2"
+                    >
+                    <kanban create="false" class="o_modules_kanban">
+                        <field name="icon"/>
+                        <field name="to_buy"/>
+                        <field name="name"/>
+                        <field name="state"/>
+                        <field name="summary"/>
+                        <field name="website"/>
+                        <field name="application"/>
+
+                        <templates>
+                            <t t-name="kanban-box">
+                                <div class="oe_module_vignette">
+                                    <t t-set="installed" t-value="record.state.raw_value == 'installed'"/>
+                                    <img t-attf-src="#{record.icon.value}" class="oe_module_icon" alt="Icon"/>
+                                    <div class="oe_module_desc" t-att-title="record.shortdesc.value" style="float: left">
+                                        <h4 class="o_kanban_record_title">
+                                            <field name="shortdesc"/>&amp;nbsp;
+                                        </h4>
+                                        <p class="oe_module_name">
+                                            <field name="summary"/>
+                                        </p>
+                                        <div class="oe_module_action d-flex flex-wrap justify-content-between">
+                                            <button type="object" class="btn btn-primary btn-sm" name="button_immediate_install" states="uninstalled" groups="base.group_system">
+                                                Activate
+                                            </button>
+                                            <button type="object" class="btn btn-secondary btn-sm" name="button_uninstall_wizard" states="installed" groups="base.group_system">
+                                                Deactivate
+                                            </button>
+                                            <button states="to remove" type="object" class="btn btn-sm btn-secondary" name="button_uninstall_cancel" groups="base.group_system">
+                                                Cancel Uninstall
+                                            </button>
+                                            <button states="to install" type="object" class="btn btn-sm btn-secondary" name="button_install_cancel" groups="base.group_system">
+                                                Cancel Install
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </templates>
+                    </kanban>
+                    </field>
+                </group>
+                <group name="company" attrs="{'invisible': [('state', '!=', 'company_info')]}">
                     <group string="Corporate Identity">
                         <p colspan="2">
                             It's important for your company to have a <b>corporate identity</b>.

@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Human Resources Installation",
+    "name": "Human Resources",
     "summary": "Install modules related to human resource management",
     "author": "Onestein",
     "website": "https://onestein.nl",

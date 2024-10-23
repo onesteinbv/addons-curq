@@ -9,28 +9,39 @@ class OnboardingWizard(models.TransientModel):
     company_id = fields.Many2one(
         comodel_name="res.company", default=lambda self: self.env.company
     )
-
     company_logo = fields.Binary(related="company_id.logo", readonly=False)
-
     company_vat = fields.Char(related="company_id.vat", readonly=False)
-
     company_registry = fields.Char(
         related="company_id.company_registry", readonly=False
     )
-
     company_phone = fields.Char(related="company_id.phone", readonly=False)
-
     company_email = fields.Char(related="company_id.email", readonly=False)
-
     company_website = fields.Char(related="company_id.website", readonly=False)
 
     fetchmail_server_id = fields.Many2one(
         comodel_name="fetchmail.server", string="Incoming Mail Server"
     )
-
     ir_mail_server_id = fields.Many2one(
         comodel_name="ir.mail_server", string="Outgoing Mail Server"
     )
+
+    module_ids = fields.Many2many(
+        comodel_name="ir.module.module", compute="_compute_module_ids"
+    )
+
+    @api.depends("state")
+    def _compute_module_ids(self):
+        installable_module_names = [
+            "account_install",
+            "website_install",
+            "membership_install",
+            "hr_install",
+        ]
+        installable_modules = self.env["ir.module.module"].search(
+            [("name", "in", installable_module_names)]
+        )
+        for wizard in self:
+            wizard.module_ids = installable_modules
 
     @api.depends("state")
     def _compute_allow_back(self):
@@ -45,7 +56,8 @@ class OnboardingWizard(models.TransientModel):
     @api.model
     def _selection_state(self):
         return [
-            ("start", "Company Information"),
+            ("start", "Installation"),
+            ("company_info", "Company Information"),
             ("mailing", "Mailing"),
             ("final", "Final"),
         ]

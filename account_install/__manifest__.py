@@ -1,8 +1,7 @@
 {
-    "name": "Accounting installation",
+    "name": "Accounting",
     "summary": "Install accounting modules",
     "author": "Onestein",
-    "website": "https://onestein.nl",
     "category": "Accounting",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",

@@ -1,5 +1,5 @@
 {
-    "name": "Membership Installation",
+    "name": "Community Builder",
     "summary": "Install modules related to community building",
     "author": "Onestein",
     "website": "https://onestein.nl",

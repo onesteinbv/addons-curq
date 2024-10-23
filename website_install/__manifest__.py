@@ -1,5 +1,5 @@
 {
-    "name": "Website Installation",
+    "name": "Website & Blog",
     "summary": "Install modules related to website building",
     "author": "Onestein",
     "website": "https://onestein.nl",
