@@ -40,7 +40,6 @@
         "digest_disable",
         "partner_external_map",
         "fetchmail_notify_error_to_sender",
-        "base_municipality",  # ? contacts
+        "base_municipality",
     ],
-    "application": True,
 }

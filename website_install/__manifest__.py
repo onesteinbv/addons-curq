@@ -13,5 +13,4 @@
         "website_odoo_debranding",
         "website_onboarding",
     ],
-    "application": True,
 }
