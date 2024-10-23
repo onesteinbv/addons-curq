@@ -4,11 +4,11 @@
 {
     "name": "Onboarding",
     "author": "Onestein",
-    "website": "https://www.onestein.eu",
+    "website": "https://onestein.nl",
     "category": "Extra Tools",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
-    "depends": ["website", "multi_step_wizard", "web", "mail"],
+    "depends": ["multi_step_wizard", "web", "mail"],
     "data": [
         "security/res_groups.xml",
         "security/ir.model.access.csv",
