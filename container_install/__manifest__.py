@@ -41,5 +41,6 @@
         "partner_external_map",
         "fetchmail_notify_error_to_sender",
         "base_municipality",
+        "product_category_product_link",
     ],
 }
