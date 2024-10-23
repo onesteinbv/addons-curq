@@ -1,0 +1,23 @@
+{
+    "name": "Membership Installation",
+    "summary": "Install modules related to community building",
+    "author": "Onestein",
+    "website": "https://onestein.nl",
+    "category": "Membership",
+    "version": "16.0.1.0.0",
+    "license": "AGPL-3",
+    "depends": [
+        "container_install",
+        "membership",
+        "membership_accessibility",
+        "membership_committee",
+        "membership_section",
+        "membership_contribution",
+        "membership_extension",
+        "membership_origin",
+        "membership_prorate",
+        "membership_report",
+        "membership_subscription",
+        "membership_variable_period",
+    ],
+}
