@@ -7,7 +7,6 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "depends": [
-        "container_install",
         "membership",
         "membership_accessibility",
         "membership_committee",
