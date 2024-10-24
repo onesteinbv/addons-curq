@@ -42,5 +42,6 @@
         "fetchmail_notify_error_to_sender",
         "base_municipality",
         "product_category_product_link",
+        "base_purge_dependency",
     ],
 }

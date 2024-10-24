@@ -6,7 +6,6 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "depends": [
-        "container_install",
         "account",
         "account_payment_mode",
         "account_payment_order",
@@ -55,4 +54,5 @@
         "mollie_account_sync",
         "payment_mollie_official",
     ],
+    "purge_depends": True,
 }

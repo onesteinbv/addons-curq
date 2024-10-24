@@ -10,7 +10,6 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "depends": [
-        "container_install",
         "hr",
         "hr_expense",
         "hr_expense_remove_mobile_link",
@@ -20,4 +19,5 @@
         "l10n_nl_hr_recruitment",
         "l10n_nl_hr_expense",
     ],
+    "purge_depends": True,
 }
