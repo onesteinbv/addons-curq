@@ -1,6 +1,6 @@
 {
     "name": "Website & Blog",
-    "summary": "Install modules related to website building",
+    "summary": "Build a website",
     "author": "Onestein",
     "website": "https://onestein.nl",
     "category": "Website",

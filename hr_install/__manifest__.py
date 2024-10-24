@@ -3,7 +3,7 @@
 
 {
     "name": "Human Resources",
-    "summary": "Install modules related to human resource management",
+    "summary": "Centralize employee information",
     "author": "Onestein",
     "website": "https://onestein.nl",
     "category": "Human Resources",

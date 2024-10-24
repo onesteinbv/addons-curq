@@ -1,6 +1,6 @@
 {
     "name": "Community Builder",
-    "summary": "Install modules related to community building",
+    "summary": "Tools to build your community",
     "author": "Onestein",
     "website": "https://onestein.nl",
     "category": "Membership",

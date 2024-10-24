@@ -1,6 +1,6 @@
 {
     "name": "Accounting",
-    "summary": "Install accounting modules",
+    "summary": "Invoices, Contracts & Payments",
     "author": "Onestein",
     "category": "Accounting",
     "version": "16.0.1.0.0",

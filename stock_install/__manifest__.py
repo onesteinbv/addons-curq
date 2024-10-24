@@ -1,6 +1,6 @@
 {
     "name": "Inventory",
-    "summary": "Install modules related to inventory system",
+    "summary": "Manage your stock and logistics activities",
     "author": "Onestein",
     "website": "https://onestein.nl",
     "category": "Inventory",
