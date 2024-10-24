@@ -66,6 +66,6 @@ class OnboardingWizard(models.TransientModel):
     @api.model
     def _selection_state(self):
         selection = super()._selection_state()
-        selection.insert(1, ("theme", "Theme"))
-        selection.insert(1, ("website", "Website"))
+        selection.insert(2, ("theme", "Theme"))
+        selection.insert(2, ("website", "Website"))
         return selection

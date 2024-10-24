@@ -32,7 +32,7 @@ class IrModuleModule(models.Model):
             )
             for other_purge_module in other_purge_modules:
                 modules_to_keep += other_purge_module.upstream_dependencies(
-                    exclude_states=("uninstalled")
+                    exclude_states=("uninstalled",)
                 )
             modules_to_keep = modules_to_keep.mapped("name")
 
