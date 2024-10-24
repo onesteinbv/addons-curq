@@ -34,6 +34,7 @@ class OnboardingWizard(models.TransientModel):
         installable_module_names = [
             "account_install",
             "website_install",
+            "website_sale_install",
             "membership_install",
             "hr_install",
             "stock_install",
