@@ -3,7 +3,7 @@
     "summary": "Organize and plan your projects",
     "author": "Onestein",
     "website": "https://onestein.nl",
-    "category": "Membership",
+    "category": "Project",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "depends": [
