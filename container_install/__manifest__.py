@@ -44,4 +44,5 @@
         "product_category_product_link",
         "base_purge_dependency",
     ],
+    "purge_depends": True,
 }
