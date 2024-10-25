@@ -38,5 +38,5 @@
         "website_snippet_dynamic_link",
         "website_snippet_openstreetmap",
     ],
-    "purge_depends": True,
+    "bundle": True,
 }

@@ -12,5 +12,5 @@
         "project_timeline",
         "project_task_add_very_high",
     ],
-    "purge_depends": True,
+    "bundle": True,
 }

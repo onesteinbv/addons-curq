@@ -54,5 +54,5 @@
         "mollie_account_sync",
         "payment_mollie_official",
     ],
-    "purge_depends": True,
+    "bundle": True,
 }

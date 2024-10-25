@@ -9,5 +9,5 @@
     "depends": [
         "crm",
     ],
-    "purge_depends": True,
+    "bundle": True,
 }

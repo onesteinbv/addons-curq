@@ -4,34 +4,34 @@ from odoo import conf, fields, models
 class IrModuleModule(models.Model):
     _inherit = "ir.module.module"
 
-    purge_depends = fields.Boolean(
-        help="Purge dependencies on uninstallation of this module",
-        compute="_compute_purge_depends",
+    is_bundle = fields.Boolean(
+        help="A bundle purges dependencies on uninstallation of this module",
+        compute="_compute_is_bundle",
     )  # Can't be stored
 
-    def _compute_purge_depends(self):
+    def _compute_is_bundle(self):
         for module in self:
             module_info = self.get_module_info(module.name)
-            module.purge_depends = module_info.get("purge_depends", False)
+            module.is_bundle = module_info.get("bundle", False)
 
     def button_uninstall(self):
         """
-        Uninstall upstream modules but only if they're not in another `purge_depends` modules dependency
+        Uninstall upstream modules but only if they're not in another bundle modules dependency
         """
         modules = self.search([("state", "=", "installed")])
-        purge_modules = modules.filtered(lambda m: m.purge_depends)
+        bundle_modules = modules.filtered(lambda m: m.is_bundle)
         for to_uninstall in self:
-            if to_uninstall not in purge_modules:
+            if to_uninstall not in bundle_modules:
                 continue
 
-            other_purge_modules = purge_modules.filtered(
+            other_bundle_modules = bundle_modules.filtered(
                 lambda m: m.id != to_uninstall.id
             )
             modules_to_keep = self.env["ir.module.module"].search(
                 [("name", "in", conf.server_wide_modules)]
             )
-            for other_purge_module in other_purge_modules:
-                modules_to_keep += other_purge_module.upstream_dependencies(
+            for other_bundle_module in other_bundle_modules:
+                modules_to_keep += other_bundle_module.upstream_dependencies(
                     exclude_states=("uninstalled",)
                 )
             modules_to_keep = modules_to_keep.mapped("name")

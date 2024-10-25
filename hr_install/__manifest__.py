@@ -19,5 +19,5 @@
         "l10n_nl_hr_recruitment",
         "l10n_nl_hr_expense",
     ],
-    "purge_depends": True,
+    "bundle": True,
 }

@@ -1,5 +1,5 @@
 {
-    "name": "Purge Dependencies",
+    "name": "Module Bundles",
     "category": "Technical",
     "version": "16.0.1.0.0",
     "author": "Onestein",

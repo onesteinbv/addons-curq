@@ -19,5 +19,5 @@
         "membership_subscription",
         "membership_variable_period",
     ],
-    "purge_depends": True,
+    "bundle": True,
 }
