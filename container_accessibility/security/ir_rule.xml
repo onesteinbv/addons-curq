@@ -56,4 +56,44 @@
         <field name="perm_unlink" eval="1"/>
         <field name="groups" eval="[(4,ref('container_accessibility.group_restricted'))]"/>
     </record>
+
+    <record id="rule_restricted_ir_module_module" model="ir.rule">
+        <field name="name">rule_restricted_ir_module_module</field>
+        <field name="model_id" ref="base.model_ir_module_module"/>
+        <field name="domain_force">
+            ['|', ('name', 'in', [
+                'account_install',
+                'website_install',
+                'website_sale_install',
+                'membership_install',
+                'hr_install',
+                'stock_install',
+                'mass_mailing_install',
+                'crm_install',
+                'project_install',
+                'event_install',
+                'website_event_install'
+            ]), ('name', '=like', 'theme_%')]
+        </field>
+        <field name="perm_read" eval="0" />
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="groups" eval="[(4,ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <!-- rule to prevent restricted users to delete module records -->
+    <record id="rule_restricted_ir_module_module_unlink" model="ir.rule">
+        <field name="name">rule_restricted_ir_module_module_unlink</field>
+        <field name="model_id" ref="base.model_ir_module_module"/>
+        <field name="domain_force">
+            [('id', '=', False)]
+        </field>
+        <field name="perm_read" eval="0" />
+        <field name="perm_create" eval="0"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="groups" eval="[(4,ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
 </odoo>

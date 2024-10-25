@@ -61,4 +61,17 @@
     <record id="server_environment.menu_server_show_config" model="ir.ui.menu">
         <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
     </record>
+
+    <record id="base.menu_apps" model="ir.ui.menu">  <!-- Apps -->
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+    <menuitem
+        id="menu_apps"
+        name="Apps"
+        parent="base.menu_management"
+        sequence="5"
+        action="container_accessibility.open_module_tree"
+        groups="container_accessibility.group_restricted"
+    /> <!-- Custom menu that only show bundles (_install modules)-->
+
 </odoo>

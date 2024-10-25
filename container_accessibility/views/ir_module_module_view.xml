@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="module_view_kanban" model="ir.ui.view">
-        <field name="model">ir.module.module</field>
-        <field name="inherit_id" ref="base.module_view_kanban" />
-        <field name="arch" type="xml">
-            <!-- Dropdown menu -->
-            <xpath expr="//div[hasclass('o_dropdown_kanban')]" position="attributes">
-                <attribute name="groups">!container_accessibility.group_restricted</attribute>
-            </xpath>
-
-            <!-- Default buttons (Activate, learn more, etc, etc) -->
-            <xpath expr="//div[hasclass('oe_module_action')]" position="attributes">
-                <attribute name="groups">!container_accessibility.group_restricted</attribute>
-            </xpath>
-
-            <!-- Show 'Professional Only' hide alot of buttons for restricted users -->
-            <xpath expr="//div[hasclass('oe_module_action')]" position="after">
-                <div class="oe_module_action d-flex flex-wrap justify-content-between" groups="container_accessibility.group_restricted">
-                    <div t-if="installed" class="d-flex align-items-center text-muted float-start">Installed</div>
-                    <div t-if="!installed" class="d-flex align-items-center text-muted float-start">Professional Only</div>
-                    <a type="edit" class="btn btn-secondary btn-sm float-end" role="button">Learn More</a>
-                </div>
-            </xpath>
+    <record id="open_module_tree" model="ir.actions.act_window">
+        <field name="name">Apps</field>
+        <field name="res_model">ir.module.module</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="base.view_module_filter"/>
+        <field name="domain">
+            [('name', 'in', [
+                'account_install',
+                'website_install',
+                'website_sale_install',
+                'membership_install',
+                'hr_install',
+                'stock_install',
+                'mass_mailing_install',
+                'crm_install',
+                'project_install',
+                'event_install',
+                'website_event_install'
+            ])]
         </field>
     </record>
 </odoo>

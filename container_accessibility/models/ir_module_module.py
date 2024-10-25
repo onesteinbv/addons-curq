@@ -1,21 +1,29 @@
-from odoo import _, models
-from odoo.exceptions import AccessError
+from odoo import models
 
 
 class IrModuleModule(models.Model):
     _inherit = "ir.module.module"
 
     def button_immediate_install(self):
+        self_sudo = self
         if self.env.user.is_restricted_user() and not self.env.su:
-            raise AccessError(_("Access denied to install modules"))
-        return super().button_immediate_install()
+            filtered = self._filter_access_rules("write")
+            if filtered:
+                self_sudo = self.sudo()
+        return super(IrModuleModule, self_sudo).button_immediate_install()
 
     def button_immediate_upgrade(self):
+        self_sudo = self
         if self.env.user.is_restricted_user() and not self.env.su:
-            raise AccessError(_("Access denied to update modules"))
-        return super().button_immediate_upgrade()
+            filtered = self._filter_access_rules("write")
+            if filtered:
+                self_sudo = self.sudo()
+        return super(IrModuleModule, self_sudo).button_immediate_upgrade()
 
     def button_immediate_uninstall(self):
+        self_sudo = self
         if self.env.user.is_restricted_user() and not self.env.su:
-            raise AccessError(_("Access denied to uninstall modules"))
-        return super().button_immediate_uninstall()
+            filtered = self._filter_access_rules("write")
+            if filtered:
+                self_sudo = self.sudo()
+        return super(IrModuleModule, self_sudo).button_immediate_uninstall()
