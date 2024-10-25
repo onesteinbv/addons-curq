@@ -30,11 +30,10 @@ class IrModuleModule(models.Model):
             modules_to_keep = self.env["ir.module.module"].search(
                 [("name", "in", conf.server_wide_modules)]
             )
-            for other_bundle_module in other_bundle_modules:
-                modules_to_keep += other_bundle_module.upstream_dependencies(
-                    exclude_states=("uninstalled",)
-                )
-            modules_to_keep = modules_to_keep.mapped("name")
+            modules_to_keep += other_bundle_modules.upstream_dependencies(
+                exclude_states=("uninstalled",)
+            )
+            modules_to_keep = set(modules_to_keep.mapped("name"))
 
             modules_to_remove = to_uninstall.upstream_dependencies(
                 exclude_states=("uninstalled",)

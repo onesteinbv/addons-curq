@@ -13,7 +13,9 @@ def main(env, do_uninstall):
 
     if do_uninstall:
         current_modules = modules.filtered(lambda m: not m.auto_install)
-        target_modules = bundles.upstream_dependencies()
+        target_modules = bundles + bundles.upstream_dependencies(
+            exclude_states=("uninstallable",)
+        )
         retired_modules = current_modules - target_modules
         if retired_modules:
             click.echo("Uninstalling %s..." % ", ".join(retired_modules.mapped("name")))
