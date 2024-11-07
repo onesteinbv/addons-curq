@@ -17,7 +17,8 @@
                 'crm_install',
                 'project_install',
                 'event_install',
-                'website_event_install'
+                'website_event_install',
+                'sale_install'
             ])]
         </field>
     </record>
