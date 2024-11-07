@@ -1,5 +1,5 @@
 {
-    "name": "Container Accessibility",
+    "name": "HR Accessibility",
     "category": "Human Resources",
     "version": "16.0.1.0.0",
     "author": "Onestein",

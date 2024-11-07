@@ -11,6 +11,7 @@
     "license": "AGPL-3",
     "depends": [
         "hr",
+        "hr_accessibility",
         "hr_expense",
         "hr_expense_remove_mobile_link",
         "hr_employee_firstname",
