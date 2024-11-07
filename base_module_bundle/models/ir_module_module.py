@@ -14,6 +14,22 @@ class IrModuleModule(models.Model):
             module_info = self.get_module_info(module.name)
             module.is_bundle = module_info.get("bundle", False)
 
+    def _get_modules_to_uninstall_for_bundle(self):
+        self.ensure_one()
+        other_installed_bundle_modules = self.search(
+            [("state", "=", "installed"), ("id", "!=", self.id)]
+        ).filtered(lambda m: m.is_bundle)
+        modules_to_keep = self.search([("name", "in", conf.server_wide_modules)])
+        modules_to_keep += other_installed_bundle_modules.upstream_dependencies(
+            exclude_states=("uninstalled",)
+        )
+        modules_to_keep = set(modules_to_keep)
+        modules_to_remove = self.upstream_dependencies(exclude_states=("uninstalled",))
+        modules_to_remove = modules_to_remove.filtered(
+            lambda d: d not in modules_to_keep
+        )
+        return modules_to_remove
+
     def button_uninstall(self):
         """
         Uninstall upstream modules but only if they're not in another bundle modules dependency.
@@ -21,27 +37,8 @@ class IrModuleModule(models.Model):
         """
         modules = self.search([("state", "=", "installed")])
         bundle_modules = modules.filtered(lambda m: m.is_bundle)
-        for to_uninstall in self:
-            if to_uninstall not in bundle_modules:
-                continue
-
-            other_bundle_modules = bundle_modules.filtered(
-                lambda m: m.id != to_uninstall.id
-            )
-            modules_to_keep = self.env["ir.module.module"].search(
-                [("name", "in", conf.server_wide_modules)]
-            )
-            modules_to_keep += other_bundle_modules.upstream_dependencies(
-                exclude_states=("uninstalled",)
-            )
-            modules_to_keep = set(modules_to_keep.mapped("name"))
-
-            modules_to_remove = to_uninstall.upstream_dependencies(
-                exclude_states=("uninstalled",)
-            )
-            modules_to_remove = modules_to_remove.filtered(
-                lambda d: d.name not in modules_to_keep
-            )
-            return modules_to_remove.button_uninstall()
+        for to_uninstall in self.filtered(lambda m: m in bundle_modules):
+            modules_to_remove = to_uninstall._get_modules_to_uninstall_for_bundle()
+            modules_to_remove.write({"state": "to remove"})
 
         return super().button_uninstall()
