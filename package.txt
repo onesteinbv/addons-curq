@@ -18,6 +18,7 @@ container_install_basis
 container_s3
 digest_configuration
 digest_disable
+hr_accessibility
 l10n_nl_hr_expense
 l10n_nl_hr_recruitment
 l10n_nl_rgs_usability
