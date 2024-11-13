@@ -85,7 +85,6 @@
         "currency_rate_update",
         "digest_configuration",
         "l10n_nl_bsn",
-        "mollie_subscription_ept",
         "payment_custom",
         "payment_demo",
         # Dutch localization
