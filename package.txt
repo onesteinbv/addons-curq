@@ -33,6 +33,7 @@ event_install
 hr_install
 mass_mailing_install
 membership_install
+helpdesk_install
 project_install
 sale_install
 stock_install
@@ -229,6 +230,7 @@ oca/fs_storage
 oca/fs_storage_backup
 oca/helpdesk_mgmt
 oca/helpdesk_mgmt_merge
+oca/helpdesk_mgmt_rating
 oca/helpdesk_mgmt_project
 oca/helpdesk_mgmt_timesheet
 oca/hr_employee_firstname
