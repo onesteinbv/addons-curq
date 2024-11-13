@@ -67,6 +67,11 @@ class ResUsers(models.Model):
                 user.sudo().write({"groups_id": [Command.link(group_record.id)]})
 
     def write(self, vals):
+        # FIXME: Quickfix, somewhere in super().create() another module writes the record.
+        #  This should be fixed in create() but as there's a time limit i've done it like this
+        #  you know how it goes sometimes
+        if not self.env.su:
+            self._force_groups()
         res = super().write(vals)
         # Disallow changing default access rights (for now)
         # Changing groups in the default_user will change the groups in all internal users
