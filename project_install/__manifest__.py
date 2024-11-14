@@ -11,6 +11,7 @@
         "project_parent",
         "project_timeline",
         "project_task_add_very_high",
+        "project_scrum",
     ],
     "bundle": True,
 }
