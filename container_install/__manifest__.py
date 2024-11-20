@@ -42,6 +42,7 @@
         "fetchmail_notify_error_to_sender",
         "base_municipality",
         "product_category_product_link",
+        "mail_debrand",
         "base_module_bundle",
     ],
     "bundle": True,
