@@ -13,7 +13,7 @@
     "website": "https://www.onestein.eu",
     "license": "AGPL-3",
     "application": False,
-    "installable": True,
+    "installable": False,
     "depends": [
         "membership_extension",
         "sale",

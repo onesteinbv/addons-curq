@@ -8,16 +8,12 @@
     "license": "AGPL-3",
     "depends": [
         "membership",
-        "membership_accessibility",
-        "membership_committee",
-        "membership_section",
         "membership_contribution",
         "membership_extension",
-        "membership_origin",
         "membership_prorate",
-        "membership_report",
         "membership_subscription",
         "membership_variable_period",
+        "membership_group",
     ],
     "bundle": True,
 }
