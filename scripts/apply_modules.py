@@ -7,6 +7,13 @@ import click_odoo
 @click.option("--do-uninstall", is_flag=True, default=False)
 def main(env, do_uninstall):
     click.echo("Upgrading bundles...")
+    base_module_bundle = env.ref("base.module_base_module_bundle")
+    if base_module_bundle.state != "installed":
+        return click.echo(
+            "`base_module_bundle` is not installed",
+            err=True,
+        )
+
     modules = env["ir.module.module"].search([("state", "=", "installed")])
     bundles = modules.filtered(lambda m: m.is_bundle)
     bundles.button_immediate_upgrade()
