@@ -29,8 +29,6 @@ if [[ "$UPDATE_COMPANY" == "true" ]]; then
   python /odoo/scripts/update_company.py -c $ODOO_RC -d $DB_NAME --log-level=error --name "$COMPANY_NAME" --email "$COMPANY_EMAIL" --coc "$COMPANY_COC" --city "$COMPANY_CITY" --zip "$COMPANY_ZIP" --street "$COMPANY_STREET"
 fi
 
-# python /odoo/scripts/prepare_install_request_mail.py -c $ODOO_RC -d $DB_NAME --log-level=error --email "ict@onestein.nl"
-
 if [[ -n "$UNINSTALL_MODULES" && "$UNINSTALL_MODULES" == "True" ]]; then
   python /odoo/scripts/apply_modules.py -c $ODOO_RC -d $DB_NAME --log-level=error --do-uninstall
 else
