@@ -18,7 +18,6 @@ class ResUsers(models.Model):
             "membership_stop",
             "membership_cancel",
             "member_lines",
-            "section_membership_ids",
-            "committee_membership_ids",
+            "membership_group_member_ids",
             "subscription_ids",
         ]
