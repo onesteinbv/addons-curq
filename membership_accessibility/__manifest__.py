@@ -22,7 +22,7 @@
         "project",
         "hr_timesheet",
         "membership_hr_recruitment",
-        "membership_committee",
+        "membership_group",
     ],
     "data": ["security/membership_accessibility_security.xml", "views/views.xml"],
     "post_init_hook": "post_init_hook",
