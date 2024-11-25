@@ -16,6 +16,8 @@ addons-generic/base_import_debranding
 addons-generic/base_list_owned_databases
 addons-generic/base_municipality
 addons-generic/crypto_currency
+addons-generic/currency_rate_update_coingecko
+addons-generic/currency_rate_update_mapping
 addons-generic/gitlab
 addons-generic/l10n_nl_rgs
 addons-generic/l10n_nl_rgs_account_financial_report
