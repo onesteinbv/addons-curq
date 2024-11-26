@@ -11,7 +11,7 @@
         "website_membership",
         "website_membership_group",
         "website_membership_registration",
-        "website_membership_registration_social"
+        "website_membership_registration_social",
         "website_membership_registration_partner_contact_birthdate",
     ],
     "bundle": True,
