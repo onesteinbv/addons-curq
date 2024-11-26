@@ -54,6 +54,8 @@ addons-generic/base_import_debranding
 addons-generic/base_list_owned_databases
 addons-generic/base_municipality
 addons-generic/crypto_currency
+addons-generic/currency_rate_update_coingecko
+addons-generic/currency_rate_update_mapping
 addons-generic/gitlab
 addons-generic/l10n_nl_rgs
 addons-generic/l10n_nl_rgs_account_financial_report
@@ -260,6 +262,7 @@ oca/mail_attach_existing_attachment_account
 oca/mail_debrand
 oca/mail_layout_force
 oca/mail_multicompany
+oca/mail_server_by_user
 oca/mail_tracking
 oca/mass_mailing_partner
 oca/membership_extension
@@ -304,6 +307,7 @@ oca/session_db
 oca/spreadsheet_dashboard_oca
 oca/spreadsheet_oca
 oca/subscription_oca
+oca/web_chatter_position
 oca/web_help
 oca/web_no_bubble
 oca/web_responsive
