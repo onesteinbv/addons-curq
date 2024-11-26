@@ -18,15 +18,16 @@ def main(env, do_uninstall):
     bundles = modules.filtered(lambda m: m.is_bundle)
     bundles.button_immediate_upgrade()
 
-    if do_uninstall:
-        current_modules = modules.filtered(lambda m: not m.auto_install)
-        target_modules = bundles + bundles.upstream_dependencies(
-            exclude_states=("uninstallable",)
-        )
-        retired_modules = current_modules - target_modules
-        if retired_modules:
-            click.echo("Uninstalling %s..." % ", ".join(retired_modules.mapped("name")))
-            retired_modules.button_immediate_uninstall()
+    # NB: Disable for now. Better to go from A to B to C than from A to C
+    # if do_uninstall:
+    #     current_modules = modules.filtered(lambda m: not m.auto_install)
+    #     target_modules = bundles + bundles.upstream_dependencies(
+    #         exclude_states=("uninstallable",)
+    #     )
+    #     retired_modules = current_modules - target_modules
+    #     if retired_modules:
+    #         click.echo("Uninstalling %s..." % ", ".join(retired_modules.mapped("name")))
+    #         retired_modules.button_immediate_uninstall()
 
 
 if __name__ == "__main__":
