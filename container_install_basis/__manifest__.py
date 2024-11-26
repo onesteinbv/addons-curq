@@ -10,7 +10,6 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "depends": [
-        "container_install",  # Backwards compatibility
         # File storage
         "fs_storage",
         "fs_attachment",
