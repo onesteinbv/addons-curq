@@ -279,6 +279,7 @@ oca/partner_firstname
 oca/product_analytic
 oca/product_category_product_link
 oca/product_category_tax
+oca/project_scrum
 oca/project_list
 oca/project_merge
 oca/project_parent
