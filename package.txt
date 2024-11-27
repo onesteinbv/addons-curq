@@ -264,6 +264,8 @@ oca/mail_layout_force
 oca/mail_multicompany
 oca/mail_server_by_user
 oca/mail_tracking
+oca/mail_partner_opt_out
+oca/mass_mailing_custom_unsubscribe
 oca/mass_mailing_partner
 oca/membership_extension
 oca/membership_sale_prorate
