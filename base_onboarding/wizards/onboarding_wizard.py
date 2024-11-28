@@ -35,7 +35,6 @@ class OnboardingWizard(models.TransientModel):
             "website_install",
             "website_sale_install",
             "website_membership_install",
-            "membership_development_install",
             "membership_install",
             "hr_install",
             "helpdesk_install",

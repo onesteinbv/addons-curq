@@ -1,5 +1,5 @@
 {
-    "name": "Online Community",
+    "name": "Community Builder",
     "summary": "Empower your community with tools "
     "to improve member engagement, content sharing, and more",
     "author": "Onestein",

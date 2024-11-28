@@ -1,6 +1,6 @@
 {
-    "name": "Community Builder",
-    "summary": "Tools to build your community",
+    "name": "Membership Management",
+    "summary": "Efficiently manage memberships and administrative tasks",
     "author": "Onestein",
     "website": "https://onestein.nl",
     "category": "Membership",
