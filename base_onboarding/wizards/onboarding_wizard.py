@@ -32,7 +32,6 @@ class OnboardingWizard(models.TransientModel):
     @api.depends("state")
     def _compute_module_ids(self):
         installable_module_names = [
-            "account_install",
             "website_install",
             "website_sale_install",
             "website_membership_install",

@@ -7,7 +7,6 @@
         <field name="search_view_id" ref="base.view_module_filter"/>
         <field name="domain">
             [('name', 'in', [
-                'account_install',
                 'website_install',
                 'website_sale_install',
                 'website_membership_install',
