@@ -29,6 +29,7 @@ membership_accessibility_website_project_role_members
 multi_company_disable
 spreadsheet_oca_ux
 container_install
+account_install
 crm_install
 event_install
 hr_install
