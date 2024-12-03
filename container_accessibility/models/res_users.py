@@ -54,9 +54,9 @@ class ResUsers(models.Model):
                 res["arch"] = etree.tostring(xml, encoding="unicode")
         return res
 
-    def _force_groups(self):
+    def _force_groups(self, force=False):
         allow_override = not self.env.user.is_restricted_user()
-        if allow_override:
+        if allow_override and not force:
             return
         forced_groups = self._get_forced_groups()
         for user in self.filtered(lambda u: u._is_internal()):
@@ -70,6 +70,7 @@ class ResUsers(models.Model):
         # FIXME: Quickfix, somewhere in super().create() another module writes the record.
         #  This should be fixed in create() but as there's a time limit i've done it like this
         #  you know how it goes sometimes
+        is_restricted = self.env.user.is_restricted_user()
         if not self.env.su:
             self._force_groups()
         res = super().write(vals)
@@ -81,7 +82,7 @@ class ResUsers(models.Model):
         ):
             raise AccessError(_("Access denied to change default user"))
         if not self.env.su:
-            self._force_groups()
+            self._force_groups(is_restricted)
         if (
             "active" in vals and vals["active"] and self._get_user_limit()
         ):  # If trying to activate / unarchive a user
