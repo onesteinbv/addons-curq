@@ -7,10 +7,13 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "depends": [
+        "base_address_extended",
+        "base_technical_features",
         "fs_storage",
         "fs_attachment",
         "fs_storage_backup",
         "web_responsive",
+        "web_pwa_oca",
         "disable_odoo_online",
         "base_fontawesome",
         "auth_oidc",
@@ -44,6 +47,9 @@
         "product_category_product_link",
         "mail_debrand",
         "base_module_bundle",
+        "mail_attach_existing_attachment",
+        "partner_contact_department",
+        "mail_tracking",
     ],
     "bundle": True,
 }

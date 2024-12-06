@@ -44,6 +44,7 @@ website_install
 website_sale_install
 website_membership_install
 membership_development_install
+survey_install
 addons-generic/account_asset_management_template
 addons-generic/account_journal_subtype
 addons-generic/account_period_auto_create
@@ -224,6 +225,7 @@ oca/auth_oidc
 oca/base_fontawesome
 oca/base_menu_visibility_restriction
 oca/base_partition
+oca/base_technical_features
 oca/base_tier_validation
 oca/base_tier_validation_formula
 oca/base_tier_validation_forward
@@ -265,6 +267,7 @@ oca/mail_layout_force
 oca/mail_multicompany
 oca/mail_server_by_user
 oca/mail_tracking
+oca/mail_tracking_mass_mailing
 oca/mail_partner_opt_out
 oca/mass_mailing_custom_unsubscribe
 oca/mass_mailing_partner
@@ -275,6 +278,7 @@ oca/mis_builder
 oca/mis_builder_budget
 oca/module_change_auto_install
 oca/multi_step_wizard
+oca/partner_contact_department
 oca/partner_contact_birthdate
 oca/partner_contact_personal_information_page
 oca/partner_external_map
@@ -315,6 +319,7 @@ oca/web_chatter_position
 oca/web_help
 oca/web_no_bubble
 oca/web_responsive
+oca/web_pwa_oca
 oca/web_search_with_and
 oca/web_timeline
 oca/web_widget_dropdown_dynamic

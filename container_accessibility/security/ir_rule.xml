@@ -74,7 +74,8 @@
                 'project_install',
                 'event_install',
                 'website_event_install',
-                'sale_install'
+                'sale_install',
+                'survey_install'
             ]), ('name', '=like', 'theme_%')]
         </field>
         <field name="perm_read" eval="0" />
