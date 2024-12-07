@@ -69,7 +69,10 @@ class ResUsers(models.Model):
     def write(self, vals):
         # FIXME: Quickfix, somewhere in super().create() another module writes the record.
         #  This should be fixed in create() but as there's a time limit i've done it like this
-        #  you know how it goes sometimes
+        #  you know how it goes sometimes, 
+        
+        # TODO: I'm not sure why I didn't create a ir.rule for this in the first place, 
+        # this should be removed. I think I drank too much coffee that day...
         is_restricted = self.env.user.is_restricted_user()
         if is_restricted and self.filtered(lambda u: u.oauth_provider_id and u.oauth_provider_id.private):
             raise AccessError(_("Access denied to update user"))
