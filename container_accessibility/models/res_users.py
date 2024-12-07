@@ -71,7 +71,7 @@ class ResUsers(models.Model):
         #  This should be fixed in create() but as there's a time limit i've done it like this
         #  you know how it goes sometimes
         is_restricted = self.env.user.is_restricted_user()
-        if is_restricted and self.filtered(lambda u: u.oauth_provider_id.private):
+        if is_restricted and self.filtered(lambda u: u.oauth_provider_id and u.oauth_provider_id.private):
             raise AccessError(_("Access denied to update user"))
         if not self.env.su:
             self._force_groups()
