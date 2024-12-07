@@ -79,7 +79,9 @@ class ResUsers(models.Model):
         # Disallow changing default access rights (for now)
         # Changing groups in the default_user will change the groups in all internal users
         if (
-            self.env.ref("base.default_user") in self
+            (self.env.ref("base.default_user") in self or 
+            self.env.ref("base.user_admin") in self or 
+            self.env.ref("base.user_root") in self)
             and self.env.user.is_restricted_user()
         ):
             raise AccessError(_("Access denied to change default user"))
