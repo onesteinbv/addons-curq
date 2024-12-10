@@ -266,6 +266,7 @@ oca/mail_debrand
 oca/mail_layout_force
 oca/mail_multicompany
 oca/mail_server_by_user
+oca/mail_server_user
 oca/mail_tracking
 oca/mail_tracking_mass_mailing
 oca/mail_partner_opt_out
@@ -316,6 +317,8 @@ oca/spreadsheet_dashboard_oca
 oca/spreadsheet_oca
 oca/subscription_oca
 oca/web_chatter_position
+oca/web_company_color
+oca/web_environment_ribbon
 oca/web_help
 oca/web_no_bubble
 oca/web_responsive
