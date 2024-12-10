@@ -53,6 +53,8 @@
         "l10n_nl_tax_statement_icp",
         "mollie_account_sync",
         "payment_mollie_official",
+        "mis_builder",
+        "mis_builder_budget",
     ],
     "bundle": True,
 }

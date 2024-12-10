@@ -19,7 +19,8 @@
                 'project_install',
                 'event_install',
                 'website_event_install',
-                'sale_install'
+                'sale_install',
+                'survey_install'
             ])]
         </field>
     </record>

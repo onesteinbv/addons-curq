@@ -8,6 +8,7 @@
     "license": "AGPL-3",
     "depends": [
         "mass_mailing",
+        "mass_mailing_help",
         "mass_mailing_force_dedicated_server",
         "mass_mailing_partner",
         "mail_partner_opt_out",
