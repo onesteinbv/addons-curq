@@ -71,9 +71,7 @@ class ResUsers(models.Model):
             group_user = self.env.ref("base.group_user")
             restricted_reified_field = "in_group_%s" % group_restricted.id
 
-            internal_user = (
-                vals.get(user_type_reified_field, group_user.id) == group_user.id
-            )
+            internal_user = vals.get(user_type_reified_field) == group_user.id
             if internal_user:
                 vals[restricted_reified_field] = True
 
