@@ -1,8 +1,7 @@
 from lxml import etree
 
 from odoo import Command, _, api, models
-from odoo.exceptions import AccessError, UserError
-from odoo.osv import expression
+from odoo.exceptions import UserError
 from odoo.tools import config
 from odoo.tools.misc import ustr
 
@@ -27,119 +26,109 @@ class ResUsers(models.Model):
         if user_count > self._get_user_limit():
             raise UserError(_("User limit exceeded"))
 
-    @api.model
-    def _get_forced_groups(self):
-        return ["container_accessibility.group_restricted"]
-
     def is_restricted_user(self):
         self.ensure_one()
         return self.has_group("container_accessibility.group_restricted")
 
     @api.model
     def get_view(self, view_id=None, view_type="form", **options):
+        """
+        Remove groups (just container_accessibility.group_restricted atm) from the form view for ux
+        """
         res = super().get_view(view_id=view_id, view_type=view_type, **options)
-        allow_override = not self.env.user.is_restricted_user()
-        if view_type == "form" and not allow_override:
-            forced_groups = self._get_forced_groups()
-            for group in forced_groups:
-                erp_group_id = self.env.ref(group).id
-                sel_xpath = (
-                    "//field[contains(@name, 'sel_groups_%s_')]/.." % erp_group_id
-                )
-                in_xpath = "//field[@name='in_group_%s']" % erp_group_id
-                xml = etree.XML(res["arch"])
-                xml_groups = xml.xpath(sel_xpath) + xml.xpath(in_xpath)
-                for xml_group in xml_groups:
-                    xml_group.getparent().remove(xml_group)
-                res["arch"] = etree.tostring(xml, encoding="unicode")
+        is_restricted = self.env.user.is_restricted_user()
+        if view_type == "form" and is_restricted:
+            group_restricted_id = self.env.ref(
+                "container_accessibility.group_restricted"
+            ).id
+            sel_xpath = (
+                "//field[contains(@name, 'sel_groups_%s_')]/.." % group_restricted_id
+            )
+            in_xpath = "//field[@name='in_group_%s']" % group_restricted_id
+            xml = etree.XML(res["arch"])
+            xml_groups = xml.xpath(sel_xpath) + xml.xpath(in_xpath)
+            for xml_group in xml_groups:
+                xml_group.getparent().remove(xml_group)
+            res["arch"] = etree.tostring(xml, encoding="unicode")
         return res
 
-    def _force_groups(self, force=False):
-        allow_override = not self.env.user.is_restricted_user()
-        if allow_override and not force:
-            return
-        forced_groups = self._get_forced_groups()
-        for user in self.filtered(lambda u: u._is_internal()):
-            for group in forced_groups:
-                if user.has_group(group):
-                    continue
-                group_record = self.env.ref(group)
-                user.sudo().write({"groups_id": [Command.link(group_record.id)]})
-
     def write(self, vals):
-        # FIXME: Quickfix, somewhere in super().create() another module writes the record.
-        #  This should be fixed in create() but as there's a time limit i've done it like this
-        #  you know how it goes sometimes,
-
-        # TODO: I'm not sure why I didn't create a ir.rule for this in the first place,
-        # this should be removed. I think I drank too much coffee that day...
         is_restricted = self.env.user.is_restricted_user()
-        if is_restricted and self.filtered(
-            lambda u: u.oauth_provider_id and u.oauth_provider_id.private
-        ):
-            raise AccessError(_("Access denied to update user"))
-        if not self.env.su:
-            self._force_groups()
+
+        # Automatically add the restricted group for ux
+        if is_restricted:
+            group_restricted = self.env.ref("container_accessibility.group_restricted")
+            group_user = self.env.ref("base.group_user")
+            user_type_category = self.env.ref("base.module_category_user_type")
+            user_type_groups = self.env["res.groups"].search(
+                [("category_id", "=", user_type_category.id)]
+            )
+
+            restricted_reified_field = "in_group_%s" % group_restricted.id
+            user_type_reified_field = "sel_groups_%s" % (
+                "_".join(str(gid) for gid in user_type_groups.ids)
+            )
+            internal_user = (
+                vals.get(user_type_reified_field, group_user.id) == group_user.id
+            )
+            if internal_user:
+                vals[restricted_reified_field] = True
+
+        # The record rule doesn't care if the record was restricted before
+        # Prevents the current becoming non-restricted
+        keep_restricted = self.filtered(lambda u: u.is_restricted_user())
         res = super().write(vals)
-        # Disallow changing default access rights (for now)
-        # Changing groups in the default_user will change the groups in all internal users
-        if (
-            self.env.ref("base.default_user") in self
-            or self.env.ref("base.user_admin") in self
-            or self.env.ref("base.user_root") in self
-        ) and self.env.user.is_restricted_user():
-            raise AccessError(_("Access denied to change default user"))
-        if not self.env.su:
-            self._force_groups(is_restricted)
-        if (
-            "active" in vals and vals["active"] and self._get_user_limit()
-        ):  # If trying to activate / unarchive a user
+        forbidden_users = self.filtered(
+            lambda u: not u.share
+            and u in keep_restricted
+            and not u.is_restricted_user()
+        )
+        if is_restricted and forbidden_users:
+            forbidden_users.write(
+                {
+                    "groups_id": [
+                        Command.link(
+                            self.env.ref("container_accessibility.group_restricted").id
+                        )
+                    ]
+                }
+            )
+
+        # When trying to activate / un-archive a user we should check the limit
+        if "active" in vals and vals["active"] and self._get_user_limit():
             self._check_user_limit_exceeded()
+
         return res
 
     @api.model_create_multi
     def create(self, vals_list):
+        # Automatically add the restricted group for ux
+        if self.env.user.is_restricted_user():
+            group_restricted = self.env.ref("container_accessibility.group_restricted")
+            group_user = self.env.ref("base.group_user")
+            user_type_category = self.env.ref("base.module_category_user_type")
+            user_type_groups = self.env["res.groups"].search(
+                [("category_id", "=", user_type_category.id)]
+            )
+
+            restricted_reified_field = "in_group_%s" % group_restricted.id
+            user_type_reified_field = "sel_groups_%s" % (
+                "_".join(str(gid) for gid in user_type_groups.ids)
+            )
+
+            for vals in vals_list:
+                internal_user = (
+                    vals.get(user_type_reified_field, group_user.id) == group_user.id
+                )
+                if internal_user:
+                    vals[restricted_reified_field] = True
+
         res = super().create(vals_list)
-        if not self.env.su:
-            res._force_groups()
         if self._get_user_limit():
             self._check_user_limit_exceeded()
         return res
 
-    @api.model
-    def _search(
-        self,
-        args,
-        offset=0,
-        limit=None,
-        order=None,
-        count=False,
-        access_rights_uid=None,
-    ):
-        # Purely for UX purposes
-        model = self.with_user(access_rights_uid) if access_rights_uid else self
-        if model.env.user.is_restricted_user() and not self.env.su:
-            args = expression.AND(
-                [
-                    args,
-                    [
-                        "|",
-                        ("share", "=", True),
-                        (
-                            "groups_id",
-                            "in",
-                            self.env.ref(
-                                "container_accessibility.group_restricted"
-                            ).ids,
-                        ),
-                    ],
-                ]
-            )
-
-        return super()._search(args, offset, limit, order, count, access_rights_uid)
-
     def _create_user_from_template(self, values):
-        # Maybe: inherit get_param (ir.config_parameter) instead because this is much redundancy 🤢
         if values.get("oauth_provider_id", False):
             provider_record = (
                 self.env["auth.oauth.provider"]
