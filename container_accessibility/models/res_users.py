@@ -18,7 +18,10 @@ class ResUsers(models.Model):
     @api.model
     def _get_limit_included_user_count(self):
         restricted_group = self.env.ref("container_accessibility.group_restricted")
-        count = self.search([("groups_id", "in", restricted_group.ids)], count=True)
+        count = self.search(
+            [("share", "=", False), ("groups_id", "in", restricted_group.ids)],
+            count=True,
+        )
         return count
 
     def _check_user_limit_exceeded(self):
@@ -54,20 +57,20 @@ class ResUsers(models.Model):
 
     def write(self, vals):
         is_restricted = self.env.user.is_restricted_user()
+        user_type_category = self.env.ref("base.module_category_user_type")
+        user_type_groups = self.env["res.groups"].search(
+            [("category_id", "=", user_type_category.id)]
+        )
+        user_type_reified_field = "sel_groups_%s" % (
+            "_".join(str(gid) for gid in user_type_groups.ids)
+        )
 
         # Automatically add the restricted group for ux
         if is_restricted:
             group_restricted = self.env.ref("container_accessibility.group_restricted")
             group_user = self.env.ref("base.group_user")
-            user_type_category = self.env.ref("base.module_category_user_type")
-            user_type_groups = self.env["res.groups"].search(
-                [("category_id", "=", user_type_category.id)]
-            )
-
             restricted_reified_field = "in_group_%s" % group_restricted.id
-            user_type_reified_field = "sel_groups_%s" % (
-                "_".join(str(gid) for gid in user_type_groups.ids)
-            )
+
             internal_user = (
                 vals.get(user_type_reified_field, group_user.id) == group_user.id
             )
@@ -94,8 +97,13 @@ class ResUsers(models.Model):
                 }
             )
 
-        # When trying to activate / un-archive a user we should check the limit
-        if "active" in vals and vals["active"] and self._get_user_limit():
+        # When trying to activate / un-archive a user we should check the limit, or when changing the user type
+        if (
+            "active" in vals
+            and vals["active"]
+            or "group_ids" in vals
+            or user_type_reified_field in vals
+        ) and self._get_user_limit():
             self._check_user_limit_exceeded()
 
         return res
