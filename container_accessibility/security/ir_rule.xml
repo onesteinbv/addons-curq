@@ -111,4 +111,17 @@
         <field name="groups" eval="[(4,ref('container_accessibility.group_restricted'))]"/>
     </record>
 
+    <record id="rule_restricted_ir_config_parameter" model="ir.rule">
+        <field name="name">rule_restricted_ir_config_parameter</field>
+        <field name="model_id" ref="base.model_ir_config_parameter"/>
+        <field name="domain_force">
+            [('key', 'not in', ('base.template_portal_user_id',))]
+        </field>
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="groups" eval="[(4,ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
 </odoo>
