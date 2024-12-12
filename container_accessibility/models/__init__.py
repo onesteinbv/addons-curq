@@ -14,3 +14,4 @@ from . import ir_cron
 from . import server_config
 from . import ir_attachment
 from . import fetchmail_server
+from . import ir_config_parameter
