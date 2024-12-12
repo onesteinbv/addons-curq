@@ -6,6 +6,6 @@
     "category": "Website",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
-    "depends": ["website_sale"],
+    "depends": ["website_sale", "website_sendcloud_official"],
     "bundle": True,
 }

@@ -54,3 +54,12 @@
         onestein: git@github.com:onesteinbv/ProjectManagement.git
     merges:
         - onestein 4959a1e7a3e6c842178acbe0ba4c4207cb1d5432
+
+# SendCloud
+./addons-sendcloud:
+    defaults:
+        depth: 20
+    remotes:
+        onestein: git@github.com:onesteinbv/addons-sendcloud.git
+    merges:
+        - onestein d0de9d500feb03a424b0ec1fb5468eddf38c9695
