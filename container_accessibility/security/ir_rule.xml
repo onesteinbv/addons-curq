@@ -27,7 +27,6 @@
         <field name="groups" eval="[(4,ref('container_accessibility.group_restricted'))]"/>
     </record>
 
-
     <record id="rule_restricted_mail_server" model="ir.rule">
         <field name="name">rule_restricted_mail_server</field>
         <field name="model_id" ref="base.model_ir_mail_server"/>
@@ -118,6 +117,39 @@
             [('key', 'not in', ('base.template_portal_user_id',))]
         </field>
         <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="groups" eval="[(4,ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="rule_restricted_ir_cron" model="ir.rule">
+        <field name="name">rule_restricted_ir_cron</field>
+        <field name="model_id" ref="base.model_ir_cron"/>
+        <field name="domain_force">[('id', '=', False)]</field>
+        <field name="perm_read" eval="0"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="groups" eval="[(4,ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="rule_restricted_ir_actions_server" model="ir.rule">
+        <field name="name">rule_restricted_ir_actions_server</field>
+        <field name="model_id" ref="base.model_ir_actions_server"/>
+        <field name="domain_force">[('id', '=', False)]</field>
+        <field name="perm_read" eval="0"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="groups" eval="[(4,ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="rule_restricted_ir_actions_actions" model="ir.rule">
+        <field name="name">rule_restricted_ir_actions_actions</field>
+        <field name="model_id" ref="base.model_ir_actions_actions"/>
+        <field name="domain_force">[('id', '=', False)]</field>
+        <field name="perm_read" eval="0"/>
         <field name="perm_create" eval="1"/>
         <field name="perm_write" eval="1"/>
         <field name="perm_unlink" eval="1"/>
