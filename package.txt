@@ -241,6 +241,17 @@ oca/contract_payment_mode
 oca/currency_rate_update
 oca/date_range
 oca/disable_odoo_online
+oca/document_knowledge
+oca/document_page
+oca/document_page_access_group
+oca/document_page_access_group_user_role
+oca/document_page_approval
+oca/document_page_group
+oca/document_page_partner
+oca/document_page_project
+oca/document_page_reference
+oca/document_page_tag
+oca/document_url
 oca/fetchmail_notify_error_to_sender
 oca/fs_attachment
 oca/fs_storage
