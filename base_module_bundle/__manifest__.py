@@ -6,5 +6,5 @@
     "website": "https://onestein.nl",
     "depends": ["base_setup"],
     "data": [],
-    "license": "LGPL-3",
+    "license": "AGPL-3",
 }

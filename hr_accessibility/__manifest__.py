@@ -11,5 +11,5 @@
     "data": [
         "data/auditlog_rule_data.xml",
     ],
-    "license": "LGPL-3",
+    "license": "AGPL-3",
 }

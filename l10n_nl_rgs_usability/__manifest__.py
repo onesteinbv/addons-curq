@@ -38,5 +38,5 @@
     "post_init_hook": "post_init_hook",
     "auto_install": True,
     "installable": True,
-    "license": "LGPL-3",
+    "license": "AGPL-3",
 }

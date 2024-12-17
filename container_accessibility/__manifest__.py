@@ -27,5 +27,5 @@
         "views/ir_module_module_view.xml",
         "menuitems.xml",
     ],
-    "license": "LGPL-3",
+    "license": "AGPL-3",
 }
