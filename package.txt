@@ -329,6 +329,8 @@ oca/session_db
 oca/spreadsheet_dashboard_oca
 oca/spreadsheet_oca
 oca/subscription_oca
+oca/survey_question_type_nps
+oca/survey_xlsx
 oca/web_chatter_position
 oca/web_company_color
 oca/web_environment_ribbon
