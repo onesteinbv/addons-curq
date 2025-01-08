@@ -140,7 +140,6 @@ addons-generic/website_two_steps_share_technical
 addons-sendcloud/delivery_sendcloud_official
 addons-sendcloud/website_sendcloud_official
 addons-third-party/mollie_account_sync
-addons-third-party/mollie_subscription_ept
 addons-third-party/payment_mollie_official
 design-themes/theme_anelusia
 design-themes/theme_artists

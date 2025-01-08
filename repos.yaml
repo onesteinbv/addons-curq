@@ -12,7 +12,7 @@
     defaults:
         depth: 20
     remotes:
-        onestein: git@github.com:onesteinbv/addons-generic.git
+        onestein: https://github.com/onesteinbv/addons-generic.git
     merges:
         - remote: onestein
           ref: 75d6ddcfbd2156017aa52ee2be99e62a6732eede
@@ -22,7 +22,7 @@
     defaults:
         depth: 20
     remotes:
-        onestein: git@github.com:onesteinbv/addons-oca.git
+        onestein: https://github.com/onesteinbv/addons-oca.git
     merges:
         - remote: onestein
           ref: fdfd5a61133e683a7a8b83ec2956994e5e2f6b1f
@@ -32,17 +32,17 @@
     defaults:
         depth: 20
     remotes:
-        onestein: git@github.com:onesteinbv/addons-third-party.git
+        onestein: https://github.com/onesteinbv/addons-third-party.git
     merges:
         - remote: onestein
-          ref: 6231767c603a10677ba7857947dee473530987fd
+          ref: 0198971bae95b423ad844664580a4e71f9b2bf15
 
 # design themes
 ./design-themes:
     defaults:
         depth: 20
     remotes:
-        odoo: git@github.com:odoo/design-themes.git
+        odoo: https://github.com/odoo/design-themes.git
     merges:
         - odoo 16.0
 
@@ -51,7 +51,7 @@
     defaults:
         depth: 20
     remotes:
-        onestein: git@github.com:onesteinbv/ProjectManagement.git
+        onestein: https://github.com/onesteinbv/ProjectManagement.git
     merges:
         - onestein 4959a1e7a3e6c842178acbe0ba4c4207cb1d5432
 
@@ -60,6 +60,6 @@
     defaults:
         depth: 20
     remotes:
-        onestein: git@github.com:onesteinbv/addons-sendcloud.git
+        onestein: https://github.com/onesteinbv/addons-sendcloud.git
     merges:
         - onestein 368cf1a86669fabb33108ce71f91c813014b776b
