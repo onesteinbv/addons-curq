@@ -10,19 +10,20 @@ jobs:
     if: startsWith(github.event.release.tag_name, '16.0.')
     with:
       tags: ghcr.io/${{ github.repository_owner }}/curq:latest,ghcr.io/${{ github.repository_owner }}/curq:${{ github.event.release.tag_name }},ghcr.io/${{ github.repository_owner }}/curq:16.0
+
   release:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
-      - uses: octokit/request-action@v2.4.0
+      - name: Publish release
+        uses: octokit/request-action@v2.4.0
         with:
           route: PATCH /repos/{repo}/releases/{release}
           repo: ${{ github.repository }}
-          release: {{ github.event.release.id }}
+          release: ${{ github.event.release.id }}
           body: |
             {
               "draft": false
             }
-          mediaType:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
