@@ -1,29 +1,28 @@
 name: release-build-16.0
 
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - "16.0.*"
 
 jobs:
   build-and-push:
     uses: ./.github/workflows/build-and-push.yml
-    if: startsWith(github.event.release.tag_name, '16.0.')
+    if: startsWith(github.ref_name, '16.0.')
     with:
-      tags: ghcr.io/${{ github.repository_owner }}/curq:latest,ghcr.io/${{ github.repository_owner }}/curq:${{ github.event.release.tag_name }},ghcr.io/${{ github.repository_owner }}/curq:16.0
+      tags: ghcr.io/${{ github.repository_owner }}/curq:latest,ghcr.io/${{ github.repository_owner }}/curq:${{ github.ref_name }},ghcr.io/${{ github.repository_owner }}/curq:16.0
 
   release:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
       - name: Publish release
-        uses: octokit/request-action@v2.4.0
-        with:
-          route: PATCH /repos/{repo}/releases/{release}
-          repo: ${{ github.repository }}
-          release: ${{ github.event.release.id }}
-          body: |
-            {
-              "draft": false
-            }
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: ${{ github.ref_name }}
+          body: "/"
+          draft: false
+          prerelease: false
