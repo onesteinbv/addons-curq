@@ -8,8 +8,8 @@ zxcvbn
 odfpy
 python-jose
 fsspec>=2024.5.0
-fsspec[s3]
-fsspec[sftp]
+fsspec[s3]>=2024.5.0
+fsspec[sftp]>=2024.5.0
 python-slugify
 PyGithub==1.59.0
 python-gitlab
