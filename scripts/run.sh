@@ -30,9 +30,9 @@ if [[ "$UPDATE_COMPANY" == "true" ]]; then
 fi
 
 if [[ -n "$UNINSTALL_MODULES" && "$UNINSTALL_MODULES" == "True" ]]; then
-  python /odoo/scripts/apply_modules.py -c $ODOO_RC -d $DB_NAME --log-level=error --do-uninstall
-else
   python /odoo/scripts/apply_modules.py -c $ODOO_RC -d $DB_NAME --log-level=error
+else
+  python /odoo/scripts/apply_modules.py -c $ODOO_RC -d $DB_NAME --log-level=error --dry-run
 fi
 
 python /odoo/scripts/uninstall_auto_install_modules.py -c $ODOO_RC -d $DB_NAME --log-level=error
