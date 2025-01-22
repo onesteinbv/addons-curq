@@ -29,10 +29,12 @@ class IrModuleModule(models.Model):
         modules_to_remove = modules_to_remove.filtered(
             lambda d: d not in modules_to_keep
         )
-        for module_to_remove in modules_to_remove:
-            modules_to_remove += module_to_remove.downstream_dependencies().filtered(
-                lambda m: m not in downstream_dependencies
-            )
+        modules_to_remove += downstream_dependencies.upstream_dependencies(
+            exclude_states=("uninstalled",)
+        ).filtered(lambda d: d not in modules_to_keep and not d.is_bundle)
+        modules_to_remove += modules_to_remove.downstream_dependencies(
+            modules_to_remove
+        ).filtered(lambda m: m not in downstream_dependencies)
         return modules_to_remove
 
     def button_uninstall(self):
