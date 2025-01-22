@@ -42,7 +42,9 @@ class IrModuleModule(models.Model):
         Uninstall upstream modules but only if they're not in another bundle modules dependency.
         This will not be invoked if a dependency of a bundle is uninstalled, only when a bundle is directly uninstalled
         """
-        modules = self.search([("state", "=", "installed")])
+        modules = self.search(
+            [("state", "=", "installed"), ("auto_install", "=", False)]
+        )
         bundle_modules = modules.filtered(lambda m: m.is_bundle)
         for to_uninstall in self.filtered(lambda m: m in bundle_modules):
             modules_to_remove = to_uninstall._get_modules_to_uninstall_for_bundle()

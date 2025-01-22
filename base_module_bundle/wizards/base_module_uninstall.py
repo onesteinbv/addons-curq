@@ -6,7 +6,7 @@ class ModuleUninstall(models.TransientModel):
 
     def _get_modules(self):
         modules = super()._get_modules()
-        if not self.module_id.is_bundle:
+        if not self.module_id.is_bundle or self.module_id.auto_install:
             return modules
         modules += self.module_id._get_modules_to_uninstall_for_bundle()
         return modules
