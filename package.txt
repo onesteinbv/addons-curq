@@ -45,6 +45,7 @@ website_sale_install
 website_membership_install
 membership_development_install
 survey_install
+stock_account_install
 addons-generic/account_asset_management_template
 addons-generic/account_journal_subtype
 addons-generic/account_period_auto_create

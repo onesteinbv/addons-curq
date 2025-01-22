@@ -16,8 +16,9 @@ class IrModuleModule(models.Model):
 
     def _get_modules_to_uninstall_for_bundle(self):
         self.ensure_one()
+        downstream_dependencies = self.downstream_dependencies(self)
         other_installed_bundle_modules = self.search(
-            [("state", "=", "installed"), ("id", "!=", self.id)]
+            [("state", "=", "installed"), ("id", "not in", downstream_dependencies.ids)]
         ).filtered(lambda m: m.is_bundle)
         modules_to_keep = self.search([("name", "in", conf.server_wide_modules)])
         modules_to_keep += other_installed_bundle_modules.upstream_dependencies(
@@ -28,6 +29,10 @@ class IrModuleModule(models.Model):
         modules_to_remove = modules_to_remove.filtered(
             lambda d: d not in modules_to_keep
         )
+        for module_to_remove in modules_to_remove:
+            modules_to_remove += module_to_remove.downstream_dependencies().filtered(
+                lambda m: m not in downstream_dependencies
+            )
         return modules_to_remove
 
     def button_uninstall(self):
