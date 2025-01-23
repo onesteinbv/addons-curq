@@ -114,7 +114,7 @@ class ResUsers(models.Model):
             group_user = self.env.ref("base.group_user")
             user_type_category = self.env.ref("base.module_category_user_type")
             user_type_groups = self.env["res.groups"].search(
-                [("category_id", "=", user_type_category.id)]
+                [("category_id", "=", user_type_category.id)], order="id ASC"
             )
 
             restricted_reified_field = "in_group_%s" % group_restricted.id
@@ -123,9 +123,10 @@ class ResUsers(models.Model):
             )
 
             for vals in vals_list:
-                internal_user = (
-                    vals.get(user_type_reified_field, group_user.id) == group_user.id
+                user_type_reified_value = vals.get(
+                    user_type_reified_field, group_user.id
                 )
+                internal_user = user_type_reified_value == group_user.id
                 if internal_user:
                     vals[restricted_reified_field] = True
 
