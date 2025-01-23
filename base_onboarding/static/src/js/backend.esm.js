@@ -3,6 +3,7 @@ import { WebClient } from "@web/webclient/webclient";
 import { onMounted } from "@odoo/owl";
 import { patch } from "@web/core/utils/patch";
 import { useService } from "@web/core/utils/hooks";
+import { ViewButton } from '@web/views/view_button/view_button';
 
 
 patch(WebClient.prototype, "base_onboarding", {
@@ -23,5 +24,18 @@ patch(WebClient.prototype, "base_onboarding", {
                 });
             }
         });
+    }
+});
+
+patch(ViewButton.prototype, "base_onboarding", {
+    setup() {
+        this._super();
+        this.uiService = useService("ui");
+    },
+    onClick(ev) {
+        if (this.props.className && this.props.className.includes("base_onboarding_instant_block")) {
+            this.uiService.block();
+        }
+        this._super(ev);
     }
 });
