@@ -22,7 +22,9 @@ def main(env, dry_run):
     target_modules = bundles + bundles.upstream_dependencies(
         exclude_states=("uninstallable",)
     )
-    ignore_modules = modules.filtered(lambda m: m.name in ["container_s3"])
+    ignore_modules = modules.filtered(
+        lambda m: m.name in ["container_s3"] or m.name.startswith("theme_")
+    )
     target_modules += ignore_modules
     retired_modules = current_modules - target_modules
     if retired_modules:
