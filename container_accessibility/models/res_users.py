@@ -59,7 +59,7 @@ class ResUsers(models.Model):
         is_restricted = self.env.user.is_restricted_user()
         user_type_category = self.env.ref("base.module_category_user_type")
         user_type_groups = self.env["res.groups"].search(
-            [("category_id", "=", user_type_category.id)]
+            [("category_id", "=", user_type_category.id)], order="id ASC"
         )
         user_type_reified_field = "sel_groups_%s" % (
             "_".join(str(gid) for gid in user_type_groups.ids)
