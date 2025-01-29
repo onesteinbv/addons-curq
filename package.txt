@@ -239,6 +239,7 @@ oca/base_view_inheritance_extension
 oca/contract
 oca/contract_payment_mode
 oca/currency_rate_update
+oca/database_cleanup
 oca/date_range
 oca/disable_odoo_online
 oca/document_knowledge
@@ -318,6 +319,7 @@ oca/purchase_sign
 oca/queue_job
 oca/remove_odoo_enterprise
 oca/report_qr
+oca/report_qweb_element_page_visibility
 oca/report_qweb_parameter
 oca/report_wkhtmltopdf_param
 oca/report_xlsx
