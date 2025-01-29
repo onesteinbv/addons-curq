@@ -55,6 +55,7 @@ COPY --parents \
 	website_onboarding \
 	website_sale_install \
 	stock_account_install \
+    sale_stock_install \
 	./
 
 RUN apt-get install git -y
