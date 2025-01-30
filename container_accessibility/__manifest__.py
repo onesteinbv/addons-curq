@@ -5,6 +5,8 @@
     "author": "Onestein BV",
     "website": "https://www.onestein.eu",
     "depends": [
+        "base",
+        "base_setup",
         "privacy_lookup",
         "web_tour",
         "payment",

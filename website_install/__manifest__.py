@@ -37,6 +37,8 @@
         "website_two_steps_share_technical",
         "website_snippet_dynamic_link",
         "website_snippet_openstreetmap",
+        "website_analytics_matomo",
+        "website_local_font",
     ],
     "bundle": True,
 }
