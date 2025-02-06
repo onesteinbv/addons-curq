@@ -57,6 +57,8 @@ class ResUsers(models.Model):
 
     def write(self, vals):
         is_restricted = self.env.user.is_restricted_user()
+        group_restricted = self.env.ref("container_accessibility.group_restricted")
+        restricted_reified_field = "in_group_%s" % group_restricted.id
         user_type_category = self.env.ref("base.module_category_user_type")
         user_type_groups = self.env["res.groups"].search(
             [("category_id", "=", user_type_category.id)], order="id ASC"
@@ -67,9 +69,7 @@ class ResUsers(models.Model):
 
         # Automatically add the restricted group for ux
         if is_restricted:
-            group_restricted = self.env.ref("container_accessibility.group_restricted")
             group_user = self.env.ref("base.group_user")
-            restricted_reified_field = "in_group_%s" % group_restricted.id
 
             internal_user = vals.get(user_type_reified_field) == group_user.id
             if internal_user:
@@ -99,8 +99,9 @@ class ResUsers(models.Model):
         if (
             "active" in vals
             and vals["active"]
-            or "group_ids" in vals
+            or "groups_id" in vals
             or user_type_reified_field in vals
+            or restricted_reified_field in vals
         ) and self._get_user_limit():
             self._check_user_limit_exceeded()
 
@@ -109,8 +110,8 @@ class ResUsers(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         # Automatically add the restricted group for ux
+        group_restricted = self.env.ref("container_accessibility.group_restricted")
         if self.env.user.is_restricted_user():
-            group_restricted = self.env.ref("container_accessibility.group_restricted")
             group_user = self.env.ref("base.group_user")
             user_type_category = self.env.ref("base.module_category_user_type")
             user_type_groups = self.env["res.groups"].search(
@@ -131,7 +132,9 @@ class ResUsers(models.Model):
                     vals[restricted_reified_field] = True
 
         res = super().create(vals_list)
-        if self._get_user_limit():
+        if self._get_user_limit() and res.mapped("groups_id").filtered(
+            lambda g_id: g_id == group_restricted
+        ):
             self._check_user_limit_exceeded()
         return res
 
