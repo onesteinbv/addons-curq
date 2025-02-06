@@ -15,7 +15,7 @@
         onestein: https://github.com/onesteinbv/addons-generic.git
     merges:
         - remote: onestein
-          ref: 75d6ddcfbd2156017aa52ee2be99e62a6732eede
+          ref: 3489bd1458ec503585b2c7caa71909fd194e6913
 
 # oca
 ./oca:
@@ -53,7 +53,7 @@
     remotes:
         onestein: https://github.com/onesteinbv/ProjectManagement.git
     merges:
-        - onestein 4959a1e7a3e6c842178acbe0ba4c4207cb1d5432
+        - onestein 18492ada42cc7ba0cb2b53651a07ee4adda76e8c
 
 # SendCloud
 ./addons-sendcloud:
