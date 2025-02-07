@@ -45,8 +45,10 @@ def main(env, email, group_file, group):
             click.echo(
                 click.style("Group `%s` doesn't exists" % group_xml_id, fg="red")
             )
-    customer_user.write({"groups_id": [(4, group_id) for group_id in group_ids]})
-
+    try:
+        customer_user.write({"groups_id": [(4, group_id) for group_id in group_ids]})
+    except Exception as e:
+        click.echo(click.style(str(e), fg="red"))
 
 if __name__ == "__main__":
     main()
