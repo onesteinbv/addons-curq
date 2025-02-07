@@ -97,12 +97,16 @@ class ResUsers(models.Model):
 
         # When trying to activate / un-archive a user we should check the limit, or when changing the user type
         if (
-            "active" in vals
-            and vals["active"]
-            or "groups_id" in vals
-            or user_type_reified_field in vals
-            or restricted_reified_field in vals
-        ) and self._get_user_limit():
+            self._get_user_limit()
+            and self.mapped("groups_id").filtered(lambda g_id: g_id == group_restricted)
+            and (
+                "active" in vals
+                and vals["active"]
+                or "groups_id" in vals
+                or user_type_reified_field in vals
+                or restricted_reified_field in vals
+            )
+        ):
             self._check_user_limit_exceeded()
 
         return res
