@@ -7,6 +7,13 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "data": ["security/security.xml"],
-    "depends": ["helpdesk_mgmt", "helpdesk_mgmt_merge", "helpdesk_mgmt_rating"],
+    "depends": [
+        "helpdesk_mgmt",
+        "helpdesk_mgmt_merge",
+        "helpdesk_mgmt_rating",
+        "helpdesk_ticket_related",
+        "helpdesk_ticket_partner_response",
+        "helpdesk_mgmt_email",
+    ],
     "bundle": True,
 }
