@@ -1,0 +1,25 @@
+[options]
+addons_path = ${PWD}/.repos/odoo/odoo/addons,${PWD}/.repos/odoo/addons,${PWD},${PWD}/.repos/addons-oca,${PWD}/.repos/addons-generic,${PWD}/.repos/addons-sendcloud,${PWD}/.repos/addons-third-party
+data_dir = /odoo-data
+auto_reload = False
+db_template = template1
+db_host = localhost
+db_port = 5432
+db_user = odoo
+db_password = odoo
+db_sslmode = prefer
+list_db = True
+admin_passwd = admin
+db_maxconn = 64
+limit_memory_soft = 2147483648
+limit_memory_hard = 2684354560
+limit_request = 8192
+limit_time_cpu = 60
+limit_time_real = 120
+limit_time_real_cron = -1
+log_handler = :INFO
+log_level = info
+max_cron_threads = 2
+logfile = None
+log_db = False
+server_wide_modules = web,base

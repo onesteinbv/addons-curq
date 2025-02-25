@@ -1,0 +1,37 @@
+{
+    "name": "Curq",
+    "dockerComposeFile": "docker-compose.yaml",
+    "service": "curq",
+    "workspaceFolder": "/workspace/${localWorkspaceFolderBasename}",
+    "forwardPorts": [8069, 5432],
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "git.repositoryScanMaxDepth": 2
+            },
+            "extensions": [
+                "ms-azuretools.vscode-docker",
+                "redhat.vscode-yaml",
+                "ecmel.vscode-html-css"
+            ]
+       }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2":{
+            "installZsh": "true",
+            "username": "vscode",
+            "userUid": "1000",
+            "userGid": "1000",
+            "upgradePackages": "true"
+        },
+        "ghcr.io/devcontainers/features/python:1": "none",
+        "ghcr.io/devcontainers/features/git:1": {
+            "version": "latest",
+            "ppa": "false"
+        }
+    },
+    "onCreateCommand": "sudo bash .devcontainer/on-create.sh",
+    "remoteUser": "vscode"
+}

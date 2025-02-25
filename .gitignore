@@ -130,4 +130,11 @@ dmypy.json
 
 # Editors
 .idea
-.vscode/
+.vscode/*
+!.vscode/launch.json
+
+# Aggregated repos
+.repos/
+
+# odoo.cfg created by devcontainer
+odoo.cfg
