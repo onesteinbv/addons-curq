@@ -31,7 +31,7 @@ class ResUsers(models.Model):
 
     def is_restricted_user(self):
         self.ensure_one()
-        return self.has_group("container_accessibility.group_restricted")
+        return self.sudo().has_group("container_accessibility.group_restricted")
 
     @api.model
     def get_view(self, view_id=None, view_type="form", **options):
@@ -60,7 +60,7 @@ class ResUsers(models.Model):
         group_restricted = self.env.ref("container_accessibility.group_restricted")
         restricted_reified_field = "in_group_%s" % group_restricted.id
         user_type_category = self.env.ref("base.module_category_user_type")
-        user_type_groups = self.env["res.groups"].search(
+        user_type_groups = self.env["res.groups"].sudo().search(
             [("category_id", "=", user_type_category.id)], order="id ASC"
         )
         user_type_reified_field = "sel_groups_%s" % (
