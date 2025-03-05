@@ -261,6 +261,8 @@ oca/fs_storage_backup
 oca/helpdesk_mgmt
 oca/helpdesk_mgmt_merge
 oca/helpdesk_mgmt_rating
+oca/helpdesk_ticket_related
+oca/helpdesk_ticket_partner_response
 oca/helpdesk_mgmt_project
 oca/helpdesk_mgmt_timesheet
 oca/hr_employee_firstname
