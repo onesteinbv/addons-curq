@@ -17,5 +17,8 @@ pip install -e .repos/odoo
 # Install pre-commit hooks
 pre-commit install
 
+# Config git
+git config pull.rebase true
+
 # Create config from template
 cat .devcontainer/odoo.cfg.tmpl | envsubst > odoo.cfg
