@@ -13,6 +13,7 @@ gitaggregate -c repos-dev.yaml
 pip install --no-cache-dir -r .repos/odoo/requirements.txt
 pip install --no-cache-dir -r requirements.txt
 pip install -e .repos/odoo
+pip install click-odoo-contrib
 
 # Install pre-commit hooks
 pre-commit install
