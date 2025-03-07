@@ -14,7 +14,8 @@
             "extensions": [
                 "ms-azuretools.vscode-docker",
                 "redhat.vscode-yaml",
-                "ecmel.vscode-html-css"
+                "ecmel.vscode-html-css",
+                "github.vscode-github-actions"
             ]
        }
     },

@@ -23,3 +23,8 @@ git config pull.rebase true
 
 # Create config from template
 cat .devcontainer/odoo.cfg.tmpl | envsubst > odoo.cfg
+
+# Install act
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/nektos/act/master/install.sh | bash
+mv ./bin/act /usr/local/bin/act
+rm -r ./bin/
