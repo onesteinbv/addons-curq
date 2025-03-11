@@ -47,10 +47,4 @@ jobs:
       - name: Run tests
         run: |
           ADDONS=$(manifestoo -d /odoo/custom --separator , list)
-          unbuffer coverage run odoo -d odoo -u $ADDONS --test-enable --stop-after-init | checklog-odoo
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./coverage.xml
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          unbuffer odoo -d odoo -u $ADDONS --test-enable --stop-after-init | checklog-odoo
