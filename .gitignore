@@ -137,3 +137,5 @@ dmypy.json
 
 # odoo.cfg created by devcontainer
 odoo.cfg
+
+.secrets

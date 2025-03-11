@@ -13,6 +13,7 @@ jobs:
       target: "ci"
   test:
     runs-on: ubuntu-22.04
+    needs: [build]
     container: 
       image: ghcr.io/${{ github.repository_owner }}/curq-ci:pr-${{ github.event.pull_request.number }}
     services:

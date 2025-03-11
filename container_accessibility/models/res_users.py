@@ -60,8 +60,10 @@ class ResUsers(models.Model):
         group_restricted = self.env.ref("container_accessibility.group_restricted")
         restricted_reified_field = "in_group_%s" % group_restricted.id
         user_type_category = self.env.ref("base.module_category_user_type")
-        user_type_groups = self.env["res.groups"].sudo().search(
-            [("category_id", "=", user_type_category.id)], order="id ASC"
+        user_type_groups = (
+            self.env["res.groups"]
+            .sudo()
+            .search([("category_id", "=", user_type_category.id)], order="id ASC")
         )
         user_type_reified_field = "sel_groups_%s" % (
             "_".join(str(gid) for gid in user_type_groups.ids)
