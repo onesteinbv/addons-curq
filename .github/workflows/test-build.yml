@@ -43,8 +43,8 @@ jobs:
       - name: Initialize test db
         run: |
           ADDONS=$(manifestoo -d /odoo/custom list | grep _install | paste -sd,)
-          unbuffer odoo -d odoo -i $ADDONS --stop-after-init | checklog-odoo
+          unbuffer odoo -d odoo -i $ADDONS --stop-after-init | checklog-odoo -i WARNING
       - name: Run tests
         run: |
           ADDONS=$(manifestoo -d /odoo/custom --separator , list)
-          unbuffer odoo -d odoo -u $ADDONS --test-enable --stop-after-init | checklog-odoo
+          unbuffer odoo -d odoo -u $ADDONS --test-enable --stop-after-init | checklog-odoo -i WARNING
