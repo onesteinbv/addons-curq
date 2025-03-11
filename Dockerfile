@@ -82,4 +82,5 @@ RUN rm -rf /odoo/wheels
 FROM base as ci
 RUN pip install --no-cache-dir coverage manifestoo checklog-odoo
 RUN apt-get update && apt-get install expect -y
+COPY checklog-odoo.cfg checklog-odoo.cfg
 ENTRYPOINT [ "/bin/bash" ]
