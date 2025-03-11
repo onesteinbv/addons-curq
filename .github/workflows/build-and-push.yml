@@ -6,7 +6,10 @@ on:
       tags:
         required: true
         type: string
-
+      target:
+        required: true
+        default: "base"
+        type: string
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -24,3 +27,4 @@ jobs:
         with:
           push: true
           tags: ${{ inputs.tags }}
+          target: ${{ inputs.target }}
