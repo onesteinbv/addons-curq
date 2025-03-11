@@ -4,6 +4,9 @@
     "service": "curq",
     "workspaceFolder": "/workspace/${localWorkspaceFolderBasename}",
     "forwardPorts": [8069, 5432],
+    "containerEnv": {
+        "ODOO_RC": "/workspace/${localWorkspaceFolderBasename}/odoo.cfg"
+    },
     "customizations": {
         "vscode": {
             "settings": {
