@@ -128,5 +128,5 @@
         "l10n_nl_hr_expense",
     ],
     "application": True,
-    "installable": False
+    "installable": False,
 }
