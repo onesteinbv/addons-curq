@@ -28,6 +28,7 @@ jobs:
           - 5432:5432
     env:
       DB_HOST: postgres
+      DB_PORT: "5432"
       DB_USER: odoo
       DB_PASSWORD: odoo
       WORKERS: "1"
