@@ -5,6 +5,7 @@ on:
     types: [opened, reopened, synchronize]
     branches:
       - "16.0"
+  workflow_dispatch:
 jobs:
   build:
     uses: ./.github/workflows/build-and-push.yml
