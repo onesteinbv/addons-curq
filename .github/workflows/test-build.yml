@@ -88,13 +88,15 @@ jobs:
           EOF
       - name: Initialize ${{ github.base_ref }}
         run: |
-          docker run ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.base_ref }} \
+          docker run \
             --entrypoint /usr/local/bin/entrypoint.sh \
-            --env-file .env.base
+            --env-file .env.base \
+            ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.base_ref }}
       - name: Test Update
         run: |
-          docker run ghcr.io/${{ github.repository_owner }}/curq-ci:pr-${{ github.event.pull_request.number }} \
+          docker run \
             --entrypoint /usr/local/bin/entrypoint.sh \ 
             --env-file .env.base \
-            -e MODE=UpdateOnly
+            --env MODE=UpdateOnly \
+            ghcr.io/${{ github.repository_owner }}/curq-ci:pr-${{ github.event.pull_request.number }}
 
