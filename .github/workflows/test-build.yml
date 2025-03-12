@@ -17,6 +17,7 @@ jobs:
     with:
       tags: ghcr.io/${{ github.repository_owner }}/curq-ci:pr-${{ github.event.pull_request.number }}
       target: "ci"
+      cache: true
   test:
     runs-on: ubuntu-22.04
     needs: [build]
@@ -37,12 +38,12 @@ jobs:
       DB_USER: odoo
       DB_PASSWORD: odoo
       WORKERS: "0"
+      WITHOUT_DEMO: "False"
       DOCKER: "true"
     steps:
       - name: Create config file
         run: |
           create_config_file.sh
-          cat /odoo/odoo.cfg
       - name: Wait for PostgreSQL
         run: |
           wait_for_postgres.sh
