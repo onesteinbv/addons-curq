@@ -21,7 +21,7 @@ jobs:
   test:
     runs-on: ubuntu-22.04
     needs: [build]
-    container: 
+    container:
       image: ghcr.io/${{ github.repository_owner }}/curq-ci:pr-${{ github.event.pull_request.number }}
     services:
       postgres:
@@ -55,3 +55,46 @@ jobs:
         run: |
           ADDONS=$(manifestoo -d /odoo/custom --separator , list)
           unbuffer odoo -d odoo -u $ADDONS --test-enable --stop-after-init | checklog-odoo -i WARNING
+  migration-test:
+    runs-on: ubuntu-22.04
+    needs: [build]
+    services:
+      postgres:
+        image: postgres:13.0
+        env:
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+          POSTGRES_DB: odoo
+        ports:
+          - 5432:5432
+    steps:
+      - name: Set up Docker
+        uses: docker/setup-docker-action@v4
+      - name: Prepare env files
+        run: |
+          BASE_IMAGE="ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.base_ref }}"
+          MODULES=$(docker run --rm $BASE_REF_IMAGE -c "manifestoo -d /odoo/custom list | grep _install | paste -sd,")
+          cat > .env.base <<EOF
+          DB_HOST=postgres
+          DB_PORT=5432
+          DB_USER=odoo
+          DB_PASSWORD=odoo
+          MODULES=$MODULES
+          WORKERS=0
+          MODE=InstallOnly
+          DOCKER=true
+          DB_NAME=main
+          DB_FILTER=^main$
+          EOF
+      - name: Initialize ${{ github.base_ref }}
+        run: |
+          docker run ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.base_ref }} \
+            --entrypoint /usr/local/bin/entrypoint.sh \
+            --env-file .env.base
+      - name: Test Update
+        run: |
+          docker run ghcr.io/${{ github.repository_owner }}/curq-ci:pr-${{ github.event.pull_request.number }} \
+            --entrypoint /usr/local/bin/entrypoint.sh \ 
+            --env-file .env.base \
+            -e MODE=UpdateOnly
+

@@ -69,7 +69,7 @@ COPY requirements.txt /curq-requirements.txt
 RUN apt-get update && apt-get -y install python3-pip cython3 python3 libldap2-dev libpq-dev libsasl2-dev python3-requests
 RUN pip wheel -r /requirements.txt -r /curq-requirements.txt --wheel-dir=/wheels
 
-FROM ghcr.io/onesteinbv/odoo-docker:19df7a6678c475d91eefbb5c0f8d0c3a1db6197d as base
+FROM ghcr.io/onesteinbv/odoo-docker:19df7a6678c475d91eefbb5c0f8d0c3a1db6197d AS base
 COPY --from=pack ./odoo /odoo/src/odoo
 COPY --from=pack ./package /odoo/custom
 COPY --from=wheels ./wheels /odoo/wheels
@@ -79,7 +79,7 @@ RUN pip install --no-cache-dir -r /odoo/src/odoo/requirements.txt -r /odoo/custo
 RUN pip install -e /odoo/src/odoo
 RUN rm -rf /odoo/wheels
 
-FROM base as ci
+FROM base AS ci
 RUN pip install --no-cache-dir coverage manifestoo checklog-odoo odoo-test-helper
 RUN apt-get update && apt-get install expect -y
 ENTRYPOINT [ "/bin/bash" ]

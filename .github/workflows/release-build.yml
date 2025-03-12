@@ -12,6 +12,13 @@ jobs:
     with:
       tags: ghcr.io/${{ github.repository_owner }}/curq:latest,ghcr.io/${{ github.repository_owner }}/curq:${{ github.ref_name }},ghcr.io/${{ github.repository_owner }}/curq:16.0
 
+  build-and-pus-ci:
+    uses: ./.github/workflows/build-and-push.yml
+    if: startsWith(github.ref_name, '16.0.')
+    with:
+      tags: ghcr.io/${{ github.repository_owner }}/curq-ci:latest,ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }},ghcr.io/${{ github.repository_owner }}/curq-ci:16.0
+      target: ci
+
   release:
     needs: build-and-push
     runs-on: ubuntu-latest
