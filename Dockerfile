@@ -80,6 +80,6 @@ RUN pip install -e /odoo/src/odoo
 RUN rm -rf /odoo/wheels
 
 FROM base as ci
-RUN pip install --no-cache-dir coverage manifestoo checklog-odoo
+RUN pip install --no-cache-dir coverage manifestoo checklog-odoo odoo-test-helper
 RUN apt-get update && apt-get install expect -y
 ENTRYPOINT [ "/bin/bash" ]
