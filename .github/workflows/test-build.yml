@@ -75,7 +75,7 @@ jobs:
           BASE_IMAGE="ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.base_ref }}"
           MODULES=$(docker run $BASE_IMAGE -c "manifestoo -d /odoo/custom list | grep _install | paste -sd,")
           cat > .env.base <<EOF
-          DB_HOST=postgres
+          DB_HOST=localhost
           DB_PORT=5432
           DB_USER=odoo
           DB_PASSWORD=odoo
