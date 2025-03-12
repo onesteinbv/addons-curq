@@ -36,7 +36,7 @@ jobs:
       DB_PORT: "5432"
       DB_USER: odoo
       DB_PASSWORD: odoo
-      WORKERS: "1"
+      WORKERS: "0"
       DOCKER: "true"
     steps:
       - name: Create config file
