@@ -16,8 +16,8 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     env:
-      CACHE_FROM: type=local
-      CACHE_TO: type=local
+      CACHE_FROM: type=local,dest=/tmp/buildx
+      CACHE_TO: type=local,dest=/tmp/buildx
     steps:
       - name: Setup cache
         if: ${{ inputs.cache }}
