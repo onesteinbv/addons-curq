@@ -73,7 +73,7 @@ jobs:
       - name: Prepare env files
         run: |
           BASE_IMAGE="ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.base_ref }}"
-          MODULES=$(docker run --rm $BASE_REF_IMAGE -c "manifestoo -d /odoo/custom list | grep _install | paste -sd,")
+          MODULES=$(docker run $BASE_IMAGE -c "manifestoo -d /odoo/custom list | grep _install | paste -sd,")
           cat > .env.base <<EOF
           DB_HOST=postgres
           DB_PORT=5432
