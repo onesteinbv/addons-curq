@@ -90,14 +90,14 @@ jobs:
         run: |
           docker volume create fs
           docker run \
-            --volume fs:/odoo/data
+            --volume fs:/odoo/data \
             --entrypoint /usr/local/bin/entrypoint.sh \
             --env-file .env.base \
             ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.base_ref }}
       - name: Test update
         run: |
           docker run \
-            --volume fs:/odoo/data
+            --volume fs:/odoo/data \
             --entrypoint /usr/local/bin/entrypoint.sh \ 
             --env-file .env.base \
             --env MODE=UpdateOnly \
