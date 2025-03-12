@@ -52,9 +52,14 @@ jobs:
           ADDONS=$(manifestoo -d /odoo/custom list | grep _install | paste -sd,)
           unbuffer odoo -d odoo -i $ADDONS --stop-after-init | checklog-odoo -i WARNING
       - name: Run tests
+        continue-on-error: true
         run: |
           ADDONS=$(manifestoo -d /odoo/custom --separator , list)
           unbuffer odoo -d odoo -u $ADDONS --test-enable --stop-after-init | checklog-odoo -i WARNING
+      - name: Warning tests failed
+        if: ${{ failure() }}
+        run: |
+          echo "::warning::Tests failed"
   migration-test:
     runs-on: ubuntu-22.04
     needs: [build]

@@ -5,7 +5,6 @@ COPY repos.yaml repos.yaml
 COPY package.txt package.txt
 COPY scripts/pack.py pack.py
 
-# TODO: Should we move modules in repostory to a singular directory to make this easier?
 COPY --parents \
 	account_configuration \
 	account_financial_consolidation_report \
@@ -69,7 +68,7 @@ COPY requirements.txt /curq-requirements.txt
 RUN apt-get update && apt-get -y install python3-pip cython3 python3 libldap2-dev libpq-dev libsasl2-dev python3-requests
 RUN pip wheel -r /requirements.txt -r /curq-requirements.txt --wheel-dir=/wheels
 
-FROM ghcr.io/onesteinbv/odoo-docker:19df7a6678c475d91eefbb5c0f8d0c3a1db6197d AS base
+FROM ghcr.io/onesteinbv/odoo-docker:ba0d14d40b17aaca48e743ef63230a08b8004899 AS base
 COPY --from=pack ./odoo /odoo/src/odoo
 COPY --from=pack ./package /odoo/custom
 COPY --from=wheels ./wheels /odoo/wheels
