@@ -42,6 +42,7 @@ jobs:
       - name: Create config file
         run: |
           create_config_file.sh
+          cat /odoo/odoo.cfg
       - name: Wait for PostgreSQL
         run: |
           wait_for_postgres.sh
