@@ -12,7 +12,11 @@
             "settings": {
                 "terminal.integrated.shell.linux": "/bin/bash",
                 "python.defaultInterpreterPath": "/usr/local/bin/python",
-                "git.repositoryScanMaxDepth": 2
+                "git.repositoryScanMaxDepth": 2,
+                "search.exclude": {
+                    "*.po": true,
+                    "*.pot": true
+                }
             },
             "extensions": [
                 "ms-azuretools.vscode-docker",

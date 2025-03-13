@@ -1,8 +1,0 @@
-ignore:
-  - "package/**/*"
-  - "odoo/**/*"
-  - "oca/**/*"
-  - "design-themes/**/*"
-  - "addons-generic/**/*"
-  - "addons-third-party/**/*"
-  - "ProjectManagement/**/*"

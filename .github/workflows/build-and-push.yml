@@ -9,10 +9,21 @@ on:
       target:
         default: "base"
         type: string
+      cache:
+        default: false
+        type: boolean
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    env:
+      CACHE_FROM: type=local,src=/tmp/buildx
+      CACHE_TO: type=local,dest=/tmp/buildx
     steps:
+      - name: Setup cache
+        if: ${{ inputs.cache }}
+        run: |
+          echo "CACHE_FROM=type=gha" >> $GITHUB_ENV
+          echo "CACHE_TO=type=gha,mode=max" >> $GITHUB_ENV
       - name: Login to Docker
         uses: docker/login-action@v3
         with:
@@ -27,3 +38,5 @@ jobs:
           push: true
           tags: ${{ inputs.tags }}
           target: ${{ inputs.target }}
+          cache-from: ${{ env.CACHE_FROM }}
+          cache-to: ${{ env.CACHE_TO }}

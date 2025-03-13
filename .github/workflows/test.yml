@@ -1,20 +1,28 @@
-name: test-build
+name: test
 
 on:
   pull_request:
     types: [opened, reopened, synchronize]
     branches:
       - "16.0"
+  workflow_dispatch:
+    
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+  
 jobs:
   build:
     uses: ./.github/workflows/build-and-push.yml
     with:
       tags: ghcr.io/${{ github.repository_owner }}/curq-ci:pr-${{ github.event.pull_request.number }}
       target: "ci"
+      cache: true
+
   test:
     runs-on: ubuntu-22.04
     needs: [build]
-    container: 
+    container:
       image: ghcr.io/${{ github.repository_owner }}/curq-ci:pr-${{ github.event.pull_request.number }}
     services:
       postgres:
@@ -27,9 +35,11 @@ jobs:
           - 5432:5432
     env:
       DB_HOST: postgres
+      DB_PORT: "5432"
       DB_USER: odoo
       DB_PASSWORD: odoo
-      WORKERS: "1"
+      WORKERS: "0"
+      WITHOUT_DEMO: "False"
       DOCKER: "true"
     steps:
       - name: Create config file
@@ -41,14 +51,15 @@ jobs:
       - name: Initialize test db
         run: |
           ADDONS=$(manifestoo -d /odoo/custom list | grep _install | paste -sd,)
-          unbuffer odoo -d odoo -i $ADDONS --stop-after-init | checklog-odoo
+          unbuffer odoo -d odoo -i $ADDONS --stop-after-init | checklog-odoo -i WARNING
       - name: Run tests
         run: |
           ADDONS=$(manifestoo -d /odoo/custom --separator , list)
-          unbuffer coverage run odoo -d odoo -u $ADDONS --test-enable --stop-after-init | checklog-odoo
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./coverage.xml
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          unbuffer odoo -d odoo -u $ADDONS --test-enable --stop-after-init | checklog-odoo -i WARNING
+
+  migration:
+    uses: ./.github/workflows/migration-test.yml
+    needs: [build]
+    with:
+      from: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.base_ref }}
+      to: ghcr.io/${{ github.repository_owner }}/curq-ci:pr-${{ github.event.pull_request.number }}

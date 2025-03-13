@@ -1,0 +1,72 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "16.0.*"
+  workflow_dispatch:
+
+jobs:
+  build-ci:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      tags: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }}
+      target: ci
+
+  migration:
+    needs: [build-ci]
+    uses: ./.github/workflows/migration-test.yml
+    with:
+      from: ghcr.io/${{ github.repository_owner }}/curq-ci:16.0
+      to: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }}
+
+  build:
+    needs: [migration]
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      tags: ghcr.io/${{ github.repository_owner }}/curq:latest,ghcr.io/${{ github.repository_owner }}/curq:${{ github.ref_name }},ghcr.io/${{ github.repository_owner }}/curq:16.0
+
+  release:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: ${{ github.ref_name }}
+          body: "/"
+          draft: false
+          prerelease: false
+
+  tag-ci-latest:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up Docker
+        uses: docker/setup-docker-action@v4
+      - name: Tag ${{ github.ref_name }} > 16.0
+        run: |
+          docker pull ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }}
+          docker tag ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }} ghcr.io/${{ github.repository_owner }}/curq-ci:16.0
+          docker push ghcr.io/${{ github.repository_owner }}/curq-ci:16.0
+
+  notify:
+    needs: [build-ci, migration, build, release]
+    if: ${{ failure() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram message
+        run: |
+          curl \
+            -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_API_TOKEN }}/sendMessage \
+            -H 'Content-Type: application/json' \
+            -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"❤️‍🩹 Release workflow failed: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
+            --fail
