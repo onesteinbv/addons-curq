@@ -1,4 +1,5 @@
 name: release-build
+run-name: Test and Release
 
 on:
   push:
