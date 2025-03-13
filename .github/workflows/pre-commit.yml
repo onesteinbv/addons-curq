@@ -9,7 +9,7 @@ on:
       - "16.0"
 
 jobs:
-  pre-commit:
+  check:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3

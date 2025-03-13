@@ -1,4 +1,4 @@
-name: test-build
+name: test
 
 on:
   pull_request:
@@ -55,7 +55,7 @@ jobs:
         run: |
           ADDONS=$(manifestoo -d /odoo/custom --separator , list)
           unbuffer odoo -d odoo -u $ADDONS --test-enable --stop-after-init | checklog-odoo -i WARNING
-  migration-test:
+  migration:
     uses: ./.github/workflows/migration-test.yml
     needs: [build]
     with:
