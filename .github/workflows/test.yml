@@ -18,6 +18,7 @@ jobs:
       tags: ghcr.io/${{ github.repository_owner }}/curq-ci:pr-${{ github.event.pull_request.number }}
       target: "ci"
       cache: true
+
   test:
     runs-on: ubuntu-22.04
     needs: [build]
@@ -55,6 +56,7 @@ jobs:
         run: |
           ADDONS=$(manifestoo -d /odoo/custom --separator , list)
           unbuffer odoo -d odoo -u $ADDONS --test-enable --stop-after-init | checklog-odoo -i WARNING
+
   migration:
     uses: ./.github/workflows/migration-test.yml
     needs: [build]
