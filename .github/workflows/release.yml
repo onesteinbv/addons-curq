@@ -63,7 +63,7 @@ jobs:
     if: ${{ failure() }}
     runs-on: ubuntu-latest
     steps:
-      - name: Send telemgram
+      - name: Send Telegram message
         run: |
           curl \
             -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_API_TOKEN }}/sendMessage \
