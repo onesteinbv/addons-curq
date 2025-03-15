@@ -61,6 +61,9 @@ addons-generic/crypto_currency
 addons-generic/currency_rate_update_coingecko
 addons-generic/currency_rate_update_mapping
 addons-generic/gitlab
+addons-generic/helpdesk_mgmt_email
+addons-generic/helpdesk_mgmt_fetchmail_multicompany
+addons-generic/helpdesk_ticket_custom_priority
 addons-generic/l10n_nl_rgs
 addons-generic/l10n_nl_rgs_account_financial_report
 addons-generic/l10n_nl_rgs_asset
