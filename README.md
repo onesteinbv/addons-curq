@@ -2,3 +2,4 @@
 [![Release](https://github.com/onesteinbv/addons-curq/actions/workflows/release.yml/badge.svg)](https://github.com/onesteinbv/addons-curq/actions/workflows/release.yml)
 
 # Curq
+
