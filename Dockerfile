@@ -5,7 +5,6 @@ COPY repos.yaml repos.yaml
 COPY package.txt package.txt
 COPY scripts/pack.py pack.py
 
-# TODO: Should we move modules in repostory to a singular directory to make this easier?
 COPY --parents \
 	account_configuration \
 	account_financial_consolidation_report \
@@ -63,12 +62,23 @@ RUN pip install --no-cache-dir git-aggregator==4.0.2 click==8.1.8
 RUN gitaggregate -c repos.yaml
 RUN python3 pack.py --location . --package-file "package.txt" --destination "package"
 
-FROM ghcr.io/onesteinbv/odoo-docker:latest
+FROM ubuntu:22.04 AS wheels
+COPY --from=pack ./odoo/requirements.txt /requirements.txt
+COPY requirements.txt /curq-requirements.txt
+RUN apt-get update && apt-get -y install python3-pip cython3 python3 libldap2-dev libpq-dev libsasl2-dev python3-requests
+RUN pip wheel -r /requirements.txt -r /curq-requirements.txt --wheel-dir=/wheels
+
+FROM ghcr.io/onesteinbv/odoo-docker:7f2dc305080f2dc4a79d0ef301f861abc860e785 AS base
 COPY --from=pack ./odoo /odoo/src/odoo
 COPY --from=pack ./package /odoo/custom
+COPY --from=wheels ./wheels /odoo/wheels
 COPY ./scripts /odoo/scripts
 COPY requirements.txt /odoo/custom/requirements.txt
-RUN pip install --no-cache-dir -r /odoo/src/odoo/requirements.txt -f https://wheelhouse.acsone.eu/manylinux2014
-# TODO: Fix dependency conflict with /odoo/src/odoo/requirements.txt and /odoo/custom/requirements.txt
-RUN pip install --no-cache-dir -r /odoo/custom/requirements.txt
+RUN pip install --no-cache-dir -r /odoo/src/odoo/requirements.txt -r /odoo/custom/requirements.txt --find-links /odoo/wheels
 RUN pip install -e /odoo/src/odoo
+RUN rm -rf /odoo/wheels
+
+FROM base AS ci
+RUN pip install --no-cache-dir manifestoo checklog-odoo odoo-test-helper
+RUN apt-get update && apt-get install expect -y
+ENTRYPOINT [ "/bin/bash" ]

@@ -50,5 +50,6 @@ def main(env, email, group_file, group):
     except Exception as e:
         click.echo(click.style("Error when applying Groups: %s" % str(e), fg="red"))
 
+
 if __name__ == "__main__":
     main()

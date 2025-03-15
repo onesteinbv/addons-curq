@@ -1,0 +1,15 @@
+name: clean-test-build
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: bots-house/ghcr-delete-image-action@v1.1.0
+        with:
+          owner: ${{ github.repository_owner }}
+          name: curq-ci
+          token: ${{ secrets.PAT }}
+          tag: pr-${{ github.event.pull_request.number }}

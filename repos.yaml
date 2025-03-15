@@ -5,7 +5,7 @@
         odoo: https://github.com/odoo/odoo.git
     merges:
         - remote: odoo
-          ref: 38b6ebd18081a9026b912735e4326c0fa901331b
+          ref: fc47e0d62d23cd2de54f132f37076ee6a635f735
 
 # onestein
 ./addons-generic:
@@ -15,7 +15,7 @@
         onestein: https://github.com/onesteinbv/addons-generic.git
     merges:
         - remote: onestein
-          ref: 48d77875a7855fb31be5cb9beefb1ba1d63ebe9e
+          ref: 9212629803cfc5fdde5ebf6e8d581f5201688ac8
 
 # oca
 ./oca:
@@ -25,7 +25,7 @@
         onestein: https://github.com/onesteinbv/addons-oca.git
     merges:
         - remote: onestein
-          ref: 05a993e3e60bb1c37ed62dedcfc9eb123d51b89a
+          ref: 1f0533eb52202341c4599dc14a08e02c6c6e5964
 
 # third-party
 ./addons-third-party:

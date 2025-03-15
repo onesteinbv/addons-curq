@@ -1,0 +1,36 @@
+./.repos/odoo:
+  defaults:
+    depth: 10
+  remotes:
+    odoo: https://github.com/odoo/odoo.git
+  merges:
+    - remote: odoo
+      ref: fc47e0d62d23cd2de54f132f37076ee6a635f735
+
+./.repos/addons-generic:
+  remotes:
+      onestein: https://github.com/onesteinbv/addons-generic.git
+  merges:
+    - onestein 16.0
+  target: onestein 16.0
+
+./.repos/addons-oca:
+  remotes:
+    onestein: https://github.com/onesteinbv/addons-oca.git
+  merges:
+    - onestein 16.0
+  target: onestein 16.0
+
+./.repos/addons-third-party:
+  remotes:
+    onestein: https://github.com/onesteinbv/addons-third-party.git
+  merges:
+    - onestein 16.0
+  target: onestein 16.0
+
+./.repos/addons-sendcloud:
+  remotes:
+    onestein: https://github.com/onesteinbv/addons-sendcloud.git
+  merges:
+    - onestein 16.0
+  target: onestein 16.0
