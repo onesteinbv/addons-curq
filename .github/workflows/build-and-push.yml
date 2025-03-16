@@ -33,14 +33,14 @@ jobs:
           echo "CACHE_TO=type=gha,mode=max" >> $GITHUB_ENV
       - name: Login to Docker
         uses: docker/login-action@v3
-        if: !inputs.use_pat
+        if: ${{ !inputs.use_pat }}
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Login to Docker
         uses: docker/login-action@v3    
-        if: inputs.use_pat
+        if: ${{ inputs.use_pat }}
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
