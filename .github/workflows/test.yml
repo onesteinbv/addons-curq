@@ -18,6 +18,7 @@ jobs:
       tags: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.event.pull_request.head.sha }},ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.base_ref }}-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
       target: "ci"
       environment: test
+      use_pat: true
 
   test:
     runs-on: ubuntu-22.04
