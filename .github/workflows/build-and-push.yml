@@ -9,6 +9,9 @@ on:
       target:
         default: "base"
         type: string
+      labels:
+        default: ""
+        type: string
       cache:
         default: false
         type: boolean
@@ -40,3 +43,5 @@ jobs:
           target: ${{ inputs.target }}
           cache-from: ${{ env.CACHE_FROM }}
           cache-to: ${{ env.CACHE_TO }}
+          labels: |
+            - nl.curq.hello=world
