@@ -15,8 +15,9 @@ jobs:
   build-ci:
     uses: ./.github/workflows/build-and-push.yml
     with:
-      tags: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.event.pull_request.head.sha }}
+      tags: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.event.pull_request.head.sha }},ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.base_ref }}-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
       target: "ci"
+      environment: test
 
   test:
     runs-on: ubuntu-22.04

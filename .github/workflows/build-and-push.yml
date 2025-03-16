@@ -9,12 +9,19 @@ on:
       target:
         default: "base"
         type: string
+      environment:
+        default: null
+        type: string
       cache:
         default: false
         type: boolean
+      use_pat:
+        type: boolean
+        default: false
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     env:
       CACHE_FROM: type=local,src=/tmp/buildx
       CACHE_TO: type=local,dest=/tmp/buildx
@@ -26,10 +33,18 @@ jobs:
           echo "CACHE_TO=type=gha,mode=max" >> $GITHUB_ENV
       - name: Login to Docker
         uses: docker/login-action@v3
+        if: !inputs.use_pat
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Login to Docker
+        uses: docker/login-action@v3    
+        if: inputs.use_pat
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PAT }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build and Push
