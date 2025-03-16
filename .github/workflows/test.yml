@@ -12,16 +12,8 @@ concurrency:
     cancel-in-progress: true
   
 jobs:
-  build-ci:
-    uses: ./.github/workflows/build-and-push.yml
-    if: ${{ github.repository_owner == 'onesteinbv' }}
-    with:
-      tags: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.event.pull_request.head.sha }},ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.base_ref }}-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
-      target: "ci"
-
   test:
     runs-on: ubuntu-22.04
-    needs: [build-ci]
     container:
       image: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.event.pull_request.head.sha }}
     services:
@@ -59,7 +51,6 @@ jobs:
 
   migration:
     uses: ./.github/workflows/migration-test.yml
-    needs: [build-ci]
     with:
       from: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.base_ref }}
       to: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.event.pull_request.head.sha }}
