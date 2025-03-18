@@ -9,10 +9,6 @@ on:
         pr:
           required: false
           type: number
-
-concurrency:
-    group: ${{ github.workflow }}-${{ inputs.git_commit }}
-    cancel-in-progress: true
   
 jobs:
   test:
