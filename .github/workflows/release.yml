@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - "16.0.*"
-  workflow_dispatch:
 
 jobs:
   build-ci:

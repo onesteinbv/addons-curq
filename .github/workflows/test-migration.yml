@@ -11,12 +11,9 @@ on:
         type: string
   workflow_dispatch:
     inputs:
-        git_commit:
-          required: true
-          type: string
-        pr:
-          required: false
-          type: number
+      git_commit:
+        required: true
+        type: string
 
 jobs:
   test:
