@@ -43,7 +43,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: "pending",
-              context: "ci/migration-test"
+              context: "ci/migration-test",
               description: "Running...",
               target_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             })
@@ -101,7 +101,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 state: "success",
-                context: "ci/migration-test"
+                context: "ci/migration-test",
                 description: "Migration succeeded",
                 target_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
               })
@@ -115,7 +115,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 state: "failure",
-                context: "ci/migration-test"
+                context: "ci/migration-test",
                 description: "Migration failed",
                 target_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
               })                

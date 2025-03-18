@@ -48,7 +48,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: "pending",
-              context: "ci/test"
+              context: "ci/test",
               description: "Running...",
               target_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             })
@@ -76,7 +76,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 state: "success",
-                context: "ci/test"
+                context: "ci/test",
                 description: "Tests passed",
                 target_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
               })
@@ -90,7 +90,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 state: "failure",
-                context: "ci/test"
+                context: "ci/test",
                 description: "Tests failed",
                 target_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
               })                
