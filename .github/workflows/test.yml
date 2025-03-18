@@ -17,6 +17,8 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-22.04
+    permissions:
+      statuses: write
     container:
       image: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ inputs.git_commit }}
     services:

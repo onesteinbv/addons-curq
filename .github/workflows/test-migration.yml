@@ -17,10 +17,12 @@ on:
         pr:
           required: false
           type: number
-      
+
 jobs:
   test:
     runs-on: ubuntu-22.04
+    permissions:
+      statuses: write    
     services:
       postgres:
         image: postgres:13.0
