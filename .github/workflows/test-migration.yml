@@ -57,7 +57,7 @@ jobs:
           fi
       - name: Prepare env files
         run: |
-          MODULES=$(docker run -e DOCKER=true ${{ env.FROM }} -c "manifestoo -d /odoo/custom list | grep _install | paste -sd,")
+          MODULES=$(docker run ${{ env.FROM }} -c "manifestoo -d /odoo/custom list | grep _install | paste -sd,")
           cat > .env.base <<EOF
           DB_HOST=localhost
           DB_PORT=5432
