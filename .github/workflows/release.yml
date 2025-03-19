@@ -13,7 +13,7 @@ jobs:
 
   migration:
     needs: [build-ci]
-    uses: ./.github/workflows/migration-test.yml
+    uses: ./.github/workflows/test-migration.yml
     with:
       from: ghcr.io/${{ github.repository_owner }}/curq-ci:16.0
       to: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }}
