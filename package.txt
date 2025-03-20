@@ -247,7 +247,6 @@ oca/date_range
 oca/disable_odoo_online
 oca/document_knowledge
 oca/document_page
-oca/membership_prorate
 oca/document_page_access_group
 oca/document_page_access_group_user_role
 oca/document_page_approval
