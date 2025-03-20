@@ -85,7 +85,6 @@ addons-generic/membership_hr
 addons-generic/membership_hr_recruitment
 addons-generic/membership_mollie_subscription
 addons-generic/membership_origin
-addons-generic/membership_prorate
 addons-generic/membership_prorate_variable_period
 addons-generic/membership_section
 addons-generic/membership_subscription
@@ -248,6 +247,7 @@ oca/date_range
 oca/disable_odoo_online
 oca/document_knowledge
 oca/document_page
+oca/membership_prorate
 oca/document_page_access_group
 oca/document_page_access_group_user_role
 oca/document_page_approval
@@ -293,6 +293,7 @@ oca/mail_partner_opt_out
 oca/mass_mailing_custom_unsubscribe
 oca/mass_mailing_partner
 oca/membership_extension
+oca/membership_prorate
 oca/membership_sale_prorate
 oca/membership_variable_period
 oca/mis_builder
