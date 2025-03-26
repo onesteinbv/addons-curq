@@ -1,0 +1,89 @@
+name: test
+
+on:
+  workflow_dispatch:
+    inputs:
+      git_commit:
+        required: true
+        type: string
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    permissions:
+      statuses: write
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ inputs.git_commit }}
+    services:
+      postgres:
+        image: postgres:13.0
+        env:
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+          POSTGRES_DB: odoo
+        ports:
+          - 5432:5432
+    env:
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_USER: odoo
+      DB_PASSWORD: odoo
+      WORKERS: "0"
+      WITHOUT_DEMO: "False"
+      DOCKER: "true"
+    steps:
+      - name: "Update status: pending"
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.repos.createCommitStatus({
+              sha: "${{ inputs.git_commit }}",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "pending",
+              context: "ci / test",
+              description: "Running...",
+              target_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            })
+      - name: Create config file
+        run: |
+          create_config_file.sh
+      - name: Wait for PostgreSQL
+        run: |
+          wait_for_postgres.sh
+      - name: Initialize test db
+        run: |
+          ADDONS=$(manifestoo -d /odoo/custom list | grep _install | paste -sd,)
+          unbuffer odoo -d odoo -i $ADDONS --stop-after-init | checklog-odoo -i WARNING
+      - name: Run tests
+        run: |
+          ADDONS=$(manifestoo -d /odoo/custom --separator , list)
+          unbuffer odoo -d odoo -u $ADDONS --test-enable --stop-after-init | checklog-odoo -i WARNING
+      - name: "Update status: success"
+        uses: actions/github-script@v7
+        if: success()
+        with:
+          script: |
+              github.rest.repos.createCommitStatus({
+                sha: "${{ inputs.git_commit }}",
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: "success",
+                context: "ci / test",
+                description: "Tests passed",
+                target_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              })
+      - name: "Update status: failure"
+        uses: actions/github-script@v7
+        if: failure()
+        with:
+          script: |
+              github.rest.repos.createCommitStatus({
+                sha: "${{ inputs.git_commit }}",
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: "failure",
+                context: "ci / test",
+                description: "Tests failed",
+                target_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              })                
