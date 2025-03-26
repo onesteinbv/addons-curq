@@ -1,0 +1,52 @@
+./odoo:
+  defaults:
+    depth: 1
+  remotes:
+    odoo: https://github.com/odoo/odoo.git
+  merges:
+    - odoo 18.0
+
+# onestein
+./addons-generic:
+  defaults:
+    depth: 1
+  remotes:
+    onestein: https://github.com/onesteinbv/addons-generic.git
+  merges:
+    - onestein 18.0
+
+# oca
+./oca:
+  defaults:
+    depth: 1
+  remotes:
+    onestein: https://github.com/onesteinbv/addons-oca.git
+  merges:
+    - onestein 18.0
+
+# third-party
+./addons-third-party:
+  defaults:
+    depth: 1
+  remotes:
+    onestein: https://github.com/onesteinbv/addons-third-party.git
+  merges:
+    - onestein 18.0
+
+# design themes
+./design-themes:
+  defaults:
+    depth: 1
+  remotes:
+    odoo: https://github.com/odoo/design-themes.git
+  merges:
+    - odoo 18.0
+
+# sendcloud
+./addons-sendcloud:
+  defaults:
+    depth: 1
+  remotes:
+    onestein: https://github.com/onesteinbv/addons-sendcloud.git
+  merges:
+    - onestein 18.0
