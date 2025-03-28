@@ -17,9 +17,6 @@
         "hr_employee_firstname",
         "hr_timesheet_sheet",
         "hr_holidays",
-        "l10n_nl_bsn",
-        "l10n_nl_hr_recruitment",
-        "l10n_nl_hr_expense",
     ],
     "bundle": True,
 }

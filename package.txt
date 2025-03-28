@@ -19,8 +19,11 @@ container_s3
 digest_configuration
 digest_disable
 hr_accessibility
+l10n_de_install
 l10n_nl_hr_expense
+l10n_nl_hr_install
 l10n_nl_hr_recruitment
+l10n_nl_install
 l10n_nl_rgs_usability
 mass_mailing_force_dedicated_server
 membership_accessibility
@@ -34,6 +37,7 @@ crm_install
 event_install
 hr_install
 mass_mailing_install
+mass_mailing_website_install
 membership_install
 helpdesk_install
 project_install
@@ -49,6 +53,7 @@ stock_account_install
 sale_stock_install
 addons-generic/account_asset_management_template
 addons-generic/account_journal_subtype
+addons-generic/account_partner_default_account
 addons-generic/account_period_auto_create
 addons-generic/attachment_preview_remove_preview_button
 addons-generic/base_company_management
@@ -64,6 +69,7 @@ addons-generic/gitlab
 addons-generic/helpdesk_mgmt_email
 addons-generic/helpdesk_mgmt_fetchmail_multicompany
 addons-generic/helpdesk_ticket_custom_priority
+addons-generic/l10n_de_skr49
 addons-generic/l10n_nl_rgs
 addons-generic/l10n_nl_rgs_account_financial_report
 addons-generic/l10n_nl_rgs_asset
@@ -100,6 +106,8 @@ addons-generic/web_responsive_disable_form_attachment_preview
 addons-generic/website_event_external_map
 addons-generic/website_event_share_filter_option
 addons-generic/website_hide_navbar_technical
+addons-generic/website_html_sitemap
+addons-generic/website_mailing_to_blogpost
 addons-generic/website_mass_mailing_membership_group
 addons-generic/website_mass_mailing_membership_section
 addons-generic/website_membership_group
@@ -216,7 +224,9 @@ oca/account_statement_import_online
 oca/account_statement_import_online_paypal
 oca/account_statement_import_online_ponto
 oca/account_statement_import_sheet_file
+oca/account_tax_balance
 oca/account_usability
+oca/account_voucher_killer
 oca/agreement
 oca/agreement_legal
 oca/agreement_legal_tier_validation_sign
@@ -272,6 +282,8 @@ oca/hr_expense_fleet
 oca/hr_expense_remove_mobile_link
 oca/hr_timesheet_sheet
 oca/hr_timesheet_sheet_autodraft
+oca/l10n_de_tax_statement
+oca/l10n_de_tax_statement_zm
 oca/l10n_nl_bank
 oca/l10n_nl_bsn
 oca/l10n_nl_postcode
