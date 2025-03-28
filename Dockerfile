@@ -32,11 +32,15 @@ COPY --parents \
 	helpdesk_install \
 	hr_accessibility \
 	hr_install \
+	l10n_de_install \
 	l10n_nl_hr_expense \
+	l10n_nl_hr_install \
 	l10n_nl_hr_recruitment \
+	l10n_nl_install \
 	l10n_nl_rgs_usability \
 	mass_mailing_force_dedicated_server \
 	mass_mailing_install \
+	mass_mailing_website_install \
 	membership_accessibility \
 	membership_accessibility_mass_mailing_membership_group \
 	membership_accessibility_website_project_role_members \
