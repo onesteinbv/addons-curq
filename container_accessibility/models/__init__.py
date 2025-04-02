@@ -12,6 +12,5 @@ from . import auditlog_log_line
 from . import auditlog_autovacuum
 from . import ir_cron
 from . import server_config
-from . import ir_attachment
 from . import fetchmail_server
 from . import ir_config_parameter
