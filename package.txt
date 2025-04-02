@@ -75,6 +75,7 @@ addons-generic/l10n_nl_rgs_account_financial_report
 addons-generic/l10n_nl_rgs_asset
 addons-generic/l10n_nl_rgs_mis_report
 addons-generic/l10n_nl_rgs_xaf_auditfile_export
+addons-generic/mail_raise_log_level
 addons-generic/mass_mailing_help
 addons-generic/mass_mailing_membership_committee
 addons-generic/mass_mailing_membership_section
@@ -346,6 +347,7 @@ oca/sale_order_amount_to_invoice
 oca/sale_timesheet_line_non_billable
 oca/server_environment
 oca/session_db
+oca/sentry
 oca/spreadsheet_dashboard_oca
 oca/spreadsheet_oca
 oca/subscription_oca
