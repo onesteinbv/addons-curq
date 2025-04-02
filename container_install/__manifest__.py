@@ -48,7 +48,6 @@
         "partner_contact_department",
         "mail_tracking",
         "mail_raise_log_level",
-        "sentry",
     ],
     "bundle": True,
 }
