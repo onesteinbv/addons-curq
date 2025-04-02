@@ -47,6 +47,7 @@
         "mail_attach_existing_attachment",
         "partner_contact_department",
         "mail_tracking",
+        "mail_raise_log_level",
     ],
     "bundle": True,
 }

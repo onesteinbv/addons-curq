@@ -30,7 +30,7 @@ def main(env, dry_run):
         exclude_states=("uninstallable",)
     )
     ignore_modules = modules.filtered(
-        lambda m: m.name in ["container_s3"] or m.name.startswith("theme_")
+        lambda m: m.name in ["container_s3", "sentry"] or m.name.startswith("theme_")
     )
     target_modules += ignore_modules
     retired_modules = current_modules - target_modules
