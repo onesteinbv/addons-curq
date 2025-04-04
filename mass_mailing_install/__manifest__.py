@@ -1,6 +1,6 @@
 {
     "name": "Email Marketing",
-    "summary": "Design, send and track emails",
+    "summary": "Design, send, and track emails",
     "author": "Onestein",
     "website": "https://onestein.nl",
     "category": "Email Marketing",
