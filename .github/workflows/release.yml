@@ -29,6 +29,8 @@ jobs:
   release:
     needs: [build]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Publish release
         uses: actions/create-release@v1
