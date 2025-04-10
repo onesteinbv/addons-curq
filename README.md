@@ -45,3 +45,5 @@ docker compose
 ## Helm
 
 ## License
+
+AGPL
