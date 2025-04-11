@@ -5,7 +5,7 @@
 
 CURQ is an all-in-one platform for businesses, built on Odoo and other FOSS.
 
-CURQ is purpose-built / highly opinionated where the goal is to make a complete package without 
+CURQ is purpose-built / highly opinionated focussed on Dutch companies where the goal is to make a complete package without 
 business consultant having to think about every single module to install. The goal is to streamline the 
 installation process and support process. Basically Curq is Odoo + OCA modules + other open source modules 
 pre-packaged with bundles. A bundle is a normal Odoo module with only dependencies to other modules.
@@ -81,8 +81,6 @@ most info on all options / environment variables can be found there.
 But notably the `MODE` env variable is most important
 
 docker compose
-
-## Helm
 
 ## License
 

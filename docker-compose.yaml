@@ -1,0 +1,67 @@
+name: curq
+
+services:
+  curq:
+    image: ghcr.io/onesteinbv/curq:latest
+    networks:
+      - nginx
+      - db
+      - reporting
+    ports:
+      - "8069:8069"
+    volumes:
+      - curq-data:/odoo/data
+    environment:
+      DB_HOST: "postgres"
+      DB_NAME: "main"
+      DB_USER: "odoo"
+      DB_PASSWORD: "odoo"
+      DB_PORT: "5432"
+      LIMIT_TIME_CPU: "600"
+      LIMIT_TIME_REAL: "1200"
+      LIMIT_TIME_REAL_CRON: "1200"
+      MODULES: "container_install,account_install"
+      CHANGE_ADMIN_USER_PWD: "false"
+      SETUP_SMTP: "false"
+      PREPARE_CUSTOMER_USER: "false"
+      DB_FILTER: "^main$"
+      UPDATE_COMPANY: "false"
+      LOG_LEVEL: "warn"
+      LOG_HANDLER: ":WARN"
+      DOCKER: "true"
+      KWKHTMLTOPDF_SERVER_URL: "http://kwkhtmltopdf:8080"
+  postgres:
+    image: postgres:13
+    networks:
+      - db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: odoo
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: odoo
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    networks:
+      - nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+
+  kwkhtmltopdf:
+    image: acsone/kwkhtmltopdf
+    restart: unless-stopped
+    networks:
+      - reporting
+    hostname: kwkhtmltopdf
+
+networks:
+  nginx:
+  db:
+  reporting:
+
+volumes:
+  postgres-data:
+  curq-data:
