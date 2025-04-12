@@ -72,7 +72,7 @@ COPY requirements.txt /curq-requirements.txt
 RUN apt-get update && apt-get -y install python3-pip cython3 python3 libldap2-dev libpq-dev libsasl2-dev python3-requests
 RUN pip wheel -r /requirements.txt -r /curq-requirements.txt --wheel-dir=/wheels
 
-FROM ghcr.io/onesteinbv/odoo-docker:16.0-8fc194c4b8752a16753172bb300179139d379a21 AS base
+FROM ghcr.io/onesteinbv/odoo-docker:16.0-bf0d310f9449b44781cab83bf3a8f9fe0c11ed24 AS base
 COPY --from=pack ./odoo /odoo/src/odoo
 COPY --from=pack ./package /odoo/custom
 COPY --from=wheels ./wheels /odoo/wheels
