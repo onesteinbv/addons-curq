@@ -2,6 +2,10 @@ name: curq
 
 services:
   curq:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    #   target: base
     image: ghcr.io/onesteinbv/curq:latest
     depends_on:
       postgres:
@@ -60,7 +64,6 @@ services:
       curq:
         condition: service_started
     restart: unless-stopped
-
   kwkhtmltopdf:
     image: acsone/kwkhtmltopdf
     restart: unless-stopped
