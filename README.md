@@ -69,7 +69,7 @@ After installing or updating Odoo (whether using `$MODE` as `Install`, `Init` or
 - [Documentation](https://docs.curq.nl)
 - [Get involved](https://curq.nl/en/doe-mee)
 - [Bug tracker](https://github.com/onesteinbv/addons-curq/issues)
-- [Updates](https://curq.nl/blog)
+- [Updates](https://curq.nl/en/blog)
 - [Release Notes](https://github.com/onesteinbv/addons-curq/releases)
 
 ## Docker
