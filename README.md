@@ -3,20 +3,19 @@
 
 # CURQ
 
-CURQ is an all-in-one platform for businesses, built on Odoo and other FOSS.
+CURQ is an all-in-one platform for businesses, built on Odoo and other open-source projects.
 
-CURQ is purpose-built / highly opinionated focussed on Dutch companies where the goal is to make a complete package without 
-business consultant having to think about every single module to install. The goal is to streamline the 
-installation process and support process. Basically Curq is Odoo + OCA modules + other open source modules 
-pre-packaged with bundles. A bundle is a normal Odoo module with only dependencies to other modules.
+It’s a highly opinionated, purpose-built solution tailored specifically for Dutch companies. 
+The goal is to provide a complete, ready-to-use package so businesses don’t need a consultant to decide which modules to install.
+CURQ streamlines both the installation and support process by combining Odoo, OCA, and other open-source modules into curated bundles.
 
 ## Bundles
 
-In CURQ, bundles are a set of predefined modules that makes installation of Odoo much easier, you don't need
-much knowledge about what modules exists. E.g. the essential bundle (`container_install`) contains 
-alot of modules that we need / want for every installation. We now can just install those with a simple click.
-
-**Available out of the box**: 
+In CURQ, bundles are a set of predefined modules that simplify the installation of Odoo, you don't need to know
+exactly which modules exist or which ones to install individually. For example, the essential bundle (`container_install`) includes 
+a collection of modules that are commonly required for every installation. Instead of installing each module manually, 
+you can install them all with a single click. Technically, a bundle is a standard Odoo module that only contains dependencies to 
+other modules, nothing else.
 
 - **Essentials Installation** (`container_install`): Installs essential modules
 - **Accounting** (`account_install`): Invoices, Contracts & Payments
@@ -38,47 +37,46 @@ alot of modules that we need / want for every installation. We now can just inst
   content sharing, and more
 - **eCommerce** (`website_sale_install`): Sell your products online
 
-TODO: Screenshot of wizard
+![Screenshot](./static/onboarding.png)
 
 ## Creating new bundles
 
-Creating a bundle is very easy. By adding the flag: `bundle: True` to the `__manifest__.py` you make sure
-that the dependencies (`depends`) are automatically uninstalled when the bundle is uninstalled. Note that a dependency
-is only uninstalled when it's not required in any other installed bundle. For example `website_install` and 
-`website_sale` both depend on `website` but if both are installed and `website_install` is uninstalled
-it will not uninstall `website`.
+Creating a bundle is simple. Just add the flag: `bundle: True` to the module's `__manifest__.py` file. This ensures that all dependencies listed in `depends` 
+are automatically uninstalled when the bundle is uninstalled. However, dependencies are only uninstalled if they are not required by any other installed 
+bundle. For example, both `website_install` and `website_sale` depend on the website module. If both bundles are installed and you uninstall `website_install`, the `website` 
+module will not be removed, because it’s still needed by `website_sale`.
 
 ## GIT Aggregator
 
-CURQ uses [git-aggregator](https://github.com/acsone/git-aggregator) to fetch modules from different sources.
-CURQ uses a copy of OCA modules for convenience here: [onesteinbv/addons-oca](https://github.com/onesteinbv/addons-oca) 
-primarily to prevent having to add every single OCA repository and necessary pull requests to the `repo.yaml` which
-will make it utterly tedious to maintain. Other modules used in CURQ are in 
-[onesteinbv/addons-generic](https://github.com/onesteinbv/addons-generic) which are (most if not all) generic
-modules that are not yet proposed to the OCA or just not interesting for the OCA.
+CURQ uses [git-aggregator](https://github.com/acsone/git-aggregator) to fetch modules from various sources.
+To simplify maintenance, CURQ uses a consolidated copy of OCA modules hosted at: [onesteinbv/addons-oca](https://github.com/onesteinbv/addons-oca).
+This avoids the need to include every individual OCA repository and required pull requests in the `repo.yaml` which
+would be tedious and error-prone. In addition, CURQ includes modules from  [onesteinbv/addons-generic](https://github.com/onesteinbv/addons-generic). These are mostly 
+generic modules that have not (yet) been proposed to the OCA, or are considered uninteresting for the OCA.
 
 ## Module packaging (package.txt)
 
-Aggregated modules aren't automatically included in the 
-[curq image](https://github.com/onesteinbv/addons-curq/pkgs/container/curq) that is the `package.txt` for.
+Modules aggrated via `git-aggregator` are **not** automatically included in the 
+[CURQ image](https://github.com/onesteinbv/addons-curq/pkgs/container/curq). To control which modules are
+bundled into the image, CURQ uses a `package.txt` file.
 
 ## Maintenance scripts
 
-After installation or update of Odoo (`$MODE` Install, Init or Update) it will `scripts/run.sh` which does some
-basic setup of the database. 
+After installing or updating Odoo (whether using `$MODE` as `Install`, `Init` or `Update`), it will automatically run `scripts/run.sh`. This script performs several setup and housekeeping tasks to ensure the system is properly configured and ready to use.
 
 ## Resources
 
 - [Documentation](https://docs.curq.nl)
-- Contributing
+- [Get involved](https://curq.nl/en/doe-mee)
 - [Bug tracker](https://github.com/onesteinbv/addons-curq/issues)
 - [Updates](https://curq.nl/blog)
+- [Release Notes](https://github.com/onesteinbv/addons-curq/releases)
 
 ## Docker
 
-The image is based on https://github.com/onesteinbv/odoo-docker 
-most info on all options / environment variables can be found there. 
-But notably the `MODE` env variable is most important
+This image is based on https://github.com/onesteinbv/odoo-docker.
+Most configuration options and environment variables are documented there.
+One key variable to note is `MODE`, which determines how Odoo is started and is essential to the image's behavior.
 
 ## Quick Start
 
