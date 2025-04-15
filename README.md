@@ -17,6 +17,9 @@ a collection of modules that are commonly required for every installation. Inste
 you can install them all with a single click. Technically, a bundle is a standard Odoo module that only contains dependencies to 
 other modules, nothing else.
 
+### Included Bundles
+These are the bundles that come with CURQ out of the box.
+
 - **Essentials Installation** (`container_install`): Installs essential modules
 - **Accounting** (`account_install`): Invoices, Contracts & Payments
 - **CRM** (`crm_install`): Track leads and close opportunities
@@ -36,6 +39,11 @@ other modules, nothing else.
 - **Community Builder** (`website_membership_install`): Empower your community with tools to improve member engagement,
   content sharing, and more
 - **eCommerce** (`website_sale_install`): Sell your products online
+
+### Localization Bundles
+
+- **Netherlands - Accounting & Localization** (`l10n_nl_install`): Fiscal (RGS) and other localization features for Dutch companies
+- **Germany - Accounting & Localization** (`l10n_de_install`): Fiscal and other localization features for German companies
 
 ![Screenshot](./static/onboarding.png)
 

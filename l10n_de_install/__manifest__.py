@@ -3,10 +3,10 @@
 
 {
     "name": "Germany - Accounting & Localization",
-    "summary": "Accounting and localization for Germany",
+    "summary": "Fiscal and other localization features for German companies",
     "author": "Onestein",
     "website": "https://onestein.nl",
-    "category": "Accounting/Localizations/Account Charts",
+    "category": "Localization",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "depends": [
