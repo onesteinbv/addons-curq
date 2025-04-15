@@ -25,7 +25,7 @@ services:
       LIMIT_TIME_CPU: "600"
       LIMIT_TIME_REAL: "1200"
       LIMIT_TIME_REAL_CRON: "1200"
-      MODULES: "account_install"
+      MODULES: "container_install,account_install,l10n_nl_install"
       CHANGE_ADMIN_USER_PWD: "false"
       SETUP_SMTP: "false"
       PREPARE_CUSTOMER_USER: "false"
