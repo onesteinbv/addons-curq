@@ -80,8 +80,16 @@ The image is based on https://github.com/onesteinbv/odoo-docker
 most info on all options / environment variables can be found there. 
 But notably the `MODE` env variable is most important
 
-docker compose
+## Quick Start
+
+```sh
+git clone git@github.com:onesteinbv/addons-curq.git
+cd addons-curq
+docker compose up
+```
+
+It's **recommended** to also run [watchtower](https://github.com/containrrr/watchtower) to automically get updates.
 
 ## License
 
-AGPL
+This project is licensed under [AGPL-3.0](LICENSE). Although externally linked / used Odoo modules can have different licenses.
