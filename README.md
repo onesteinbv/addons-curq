@@ -51,8 +51,7 @@ module will not be removed, because it’s still needed by `website_sale`.
 CURQ uses [git-aggregator](https://github.com/acsone/git-aggregator) to fetch modules from various sources.
 To simplify maintenance, CURQ uses a consolidated copy of OCA modules hosted at: [onesteinbv/addons-oca](https://github.com/onesteinbv/addons-oca).
 This avoids the need to include every individual OCA repository and required pull requests in the `repo.yaml` which
-would be tedious and error-prone. In addition, CURQ includes modules from  [onesteinbv/addons-generic](https://github.com/onesteinbv/addons-generic). These are mostly 
-generic modules that have not (yet) been proposed to the OCA, or are considered uninteresting for the OCA.
+would be tedious and error-prone. In addition, CURQ includes modules from [onesteinbv/addons-generic](https://github.com/onesteinbv/addons-generic) and [onesteinbv/addons-third-party](https://github.com/onesteinbv/addons-third-party). The former contains primarily generic modules that have not (yet) been proposed to the OCA, or are considered uninteresting for the OCA.
 
 ## Module packaging (package.txt)
 
@@ -88,7 +87,7 @@ docker compose up
 
 It's **recommended** to also run [watchtower](https://github.com/containrrr/watchtower) to automically get updates.
 
-Default credentials for Curq are:
+Default credentials for CURQ are:
 - **Email:** admin
 - **Password:** admin
 
