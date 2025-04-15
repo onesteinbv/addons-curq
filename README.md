@@ -57,7 +57,7 @@ will make it utterly tedious to maintain. Other modules used in CURQ are in
 [onesteinbv/addons-generic](https://github.com/onesteinbv/addons-generic) which are (most if not all) generic
 modules that are not yet proposed to the OCA or just not interesting for the OCA.
 
-## package.txt
+## Module packaging (package.txt)
 
 Aggregated modules aren't automatically included in the 
 [curq image](https://github.com/onesteinbv/addons-curq/pkgs/container/curq) that is the `package.txt` for.
@@ -89,6 +89,10 @@ docker compose up
 ```
 
 It's **recommended** to also run [watchtower](https://github.com/containrrr/watchtower) to automically get updates.
+
+Default credentials for Curq are:
+- **Email:** admin
+- **Password:** admin
 
 ## License
 
