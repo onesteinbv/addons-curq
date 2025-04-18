@@ -1,6 +1,6 @@
 {
     "name": "Publish Events",
-    "summary": "Publish events, sell tickets on your website",
+    "summary": "Publish events, and sell tickets on your website",
     "author": "Onestein",
     "website": "https://onestein.nl",
     "category": "Website",

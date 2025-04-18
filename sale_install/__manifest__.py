@@ -1,6 +1,6 @@
 {
     "name": "Sales Management",
-    "summary": "From quotations to invoices",
+    "summary": "Sales process from quotations to invoices",
     "author": "Onestein",
     "website": "https://onestein.nl",
     "category": "Sales",
