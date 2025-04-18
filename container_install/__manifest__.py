@@ -49,6 +49,11 @@
         "mail_tracking",
         "mail_raise_log_level",
         "sentry",
+        "operating_unit",
+        "analytic_operating_unit",
+        "report_qweb_operating_unit",
+        "sale_operating_unit",
+        "sales_team_operating_unit",
     ],
     "bundle": True,
 }

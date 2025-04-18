@@ -370,3 +370,8 @@ oca/website_local_font
 oca/website_odoo_debranding
 oca/website_snippet_dynamic_link
 oca/website_snippet_openstreetmap
+oca/operating_unit
+oca/analytic_operating_unit
+oca/report_qweb_operating_unit
+oca/sale_operating_unit
+oca/sales_team_operating_unit
