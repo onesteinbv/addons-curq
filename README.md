@@ -5,8 +5,8 @@
 
 CURQ is an all-in-one platform for businesses, built on Odoo and other open-source projects.
 
-It’s a highly opinionated, purpose-built solution tailored specifically for Dutch companies. 
-The goal is to provide a complete, ready-to-use package so businesses don’t need a consultant to decide which modules to install.
+It's a highly opinionated, purpose-built solution tailored specifically for Dutch companies. 
+The goal is to provide a complete, ready-to-use package so businesses don't need a consultant to decide which modules to install.
 CURQ streamlines both the installation and support process by combining Odoo, OCA, and other open-source modules into curated bundles.
 
 ## Bundles
@@ -52,7 +52,7 @@ These are the bundles that come with CURQ out of the box.
 Creating a bundle is simple. Just add the flag: `bundle: True` to the module's `__manifest__.py` file. This ensures that all dependencies listed in `depends` 
 are automatically uninstalled when the bundle is uninstalled. However, dependencies are only uninstalled if they are not required by any other installed 
 bundle. For example, both `website_install` and `website_sale` depend on the website module. If both bundles are installed and you uninstall `website_install`, the `website` 
-module will not be removed, because it’s still needed by `website_sale`.
+module will not be removed, because it's still needed by `website_sale`.
 
 ## GIT Aggregator
 
