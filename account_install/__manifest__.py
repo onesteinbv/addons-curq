@@ -45,6 +45,7 @@
         "payment_mollie_official",
         "mis_builder",
         "mis_builder_budget",
+        "account_operating_unit",
     ],
     "bundle": True,
 }
