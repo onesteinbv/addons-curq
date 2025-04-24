@@ -10,6 +10,8 @@
         "sale_management",
         "sale_order_amount_to_invoice",
         "delivery_sendcloud_official",
+        "sale_operating_unit",
+        "sales_team_operating_unit",
     ],
     "bundle": True,
 }

@@ -52,8 +52,6 @@
         "operating_unit",
         "analytic_operating_unit",
         "report_qweb_operating_unit",
-        "sale_operating_unit",
-        "sales_team_operating_unit",
     ],
     "bundle": True,
 }
