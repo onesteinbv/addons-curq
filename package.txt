@@ -343,8 +343,10 @@ oca/report_qweb_parameter
 oca/report_wkhtmltopdf_param
 oca/report_xlsx
 oca/report_xlsx_helper
+oca/resource_booking
 oca/sale_order_amount_to_invoice
 oca/sale_timesheet_line_non_billable
+oca/sale_resource_booking
 oca/server_environment
 oca/session_db
 oca/sentry
@@ -353,10 +355,12 @@ oca/spreadsheet_oca
 oca/subscription_oca
 oca/survey_question_type_nps
 oca/survey_xlsx
+oca/web_calendar_slot_duration
 oca/web_chatter_position
 oca/web_company_color
 oca/web_environment_ribbon
 oca/web_help
+oca/web_ir_actions_act_multi
 oca/web_no_bubble
 oca/web_responsive
 oca/web_pwa_oca
@@ -368,6 +372,7 @@ oca/website_analytics_matomo
 oca/website_breadcrumb
 oca/website_local_font
 oca/website_odoo_debranding
+oca/website_sale_resource_booking
 oca/website_snippet_dynamic_link
 oca/website_snippet_openstreetmap
 oca/operating_unit
