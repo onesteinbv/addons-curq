@@ -246,7 +246,6 @@ oca/base_tier_validation
 oca/base_tier_validation_formula
 oca/base_tier_validation_forward
 oca/base_tier_validation_sign
-oca/base_user_management
 oca/base_user_role
 oca/base_vat_optional_vies
 oca/base_view_inheritance_extension
