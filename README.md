@@ -39,6 +39,7 @@ These are the bundles that come with CURQ out of the box.
 - **Community Builder** (`website_membership_install`): Empower your community with tools to improve member engagement,
   content sharing, and more
 - **eCommerce** (`website_sale_install`): Sell your products online
+- **Booking Management** (`resource_booking_install`): Manage appointments and resource booking
 
 ### Localization Bundles
 

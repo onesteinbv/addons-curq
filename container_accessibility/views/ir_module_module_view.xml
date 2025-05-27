@@ -20,7 +20,8 @@
                 'event_install',
                 'website_event_install',
                 'sale_install',
-                'survey_install'
+                'survey_install',
+                'resource_booking_install'
             ])]
         </field>
     </record>

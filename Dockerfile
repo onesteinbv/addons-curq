@@ -59,6 +59,7 @@ COPY --parents \
 	website_sale_install \
 	stock_account_install \
 	sale_stock_install \
+	resource_booking_install \
 	./
 
 RUN apt-get install git -y

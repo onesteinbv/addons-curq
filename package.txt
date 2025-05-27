@@ -14,7 +14,6 @@ base_partner_security
 consolidation_account
 container_accessibility
 container_hr_recruitment
-container_install_basis
 container_s3
 digest_configuration
 digest_disable
@@ -51,6 +50,7 @@ membership_development_install
 survey_install
 stock_account_install
 sale_stock_install
+resource_booking_install
 addons-generic/account_asset_management_template
 addons-generic/account_journal_subtype
 addons-generic/account_partner_default_account
