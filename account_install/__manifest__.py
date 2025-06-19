@@ -42,6 +42,7 @@
         "contract_payment_mode",
         "currency_rate_update",
         "mollie_account_sync",
+        "partner_manual_rank",
         "payment_mollie_official",
         "mis_builder",
         "mis_builder_budget",

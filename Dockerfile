@@ -23,7 +23,6 @@ COPY --parents \
 	container_accessibility \
 	container_hr_recruitment \
 	container_install \
-	container_install_basis \
 	container_s3 \
 	crm_install \
 	digest_configuration \

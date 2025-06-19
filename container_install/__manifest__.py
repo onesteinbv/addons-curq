@@ -52,6 +52,13 @@
         "operating_unit",
         "analytic_operating_unit",
         "report_qweb_operating_unit",
+        "base_name_search_improved",
+        "partner_contact_access_link",
+        "server_action_mass_edit",
+        "web_advanced_search",
+        "web_listview_range_select",
+        "web_refresher",
+        "web_search_with_and",
     ],
     "bundle": True,
 }

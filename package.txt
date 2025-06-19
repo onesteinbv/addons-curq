@@ -380,3 +380,10 @@ oca/account_operating_unit
 oca/report_qweb_operating_unit
 oca/sale_operating_unit
 oca/sales_team_operating_unit
+oca/base_name_search_improved
+oca/partner_contact_access_link
+oca/partner_manual_rank
+oca/server_action_mass_edit
+oca/web_advanced_search
+oca/web_listview_range_select
+oca/web_refresher
