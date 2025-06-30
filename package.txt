@@ -387,3 +387,5 @@ oca/server_action_mass_edit
 oca/web_advanced_search
 oca/web_listview_range_select
 oca/web_refresher
+oca/web_dialog_size
+oca/portal_odoo_debranding
