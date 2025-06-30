@@ -59,6 +59,8 @@
         "web_listview_range_select",
         "web_refresher",
         "web_search_with_and",
+        "portal_odoo_debranding",
+        "web_dialog_size",
     ],
     "bundle": True,
 }
