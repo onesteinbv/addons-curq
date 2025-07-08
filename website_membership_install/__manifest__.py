@@ -14,6 +14,7 @@
         "website_membership_registration",
         "website_membership_registration_social",
         "website_membership_registration_partner_contact_birthdate",
+        "website_partner_privacy",
     ],
     "bundle": True,
 }

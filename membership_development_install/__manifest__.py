@@ -12,6 +12,7 @@
         "membership_activity_cde",
         "membership_activity_gitlab",
         "membership_activity_github",
+        "membership_nickname",
     ],
     "bundle": True,
 }
