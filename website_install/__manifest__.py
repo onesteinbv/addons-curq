@@ -28,7 +28,6 @@
         "website_share_mastodon",
         "website_share_pleroma",
         "website_share_reddit",
-        "website_share_skype",
         "website_share_snapchat",
         "website_share_telegram",
         "website_share_tumblr",
