@@ -5,7 +5,7 @@
         odoo: https://github.com/odoo/odoo.git
     merges:
         - remote: odoo
-          ref: a0b4ed72b1f99b7c83db08891fd9b0323781766a
+          ref: 197fb0b60ca0dd500a7c8ddac7c86cd09edadcbe
 
 # onestein
 ./addons-generic:
