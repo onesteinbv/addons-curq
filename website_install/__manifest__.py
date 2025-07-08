@@ -19,7 +19,6 @@
         "website_share_filter_option_mastodon",
         "website_share_filter_option_pleroma",
         "website_share_filter_option_reddit",
-        "website_share_filter_option_skype",
         "website_share_filter_option_snapchat",
         "website_share_filter_option_technical",
         "website_share_filter_option_telegram",

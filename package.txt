@@ -116,12 +116,16 @@ addons-generic/website_membership_registration
 addons-generic/website_membership_registration_partner_cde
 addons-generic/website_membership_registration_partner_contact_birthdate
 addons-generic/website_membership_registration_project_role_members
+addons-generic/website_membership_registration_partner_nickname
+addons-generic/website_membership_registration_partner_privacy
+addons-generic/website_membership_registration_partner_privacy_nickname
 addons-generic/website_membership_registration_social
 addons-generic/website_membership_section
 addons-generic/website_payment_recurring_donations
 addons-generic/website_payment_recurring_donations_mollie
 addons-generic/website_project
 addons-generic/website_project_role_members
+addons-generic/website_project_role_members_partner_privacy
 addons-generic/website_sale_share_filter_option
 addons-generic/website_security
 addons-generic/website_share_base
@@ -150,6 +154,10 @@ addons-generic/website_share_tumblr
 addons-generic/website_share_wordpress
 addons-generic/website_snippet_project
 addons-generic/website_two_steps_share_technical
+addons-generic/membership_nickname
+addons-generic/partner_nickname
+addons-generic/website_partner_privacy_nickname
+addons-generic/website_partner_privacy
 addons-sendcloud/delivery_sendcloud_official
 addons-sendcloud/website_sendcloud_official
 addons-third-party/mollie_account_sync
@@ -252,6 +260,7 @@ oca/base_view_inheritance_extension
 oca/contract
 oca/contract_payment_mode
 oca/currency_rate_update
+oca/crowdfunding
 oca/database_cleanup
 oca/date_range
 oca/disable_odoo_online
