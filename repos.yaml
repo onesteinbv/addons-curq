@@ -1,6 +1,6 @@
 ./odoo:
     defaults:
-        depth: 10
+        depth: 1
     remotes:
         odoo: https://github.com/odoo/odoo.git
     merges:
@@ -10,7 +10,7 @@
 # onestein
 ./addons-generic:
     defaults:
-        depth: 20
+        depth: 1
     remotes:
         onestein: https://github.com/onesteinbv/addons-generic.git
     merges:
@@ -20,7 +20,7 @@
 # oca
 ./oca:
     defaults:
-        depth: 20
+        depth: 1
     remotes:
         onestein: https://github.com/onesteinbv/addons-oca.git
     merges:
@@ -30,7 +30,7 @@
 # third-party
 ./addons-third-party:
     defaults:
-        depth: 20
+        depth: 1
     remotes:
         onestein: https://github.com/onesteinbv/addons-third-party.git
     merges:
@@ -40,7 +40,7 @@
 # design themes
 ./design-themes:
     defaults:
-        depth: 20
+        depth: 1
     remotes:
         odoo: https://github.com/odoo/design-themes.git
     merges:
@@ -49,7 +49,7 @@
 # ProjectManagement
 ./ProjectManagement:
     defaults:
-        depth: 20
+        depth: 1
     remotes:
         onestein: https://github.com/onesteinbv/ProjectManagement.git
     merges:
@@ -58,7 +58,7 @@
 # SendCloud
 ./addons-sendcloud:
     defaults:
-        depth: 20
+        depth: 1
     remotes:
         onestein: https://github.com/onesteinbv/addons-sendcloud.git
     merges:

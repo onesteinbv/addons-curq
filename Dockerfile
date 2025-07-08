@@ -69,9 +69,9 @@ RUN python3 pack.py --location . --package-file "package.txt" --destination "pac
 FROM ubuntu:22.04 AS wheels
 COPY --from=pack ./odoo/requirements.txt /requirements.txt
 COPY requirements.txt /curq-requirements.txt
+RUN apt-get update && \
+    apt-get -y install python3-pip cython3 python3 libldap2-dev libpq-dev libsasl2-dev python3-requests
 RUN sed -i -E "s/(gevent==)21\.8\.0( ; sys_platform != 'win32' and python_version > '3.9' and python_version <= '3.10')/\122.10.2\2/;s/(greenlet==)1.1.2( ; sys_platform != 'win32' and python_version  > '3.9' and python_version <= '3.10')/\12.0.2\2/" /requirements.txt && \
-    apt-get update && \
-    apt-get -y install python3-pip cython3 python3 libldap2-dev libpq-dev libsasl2-dev python3-requests && \
     pip wheel -r /requirements.txt -r /curq-requirements.txt --wheel-dir=/wheels
 
 FROM ghcr.io/onesteinbv/odoo-docker:16.0-bf0d310f9449b44781cab83bf3a8f9fe0c11ed24 AS base
@@ -81,9 +81,10 @@ COPY --from=wheels ./wheels /odoo/wheels
 COPY --from=wheels ./requirements.txt /odoo/src/odoo/requirements.txt
 COPY ./scripts /odoo/scripts
 COPY requirements.txt /odoo/custom/requirements.txt
-RUN pip install --no-cache-dir -r /odoo/src/odoo/requirements.txt -r /odoo/custom/requirements.txt --find-links /odoo/wheels && \
-    pip install -e /odoo/src/odoo && \
-    rm -rf /odoo/wheels
+RUN pip install --upgrade pip "setuptools<=80" && \
+    pip install --no-cache-dir -r /odoo/src/odoo/requirements.txt -r /odoo/custom/requirements.txt --find-links /odoo/wheels
+RUN pip install -e /odoo/src/odoo
+RUN rm -rf /odoo/wheels
 
 FROM base AS ci
 RUN pip install --no-cache-dir manifestoo checklog-odoo odoo-test-helper
