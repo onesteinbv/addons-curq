@@ -99,6 +99,7 @@ addons-generic/membership_subscription_prorate_variable_period
 addons-generic/nextcloud_odoo_sync
 addons-generic/partner_cde
 addons-generic/partner_country_default_nl
+addons-generic/partner_mollie
 addons-generic/project_role_members
 addons-generic/sale_recurring_payment
 addons-generic/sale_recurring_payment_mollie
