@@ -7,7 +7,6 @@ class ResUsers(models.Model):
     @property
     def SELF_READABLE_FIELDS(self):
         return super().SELF_READABLE_FIELDS + [
-            "is_anonymous",
             "is_published",
             "website_description",
         ]

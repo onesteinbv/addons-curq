@@ -6,7 +6,6 @@
         <field name="inherit_id" ref="membership_accessibility.res_users_view_form_simple_modif"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='associate_member']" position="before">
-                <field name="is_anonymous" string="Stay Anonymous"/>
                 <field name="is_published" widget="boolean_toggle" string="Publish Me"/>
             </xpath>
             <xpath expr="//field[@name='member_lines']" position="before">
