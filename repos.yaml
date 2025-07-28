@@ -15,7 +15,7 @@
         onestein: https://github.com/onesteinbv/addons-generic.git
     merges:
         - remote: onestein
-          ref: dea9fa9af975133ced6be51c9e577a766fcd5d66
+          ref: 9dc94832f61ab2f5e0ac5c47ba2f87c070ff3d6b
 
 # oca
 ./oca:
@@ -25,7 +25,7 @@
         onestein: https://github.com/onesteinbv/addons-oca.git
     merges:
         - remote: onestein
-          ref: 407a4ffd81167732e41a9db99378fb7f34928f2c
+          ref: 4480326c765ccc652e0aa21ddd81a37cc2c98222
 
 # third-party
 ./addons-third-party:
