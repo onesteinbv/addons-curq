@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="config_parameter_enabled" model="ir.config_parameter">
+        <field name="key">mass_mailing_force_dedicated_server.enabled</field>
+        <field name="value">False</field>
+    </record>
+</odoo>
