@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="digest.ir_cron_digest_scheduler_action" model="ir.cron">
+        <field name="active" eval="False"/>
+    </record>
+</odoo>
