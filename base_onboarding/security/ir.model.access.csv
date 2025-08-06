@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+base_onboarding.access_base_onboarding_wizard,access_base_onboarding_wizard,base_onboarding.model_base_onboarding_wizard,base.group_user,1,1,1,1
+base_onboarding.access_res_company,access_res_company,base.model_res_company,base_onboarding.onboarding_group,1,1,0,0
+base_onboarding.access_base_document_layout,access.base.document.layout,web.model_base_document_layout,base_onboarding.onboarding_group,1,1,1,0
