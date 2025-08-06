@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="base.menu_action_res_groups" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="base.next_id_6" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="base.next_id_2" model="ir.ui.menu">  <!-- Settings/Technical/User Interface -->
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="base.next_id_9" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="base.menu_automation" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="base.reporting_menuitem" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="base.ir_model_data_menu" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="base.menu_theme_store" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="base.theme_store" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+    <record id="base.menu_third_party" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+    <record id="base.menu_security" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+    <record id="privacy_lookup.privacy_menu" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="fs_storage.menu_storage" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="server_environment.menu_server_show_config" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="base.menu_apps" model="ir.ui.menu">  <!-- Apps -->
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+    <menuitem
+        id="menu_apps"
+        name="Apps"
+        parent="base.menu_management"
+        sequence="5"
+        action="container_accessibility.open_module_tree"
+        groups="container_accessibility.group_restricted"
+    /> <!-- Custom menu that only show bundles (_install modules)-->
+
+</odoo>

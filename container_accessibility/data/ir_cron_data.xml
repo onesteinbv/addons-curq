@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- This function exists because the record is noupdate=True -->
+    <function model="ir.cron" name="write">
+        <value model="ir.cron" search="[('id', '=', ref('auditlog.ir_cron_auditlog_autovacuum')), '|', ('active', '=', False), ('active', '=', True)]"/>
+        <value eval="{'active': True, 'interval_number': 30, 'interval_type': 'days', 'code': 'model.autovacuum(720, chunk_size=1000)'}" />
+    </function>
+</odoo>
