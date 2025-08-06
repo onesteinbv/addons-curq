@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="onboarding_group" model="res.groups">
+        <field name="name">Onboarding</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+        <field
+            name="implied_ids"
+            eval="[
+                Command.link(ref('base.group_system'))
+            ]"
+        />
+    </record>
+</odoo>

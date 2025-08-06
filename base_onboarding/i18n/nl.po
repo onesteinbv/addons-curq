@@ -1,0 +1,376 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_onboarding
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-25 12:34+0000\n"
+"PO-Revision-Date: 2020-11-25 12:34+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid ""
+"<i class=\"fa fa-arrow-right\"/>\n"
+"                                How to get my Tracking ID"
+msgstr ""
+"<i class=\"fa fa-arrow-right\"/>\n"
+"                                Hoe mijn tracking ID te verkrijgen"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid ""
+"<i class=\"fa fa-envelope\"/>\n"
+"                            support@base.nl"
+msgstr ""
+"<i class=\"fa fa-envelope\"/>\n"
+"                            support@base.nl"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid ""
+"<i class=\"fa fa-phone\"/>\n"
+"                            088-627-0400"
+msgstr ""
+"<i class=\"fa fa-phone\"/>\n"
+"                            088-627-0400"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__allow_back
+msgid "Allow Back"
+msgstr "Teruggaan Toegestaan"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "Analytics"
+msgstr "Analytics"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__company_id
+msgid "Company"
+msgstr "Bedrijf"
+
+#. module: base_onboarding
+#: model:ir.model,name:base_onboarding.model_base_document_layout
+msgid "Company Document Layout"
+msgstr "Bedrijf document lay-out"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "Company Information"
+msgstr "Bedrijfsinformatie"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__company_logo
+msgid "Company Logo"
+msgstr "Bedrijfslogo"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__company_registry
+msgid "Company Registry"
+msgstr "KvK Nummer"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "Configure Document Layout"
+msgstr "Configureer Documentsjabloon"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid ""
+"Congratulations, you're all setup now. If you happen to have any questions "
+"please feel free to contact us."
+msgstr ""
+"Gefeliciteerd, u bent nu helemaal klaar. Als u vragen hebt voel je dan vrij om ons te benaderen."
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "Corporate Identity"
+msgstr "Bedrijfsidentiteit"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__create_uid
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__create_date
+msgid "Created on"
+msgstr "Aangemaakt op"
+
+#. module: base_onboarding
+#: model:ir.model,name:base_onboarding.model_base_onboarding_wizard
+msgid "base Onboarding Wizard"
+msgstr "base Onboarding Wizard"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__display_name
+msgid "Display Name"
+msgstr "Schermnaam"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "Do you want to track visitors on your website?"
+msgstr "Wilt u bezoekers op uw website volgen?"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__company_email
+msgid "Email"
+msgstr "E-mail"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__social_facebook
+msgid "Facebook Account"
+msgstr "Facebook Account"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "Finish"
+msgstr "Voltooien"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__matomo_analytics_host
+msgid "Host"
+msgstr "Host"
+
+#. module: base_onboarding
+#: model:ir.model.fields.selection,name:base_onboarding.selection__base_onboarding_wizard__mail_choice__own
+msgid "I want to use my own mail servers."
+msgstr "Ik wil mijn eigen mailservers gebruiken."
+
+#. module: base_onboarding
+#: model:ir.model.fields.selection,name:base_onboarding.selection__base_onboarding_wizard__mail_choice__base
+msgid "I want to use the mail servers of base."
+msgstr "Ik wil de mailservers van base gebruiken."
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__fetchmail_server_id
+msgid "Incoming Mail Server"
+msgstr "Binnenkomende Mail Server"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__social_instagram
+msgid "Instagram Account"
+msgstr "Instagram Account"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid ""
+"It's important for your company to have a <b>corporate identity</b>.\n"
+"                            A beautiful looking invoice or sale order leads to <b>clients paying faster</b> for your services.\n"
+"                            Click the button to personalize your document layout."
+msgstr ""
+"Het is belangrijk voor uw bedrijf om een <b>bedrijfsidentiteit</b> te hebben.\n"
+"                            Een mooi ogende factuur of offerte zorgt ervoor dat <b>klanten sneller betalen</b> voor uw diensten.\n"
+"                            Klik de knop om uw documentsjabloon te personaliseren."
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard____last_update
+msgid "Last Modified on"
+msgstr "Laatst gewijzigd op"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Laatst bijgewerkt door"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__write_date
+msgid "Last Updated on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__social_linkedin
+msgid "LinkedIn Account"
+msgstr "LinkedIn Account"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__mail_choice
+msgid "Mail Choice"
+msgstr "Mail Keuze"
+
+#. module: base_onboarding
+#: model:ir.model,name:base_onboarding.model_ir_module_module
+msgid "Module"
+msgstr "Module"
+
+#. module: base_onboarding
+#: model:ir.model.fields.selection,name:base_onboarding.selection__base_onboarding_wizard__website_analytics__no
+msgid "No."
+msgstr "Nee."
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_document_layout__onboarding
+#: model:res.groups,name:base_onboarding.onboarding_group
+msgid "Onboarding"
+msgstr "Onboarding"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "Other"
+msgstr "Overige"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__ir_mail_server_id
+msgid "Outgoing Mail Server"
+msgstr "Uitgaande Mailserver"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "Outgoing and incoming mail"
+msgstr "Uitgaande en inkomende mail"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__company_phone
+msgid "Phone"
+msgstr "Telefoonnummer"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__has_matomo_analytics
+msgid "Matomo Analytics"
+msgstr "Matomo Analytics"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "Select a theme for your website"
+msgstr "Selecteer een thema voor uw website"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "Skip Setup"
+msgstr "Sla Setup Over"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "Social Media Links"
+msgstr "Social Media Links"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "Start Tutorial"
+msgstr "Start Tutorial"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__state
+msgid "State"
+msgstr "Status"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__company_vat
+msgid "Tax ID"
+msgstr "BTW-nummer"
+
+#. module: base_onboarding
+#: model:ir.model.fields,help:base_onboarding.field_base_onboarding_wizard__matomo_analytics_id
+msgid "The ID Matomo uses to identify the website"
+msgstr "De ID die Matomo gebruikt om de website te identificeren"
+
+#. module: base_onboarding
+#: model:ir.model.fields,help:base_onboarding.field_base_onboarding_wizard__company_vat
+msgid ""
+"The Tax Identification Number. Complete it if the contact is subjected to "
+"government taxes. Used in some legal statements."
+msgstr ""
+"Het BTW-nummer. Vul het in als het contact BTW moet betalen. Wordt gebruikt "
+"in sommige rapportages"
+
+#. module: base_onboarding
+#: model:ir.model.fields,help:base_onboarding.field_base_onboarding_wizard__matomo_analytics_host
+msgid ""
+"The host/path your Matomo installation is accessible by on the internet. Do not include a protocol here!\n"
+"So http[s]://[this field]/matomo.php should resolve to your matomo.php"
+msgstr ""
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__theme_module_ids
+msgid "Theme Module"
+msgstr "Thema Module"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid ""
+"This information will be included on documents (e.g. invoices) you'll send "
+"to customers."
+msgstr ""
+"Deze informatie wordt opgenomen in documenten (bijv. Facturen) die u naar "
+"klanten stuurt."
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__google_analytics_key
+msgid "Tracking ID"
+msgstr "Tracking ID"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__social_twitter
+msgid "Twitter Account"
+msgstr "Twitter Account"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "UA-XXXXXXXX-Y"
+msgstr "UA-XXXXXXXX-Y"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__website_id
+msgid "Website"
+msgstr "Website"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__website_analytics
+msgid "Website Analytics"
+msgstr "Website Analytics"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__matomo_analytics_id
+msgid "Website ID"
+msgstr "Website ID"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__company_website
+msgid "Website Link"
+msgstr "Website Link"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__website_name
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "Website Name"
+msgstr "Website Naam"
+
+#. module: base_onboarding
+#: code:addons/base_onboarding/wizards/onboarding_wizard.py:0
+#: model:ir.actions.act_window,name:base_onboarding.onboarding_wizard_action
+#, python-format
+msgid "Welcome to base"
+msgstr "Welkom bij base"
+
+#. module: base_onboarding
+#: model:ir.model.fields.selection,name:base_onboarding.selection__base_onboarding_wizard__website_analytics__ga
+msgid "Yes, using Google Analytics"
+msgstr "Ja, met Google Analytics"
+
+#. module: base_onboarding
+#: model:ir.model.fields.selection,name:base_onboarding.selection__base_onboarding_wizard__website_analytics__matomo
+msgid "Yes, using Matomo"
+msgstr "Ja, met Matomo"
+
+#. module: base_onboarding
+#: model:ir.model.fields,field_description:base_onboarding.field_base_onboarding_wizard__social_youtube
+msgid "Youtube Account"
+msgstr "Youtube Account"
+
+#. module: base_onboarding
+#: model_terms:ir.ui.view,arch_db:base_onboarding.onboarding_wizard_form
+msgid "host.name/matomo"
+msgstr "host.naam/matomo"
