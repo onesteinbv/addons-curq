@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="hr_recruitment.mail_alias_jobs" model="mail.alias">
+        <field name="alias_name">vacatures</field>
+    </record>
+</odoo>
