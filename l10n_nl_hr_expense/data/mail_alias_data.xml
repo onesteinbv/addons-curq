@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="hr_expense.mail_alias_expense" model="mail.alias">
+        <field name="alias_name">uitgaven</field>
+    </record>
+</odoo>
