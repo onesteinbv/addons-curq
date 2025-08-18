@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="ir_attachment_location" model="ir.config_parameter">
+        <field name="key">ir_attachment.location</field>
+        <field name="value">db</field>
+    </record>
+</odoo>
