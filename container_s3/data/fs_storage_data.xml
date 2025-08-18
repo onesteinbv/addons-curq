@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="s3" model="fs.storage">
+        <field name="name">s3</field>
+        <field name="code">s3</field>
+        <!-- Other fields filled by server_environment -->
+    </record>
+</odoo>
