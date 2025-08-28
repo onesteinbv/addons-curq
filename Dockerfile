@@ -5,6 +5,28 @@ COPY repos.yaml repos.yaml
 COPY package.txt package.txt
 COPY scripts/pack.py pack.py
 
+COPY --parents \
+	account_statement_import_online_ponto_log \
+	account_statement_import_online_ponto_statement_creation_mode \
+	base_module_bundle \
+	container_accessibility \
+	container_s3 \
+	crm_install \
+	event_install \
+	hr_accessibility \
+	hr_install \
+	l10n_nl_hr_expense \
+	l10n_nl_hr_recruitment \
+	membership_development_install \
+	project_install \
+	stock_install \
+	survey_install \
+	website_event_install \
+	website_install \
+	website_membership_install \
+	website_sale_install \
+	./
+
 RUN apt-get install git -y
 RUN pip install --no-cache-dir git-aggregator==4.0.2 click==8.1.8
 RUN gitaggregate -c repos.yaml
