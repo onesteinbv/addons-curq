@@ -47,8 +47,7 @@
                                     <div class="o_theme_preview_top position-relative border rounded-3 transition-base">
                                         <div t-attf-class="bg-gray-lighter #{has_screenshot? 'o_theme_screenshot' : (has_image ? 'o_theme_cover' : 'o_theme_logo')} rounded-3"
                                              t-attf-style="background-image: url(#{image_url});"/>
-                                        <div t-if="record.is_installed_on_current_website.raw_value or !record.url.value"
-                                             class="o_button_area position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center w-100 h-100 bg-dark bg-opacity-50 rounded opacity-0 opacity-100-hover transition-fade">
+                                        <div class="o_button_area position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center w-100 h-100 bg-dark bg-opacity-50 rounded opacity-0 opacity-100-hover transition-fade">
                                             <div class="d-flex flex-column gap-2 w-50">
                                                 <t t-if="record.is_installed_on_current_website.raw_value">
                                                     <button type="object" name="button_refresh_theme"
@@ -60,15 +59,19 @@
                                                 </t>
                                                 <t t-else="">
                                                     <button type="object" name="button_choose_theme"
-                                                            class="btn btn-primary">Use default theme
+                                                            class="btn btn-primary">Use theme
                                                     </button>
+                                                    <hr t-if="record.url.value"/>
+                                                    <a role="button"
+                                                       t-if="record.url.value"
+                                                       t-att-href="record.url.value" target="_blank"
+                                                       class="btn btn-secondary"
+                                                    >
+                                                        Live Preview
+                                                    </a>
                                                 </t>
                                             </div>
                                         </div>
-                                        <t t-else="">
-                                            <button class="position-absolute top-0 start-0 h-100 w-100 opacity-0"
-                                                    role="button" type="edit" t-if="record.url.value"/>
-                                        </t>
                                     </div>
                                     <div class="o_theme_preview_bottom mt-2 mb-3 px-2">
                                         <small t-if="record.summary.value" class="text-uppercase text-muted">
