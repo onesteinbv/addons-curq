@@ -1,7 +1,9 @@
 fsspec>=2024.5.0,<=2025.2.0
 fsspec[s3]>=2024.5.0,<=2025.2.0
 fsspec[sftp]>=2024.5.0,<=2025.2.0
+pdfminer.six==20220319
 PyGithub==1.59.0
 python-gitlab
 python-jose
 python-slugify
+responses
