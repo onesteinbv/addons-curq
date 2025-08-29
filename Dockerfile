@@ -9,15 +9,21 @@ COPY --parents \
 	account_configuration \
 	account_statement_import_online_ponto_log \
 	account_statement_import_online_ponto_statement_creation_mode \
+	base_customer_company \
+	base_customer_user \
 	base_module_bundle \
+	base_onboarding \
 	container_accessibility \
 	container_s3 \
 	crm_install \
+	digest_configuration \
+	digest_disable \
 	event_install \
 	hr_accessibility \
 	hr_install \
 	l10n_nl_hr_expense \
 	l10n_nl_hr_recruitment \
+	mass_mailing_force_dedicated_server \
 	membership_development_install \
 	project_install \
 	stock_install \
@@ -25,6 +31,7 @@ COPY --parents \
 	website_event_install \
 	website_install \
 	website_membership_install \
+	website_onboarding \
 	website_sale_install \
 	./
 
