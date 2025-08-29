@@ -1,3 +1,4 @@
+account_configuration
 base_module_bundle
 account_statement_import_online_ponto_log
 account_statement_import_online_ponto_statement_creation_mode

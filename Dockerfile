@@ -6,6 +6,7 @@ COPY package.txt package.txt
 COPY scripts/pack.py pack.py
 
 COPY --parents \
+	account_configuration \
 	account_statement_import_online_ponto_log \
 	account_statement_import_online_ponto_statement_creation_mode \
 	base_module_bundle \
