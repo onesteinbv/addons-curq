@@ -1,0 +1,19 @@
+{
+    "name": "Helpdesk",
+    "summary": "Streamline customer support and ensure quick and efficient issue resolution",
+    "author": "Onestein",
+    "website": "https://onestein.nl",
+    "category": "After-Sales",
+    "version": "18.0.1.0.0",
+    "license": "AGPL-3",
+    "data": ["security/security.xml"],
+    "depends": [
+        "helpdesk_mgmt",
+        "helpdesk_mgmt_merge",
+        "helpdesk_mgmt_rating",
+        "helpdesk_ticket_related",
+        "helpdesk_ticket_partner_response",
+        "helpdesk_mgmt_email",
+    ],
+    "bundle": True,
+}
