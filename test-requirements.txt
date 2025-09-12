@@ -1,3 +1,4 @@
 manifestoo
 checklog-odoo
 odoo-test-helper
+vcrpy
