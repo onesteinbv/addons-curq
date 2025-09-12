@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_journal_dashboard_kanban_view" model="ir.ui.view">
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//t[@id='account.JournalBodySalePurchase']//button[@name='action_create_vendor_bill']" position="replace">
+                <widget name="account_file_uploader" btnClass="btn btn-primary oe_kanban_action_button"/>
+            </xpath>
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="banner_route"></attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--
+        Payment terms
+        -->
+        <record id="account_payment_term_14days" model="account.payment.term">
+            <field name="name">14 Days</field>
+            <field name="note">Payment terms: 14 Days</field>
+            <field name="line_ids" eval="[Command.clear(), Command.create({'value': 'balance', 'value_amount': 0.0, 'days': 14})]"/>
+        </record>
+
+        <record id="account.account_payment_term_15days" model="account.payment.term">
+            <field name="active">0</field>
+        </record>
+
+        <record id="account.account_payment_term_30_days_end_month_the_10" model="account.payment.term">
+            <field name="active">0</field>
+        </record>
+
+        <record id="account.account_payment_term_30days_early_discount" model="account.payment.term">
+            <field name="active">0</field>
+        </record>
+
+    </data>
+</odoo>

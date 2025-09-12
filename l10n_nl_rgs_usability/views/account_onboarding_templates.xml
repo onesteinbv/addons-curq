@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="account_dashboard_onboarding_panel" name="account.dashboard.onboarding.panel" inherit_id="account.account_dashboard_onboarding_panel">
+        <xpath expr="//t[@t-call='account.onboarding_chart_of_account_step']" position="replace">
+        </xpath>
+    </template>
+
+</odoo>
