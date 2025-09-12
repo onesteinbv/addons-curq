@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="knab_bank_statement_map" model="account.statement.import.sheet.mapping">
+        <field name="name">KNAB Import</field>
+        <field name="header_lines_skip_count">2</field>
+        <field name="delimiter">semicolon</field>
+        <field name="quotechar">"</field>
+        <field name="timestamp_format">%d-%m-%Y</field>
+        <field name="timestamp_column">Transactiedatum</field>
+        <field name="amount_type">absolute_value</field>
+        <field name="amount_column">Bedrag</field>
+        <field name="currency_column">Valutacode</field>
+        <field name="debit_credit_column">CreditDebet</field>
+        <field name="description_column">Omschrijving</field>
+        <field name="notes_column">Betaalwijze</field>
+        <field name="partner_name_column">Tegenrekeninghouder</field>
+        <field name="bank_account_column">Rekeningnummer</field>
+    </record>
+</odoo>
