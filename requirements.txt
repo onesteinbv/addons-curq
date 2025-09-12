@@ -8,3 +8,4 @@ python-jose
 python-slugify
 responses
 astor==0.8.1
+Unidecode==1.4.0
