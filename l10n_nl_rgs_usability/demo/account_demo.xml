@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Payment Terms -->
+
+        <record id="account.account_payment_term_advance" model="account.payment.term">
+            <field name="active">0</field>
+        </record>
+
+    </data>
+</odoo>
