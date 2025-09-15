@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem
+        id="account_financial_report.menu_vat_report_wizard"
+        active="False"
+    />
+</odoo>

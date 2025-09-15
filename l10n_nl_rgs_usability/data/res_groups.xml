@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="analytic.group_analytic_accounting" model="res.groups">
+        <field
+            name="users"
+            eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
+        />
+    </record>
+
+    <!-- By default, allow all users to make use of analytic accounts -->
+    <!-- Disabled. Requested by Thijs
+    <record id="base.group_user" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('analytic.group_analytic_accounting'))]"/>
+    </record>
+    -->
+
+    <!-- By default, allow all users to add a bank number -->
+    <record id="base.group_user" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('account_payment_order.group_account_payment'))]"/>
+    </record>
+
+</odoo>
