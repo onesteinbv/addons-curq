@@ -186,6 +186,7 @@ oca/account_payment_partner
 oca/account_payment_purchase
 oca/account_payment_purchase_stock
 oca/account_payment_sale
+oca/account_reconcile_model_oca
 oca/account_reconcile_oca
 oca/account_spread_cost_revenue
 oca/account_statement_base
