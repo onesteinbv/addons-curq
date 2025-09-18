@@ -47,7 +47,7 @@
         "partner_contact_department",
         "mail_tracking",
         "mail_raise_log_level",
-        "sentry",
+        # "sentry",
         "operating_unit",
         "analytic_operating_unit",
         "report_qweb_operating_unit",
