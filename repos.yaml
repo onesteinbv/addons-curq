@@ -42,11 +42,11 @@
   merges:
     - odoo 18.0
 
-# sendcloud
-./addons-sendcloud:
-  defaults:
-    depth: 1
-  remotes:
-    onestein: https://github.com/onesteinbv/addons-sendcloud.git
-  merges:
-    - onestein 18.0
+# sendcloud: until the modules are available in the OCA, we include them here
+# ./addons-sendcloud:
+#   defaults:
+#     depth: 1
+#   remotes:
+#     onestein: https://github.com/onesteinbv/addons-sendcloud.git
+#   merges:
+#     - onestein 18.0

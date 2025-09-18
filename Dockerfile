@@ -7,25 +7,38 @@ COPY scripts/pack.py pack.py
 
 COPY --parents \
 	account_configuration \
+	account_install \
 	account_statement_import_online_ponto_log \
 	account_statement_import_online_ponto_statement_creation_mode \
+	account_statement_import_sheet_file_sheet_mappings \
 	base_customer_company \
 	base_customer_user \
+	base_mail_security \
 	base_module_bundle \
 	base_onboarding \
 	container_accessibility \
+	container_install \
 	container_s3 \
 	crm_install \
 	digest_configuration \
 	digest_disable \
 	event_install \
+	helpdesk_install \
 	hr_accessibility \
 	hr_install \
+	l10n_de_install \
 	l10n_nl_hr_expense \
+	l10n_nl_hr_install \
 	l10n_nl_hr_recruitment \
+	l10n_nl_install \
+	l10n_nl_rgs_usability \
 	mass_mailing_force_dedicated_server \
+	mass_mailing_install \
+	mass_mailing_website_install \
 	membership_development_install \
+	membership_install \
 	project_install \
+	sale_install \
 	stock_install \
 	survey_install \
 	website_event_install \
@@ -33,6 +46,9 @@ COPY --parents \
 	website_membership_install \
 	website_onboarding \
 	website_sale_install \
+	stock_account_install \
+	sale_stock_install \
+	resource_booking_install \
 	./
 
 RUN apt-get install git -y
