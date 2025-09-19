@@ -7,6 +7,7 @@
     "depends": [
         "l10n_nl_rgs",
         "base_view_inheritance_extension",
+        "base_vat",
         "account_usability",
         "account_payment_order",
         "account_payment_mode",

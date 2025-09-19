@@ -32,7 +32,7 @@ class AccountJournal(models.Model):
                     )
 
     def unlink(self):
-        if self.env.context.get("force_delete"):
+        if self.env.context.get("_force_unlink"):
             for journal in self:
                 payment_modes = self.env["account.payment.mode"].search(
                     [
@@ -40,6 +40,12 @@ class AccountJournal(models.Model):
                     ]
                 )
                 payment_modes.unlink()
+                spread_templates = self.env["account.spread.template"].search(
+                    [
+                        ("spread_journal_id", "=", journal.id),
+                    ]
+                )
+                spread_templates.unlink()
         return super().unlink()
 
     @api.model_create_multi
