@@ -6,8 +6,8 @@ from odoo import api, models
 class AccountChartTemplate(models.AbstractModel):
     _inherit = "account.chart.template"
 
-    def _load(self, template_code, company, install_demo):
-        res = super()._load(template_code, company, install_demo)
+    def _load(self, template_code, company, install_demo, force_create=True):
+        res = super()._load(template_code, company, install_demo, force_create)
         if template_code == "nl_rgs":
             # Generate payment modes
             self._generate_payment_modes(company)
