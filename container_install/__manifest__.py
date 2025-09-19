@@ -30,6 +30,7 @@
         "payment_demo",
         "partner_firstname",
         "web_no_bubble",
+        "web_hierarchy",
         "base_customer_company",
         "base_customer_user",
         "base_onboarding",
