@@ -46,6 +46,12 @@ class AccountJournal(models.Model):
                     ]
                 )
                 spread_templates.unlink()
+                asset_profiles = self.env["account.asset.profile"].search(
+                    [
+                        ("journal_id", "=", journal.id),
+                    ]
+                )
+                asset_profiles.unlink()
         return super().unlink()
 
     @api.model_create_multi
