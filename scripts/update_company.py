@@ -34,7 +34,6 @@ def main(env, name, email, coc, city, zip_code, street):
         "name": name,
         "email": email,
         "company_registry": coc,
-        "l10n_nl_kvk": coc,
         "city": city,
         "zip": zip_code,
         "street": street,
