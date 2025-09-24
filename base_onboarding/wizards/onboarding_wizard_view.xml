@@ -47,7 +47,7 @@
                             <t t-name="card">
                                 <div class="oe_module_vignette">
                                     <t t-set="installed" t-value="record.state.raw_value == 'installed'"/>
-                                    <img t-attf-src="#{record.icon.value}" class="oe_module_icon" alt="Icon"/>
+                                    <img t-attf-src="#{record.icon.value}" class="oe_module_icon" alt="Icon" height="140" width="140"/>
                                     <div class="oe_module_desc" t-att-title="record.shortdesc.value" style="float: right;width:65%">
                                         <h4 class="o_kanban_record_title">
                                             <field name="shortdesc"/>&amp;nbsp;
