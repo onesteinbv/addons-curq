@@ -14,7 +14,7 @@ class ResPartner(models.Model):
         order=None,
     ):
         # Purely for UX purposes
-        if self.env.user.is_restricted_user():
+        if self.env.user.is_restricted_user() and not self.env.su:
             hidden_partners = (
                 self.env["res.users"]
                 .sudo()
