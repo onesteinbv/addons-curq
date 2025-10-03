@@ -18,6 +18,7 @@ class ResPartner(models.Model):
             hidden_partners = (
                 self.env["res.users"]
                 .sudo()
+                .with_context(active_test=False)
                 .search(
                     [
                         (
