@@ -59,11 +59,17 @@ RUN python3 pack.py --location . --package-file "package.txt" --destination "pac
 FROM ubuntu:22.04 AS wheels
 COPY --from=pack ./odoo/requirements.txt /requirements.txt
 COPY requirements.txt /curq-requirements.txt
+ENV DEBIAN_FRONTEND=noninteractive \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8
 RUN apt-get update \
-    && apt-get install -y python3-pip cython3 python3 libldap2-dev libpq-dev libsasl2-dev python3-requests gcc python3-dev \
-    && pip install -U pip wheel setuptools \
+    && apt-get install -y software-properties-common \
+    && add-apt-repository ppa:deadsnakes/ppa \
+    && apt-get install -y python3.12 cython3 libldap2-dev libpq-dev libsasl2-dev gcc python3.12-dev python3.12-venv \
+    && python3.12 -m ensurepip --upgrade \
+    && pip3.12 install -U wheel setuptools \
     && sed -i -E "s/(gevent==)21\.8\.0( ; sys_platform != 'win32' and python_version == '3.10')/\122.10.2\2/;s/(greenlet==)1.1.2( ; sys_platform != 'win32' and python_version == '3.10')/\12.0.2\2/" /requirements.txt \
-    && pip wheel -r /requirements.txt -r /curq-requirements.txt --wheel-dir=/wheels
+    && pip3.12 wheel -r /requirements.txt -r /curq-requirements.txt --wheel-dir=/wheels
 
 FROM ghcr.io/onesteinbv/odoo-docker:18.0-981167e7f1bdb7c0d9f50d194ee9fd66abd85050 AS base
 COPY --from=pack ./odoo /odoo/src/odoo
