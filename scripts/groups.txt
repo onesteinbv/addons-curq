@@ -1,6 +1,5 @@
 base.group_erp_manager
 base.group_allow_export
-base.group_private_addresses
 account.group_account_manager
 account_payment_order.group_account_payment
 stock.group_stock_manager
@@ -21,7 +20,7 @@ account.group_account_user
 base.group_sanitize_override
 base.group_partner_manager
 account.group_delivery_invoice_address
-product.group_discount_per_so_line
+sale.group_discount_per_so_line
 hr_recruitment.group_applicant_cv_display
 website.group_website_designer
 hr_contract.group_hr_contract_employee_manager
@@ -42,7 +41,6 @@ website.group_website_restricted_editor
 purchase.group_send_reminder
 base.group_system
 crm.group_use_recurring_revenues
-account.group_show_line_subtotals_tax_excluded
 hr_expense.group_hr_expense_team_approver
 base.group_no_one
 project.group_project_milestone

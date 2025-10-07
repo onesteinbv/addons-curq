@@ -12,6 +12,7 @@
     "depends": [
         "hr",
         "hr_accessibility",
+        "hr_contract",
         "hr_expense",
         "hr_employee_firstname",
         "hr_timesheet_sheet",
