@@ -6,6 +6,6 @@
     "category": "Marketing/Surveys",
     "version": "18.0.1.0.0",
     "license": "AGPL-3",
-    "depends": ["survey"],
+    "depends": ["survey", "survey_question_type_nps", "survey_xlsx"],
     "bundle": True,
 }

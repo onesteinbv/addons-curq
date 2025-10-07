@@ -347,3 +347,5 @@ oca/web_dialog_size
 oca/portal_odoo_debranding
 oca/delivery_sendcloud_oca
 oca/website_sendcloud_official
+oca/survey_xlsx
+oca/survey_question_type_nps
