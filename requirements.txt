@@ -9,7 +9,7 @@ python-slugify
 responses
 astor==0.8.1
 Unidecode==1.4.0
-# sentry_sdk>=2.0.0,<=2.22.0
+sentry_sdk>=2.0.0,<=2.22.0
 openupgradelib
 phonenumbers
 mollie-api-python~=3.7.4
