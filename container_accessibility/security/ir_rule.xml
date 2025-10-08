@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="rule_restricted_users" model="ir.rule">
-        <field name="name">rule_restricted_users</field>
+    <record id="rule_restricted_users_read" model="ir.rule">
+        <field name="name">rule_restricted_users read</field>
         <field name="model_id" ref="base.model_res_users" />
         <field
             name="groups"
@@ -9,12 +9,28 @@
         />
         <field
             name="domain_force"
-            eval="['|', ('share', '=', True), ('groups_id', 'in', [ref('container_accessibility.group_restricted')])]"
+            eval="['|', '|', ('share', '=', True), ('groups_id', 'in', [ref('container_accessibility.group_restricted')]), ('id', '=', ref('base.user_default'))]"
         />
         <field name="perm_read" eval="1" />
-        <field name="perm_create" eval="1" />
-        <field name="perm_write" eval="1" />
-        <field name="perm_unlink" eval="1" />
+        <field name="perm_create" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_unlink" eval="0" />
+    </record>
+    <record id="rule_restricted_users" model="ir.rule">
+        <field name="name">rule_restricted_users</field>
+        <field name="model_id" ref="base.model_res_users"/>
+        <field
+                name="groups"
+                eval="[(4, ref('container_accessibility.group_restricted'))]"
+        />
+        <field
+                name="domain_force"
+                eval="['|', ('share', '=', True), ('groups_id', 'in', [ref('container_accessibility.group_restricted')])]"
+        />
+        <field name="perm_read" eval="0"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
     </record>
     <record id="rule_restricted_groups" model="ir.rule">
         <field name="name">rule_restricted_groups</field>
