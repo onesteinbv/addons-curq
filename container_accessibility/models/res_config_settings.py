@@ -38,3 +38,29 @@ class ResConfigSettings(models.TransientModel):
         ):
             sudo_self = self.sudo()
         return super(ResConfigSettings, sudo_self).execute()
+
+    @api.depends("company_id")
+    def _compute_active_user_count(self):
+        res = super()._compute_active_user_count()
+        if self.env.user.is_restricted_user():
+            active_user_count = (
+                self.env["res.users"]
+                .sudo()
+                .search_count(
+                    [
+                        ("share", "=", False),
+                        (
+                            "groups_id",
+                            "in",
+                            [
+                                self.env.ref(
+                                    "container_accessibility.group_restricted"
+                                ).id,
+                            ],
+                        ),
+                    ]
+                )
+            )
+            for record in self:
+                record.active_user_count = active_user_count
+        return res
