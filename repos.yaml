@@ -3,8 +3,10 @@
     depth: 1
   remotes:
     odoo: https://github.com/odoo/odoo.git
+    ByteMeAsap: https://github.com/ByteMeAsap/odoo.git
   merges:
     - odoo 18.0
+    - ByteMeAsap 18.0-fix-web_editor
 
 # onestein
 ./addons-generic:
