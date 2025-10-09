@@ -316,6 +316,8 @@ oca/server_environment
 oca/session_db
 oca/sentry
 oca/subscription_oca
+oca/spreadsheet_oca
+oca/spreadsheet_dashboard_oca
 oca/web_calendar_slot_duration
 oca/web_chatter_position
 oca/web_company_color
