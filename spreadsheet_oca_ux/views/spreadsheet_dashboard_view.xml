@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="spreadsheet_dashboard_tree_view">
+        <field name="inherit_id" ref="spreadsheet_dashboard_oca.spreadsheet_dashboard_tree_view" />
+        <field name="model">spreadsheet.dashboard</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='spreadsheet_binary_data']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

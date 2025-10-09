@@ -49,6 +49,7 @@ COPY --parents \
 	stock_account_install \
 	sale_stock_install \
 	resource_booking_install \
+    spreadsheet_oca_ux \
 	./
 
 RUN apt-get install git -y
