@@ -9,7 +9,7 @@
         />
         <field
             name="domain_force"
-            eval="['|', '|', ('share', '=', True), ('groups_id', 'in', [ref('container_accessibility.group_restricted')]), ('id', '=', ref('base.user_default'))]"
+            eval="['|', '|', ('share', '=', True), ('groups_id', 'in', [ref('container_accessibility.group_restricted')]), ('id', '=', ref('base.default_user'))]"
         />
         <field name="perm_read" eval="1" />
         <field name="perm_create" eval="0" />
