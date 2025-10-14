@@ -25,7 +25,18 @@ class ResConfigSettings(models.TransientModel):
                     if "o_setting_box" in element.attrib.get("class", ""):
                         setting_box = element
                 if setting_box.getparent() is not None:
-                    setting_box.getparent().remove(setting_box)
+                    parent_element = setting_box.getparent()
+                    # Added this to resolve a client side error coming up when searching for anything in
+                    # res.config.settings form view and having a module with module related fields present in a <group>
+                    # tag. For example:Check the website_slides.res_config_settings_view_form view
+                    if (
+                        parent_element.tag
+                        and parent_element.tag == "group"
+                        and parent_element.getparent() is not None
+                    ):
+                        parent_element.getparent().remove(parent_element)
+                    else:
+                        parent_element.remove(setting_box)
                 else:
                     setting_box.clear()
 
