@@ -40,6 +40,7 @@ survey_install
 stock_account_install
 sale_stock_install
 resource_booking_install
+spreadsheet_oca_ux
 addons-generic/account_journal_subtype
 addons-generic/account_partner_default_account
 addons-generic/account_period_auto_create
