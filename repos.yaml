@@ -1,6 +1,6 @@
 ./odoo:
   defaults:
-    depth: 1
+    depth: 100
   remotes:
     odoo: https://github.com/odoo/odoo.git
     ByteMeAsap: https://github.com/ByteMeAsap/odoo.git
