@@ -54,7 +54,10 @@ COPY --parents \
 
 RUN apt-get install git -y
 RUN pip install --no-cache-dir git-aggregator==4.0.2 click==8.1.8
-RUN gitaggregate -c repos.yaml
+# Configure dummy git user to avoid errors
+RUN git config --global user.name bot && \
+    git config --global user.email "bot@onestein.nl" && \
+    gitaggregate -c repos.yaml
 RUN python3 pack.py --location . --package-file "package.txt" --destination "package"
 
 FROM ubuntu:22.04 AS wheels
