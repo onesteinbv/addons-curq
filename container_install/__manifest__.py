@@ -15,7 +15,7 @@
         "fs_storage_backup",
         "web_responsive",
         "disable_odoo_online",
-        "base_fontawesome",
+        "base_fontawesome_web_editor",
         "auth_oidc",
         "container_accessibility",
         "report_qr",
