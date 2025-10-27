@@ -214,6 +214,7 @@ oca/attachment_preview
 oca/auditlog
 oca/auth_oidc
 oca/base_fontawesome
+oca/base_fontawesome_web_editor
 oca/base_menu_visibility_restriction
 oca/base_partition
 oca/base_technical_features
