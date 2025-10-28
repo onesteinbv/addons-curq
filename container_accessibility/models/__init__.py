@@ -3,6 +3,7 @@ from . import res_partner
 from . import ir_mail_server
 from . import restrict_mixin
 from . import ir_module_module
+from . import mail_activity_mixin
 from . import payment_provider
 from . import res_config_settings
 from . import oauth_provider
