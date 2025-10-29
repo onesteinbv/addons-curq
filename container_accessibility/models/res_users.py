@@ -186,3 +186,14 @@ class ResUsers(models.Model):
                 return self._create_user_from_template(values)
 
         return super()._signup_create_user(values)
+
+    def _default_groups(self):
+        res = super()._default_groups()
+        restricted_group = self.env.ref("container_accessibility.group_restricted")
+        if self.env.user.is_restricted_user():
+            if (
+                not res
+            ):  # In the case default user is deleted somehow it will return a list not a empty recordset
+                return restricted_group
+            res += restricted_group
+        return res
