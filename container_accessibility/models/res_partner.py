@@ -14,34 +14,8 @@ class ResPartner(models.Model):
         order=None,
     ):
         # Purely for UX purposes
-        active_model = self.env.context.get(
-            "active_model", "res.partner"
-        )  # Default to res.partner
-        if (
-            self.env.user.is_restricted_user()
-            and not self.env.su
-            and active_model == "res.partner"
-        ):
-            hidden_partners = (
-                self.env["res.users"]
-                .sudo()
-                .with_context(active_test=False)
-                .search(
-                    [
-                        (
-                            "groups_id",
-                            "not in",
-                            [
-                                self.env.ref("base.group_portal").id,
-                                self.env.ref(
-                                    "container_accessibility.group_restricted"
-                                ).id,
-                            ],
-                        )
-                    ]
-                )
-                .mapped("partner_id")
-            )
+        if self.env.user.is_restricted_user() and not self.env.su:
+            hidden_partners = self._get_hidden_partners()
             domain = expression.AND([domain, [("id", "not in", hidden_partners.ids)]])
         return super()._search(
             domain,
@@ -49,3 +23,26 @@ class ResPartner(models.Model):
             limit=limit,
             order=order,
         )
+
+    @api.model
+    def _get_hidden_partners(self):
+        """Returns the hidden partners for restricted users."""
+        hidden_partners = (
+            self.env["res.users"]
+            .sudo()
+            .with_context(active_test=False)
+            .search(
+                [
+                    (
+                        "groups_id",
+                        "not in",
+                        [
+                            self.env.ref("base.group_portal").id,
+                            self.env.ref("container_accessibility.group_restricted").id,
+                        ],
+                    )
+                ]
+            )
+            .mapped("partner_id")
+        )
+        return hidden_partners
