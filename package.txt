@@ -112,6 +112,7 @@ addons-generic/website_share_filter_option_technical
 addons-generic/website_share_filter_option_telegram
 addons-generic/website_share_filter_option_tumblr
 addons-generic/website_share_filter_option_wordpress
+addons-generic/website_share_filter_option_skype
 addons-generic/website_share_friendica
 addons-generic/website_share_mastodon
 addons-generic/website_share_pleroma
