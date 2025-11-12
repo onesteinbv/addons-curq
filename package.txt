@@ -266,6 +266,7 @@ oca/l10n_nl_tax_statement_date_range
 oca/l10n_nl_tax_statement_icp
 oca/l10n_nl_xaf_auditfile_export
 oca/mail_attach_existing_attachment
+oca/mail_attach_existing_attachment_account
 oca/mail_debrand
 oca/mail_multicompany
 oca/mail_server_user
