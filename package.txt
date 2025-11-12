@@ -120,6 +120,7 @@ addons-generic/website_share_snapchat
 addons-generic/website_share_telegram
 addons-generic/website_share_tumblr
 addons-generic/website_share_wordpress
+addons-generic/website_share_skype
 addons-generic/website_snippet_project
 addons-generic/website_two_steps_share_technical
 addons-generic/membership_nickname
