@@ -1,4 +1,7 @@
 #!/bin/bash
+
+USER_EMAIL=${USER_EMAIL:-$COMPANY_EMAIL}
+
 python /odoo/scripts/set_base_url.py -c $ODOO_RC -d $DB_NAME --log-level=error --domain "$DOMAIN"
 
 if [[ -n "$ADMIN_USER_PWD" && "$CHANGE_ADMIN_USER_PWD" == "true" ]]; then
@@ -24,10 +27,6 @@ fi
 
 
 python /odoo/scripts/localize.py
-
-if [[ "$UPDATE_COMPANY" == "true" ]]; then
-  python /odoo/scripts/update_company.py -c $ODOO_RC -d $DB_NAME --log-level=error --name "$COMPANY_NAME" --email "$COMPANY_EMAIL" --coc "$COMPANY_COC" --city "$COMPANY_CITY" --zip "$COMPANY_ZIP" --street "$COMPANY_STREET"
-fi
 
 if [[ -n "$UNINSTALL_MODULES" && "$UNINSTALL_MODULES" == "True" ]]; then
   python /odoo/scripts/apply_modules.py -c $ODOO_RC -d $DB_NAME --log-level=error
@@ -58,6 +57,10 @@ if [[ -n "$KEYCLOAK_URL" ]]; then
   fi
 fi
 
+if [[ "$UPDATE_COMPANY" == "true" ]]; then
+  python /odoo/scripts/update_company.py -c $ODOO_RC -d $DB_NAME --log-level=error --name "$COMPANY_NAME" --email "$COMPANY_EMAIL" --coc "$COMPANY_COC" --city "$COMPANY_CITY" --zip "$COMPANY_ZIP" --street "$COMPANY_STREET"
+fi
+
 if [[ "$PREPARE_CUSTOMER_USER" == "true" ]]; then
-  python /odoo/scripts/prepare_customer_user.py -c $ODOO_RC -d $DB_NAME --log-level=error --email "$COMPANY_EMAIL" --group-file /odoo/scripts/groups.txt
+  python /odoo/scripts/prepare_customer_user.py -c $ODOO_RC -d $DB_NAME --log-level=error --email "$USER_EMAIL" --group-file /odoo/scripts/groups.txt
 fi
