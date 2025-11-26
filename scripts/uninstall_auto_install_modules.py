@@ -9,7 +9,14 @@ from odoo.exceptions import MissingError
 def main(
     env,
 ):  # We have this script because module_change_auto_install doesn't work properly with initdb (click-odoo-contrib)
-    module_names = ["iap", "partner_autocomplete"]
+    module_names = [
+        "crm_iap_enrich",
+        "crm_iap_mine",
+        "iap_crm",
+        "snailmail",
+        "snailmail_account"
+        "partner_autocomplete"
+    ]
     click.echo("Uninstalling auto-install modules...")
     modules = env["ir.module.module"].search(
         [("name", "in", module_names), ("state", "=", "installed")]
