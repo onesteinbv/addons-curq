@@ -14,7 +14,7 @@ def main(
         "crm_iap_mine",
         "iap_crm",
         "snailmail",
-        "snailmail_account"
+        "snailmail_account",
         "partner_autocomplete"
     ]
     click.echo("Uninstalling auto-install modules...")
