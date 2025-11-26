@@ -28,9 +28,11 @@ def main(env, name, email, coc, city, zip_code, street):
     main_company = env.ref("base.main_company", raise_if_not_found=False)
 
     if not main_company:
-        click.echo("Company not existent, probably deleted by user, exiting...", err=True)
+        click.echo(
+            "Company not existent, probably deleted by user, exiting...", err=True
+        )
         return
-    
+
     # Force email address if the only available SMTP server is private due to changes in the mail templates
     # https://github.com/odoo/odoo/commit/597fc004148bf39e8f56e36e840aa6788872f237
     smtp_server = env["ir.mail_server"].search([])

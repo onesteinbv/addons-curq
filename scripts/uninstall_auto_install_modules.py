@@ -15,7 +15,7 @@ def main(
         "iap_crm",
         "snailmail",
         "snailmail_account",
-        "partner_autocomplete"
+        "partner_autocomplete",
     ]
     click.echo("Uninstalling auto-install modules...")
     modules = env["ir.module.module"].search(
