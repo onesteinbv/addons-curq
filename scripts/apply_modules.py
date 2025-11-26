@@ -35,6 +35,8 @@ def main(env, dry_run):
         else:
             click.echo("Uninstalling %s..." % ", ".join(retired_modules.mapped("name")))
             retired_modules.button_immediate_uninstall()
+    else:
+        click.echo("No retired modules.")
 
 
 if __name__ == "__main__":
