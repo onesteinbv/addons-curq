@@ -42,15 +42,4 @@
         <field name="private" eval="True" />
     </record>
 
-    <function model="auditlog.rule" name="unsubscribe">
-        <function
-            eval="[[('private', '=', True), ('state', '=', 'subscribed')]]"
-            model="auditlog.rule" name="search"
-        />
-    </function>
-
-    <function model="auditlog.rule" name="subscribe">
-        <function eval="[[('private', '=', True), ('state', '=', 'draft')]]"
-                  model="auditlog.rule" name="search"/>
-    </function>
 </odoo>
