@@ -13,4 +13,25 @@
         <field name="log_export_data" eval="True" />
         <field name="private" eval="True" />
     </record>
+
+    <function model="auditlog.rule" name="unsubscribe">
+        <function
+            eval="[[
+                ('id', 'in', [
+                    ref('auditlog_rule_hr_employee'),
+                ]),
+                ('state', '=', 'subscribed')]]"
+            model="auditlog.rule" name="search"
+        />
+    </function>
+
+    <function model="auditlog.rule" name="subscribe">
+        <function
+            eval="[[
+                ('id', 'in', [
+                    ref('auditlog_rule_hr_employee'),
+                ]),
+                ('state', '=', 'draft')]]"
+            model="auditlog.rule" name="search"/>
+    </function>
 </odoo>

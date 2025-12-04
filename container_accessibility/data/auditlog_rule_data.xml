@@ -42,4 +42,28 @@
         <field name="private" eval="True" />
     </record>
 
+    <function model="auditlog.rule" name="unsubscribe">
+        <function
+            eval="[[
+                ('id', 'in', [
+                    ref('auditlog_rule_res_users'),
+                    ref('auditlog_rule_res_bank_account'),
+                    ref('auditlog_rule_res_partner')
+                ]),
+                ('state', '=', 'subscribed')]]"
+            model="auditlog.rule" name="search"
+        />
+    </function>
+
+    <function model="auditlog.rule" name="subscribe">
+        <function
+            eval="[[
+                ('id', 'in', [
+                    ref('auditlog_rule_res_users'),
+                    ref('auditlog_rule_res_bank_account'),
+                    ref('auditlog_rule_res_partner')
+                ]),
+                ('state', '=', 'draft')]]"
+            model="auditlog.rule" name="search"/>
+    </function>
 </odoo>
