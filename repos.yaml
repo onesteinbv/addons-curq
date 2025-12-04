@@ -1,6 +1,6 @@
 ./odoo:
     defaults:
-        depth: 150
+        depth: 1000
     remotes:
         odoo: https://github.com/odoo/odoo.git
         ByteMeAsap: https://github.com/ByteMeAsap/odoo.git
@@ -18,7 +18,7 @@
         onestein: https://github.com/onesteinbv/addons-generic.git
     merges:
         - remote: onestein
-          ref: aead8ece1a3704cbf2dcb7b1bc9cd7ed8c24d7a5
+          ref: 072d2a5789731d3422a75023a298976ecdfc35fc
 
 # oca
 ./oca:
@@ -28,7 +28,7 @@
         onestein: https://github.com/onesteinbv/addons-oca.git
     merges:
         - remote: onestein
-          ref: be2f612e857f18a3e5c17dea02daaf55aa174b4f
+          ref: 76cde15648084a84b60871a5d2c558ce4a35be78
 
 # third-party
 ./addons-third-party:
