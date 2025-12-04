@@ -44,6 +44,7 @@ spreadsheet_oca_ux
 addons-generic/account_journal_subtype
 addons-generic/account_partner_default_account
 addons-generic/account_period_auto_create
+addons-generic/attachment_preview_remove_preview_button
 addons-generic/base_import_debranding
 addons-generic/base_municipality
 addons-generic/crypto_currency
@@ -78,6 +79,7 @@ addons-generic/project_role_members
 addons-generic/sale_recurring_payment
 addons-generic/sale_recurring_payment_mollie
 addons-generic/subscription_portal
+addons-generic/web_responsive_attachment_preview
 addons-generic/website_event_external_map
 addons-generic/website_hide_navbar_technical
 addons-generic/website_html_sitemap
