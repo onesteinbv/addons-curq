@@ -41,6 +41,9 @@ def main(env, host, user, password, encryption, port):
     env["ir.config_parameter"].set_param("mail.default.from", "info")
     env["ir.config_parameter"].set_param("mail.catchall.domain", mail_domain)
 
+    # In case mails are sent from the root user
+    env.ref("base.partner_root").email = "bot@%s" % mail_domain
+
 
 if __name__ == "__main__":
     main()
