@@ -15,7 +15,8 @@
   remotes:
     onestein: https://github.com/onesteinbv/addons-generic.git
   merges:
-    - onestein 18.0
+    - remote: onestein
+      ref: 520edb8548551553372031b470ea86f2727ad3fa
 
 # oca
 ./oca:

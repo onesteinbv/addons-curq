@@ -37,6 +37,7 @@
         "spreadsheet_dashboard_oca",
         "spreadsheet_oca_ux",
         "remove_odoo_enterprise",
+        "remove_enterprise_shipping_connector",
         "base_import_debranding",
         "digest_disable",
         "partner_external_map",
