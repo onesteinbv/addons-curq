@@ -61,6 +61,7 @@
         "portal_odoo_debranding",
         "web_dialog_size",
         "iap_alternative_provider",
+        "web_responsive_attachment_preview",
     ],
     "bundle": True,
 }
