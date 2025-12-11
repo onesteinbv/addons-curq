@@ -129,7 +129,7 @@
     </record>
 
     <record id="onboarding_wizard_action" model="ir.actions.act_window">
-        <field name="name">Welcome to Odoo</field>
+        <field name="name">Welcome to CURQ</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">base.onboarding.wizard</field>
         <field name="view_mode">form</field>
