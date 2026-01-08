@@ -282,6 +282,7 @@ oca/mass_mailing_custom_unsubscribe
 oca/mass_mailing_partner
 oca/membership_extension
 oca/membership_prorate
+oca/membership_prorate_variable_period
 oca/membership_sale_prorate
 oca/membership_variable_period
 oca/mis_builder
