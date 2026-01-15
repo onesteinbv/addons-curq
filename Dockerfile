@@ -75,7 +75,7 @@ RUN apt-get update \
     && sed -i -E "s/(gevent==)21\.8\.0( ; sys_platform != 'win32' and python_version == '3.10')/\122.10.2\2/;s/(greenlet==)1.1.2( ; sys_platform != 'win32' and python_version == '3.10')/\12.0.2\2/" /requirements.txt \
     && pip3.12 wheel -r /requirements.txt -r /curq-requirements.txt --wheel-dir=/wheels
 
-FROM ghcr.io/onesteinbv/odoo-docker:18.0-981167e7f1bdb7c0d9f50d194ee9fd66abd85050 AS base
+FROM ghcr.io/onesteinbv/odoo-docker:18.0-85defaf3742d4285d20570e6171a908e7a8b3d75 AS base
 COPY --from=pack ./odoo /odoo/src/odoo
 COPY --from=pack ./package /odoo/custom
 COPY --from=wheels ./wheels /odoo/wheels
