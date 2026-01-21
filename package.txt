@@ -12,6 +12,7 @@ container_s3
 digest_configuration
 digest_disable
 hr_accessibility
+hr_timesheet_sheet_accessibility
 l10n_de_install
 l10n_nl_hr_expense
 l10n_nl_hr_install
