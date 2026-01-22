@@ -9,6 +9,9 @@ services:
     networks:
       - db
       - reporting
+    ports:
+      - "8069:8069"
+      - "8072:8072"
     volumes:
       - curq-data:/odoo/data
     environment:
