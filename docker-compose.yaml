@@ -6,7 +6,7 @@ services:
     #   context: .
     #   dockerfile: Dockerfile
     #   target: base
-    image: ghcr.io/onesteinbv/curq:latest
+    image: ghcr.io/onesteinbv/curq:16.0
     depends_on:
       postgres:
         condition: service_healthy
