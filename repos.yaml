@@ -16,7 +16,7 @@
     onestein: https://github.com/onesteinbv/addons-generic.git
   merges:
     - remote: onestein
-      ref: e757846e1476a5179c3b32cd30daaf890f8734ba
+      ref: f26c366ccad7f6c5d2a0b4ad253ed9d8a8d2f43c
 
 # oca
 ./oca:
