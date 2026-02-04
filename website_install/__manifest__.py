@@ -9,6 +9,7 @@
     "depends": [
         "website",
         "website_blog",
+        "website_breadcrumb",
         "website_odoo_debranding",
         "website_onboarding",
         "website_share_blogger",
