@@ -331,6 +331,7 @@ oca/web_calendar_slot_duration
 oca/web_chatter_position
 oca/web_company_color
 oca/web_environment_ribbon
+oca/web_favicon
 oca/web_help
 oca/web_ir_actions_act_multi
 oca/web_no_bubble
@@ -340,6 +341,7 @@ oca/web_timeline
 oca/web_widget_dropdown_dynamic
 oca/web_widget_x2many_2d_matrix
 oca/website_analytics_matomo
+oca/website_breadcrumb
 oca/website_odoo_debranding
 oca/website_sale_resource_booking
 oca/website_snippet_openstreetmap
