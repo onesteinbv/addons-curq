@@ -20,6 +20,7 @@ COPY --parents \
 	container_install \
 	container_s3 \
 	crm_install \
+	crypto_currency_install \
 	digest_configuration \
 	digest_disable \
 	event_install \
