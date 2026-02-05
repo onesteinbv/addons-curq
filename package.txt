@@ -22,6 +22,7 @@ mass_mailing_force_dedicated_server
 container_install
 account_install
 crm_install
+crypto_currency_install
 event_install
 hr_install
 mass_mailing_install
