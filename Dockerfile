@@ -48,6 +48,7 @@ COPY --parents \
 	website_sale_install \
 	stock_account_install \
 	sale_stock_install \
+	sales_team_update \
 	resource_booking_install \
     spreadsheet_oca_ux \
 	./
