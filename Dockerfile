@@ -13,7 +13,6 @@ COPY --parents \
 	account_statement_import_sheet_file_sheet_mappings \
 	base_customer_company \
 	base_customer_user \
-	base_mail_security \
 	base_module_bundle \
 	base_onboarding \
 	container_accessibility \
