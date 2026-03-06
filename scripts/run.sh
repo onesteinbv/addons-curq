@@ -28,7 +28,8 @@ fi
 
 python /odoo/scripts/localize.py
 
-if [[ -n "$UNINSTALL_MODULES" && "$UNINSTALL_MODULES" == "True" ]]; then
+# TODO: Remove capitalized True/False check, it's kept for backward compatibility but should be removed in favor of lowercase in the future
+if [[ -n "$UNINSTALL_MODULES" && ( "$UNINSTALL_MODULES" == "True" || "$UNINSTALL_MODULES" == "true" ) ]]; then
   python /odoo/scripts/apply_modules.py -c $ODOO_RC -d $DB_NAME --log-level=error
 else
   python /odoo/scripts/apply_modules.py -c $ODOO_RC -d $DB_NAME --log-level=error --dry-run
@@ -46,7 +47,7 @@ if [[ -n "$KEYCLOAK_URL" ]]; then
     --body="Support Login" \
     --template-user-id="base.user_admin"
 
-  if [[ "${KEYCLOAK_RESELLER_REALM:-False}" != "False" ]]; then
+  if [[ "${KEYCLOAK_RESELLER_REALM:-false}" != "false" ]]; then
     python /odoo/scripts/setup_oauth.py -c $ODOO_RC -d $DB_NAME --log-level=error \
       --url "$KEYCLOAK_URL" --realm "$KEYCLOAK_RESELLER_REALM" \
       --client-id "$KEYCLOAK_CLIENT_ID" --client-secret "$KEYCLOAK_RESELLER_CLIENT_SECRET" \
