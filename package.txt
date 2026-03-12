@@ -28,6 +28,7 @@ mass_mailing_install
 mass_mailing_website_install
 membership_install
 helpdesk_install
+helpdesk_project_install
 project_install
 sale_install
 stock_install
