@@ -1,10 +1,15 @@
 #!/bin/bash
+# TODO: Remove '-c "$ODOO_RC"', they are not necessary as Odoo will automatically use the ODOO_RC env variable
+
 
 USER_EMAIL=${USER_EMAIL:-$COMPANY_EMAIL}
 
-# TODO: Removed '-c "$ODOO_RC"', they are not necessary as Odoo will automatically use the ODOO_RC env variable
-
-python /odoo/scripts/set_base_url.py -c "$ODOO_RC" -d "$DB_NAME" --log-level=error --domain "$DOMAIN"
+# Set web.base.url based on DOMAIN or WEB_BASE_URL environment variables, DOMAIN is deprecated but kept for backward compatibility
+if [[ -n "$WEB_BASE_URL" ]]; then
+  python /odoo/scripts/set_base_url.py -c "$ODOO_RC" -d "$DB_NAME" --log-level=error --web-base-url "$WEB_BASE_URL"
+elif [[ -n "$DOMAIN" ]]; then
+  python /odoo/scripts/set_base_url.py -c "$ODOO_RC" -d "$DB_NAME" --log-level=error --domain "$DOMAIN"
+fi
 
 # TODO: Remove this in favor for the update_user.py script, kept for backward compatibility but should be removed in the future
 if [[ -n "$ADMIN_USER_PWD" && "$CHANGE_ADMIN_USER_PWD" == "true" ]]; then
