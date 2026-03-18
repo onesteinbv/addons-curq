@@ -1,8 +1,9 @@
 #!/bin/bash
 # TODO: Remove '-c "$ODOO_RC"', they are not necessary as Odoo will automatically use the ODOO_RC env variable
 
-
+# Backward compatibility with old environment variables, if the new ones are not set, use the old ones
 USER_EMAIL=${USER_EMAIL:-$COMPANY_EMAIL}
+CUSTOMER_USER_LOGIN=${CUSTOMER_USER_LOGIN:-$USER_EMAIL}
 
 # Set web.base.url based on DOMAIN or WEB_BASE_URL environment variables, DOMAIN is deprecated but kept for backward compatibility
 if [[ -n "$WEB_BASE_URL" ]]; then
@@ -86,5 +87,5 @@ if [[ "$UPDATE_COMPANY" == "true" ]]; then
 fi
 
 if [[ "$PREPARE_CUSTOMER_USER" == "true" ]]; then
-  python /odoo/scripts/prepare_customer_user.py -c "$ODOO_RC" -d "$DB_NAME" --log-level=error --email "$USER_EMAIL" --group-file /odoo/scripts/groups.txt
+  python /odoo/scripts/prepare_customer_user.py -c "$ODOO_RC" -d "$DB_NAME" --log-level=error --login "$CUSTOMER_USER_LOGIN" --group-file /odoo/scripts/groups.txt
 fi
