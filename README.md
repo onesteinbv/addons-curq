@@ -40,6 +40,7 @@ These are the bundles that come with CURQ out of the box.
   content sharing, and more
 - **eCommerce** (`website_sale_install`): Sell your products online
 - **Booking Management** (`resource_booking_install`): Manage appointments and resource booking
+- **Subscription Management** (`subscription_install`): Manage subscriptions and create recurring invoices
 
 ### Localization Bundles
 

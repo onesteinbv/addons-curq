@@ -15,6 +15,8 @@
         "membership_subscription",
         "membership_variable_period",
         "membership_group",
+        "sale_recurring_payment_mollie",
+        "subscription_portal",
     ],
     "bundle": True,
 }

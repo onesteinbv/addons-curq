@@ -47,6 +47,7 @@ class OnboardingWizard(models.TransientModel):
             "sale_install",
             "survey_install",
             "resource_booking_install",
+            "subscription_install",
         ]
         installable_modules = self.env["ir.module.module"].search(
             [("name", "in", installable_module_names)]
