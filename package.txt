@@ -38,6 +38,7 @@ website_sale_install
 website_membership_install
 membership_development_install
 survey_install
+subscription_install
 stock_account_install
 sale_stock_install
 sales_team_update

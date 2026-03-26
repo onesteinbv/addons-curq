@@ -40,6 +40,7 @@ COPY --parents \
 	project_install \
 	sale_install \
 	stock_install \
+	subscription_install \
 	survey_install \
 	website_event_install \
 	website_install \
