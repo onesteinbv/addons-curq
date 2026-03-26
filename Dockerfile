@@ -23,6 +23,7 @@ COPY --parents \
 	digest_disable \
 	event_install \
 	helpdesk_install \
+	helpdesk_project_install \
 	hr_accessibility \
 	hr_install \
 	l10n_de_install \
