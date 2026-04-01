@@ -15,6 +15,12 @@ class AccountChartTemplate(models.AbstractModel):
             company._create_spread_templates()
         return res
 
+    def _guess_chart_template(self, country):
+        # The RGS chart has preference over the generic Dutch chart template
+        if country and country.code == "NL":
+            return "nl_rgs"
+        return super()._guess_chart_template(country)
+
     @api.model
     def _generate_payment_modes(self, company):
         """Generate payment modes"""

@@ -1,20 +1,8 @@
-from odoo import _, api, models
+from odoo import _, models
 
 
 class Company(models.Model):
     _inherit = "res.company"
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        companies = super().create(vals_list)
-        for company in companies:
-            if not company.chart_template:
-                self.env["account.chart.template"]._load(
-                    "nl_rgs",
-                    company,
-                    install_demo=False,
-                )
-        return companies
 
     def _create_direct_debit_in_payment_mode(self):
         self.ensure_one()
