@@ -51,7 +51,7 @@ services:
       retries: 5
     restart: unless-stopped
   kwkhtmltopdf:
-    image: acsone/kwkhtmltopdf
+    image: ghcr.io/acsone/kwkhtmltopdf:0.12.6.1-latest
     restart: unless-stopped
     networks:
       - reporting
