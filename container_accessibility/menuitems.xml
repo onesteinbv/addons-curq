@@ -16,6 +16,14 @@
         <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
     </record>
 
+    <record id="base.menu_ir_cron_act" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
+    <record id="base.ir_cron_trigger_menu" model="ir.ui.menu">
+        <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
+    </record>
+
     <record id="base.reporting_menuitem" model="ir.ui.menu">
         <field name="excluded_group_ids" eval="[Command.link(ref('container_accessibility.group_restricted'))]"/>
     </record>
