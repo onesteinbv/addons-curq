@@ -56,6 +56,10 @@ class ActionsActions(models.Model):
     _name = "ir.actions.actions"
     _inherit = ["ir.actions.actions", "container.restrict.mixin"]
 
+    @api.model
+    def _get_restrict_domain(self):
+        return [("base_automation_id", "!=", False)]
+
 
 class IrCron(models.Model):
     _name = "ir.cron"

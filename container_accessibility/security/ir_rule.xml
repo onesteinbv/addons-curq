@@ -155,7 +155,7 @@
     <record id="rule_restricted_ir_actions_server" model="ir.rule">
         <field name="name">rule_restricted_ir_actions_server</field>
         <field name="model_id" ref="base.model_ir_actions_server"/>
-        <field name="domain_force">[('id', '=', False)]</field>
+        <field name="domain_force">[('base_automation_id', '!=', False)]</field>
         <field name="perm_read" eval="0"/>
         <field name="perm_create" eval="1"/>
         <field name="perm_write" eval="1"/>
