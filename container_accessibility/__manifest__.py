@@ -7,6 +7,7 @@
     "depends": [
         "base",
         "base_setup",
+        "base_automation",
         "mail",
         "privacy_lookup",
         "web_tour",
