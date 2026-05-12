@@ -53,6 +53,7 @@ COPY --parents \
 	sales_team_update \
 	resource_booking_install \
     spreadsheet_oca_ux \
+	partner_external_map_usability \
 	./
 
 RUN apt-get install git -y
