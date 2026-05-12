@@ -3,9 +3,21 @@ name: release
 on:
   push:
     tags:
+      - "18.0.*.*"
       - "18.0.*"
 
 jobs:
+  notify-start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram message
+        run: |
+          curl \
+            -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_API_TOKEN }}/sendMessage \
+            -H 'Content-Type: application/json' \
+            -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"📢 Release workflow started: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
+            --fail
+ 
   build-ci:
     uses: ./.github/workflows/build-and-push.yml
     with:
@@ -60,7 +72,7 @@ jobs:
           docker tag ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }} ghcr.io/${{ github.repository_owner }}/curq-ci:18.0
           docker push ghcr.io/${{ github.repository_owner }}/curq-ci:18.0
 
-  notify:
+  notify-failure:
     needs: [build-ci, migration, build, release]
     if: ${{ failure() }}
     runs-on: ubuntu-latest
