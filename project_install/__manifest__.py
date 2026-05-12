@@ -15,6 +15,7 @@
         "project_merge",
         "project_task_default_stage",
         "hr_timesheet_sheet",
+        "hr_timesheet_sheet_accessibility",
         "project_timesheet_time_control",
     ],
     "bundle": True,
