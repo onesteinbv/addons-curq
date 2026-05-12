@@ -44,6 +44,7 @@
         "base_import_debranding",
         "digest_disable",
         "partner_external_map",
+        "partner_external_map_usability",
         "fetchmail_notify_error_to_sender",
         "product_category_product_link",
         "mail_debrand",
@@ -65,6 +66,7 @@
         "web_dialog_size",
         "iap_alternative_provider",
         "web_responsive_attachment_preview",
+        "base_geolocalize",
     ],
     "bundle": True,
 }

@@ -45,6 +45,7 @@ sale_stock_install
 sales_team_update
 resource_booking_install
 spreadsheet_oca_ux
+partner_external_map_usability
 addons-generic/account_journal_subtype
 addons-generic/account_partner_default_account
 addons-generic/account_period_auto_create
