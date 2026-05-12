@@ -4,9 +4,17 @@ on:
   push:
     tags:
       - "18.0.*.*"
-      - "18.0.*"
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      major_tag: ${{ steps.vars.outputs.major_tag }}
+    steps:
+      - id: vars
+        run: |
+          echo "major_tag=$(echo '${{ github.ref_name }}' | sed 's/\.[^.]*$//')" >> "$GITHUB_OUTPUT"
+
   notify-start:
     runs-on: ubuntu-latest
     steps:
@@ -32,10 +40,10 @@ jobs:
       to: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }}
 
   build:
-    needs: [migration]
+    needs: [setup, migration]
     uses: ./.github/workflows/build-and-push.yml
     with:
-      tags: ghcr.io/${{ github.repository_owner }}/curq:${{ github.ref_name }},ghcr.io/${{ github.repository_owner }}/curq:18.0
+      tags: ghcr.io/${{ github.repository_owner }}/curq:${{ github.ref_name }},ghcr.io/${{ github.repository_owner }}/curq:${{ needs.setup.outputs.major_tag }},ghcr.io/${{ github.repository_owner }}/curq:18.0
       target: base
 
   release:
