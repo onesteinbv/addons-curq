@@ -1,6 +1,6 @@
 ./odoo:
   defaults:
-    depth: 10
+    depth: 125
   remotes:
     odoo: https://github.com/odoo/odoo.git
     onesteinbv: https://github.com/onesteinbv/odoo.git
