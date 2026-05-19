@@ -138,6 +138,7 @@ addons-generic/partner_nickname
 addons-generic/website_partner_privacy_nickname
 addons-generic/website_partner_privacy
 addons-generic/remove_enterprise_shipping_connector
+addons-generic/membership_activity_project_parent
 addons-third-party/mollie_account_sync
 addons-third-party/payment_mollie_official
 design-themes/theme_anelusia
