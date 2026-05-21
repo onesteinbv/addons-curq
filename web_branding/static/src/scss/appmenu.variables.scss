@@ -1,0 +1,13 @@
+// $app-menu-text-color: lighten($o-black, 20%);
+$app-menu-box-shadow:
+    inset 0 0 0 1px rgba($curq-blue, 0.16),
+    0 2px 2px rgba($curq-blue, 0.016),
+    0 4px 4px rgba($curq-blue, 0.016),
+    0 8px 8px rgba($curq-blue, 0.016),
+    0 16px 16px rgba($curq-blue, 0.016);
+$app-menu-box-shadow-highlight:
+    inset 0 0 0 1px rgba($curq-blue, 0.26),
+    0 2px 2px rgba($curq-blue, 0.026),
+    0 4px 4px rgba($curq-blue, 0.026),
+    0 8px 8px rgba($curq-blue, 0.026),
+    0 16px 16px rgba($curq-blue, 0.026);

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="layout" inherit_id="web.layout" name="Web layout">
+        <xpath expr="//head/link[@rel='shortcut icon']" position="attributes">
+            <attribute
+                name="t-att-href"
+            >'/web_branding/static/img/icon.svg'</attribute>
+        </xpath>
+        <xpath expr="//head/title" position="attributes">
+            <attribute name="t-esc">title or 'CURQ'</attribute>
+        </xpath>
+    </template>
+</odoo>

@@ -56,6 +56,7 @@ COPY --parents \
     spreadsheet_oca_ux \
 	partner_external_map_usability \
 	release_note \
+	web_branding \
 	./
 
 RUN apt-get install git -y
