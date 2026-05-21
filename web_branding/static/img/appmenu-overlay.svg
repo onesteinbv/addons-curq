@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="2000"
+   height="1128"
+   viewBox="0 0 2000 1128"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="appmenu-overlay.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.41843972"
+     inkscape:cx="1523.5169"
+     inkscape:cy="848.38983"
+     inkscape:window-width="1920"
+     inkscape:window-height="1120"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <path
+     id="polygon2"
+     style="fill:#ffc03d;fill-opacity:0.152941"
+     d="M 0,1077.844 392.627,778.443 1504.99,1127.745 H 0 Z" />
+  <path
+     id="polygon4"
+     style="fill:#ffc03d;fill-opacity:0.152941"
+     d="M 392.216,778.443 283.294,0 H 0 v 666.504 z" />
+  <path
+     id="polygon6"
+     style="fill:#ffc03d;fill-opacity:0.152941"
+     d="M 1000,0 2000,1009.98 V 439.94 L 1749.817,0 Z" />
+</svg>

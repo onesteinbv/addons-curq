@@ -14,7 +14,6 @@
         "fs_attachment",
         "fs_storage_backup",
         "web_responsive",
-        "web_favicon",
         "disable_odoo_online",
         "base_fontawesome_web_editor",
         "auth_oidc",
@@ -67,6 +66,7 @@
         "iap_alternative_provider",
         "web_responsive_attachment_preview",
         "base_geolocalize",
+        "web_branding",
     ],
     "bundle": True,
 }
