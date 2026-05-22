@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="website.default_website" model="website">
+        <!-- <field name="logo"></field> -->
+        <field name="favicon" type="base64" file="website_branding/static/img/icon.svg" />
+    </record>
+</odoo>
