@@ -55,6 +55,7 @@ COPY --parents \
 	resource_booking_install \
     spreadsheet_oca_ux \
 	partner_external_map_usability \
+	release_note \
 	./
 
 RUN apt-get install git -y
@@ -86,6 +87,7 @@ COPY --from=pack ./package /odoo/custom
 COPY --from=wheels ./wheels /odoo/wheels
 COPY --from=wheels /curq-requirements.txt /odoo/custom/requirements.txt
 COPY --from=wheels /requirements.txt /odoo/src/odoo/requirements.txt
+COPY ./NEWS.md /odoo/custom/NEWS.md
 COPY ./scripts /odoo/scripts
 RUN pip install --no-cache-dir -r /odoo/src/odoo/requirements.txt -r /odoo/custom/requirements.txt --find-links /odoo/wheels
 RUN pip install -e /odoo/src/odoo

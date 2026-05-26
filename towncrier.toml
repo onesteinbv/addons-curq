@@ -1,0 +1,24 @@
+[tool.towncrier]
+name = "CURQ"
+directory = "newsfragments"
+filename = "NEWS.md"
+issue_format = "[#{issue}](https://github.com/onesteinbv/addons-curq/pull/{issue})"
+
+[[tool.towncrier.type]]
+directory = "feat"
+name = "Features"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "imp"
+name = "Improvements"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "fix"
+name = "Fixes"
+showcontent = true
+
+[[tool.towncrier.type]]
+name = "misc"
+showcontent = false

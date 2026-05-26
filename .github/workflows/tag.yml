@@ -1,4 +1,4 @@
-name: release
+name: tag
 
 on:
   push:
@@ -6,15 +6,6 @@ on:
       - "18.0.*.*"
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      major_tag: ${{ steps.vars.outputs.major_tag }}
-    steps:
-      - id: vars
-        run: |
-          echo "major_tag=$(echo '${{ github.ref_name }}' | sed 's/\.[^.]*$//')" >> "$GITHUB_OUTPUT"
-
   notify-start:
     runs-on: ubuntu-latest
     steps:
@@ -23,10 +14,36 @@ jobs:
           curl \
             -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_API_TOKEN }}/sendMessage \
             -H 'Content-Type: application/json' \
-            -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"📢 Release workflow started: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
+            -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"📢 Testing tag `${{ github.ref_name }}`: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
             --fail
+  
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      major_tag: ${{ steps.vars.outputs.major_tag }}
+    steps:
+      - id: vars
+        name: Extract major tag
+        run: |
+          echo "major_tag=$(echo '${{ github.ref_name }}' | sed 's/\.[^.]*$//')" >> "$GITHUB_OUTPUT"
+
+  check-dangling-news-fragments:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: Ensure no dangling newsfragments
+          run: |
+            # Count how many files are sitting in newsfragments (excluding .gitkeep)
+            FRAGMENT_COUNT=$(find newsfragments/ -type f ! -name ".gitkeep" | wc -l)
+            
+            if [ "$FRAGMENT_COUNT" -gt 0 ]; then
+              echo "❌ Found $FRAGMENT_COUNT uncompiled news fragments in newsfragments/."
+              echo "Did you forget to run 'towncrier build'?"
+              exit 1
+            fi
  
   build-ci:
+    needs: [check-dangling-news-fragments]
     uses: ./.github/workflows/build-and-push.yml
     with:
       tags: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }}
@@ -46,23 +63,6 @@ jobs:
       tags: ghcr.io/${{ github.repository_owner }}/curq:${{ github.ref_name }},ghcr.io/${{ github.repository_owner }}/curq:${{ needs.setup.outputs.major_tag }},ghcr.io/${{ github.repository_owner }}/curq:18.0
       target: base
 
-  release:
-    needs: [build]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Publish release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref_name }}
-          release_name: ${{ github.ref_name }}
-          body: "/"
-          draft: false
-          prerelease: false
-
   tag-ci-latest:
     needs: [build]
     runs-on: ubuntu-latest
@@ -81,7 +81,7 @@ jobs:
           docker push ghcr.io/${{ github.repository_owner }}/curq-ci:18.0
 
   notify-failure:
-    needs: [build-ci, migration, build, release]
+    needs: [build-ci, migration, build]
     if: ${{ failure() }}
     runs-on: ubuntu-latest
     steps:
@@ -90,5 +90,5 @@ jobs:
           curl \
             -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_API_TOKEN }}/sendMessage \
             -H 'Content-Type: application/json' \
-            -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"❤️‍🩹 Release workflow failed: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
+            -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"❤️‍🩹 Testing tag `${{ github.ref_name }}` failed: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
             --fail
