@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="base.main_company" model="res.company">
+            <!-- Set your desired colors. -->
+            <field name="primary_color">#FFC03D</field>
+            <field name="email_primary_color">#FFC03D</field>
+            <field name="secondary_color">#1C355E</field>
+            <field name="email_secondary_color">#1C355E</field>
+        </record>
+    </data>
+</odoo>

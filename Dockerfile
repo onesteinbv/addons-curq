@@ -35,6 +35,7 @@ COPY --parents \
 	l10n_nl_hr_recruitment \
 	l10n_nl_install \
 	l10n_nl_rgs_usability \
+	mail_branding \
 	mass_mailing_force_dedicated_server \
 	mass_mailing_install \
 	mass_mailing_website_install \
