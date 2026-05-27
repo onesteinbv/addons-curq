@@ -3,6 +3,7 @@ base_module_bundle
 account_statement_import_online_ponto_log
 account_statement_import_online_ponto_statement_creation_mode
 account_statement_import_sheet_file_sheet_mappings
+base_branding
 base_customer_company
 base_customer_user
 base_onboarding
