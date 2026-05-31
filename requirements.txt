@@ -19,3 +19,4 @@ pdfminer.six==20220319
 odfpy
 reportlab[pycairo]
 reportlab[renderpm]
+markdown==3.10.2
