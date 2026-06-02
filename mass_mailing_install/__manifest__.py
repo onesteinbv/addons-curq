@@ -13,6 +13,7 @@
         "mass_mailing_partner",
         "mail_partner_opt_out",
         "mass_mailing_custom_unsubscribe",
+        "mail_tracking_mass_mailing",
     ],
     "bundle": True,
 }

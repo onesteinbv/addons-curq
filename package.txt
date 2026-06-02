@@ -297,6 +297,7 @@ oca/mail_debrand
 oca/mail_multicompany
 oca/mail_server_user
 oca/mail_tracking
+oca/mail_tracking_mailgun
 oca/mail_tracking_mass_mailing
 oca/mail_partner_opt_out
 oca/mass_mailing_custom_unsubscribe
