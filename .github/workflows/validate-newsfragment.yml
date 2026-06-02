@@ -1,8 +1,10 @@
 name: validate-newsfragment
 on:
   pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
     branches:
       - "18.0"
+  
 
 permissions:
   contents: read
@@ -16,6 +18,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install Towncrier
+        if: "!contains(github.event.pull_request.labels.*.name, 'no-newsfragment')"
         run: |
           pip3 install towncrier
 
