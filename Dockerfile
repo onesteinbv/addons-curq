@@ -41,6 +41,7 @@ COPY --parents \
 	membership_development_install \
 	membership_install \
 	project_install \
+	sale_branding \
 	sale_install \
 	stock_install \
 	subscription_install \
