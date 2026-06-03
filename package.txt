@@ -28,6 +28,7 @@ event_install
 hr_install
 mass_mailing_install
 mass_mailing_website_install
+membership_branding
 membership_install
 helpdesk_install
 helpdesk_project_install
