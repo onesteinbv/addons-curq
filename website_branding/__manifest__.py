@@ -12,6 +12,18 @@
         "web._assets_primary_variables": [
             "website_branding/static/src/scss/primary_variables.scss"
         ],
+        "website.assets_editor": [
+            (
+                "after",
+                "website/static/src/client_actions/*/*.xml",
+                "website_branding/static/src/scss/configurator.scss",
+            ),
+            (
+                "after",
+                "website/static/src/systray_items/*",
+                "website_branding/static/src/scss/systray.scss",
+            ),
+        ],
     },
     "data": [
         "data/website_data.xml",
