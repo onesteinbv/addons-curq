@@ -1,3 +1,9 @@
 .o_configurator_odoo_logo {
     --configurator-logo: url("/website_branding/static/img/logo-p0.svg");
 }
+
+.o_website_loader_container {
+    .o_website_loader_odoo_logo {
+        --configurator-logo: url("/website_branding/static/img/logo-p0.svg");
+    }
+}
