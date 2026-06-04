@@ -37,6 +37,7 @@ COPY --parents \
 	mass_mailing_force_dedicated_server \
 	mass_mailing_install \
 	mass_mailing_website_install \
+	membership_branding \
 	membership_development_install \
 	membership_install \
 	project_install \

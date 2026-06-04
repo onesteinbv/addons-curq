@@ -9,6 +9,7 @@
     "data": ["security/security.xml"],
     "depends": [
         "membership",
+        "membership_branding",
         "membership_contribution",
         "membership_extension",
         "membership_prorate",
