@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t
-        t-name="sale_branding.SaleActionHelperInherit"
+        t-name="sale_branding.SaleActionHelper"
         t-inherit="sale.SaleActionHelper"
         t-inherit-mode="extension"
     >
