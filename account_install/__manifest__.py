@@ -7,6 +7,7 @@
     "license": "AGPL-3",
     "depends": [
         "account",
+        "account_branding",
         "account_payment_mode",
         "account_payment_order",
         "account_payment_partner",
