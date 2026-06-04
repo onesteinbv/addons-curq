@@ -15,6 +15,7 @@ COPY --parents \
 	base_customer_user \
 	base_module_bundle \
 	base_onboarding \
+	calendar_branding \
 	container_accessibility \
 	container_install \
 	container_s3 \
