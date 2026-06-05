@@ -27,6 +27,7 @@
             "web_branding/static/src/scss/appmenu.scss",
             "web_branding/static/src/scss/searchbar.scss",
             "web_branding/static/src/js/user_menu_items.esm.js",
+            "web_branding/static/src/xml/documentation_link.xml",
         ],
     },
     "data": [
