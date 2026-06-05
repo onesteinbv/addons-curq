@@ -34,6 +34,7 @@ membership_install
 helpdesk_install
 helpdesk_project_install
 project_install
+sale_branding
 sale_install
 stock_install
 website_event_install
