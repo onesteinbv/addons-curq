@@ -26,6 +26,7 @@
             ),
             "web_branding/static/src/scss/appmenu.scss",
             "web_branding/static/src/scss/searchbar.scss",
+            "web_branding/static/src/js/user_menu_items.esm.js",
         ],
     },
     "data": [
@@ -34,5 +35,7 @@
     "depends": [
         "web",
         "web_responsive",
+        "web_tour",
+        "disable_odoo_online",  # Not a real dependency, but this module doesn't make sense without it.
     ],
 }
