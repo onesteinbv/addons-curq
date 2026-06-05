@@ -87,5 +87,5 @@ if [[ "$UPDATE_COMPANY" == "true" ]]; then
 fi
 
 if [[ "$PREPARE_CUSTOMER_USER" == "true" ]]; then
-  python /odoo/scripts/prepare_customer_user.py -c "$ODOO_RC" -d "$DB_NAME" --log-level=error --login "$CUSTOMER_USER_LOGIN" --group-file /odoo/scripts/groups.txt
+  python /odoo/scripts/prepare_customer_user.py -c "$ODOO_RC" -d "$DB_NAME" --log-level=error --login "$CUSTOMER_USER_LOGIN"
 fi
