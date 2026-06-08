@@ -3,22 +3,11 @@ import base64
 from odoo.tools.misc import file_path
 
 
-def update_system_user(env):
-    curq_icon_base64 = base64.b64encode(
-        open(file_path("mail_branding/static/img/curqbot.png"), "rb").read()
-    ).decode("utf-8")
-    root_user_id = env.ref("base.user_root", raise_if_not_found=False)
-    if root_user_id:
-        root_user_id.with_context(mail_notrack=True).write(
-            {"name": "CurqBot", "image_1920": curq_icon_base64}
-        )
-
-
 def uninstall_hook(env):
     """Uninstall hook for mail_branding module
     1. Change name of root user to OdooBot
     2. Change image of root user to Odoo icon
-    3. Reset company colors to Odoo defaults
+    3. Reset overridden fields in ir.model.fields and selection
     """
     odoo_icon_base64 = base64.b64encode(
         open(file_path("mail/static/src/img/odoobot.png"), "rb").read()
@@ -28,17 +17,38 @@ def uninstall_hook(env):
         root_user_id.with_context(mail_notrack=True).write(
             {"name": "OdooBot", "image_1920": odoo_icon_base64}
         )
-    # Find the main company record (base.main_company)
-    main_company = env.ref("base.main_company", raise_if_not_found=False)
 
-    if main_company:
-        # Writing False or None removes the custom hex codes,
-        # forcing Odoo to fall back to its default system styling.
-        main_company.write(
+    # Revert overridden fields in ir.model.fields
+    odoobot_field = env["ir.model.fields"].search(
+        [
+            ("model", "=", "res.users"),
+            ("name", "=", "odoobot_state"),
+        ]
+    )
+    if odoobot_field:
+        odoobot_field.write({"field_description": "OdooBot Status"})
+
+    notification_field = env["ir.model.fields"].search(
+        [
+            ("model", "=", "res.users"),
+            ("name", "=", "notification_type"),
+        ]
+    )
+    if notification_field:
+        notification_field.write(
             {
-                "primary_color": "#000000",
-                "email_primary_color": "#000000",
-                "secondary_color": "#875A7B",
-                "email_secondary_color": "#875A7B",
+                "help": "Policy on how to handle Chatter notifications:\n"
+                "- Handle by Emails: notifications are sent to your email address\n"
+                "- Handle in Odoo: notifications appear in your Odoo Inbox"
             }
         )
+
+    inbox_selection = env["ir.model.fields.selection"].search(
+        [
+            ("field_id.model", "=", "res.users"),
+            ("field_id.name", "=", "notification_type"),
+            ("value", "=", "inbox"),
+        ]
+    )
+    if inbox_selection:
+        inbox_selection.write({"name": "Handle in Odoo"})

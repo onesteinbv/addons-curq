@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
+    <data noupdate="1">
+        <!-- Rebrand the default mail template color.-->
         <record id="base.main_company" model="res.company">
-            <!-- Set your desired colors. -->
             <field name="primary_color">#FFC03D</field>
             <field name="email_primary_color">#FFC03D</field>
             <field name="secondary_color">#1C355E</field>
