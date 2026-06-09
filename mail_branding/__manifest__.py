@@ -16,5 +16,4 @@
     ],
     "installable": True,
     "uninstall_hook": "uninstall_hook",
-    "auto_install": True,
 }
