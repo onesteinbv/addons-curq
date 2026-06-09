@@ -67,6 +67,7 @@
         "web_responsive_attachment_preview",
         "base_geolocalize",
         "web_branding",
+        "base_branding",
     ],
     "bundle": True,
 }
