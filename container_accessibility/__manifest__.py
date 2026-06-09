@@ -1,5 +1,5 @@
 {
-    "name": "Container Accessibility",
+    "name": "CURQ Accessibility",
     "category": "Technical",
     "version": "18.0.1.0.0",
     "author": "Onestein",
@@ -12,6 +12,7 @@
         "web_tour",
         "payment",
         "base_menu_visibility_restriction",
+        "base_user_role",
         "auth_oidc",
         "auditlog",
         "server_environment",

@@ -15,3 +15,4 @@ from . import server_config
 from . import fetchmail_server
 from . import ir_config_parameter
 from . import discuss_channel
+from . import res_users_role
