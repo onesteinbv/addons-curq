@@ -46,6 +46,7 @@
         "partner_external_map_usability",
         "fetchmail_notify_error_to_sender",
         "product_category_product_link",
+        "mail_branding",
         "mail_debrand",
         "base_module_bundle",
         "mail_attach_existing_attachment",
