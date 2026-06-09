@@ -1,4 +1,5 @@
 import base64
+
 from odoo.tools.misc import file_path
 
 

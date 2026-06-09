@@ -1,8 +1,8 @@
 {
     "name": "Mail Branding",
-    "summary": "Mail Branding: Adapting to CURQ branding",
+    "summary": "Adapt mail features to CURQ branding",
     "author": "Onestein",
-    "website": "https://onestein.eu",
+    "website": "https://onestein.nl",
     "category": "Mail",
     "version": "18.0.1.0.0",
     "license": "AGPL-3",
@@ -11,9 +11,8 @@
         "mail",
     ],
     "data": [
-        "data/company_colors.xml",
-        "data/mail_bot.xml",
+        "data/res_company_data.xml",
+        "data/res_users_data.xml",
     ],
-    "installable": True,
     "uninstall_hook": "uninstall_hook",
 }
