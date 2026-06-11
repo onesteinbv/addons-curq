@@ -22,10 +22,12 @@
     ],
     "data": [
         "security/res_groups.xml",
+        "security/res_users_role.xml",
         "security/ir_rule.xml",
         "data/auditlog_rule_data.xml",
         "data/ir_cron_data.xml",
         "views/ir_module_module_view.xml",
+        "views/res_users_view.xml",
         "menuitems.xml",
     ],
     "license": "AGPL-3",

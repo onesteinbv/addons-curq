@@ -1,6 +1,6 @@
 from lxml import etree
 
-from odoo import Command, api, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import config
 from odoo.tools.misc import ustr
@@ -10,6 +10,25 @@ from odoo.addons.auth_signup.models.res_partner import SignupError
 
 class ResUsers(models.Model):
     _inherit = "res.users"
+
+    # Simplified role field without the possibility to have multiple roles
+    role_id = fields.Many2one(
+        comodel_name="res.users.role",
+        inverse="_inverse_role_id",
+    )
+    role_comment = fields.Text(
+        related="role_id.comment",
+        readonly=True,
+    )
+
+    def _inverse_role_id(self):
+        for user in self:
+            # For now just clear and set the role, we could improve this to end the current role
+            # and start the new one, but for now this is sufficient and simpler
+            user.role_line_ids = [
+                Command.clear(),
+                Command.create({"role_id": user.role_id.id}),
+            ]
 
     @api.model
     def _get_user_limit(self):
