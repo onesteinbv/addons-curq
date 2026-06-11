@@ -1,5 +1,29 @@
 # CURQ Accessibility
 
+## Restricted Group
+
+The restricted group is a special group that is used to restrict access to certain features and settings in CURQ. The group is introduced to limit the access to destructive actions and standardize CURQ configuration, without it users with `base.group_system` would have unrestricted access. E.g. users with `base.group_system` can edit, or remove `ir.ui.views`, `ir.actions`, `ir.model.access`, and many more, which can lead to unstandardized configurations and even incorrect functioning of CURQ. By using the restricted group, we can ensure that only users that are used for maintenance have access to these features, while customers, support employees, and consultants do not have access to these features.
+
+**Restricted users cannot**:
+
+- Edit or remove `ir.ui.views`, `ir.actions`, `ir.model.access`, `res.groups`, and many more.
+- Create unrestricted users.
+- See unrestricted users in the user list.
+- CRUD private oauth providers and mail servers
+- Install, upgrade, or uninstall modules that are not bundles (`_install` modules)
+
+## Removal of "become superuser"
+
+Some features should not even be accessible to administrators, the "become superuser" feature is outright removed, which allows administrators to become the superuser aka `base.user_root`.
+To ensure accountability, this module adds immutable audit log rules that track potential malicious violations of privacy rules. For example, if a support user exports contact information, this action will be logged and cannot be deleted, even by administrators / maintainers.
+
+## Private oauth provider, and mail servers
+
+Restricted users cannot access private OAuth providers, which are reserved for support employees and partners to use as single sign-on. While customers can add their own OAuth providers, private ones are restricted to prevent accidental lockouts of support and partner accounts.
+Mail servers are also restricted to prevent customers from modifying the mail server configuration, which could disrupt email functionality and generate unnecessary support requests.
+
+## User Roles
+
 These are the user roles in CURQ:
 
 `Administrator`: has full access to all features and settings of CURQ.
