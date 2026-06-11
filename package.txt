@@ -102,6 +102,7 @@ addons-generic/website_mass_mailing_membership_group
 addons-generic/website_membership_group
 addons-generic/website_membership_group_partner_privacy
 addons-generic/website_membership_registration
+addons-generic/website_membership_registration_altcha
 addons-generic/website_membership_registration_partner_cde
 addons-generic/website_membership_registration_partner_contact_birthdate
 addons-generic/website_membership_registration_project_role_members
@@ -360,6 +361,7 @@ oca/web_timeline
 oca/web_widget_dropdown_dynamic
 oca/web_widget_x2many_2d_matrix
 oca/website_analytics_matomo
+oca/website_altcha
 oca/website_breadcrumb
 oca/website_odoo_debranding
 oca/website_event_external

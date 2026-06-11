@@ -8,6 +8,7 @@
     "license": "AGPL-3",
     "depends": [
         "website",
+        "website_altcha",
         "website_blog",
         "website_breadcrumb",
         "website_odoo_debranding",
