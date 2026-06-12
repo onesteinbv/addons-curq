@@ -63,6 +63,7 @@ COPY --parents \
 	release_note \
 	web_branding \
 	account_branding \
+	website_branding \
 	./
 
 RUN apt-get install git -y

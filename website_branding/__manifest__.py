@@ -28,4 +28,5 @@
     "data": [
         "data/website_data.xml",
     ],
+    "auto_install": True,
 }

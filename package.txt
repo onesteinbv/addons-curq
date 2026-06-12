@@ -54,6 +54,7 @@ spreadsheet_oca_ux
 partner_external_map_usability
 release_note
 web_branding
+website_branding
 account_branding
 addons-generic/account_journal_subtype
 addons-generic/account_partner_default_account
