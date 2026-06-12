@@ -13,8 +13,7 @@ class ResUsers(models.Model):
 
     # Simplified role field without the possibility to have multiple roles
     role_id = fields.Many2one(
-        comodel_name="res.users.role",
-        inverse="_inverse_role_id",
+        comodel_name="res.users.role", inverse="_inverse_role_id", required=True
     )
     role_comment = fields.Text(
         related="role_id.comment",

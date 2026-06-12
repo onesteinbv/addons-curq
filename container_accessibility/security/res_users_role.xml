@@ -3,15 +3,18 @@
     <record id="group_user_role_administrator" model="res.users.role">
         <field name="name">Administrator</field>
         <field name="comment">Full access to all features and settings of CURQ.</field>
+        <field name="implied_by_text" file="container_accessibility/security/administrator/groups" />
     </record>
 
     <record id="group_user_role_manager" model="res.users.role">
         <field name="name">Manager</field>
         <field name="comment">Access to management features and settings of CURQ.</field>
+        <field name="implied_by_text" file="container_accessibility/security/manager/groups" />
     </record>
 
     <record id="group_user_role_user" model="res.users.role">
         <field name="name">User</field>
         <field name="comment">Access to their own documents.</field>
+        <field name="implied_by_text" file="container_accessibility/security/user/groups" />
     </record>
 </odoo>
