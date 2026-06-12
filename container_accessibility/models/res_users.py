@@ -12,9 +12,7 @@ class ResUsers(models.Model):
     _inherit = "res.users"
 
     # Simplified role field without the possibility to have multiple roles
-    role_id = fields.Many2one(
-        comodel_name="res.users.role", inverse="_inverse_role_id", required=True
-    )
+    role_id = fields.Many2one(comodel_name="res.users.role", inverse="_inverse_role_id")
     role_comment = fields.Text(
         related="role_id.comment",
         readonly=True,
@@ -24,10 +22,10 @@ class ResUsers(models.Model):
         for user in self:
             # For now just clear and set the role, we could improve this to end the current role
             # and start the new one, but for now this is sufficient and simpler
-            user.role_line_ids = [
-                Command.clear(),
-                Command.create({"role_id": user.role_id.id}),
-            ]
+            ops = [Command.clear()]
+            if user.role_id:
+                ops.append(Command.create({"role_id": user.role_id.id}))
+            user.role_line_ids = ops
 
     @api.model
     def _get_user_limit(self):

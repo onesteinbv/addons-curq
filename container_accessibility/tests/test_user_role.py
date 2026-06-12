@@ -82,6 +82,7 @@ class TestUserRole(BaseCommon):
         self.assertNotIn(new_group, role.implied_ids)
         self.assertIn(new_group_2, role.implied_ids)
         self.assertIn(new_group_3, role.implied_ids)
+
         (data_2 + data_3).unlink()
         self.assertNotIn(new_group_2, role.implied_ids)
         self.assertNotIn(new_group_3, role.implied_ids)

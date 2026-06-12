@@ -8,7 +8,7 @@ class ModelData(models.Model):
     def create(self, vals):
         res = super().create(vals)
         if vals.get("model") == "res.groups":
-            self.env["res.users.role"].search(
+            self.env["res.groups"].search(
                 [("implied_by_text", "ilike", res.complete_name)]
             ).apply_implied_by_text()
         return res
@@ -21,7 +21,7 @@ class ModelData(models.Model):
             domain = expression.OR(
                 [[("implied_by_text", "ilike", xml_id)] for xml_id in xml_ids]
             )
-            affected_roles = self.env["res.users.role"].search(domain)
+            affected_roles = self.env["res.groups"].search(domain)
             affected_roles.apply_implied_by_text()
         return res
 
@@ -35,5 +35,5 @@ class ModelData(models.Model):
         domain = expression.OR(
             [[("implied_by_text", "ilike", xml_id)] for xml_id in xml_ids]
         )
-        affected_roles = self.env["res.users.role"].search(domain)
+        affected_roles = self.env["res.groups"].search(domain)
         affected_roles.apply_implied_by_text(ignore=xml_ids)

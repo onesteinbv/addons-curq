@@ -2,8 +2,8 @@ from odoo import fields, models
 from odoo.osv import expression
 
 
-class ResUsersRole(models.Model):
-    _inherit = "res.users.role"
+class ResGroups(models.Model):
+    _inherit = "res.groups"
 
     implied_by_text = fields.Text(
         string="Implied by",
