@@ -15,7 +15,4 @@
     "data": [
         "views/calendar_branding_views.xml",
     ],
-    "installable": True,
-    "application": False,
-    "auto_install": True,
 }

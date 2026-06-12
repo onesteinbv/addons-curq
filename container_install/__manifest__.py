@@ -69,6 +69,8 @@
         "base_geolocalize",
         "web_branding",
         "base_branding",
+        "calendar",
+        "calendar_branding",
     ],
     "bundle": True,
 }
