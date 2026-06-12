@@ -71,6 +71,7 @@
         "base_branding",
         "calendar",
         "calendar_branding",
+        "release_note",
     ],
     "bundle": True,
 }
