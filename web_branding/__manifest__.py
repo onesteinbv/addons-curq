@@ -28,6 +28,7 @@
             "web_branding/static/src/scss/searchbar.scss",
             "web_branding/static/src/js/user_menu_items.esm.js",
             "web_branding/static/src/js/app_menu_preferences.esm.js",
+            "web_branding/static/src/js/title_service.esm.js",
             "web_branding/static/src/xml/documentation_link.xml",
         ],
     },
