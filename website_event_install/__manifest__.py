@@ -6,6 +6,11 @@
     "category": "Website",
     "version": "18.0.1.0.0",
     "license": "AGPL-3",
-    "depends": ["website_event", "website_event_track", "website_event_external"],
+    "depends": [
+        "website_event",
+        "website_event_track",
+        "website_event_external",
+        "website_branding",
+    ],
     "bundle": True,
 }

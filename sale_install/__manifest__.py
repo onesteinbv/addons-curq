@@ -12,6 +12,7 @@
         "delivery_sendcloud_oca",
         "sale_operating_unit",
         "sales_team_operating_unit",
+        "sale_branding",
     ],
     "bundle": True,
 }

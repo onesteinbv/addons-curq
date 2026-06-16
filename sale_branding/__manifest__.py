@@ -21,7 +21,5 @@
             "sale_branding/static/src/xml/sale_action_helper.xml",
         ],
     },
-    "installable": True,
-    "application": False,
     "auto_install": True,
 }
