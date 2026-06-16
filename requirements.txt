@@ -20,3 +20,4 @@ odfpy
 reportlab[pycairo]
 reportlab[renderpm]
 markdown==3.10.2
+altcha==2.0.0
