@@ -92,3 +92,17 @@ jobs:
             -H 'Content-Type: application/json' \
             -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"❤️‍🩹 Testing tag `${{ github.ref_name }}` failed: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
             --fail
+  
+  notify-success:
+    needs: [build-ci, migration, build]
+    if: ${{ success() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram message
+        run: |
+          curl \
+            -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_API_TOKEN }}/sendMessage \
+            -H 'Content-Type: application/json' \
+            -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"✅ Testing tag `${{ github.ref_name }}` succeeded: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
+            --fail
+  
