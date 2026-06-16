@@ -1,3 +1,9 @@
+# CURQ 18.0.9.1 (16-06-2026)
+
+## Fixes
+
+* Realtime verbinding probleem opgelost
+
 # CURQ 18.0.9.0 (16-06-2026)
 
 ## TLDR

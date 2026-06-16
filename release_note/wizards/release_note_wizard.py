@@ -155,5 +155,9 @@ class ReleaseNoteWizard(models.TransientModel):
             .sudo()
             .get_param("release_note.current_version", default="0.0.0")
         )
-        self.env.user.last_release_note_version = current_version
-        self.env.user.has_unread_release_note = False
+        self.env.user.sudo().write(
+            {
+                "last_release_note_version": current_version,
+                "has_unread_release_note": False,
+            }
+        )
