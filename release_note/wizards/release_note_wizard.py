@@ -56,6 +56,18 @@ class ReleaseNoteWizard(models.TransientModel):
 
     @api.model
     def _get_release_notes_from_file(self):
+        # Try to read localized NEWS.md file, if not found, try the default one.
+        if self.env.lang:  # Root user has no language
+            try:
+                file_location = file_path("NEWS.%s.md" % self.env.lang)
+                return open(file_location, "r").read()
+            except FileNotFoundError:
+                _logger.warning(
+                    "Localized NEWS.md (NEWS.%s.md) file not found for language %s.",
+                    self.env.lang,
+                    self.env.lang,
+                )
+
         try:
             file_location = file_path("NEWS.md")
             return open(file_location, "r").read()
