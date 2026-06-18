@@ -4,7 +4,7 @@
         <xpath expr="//head/link[@rel='shortcut icon']" position="attributes">
             <attribute
                 name="t-att-href"
-            >'/web_branding/static/img/icon.svg'</attribute>
+            >x_icon or '/web_branding/static/img/icon.svg'</attribute>
         </xpath>
         <xpath expr="//head/title" position="attributes">
             <attribute name="t-esc">title or 'CURQ'</attribute>
