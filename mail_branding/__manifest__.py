@@ -13,6 +13,7 @@
     "data": [
         "data/res_company_data.xml",
         "data/res_users_data.xml",
+        "templates/discuss_public_channel_template.xml",
     ],
     "uninstall_hook": "uninstall_hook",
 }
