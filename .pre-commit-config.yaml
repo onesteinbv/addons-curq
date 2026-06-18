@@ -20,7 +20,7 @@ exclude: |
   # Emesa: prevent "not used from manifest" for indirectly loaded test data
   custom/addons/([^/]+)/test_data/
 default_language_version:
-  python: python3
+  python: python3.12
   node: "16.17.0"
 repos:
   - repo: local
