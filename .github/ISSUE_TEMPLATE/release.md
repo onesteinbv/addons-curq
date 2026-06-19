@@ -14,6 +14,7 @@ assignees: ''
 
 ### Create Release Notes
 - [ ] Run towncrier to generate release notes (`towncrier build --version 18.0.X.Y`)
+- [ ] Review the generated release notes and make any necessary edits to ensure clarity and accuracy for users, try to avoid technical jargon and keep it concise.
 - [ ] Translate release notes to Dutch (`NEWS.nl_NL.md`)
 - [ ] Update documentation on [docs.curq.nl](https://docs.curq.nl) if necessary (https://github.com/onesteinbv/curq-docs)
 - [ ] Commit release notes to the repository
