@@ -96,6 +96,7 @@ addons-generic/sale_recurring_payment_mollie
 addons-generic/subscription_portal
 addons-generic/web_responsive_attachment_preview
 addons-generic/website_event_external_map
+addons-generic/website_event_altcha
 addons-generic/website_hide_navbar_technical
 addons-generic/website_html_sitemap
 addons-generic/website_mailing_to_blogpost
