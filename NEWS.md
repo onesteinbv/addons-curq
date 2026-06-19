@@ -1,3 +1,15 @@
+# CURQ 18.0.9.2 (2026-06-19)
+
+## Features
+
+- Added branding for discuss public channels ([#393](https://github.com/onesteinbv/addons-curq/pull/393))
+
+## Fixes
+
+- Fixed issue where the configured favicon on the website was not displayed correctly ([#392](https://github.com/onesteinbv/addons-curq/pull/392))
+- Applied ALTCHA protection to the event registration form ([#394](https://github.com/onesteinbv/addons-curq/pull/394))
+
+
 # CURQ 18.0.9.1 (2026-06-16)
 
 ## Fixes

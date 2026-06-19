@@ -1,3 +1,14 @@
+# CURQ 18.0.9.2 (2026-06-19)
+
+## Features
+
+- Branding toegevoegd voor openbare discussie kanalen ([#393](https://github.com/onesteinbv/addons-curq/pull/393))
+
+## Fixes
+
+- Opgelost: geconfigureerde favicon op de website werd niet correct weergegeven ([#392](https://github.com/onesteinbv/addons-curq/pull/392))
+- ALTCHA-beveiliging toegepast op het evenementregistratieformulier ([#394](https://github.com/onesteinbv/addons-curq/pull/394))
+
 # CURQ 18.0.9.1 (16-06-2026)
 
 ## Fixes
