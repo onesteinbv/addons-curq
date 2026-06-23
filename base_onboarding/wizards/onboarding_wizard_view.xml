@@ -29,7 +29,7 @@
             <xpath expr="//footer" position="before">
                 <field name="company_id" invisible="1" />
                 <group name="installation" invisible="state != 'start'" >
-                    <p colspan="2">Activating apps can take some time</p>
+                    <p colspan="2">Activating bundles can take some time</p>
                     <field
                         name="module_ids"
                         mode="kanban" nolabel="1" colspan="2"
@@ -45,16 +45,18 @@
 
                         <templates>
                             <t t-name="card">
-                                <div class="oe_module_vignette">
+                                <div class="oe_module_vignette d-flex">
                                     <t t-set="installed" t-value="record.state.raw_value == 'installed'"/>
-                                    <img t-attf-src="#{record.icon.value}" class="oe_module_icon" alt="Icon" height="140" width="140"/>
-                                    <div class="oe_module_desc" t-att-title="record.shortdesc.value" style="float: right;width:65%">
+                                    <img t-attf-src="#{record.icon.value}" class="oe_module_icon m-2" alt="Icon" height="70" width="70"/>
+                                    <div class="oe_module_desc ps-2 flex-grow-1" t-att-title="record.shortdesc.value">
                                         <h4 class="o_kanban_record_title">
                                             <field name="shortdesc"/>&amp;nbsp;
                                         </h4>
-                                        <p class="oe_module_name">
+                                        <p class="oe_module_name" style="min-height: 3em;">
                                             <field name="summary"/>
                                         </p>
+                                    </div>
+                                    <div>
                                         <div class="oe_module_action d-flex flex-wrap justify-content-between">
                                             <button type="object" class="btn btn-primary btn-sm base_onboarding_instant_block" context="{'onboarding_wizard': True}" name="button_immediate_install" invisible="state != 'uninstalled'" groups="base.group_system">
                                                 Activate
@@ -69,7 +71,7 @@
                                                 Cancel Install
                                             </button>
                                         </div>
-                                </div>
+                                    </div>
                                 </div>
                             </t>
                         </templates>
