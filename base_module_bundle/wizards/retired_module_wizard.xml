@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="retired_module_wizard_view" model="ir.ui.view">
+        <field name="model">retired.module.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Retired Modules">
+                <field name="retired_module_ids">
+                    <list delete="1" create="0" edit="0">
+                        <field name="shortdesc"/>
+                        <field name="name"/>
+                        <field name="author" />
+                        <field name="state"/>
+                    </list>
+                </field>
+                <footer>
+                    <button
+                        string="Uninstall"
+                        type="object"
+                        name="uninstall_retired_modules" class="btn-primary"
+                        confirm="Are you sure you want to uninstall the selected modules?"
+                    />
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="retired_module_wizard_action" model="ir.actions.act_window">
+        <field name="name">Retired Modules</field>
+        <field name="res_model">retired.module.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
