@@ -373,6 +373,7 @@ oca/website_breadcrumb
 oca/website_odoo_debranding
 oca/website_event_external
 oca/website_helpdesk_mgmt
+oca/website_event_calendar
 oca/website_sale_resource_booking
 oca/website_snippet_openstreetmap
 oca/operating_unit
