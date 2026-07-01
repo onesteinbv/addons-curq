@@ -10,6 +10,7 @@
         "website_event",
         "website_event_track",
         "website_event_external",
+        "website_event_calendar",
         "website_branding",
     ],
     "bundle": True,
