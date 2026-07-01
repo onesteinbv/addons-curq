@@ -8,6 +8,9 @@ assignees: ''
 
 ## Release Checklist
 
+### Merge
+- [ ] Merge all PRs for the release into the 18.0 branch
+
 ### Testing
 - [ ] Test the development Docker build if all changes in the newsfragments directory are included and working as expected
 - [ ] Assign a second reviewer to verify
