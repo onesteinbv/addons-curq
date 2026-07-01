@@ -52,6 +52,7 @@
         "mail_attach_existing_attachment",
         "partner_contact_department",
         "mail_tracking",
+        "mail_tracking_mailgun",
         "mail_raise_log_level",
         "sentry",
         "operating_unit",
