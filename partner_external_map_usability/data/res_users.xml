@@ -1,8 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
     <!-- Ensure openstreetmap is set as default for customer user -->
     <record id="base_customer_user.user_customer" model="res.users">
-        <field name="context_map_website_id" eval="ref('partner_external_map.openstreetmap')" />
-        <field name="context_route_map_website_id" eval="ref('partner_external_map.openstreetmap')" />
+        <field
+            name="context_map_website_id"
+            eval="ref('partner_external_map.openstreetmap')"
+        />
+        <field
+            name="context_route_map_website_id"
+            eval="ref('partner_external_map.openstreetmap')"
+        />
     </record>
 </odoo>
