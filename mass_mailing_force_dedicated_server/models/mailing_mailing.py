@@ -28,9 +28,7 @@ class MailingMailing(models.Model):
                 raise UserError(
                     self.env._("Please configure a dedicated outgoing server.")
                 )
-            if (
-                not self.mail_server_id
-            ):  # Forcing a mail_server_id is actually enough because mass_mailing.mail_server_id is only used as default value, checking the system parameters is for UX and preventing exploiting test emails
+            if not self.mail_server_id:  # Forcing a mail_server_id is actually enough because mass_mailing.mail_server_id is only used as default value, checking the system parameters is for UX and preventing exploiting test emails
                 raise UserError(
                     self.env._("Please select a mail server (in the Settings tab).")
                 )
