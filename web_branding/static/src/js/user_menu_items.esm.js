@@ -1,4 +1,4 @@
-import { patch } from "@web/core/utils/patch";
+import {patch} from "@web/core/utils/patch";
 import {registry} from "@web/core/registry";
 import {browser} from "@web/core/browser/browser";
 import {_t} from "@web/core/l10n/translation";
@@ -6,7 +6,6 @@ import {_t} from "@web/core/l10n/translation";
 import {tourService} from "@web_tour/tour_service/tour_service";
 
 const menuItemRegistry = registry.category("user_menuitems");
-
 
 function documentationItem() {
     const documentationURL = "https://docs.curq.nl";
@@ -21,7 +20,6 @@ function documentationItem() {
         sequence: 10,
     };
 }
-
 
 function supportItem() {
     const url = "https://curq.nl/support";

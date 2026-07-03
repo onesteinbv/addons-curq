@@ -1,4 +1,4 @@
-import { registry } from "@web/core/registry";
+import {registry} from "@web/core/registry";
 
 // For a lack of a better way to customize this we need to override the whole service
 export const titleService = {
@@ -11,7 +11,10 @@ export const titleService = {
         }
 
         function updateTitle() {
-            const counter = Object.values(titleCounters).reduce((acc, count) => acc + count, 0);
+            const counter = Object.values(titleCounters).reduce(
+                (acc, count) => acc + count,
+                0
+            );
             const name = Object.values(titleParts).join(" - ") || "CURQ";
             if (!counter) {
                 document.title = name;
