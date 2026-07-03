@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
     <record id="user_customer" model="res.users" context="{'no_reset_password': True}">
         <field name="name">Administrator</field>
