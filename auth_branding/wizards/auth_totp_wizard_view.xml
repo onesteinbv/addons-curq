@@ -3,6 +3,7 @@
     <record model="ir.ui.view" id="view_totp_wizard">
         <field name="model">auth_totp.wizard</field>
         <field name="inherit_id" ref="auth_totp.view_totp_wizard" />
+        <field name="priority" eval="99" />
         <field name="arch" type="xml">
             <xpath
                 expr="//span[contains(., 'Microsoft Authenticator')]"

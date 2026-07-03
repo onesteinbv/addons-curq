@@ -1,7 +1,7 @@
+import {_t} from "@web/core/l10n/translation";
+import {browser} from "@web/core/browser/browser";
 import {patch} from "@web/core/utils/patch";
 import {registry} from "@web/core/registry";
-import {browser} from "@web/core/browser/browser";
-import {_t} from "@web/core/l10n/translation";
 
 import {tourService} from "@web_tour/tour_service/tour_service";
 
