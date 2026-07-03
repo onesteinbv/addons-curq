@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record model="ir.ui.view" id="spreadsheet_spreadsheet_form_view">
-        <field name="inherit_id" ref="spreadsheet_oca.spreadsheet_spreadsheet_form_view" />
+        <field
+            name="inherit_id"
+            ref="spreadsheet_oca.spreadsheet_spreadsheet_form_view"
+        />
         <field name="model">spreadsheet.spreadsheet</field>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='spreadsheet_binary_data']" position="attributes">
+            <xpath
+                expr="//field[@name='spreadsheet_binary_data']"
+                position="attributes"
+            >
                 <attribute name="invisible">True</attribute>
             </xpath>
         </field>
