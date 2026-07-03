@@ -4,6 +4,7 @@
         <field name="name">calendar.event.form.inherit.branding</field>
         <field name="model">calendar.event</field>
         <field name="inherit_id" ref="calendar.view_calendar_event_form" />
+        <field name="priority" eval="99" />
         <field name="arch" type="xml">
             <xpath
                 expr="//button[@name='set_discuss_videocall_location']/span[not(hasclass('fa'))]"
@@ -17,6 +18,7 @@
         <field name="name">calendar.event.form.quick_create.inherit.branding</field>
         <field name="model">calendar.event</field>
         <field name="inherit_id" ref="calendar.view_calendar_event_form_quick_create" />
+        <field name="priority" eval="99" />
         <field name="arch" type="xml">
             <xpath
                 expr="//button[@name='set_discuss_videocall_location']/span[not(hasclass('fa'))]"
