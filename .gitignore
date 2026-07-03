@@ -138,3 +138,5 @@ dmypy.json
 odoo.cfg
 
 .secrets
+
+.ruff_cache/
