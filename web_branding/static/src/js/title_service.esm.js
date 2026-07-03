@@ -16,20 +16,20 @@ export const titleService = {
                 0
             );
             const name = Object.values(titleParts).join(" - ") || "CURQ";
-            if (!counter) {
-                document.title = name;
-            } else {
+            if (counter) {
                 document.title = `(${counter}) ${name}`;
+            } else {
+                document.title = name;
             }
         }
 
         function setCounters(counters) {
             for (const key in counters) {
                 const val = counters[key];
-                if (!val) {
-                    delete titleCounters[key];
-                } else {
+                if (val) {
                     titleCounters[key] = val;
+                } else {
+                    delete titleCounters[key];
                 }
             }
             updateTitle();
@@ -38,10 +38,10 @@ export const titleService = {
         function setParts(parts) {
             for (const key in parts) {
                 const val = parts[key];
-                if (!val) {
-                    delete titleParts[key];
-                } else {
+                if (val) {
                     titleParts[key] = val;
+                } else {
+                    delete titleParts[key];
                 }
             }
             updateTitle();

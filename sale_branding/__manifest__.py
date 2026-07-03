@@ -1,10 +1,6 @@
 {
     "name": "Sale Branding",
     "summary": "Remove Odoo sample quotation button/branding from quotation views.",
-    "description": """
-        This module removes the 'Check a sample. It's clean!' button and the
-        onboarding video helper from the empty-state quotation views in Odoo Sales.
-    """,
     "category": "Sales",
     "version": "18.0.1.0.0",
     "license": "AGPL-3",

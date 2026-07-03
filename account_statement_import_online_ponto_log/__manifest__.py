@@ -4,7 +4,7 @@
     "name": "Online Bank Statements: MyPonto.com - LOG",
     "version": "18.0.1.0.0",
     "category": "Account",
-    "website": "https://github.com/OCA/bank-statement-import",
+    "website": "https://onestein.nl",
     "author": "Onestein",
     "license": "AGPL-3",
     "installable": True,

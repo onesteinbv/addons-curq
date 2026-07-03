@@ -3,7 +3,7 @@
     "summary": "Adds sheet mappings for bank statement imports",
     "version": "18.0.1.0.0",
     "category": "Accounting",
-    "website": "https://www.onestein.eu",
+    "website": "https://onestein.nl",
     "author": "Onestein",
     "license": "AGPL-3",
     "installable": True,

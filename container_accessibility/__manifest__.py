@@ -2,8 +2,8 @@
     "name": "Container Accessibility",
     "category": "Technical",
     "version": "18.0.1.0.0",
-    "author": "Onestein BV",
-    "website": "https://www.onestein.eu",
+    "author": "Onestein",
+    "website": "https://onestein.nl",
     "depends": [
         "base",
         "base_setup",

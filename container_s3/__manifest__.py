@@ -4,7 +4,7 @@
     "version": "18.0.1.0.0",
     "license": "AGPL-3",
     "author": "Onestein",
-    "website": "https://www.onestein.eu",
+    "website": "https://onestein.nl",
     "depends": [
         "fs_storage",
     ],
