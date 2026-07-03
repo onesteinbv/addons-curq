@@ -10,8 +10,8 @@ class OauthProvider(models.Model):
     group_ids = fields.Many2many(comodel_name="res.groups")
 
     def write(self, vals):
-        if self.env.user.is_restricted_user() and vals.get(
-            "private"
+        if (
+            self.env.user.is_restricted_user() and vals.get("private")
         ):  # The record rule doesn't care if the record was non-private before the write.
             raise AccessError(self.env._("Access denied"))
         return super().write(vals)
