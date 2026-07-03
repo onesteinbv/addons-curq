@@ -191,9 +191,7 @@ class ResUsers(models.Model):
         res = super()._default_groups()
         restricted_group = self.env.ref("container_accessibility.group_restricted")
         if self.env.user.is_restricted_user():
-            if (
-                not res
-            ):  # In the case default user is deleted somehow it will return a list not a empty recordset
+            if not res:  # In the case default user is deleted somehow it will return a list not a empty recordset
                 return restricted_group
             res += restricted_group
         return res
