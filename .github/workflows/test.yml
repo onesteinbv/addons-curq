@@ -33,13 +33,13 @@ jobs:
           set -x
           pip install git-aggregator
           gitaggregate -c repos.yaml
-          addons_path=$ADDONS_PATH,$(find $(pwd)/* -name .git -exec dirname {} \; | uniq | tr '\n' ',' | sed 's/,$//'),.
+          addons_path=$ADDONS_PATH,$(find $(pwd)/* -name .git -exec dirname {} \; -not -name odoo | uniq | tr '\n' ',' | sed 's/,$//'),.
           echo "addons_path=${addons_path}" >> ${ODOO_RC}
           echo "ADDONS_PATH=$addons_path" >> $GITHUB_ENV
       - name: Install external dependencies
         run: |
-          selection_flags=$(echo $ADDONS_PATH | sed 's/,/ -d /g' | sed 's/^/-d /')
-          external_deps=$(manifestoo $selection_flags --exclude-core-addons list-external-dependencies python --transitive --separator ' ')
+          bundles=$(find . -mindepth 1 -maxdepth 1 -type d -name '*_install' -printf '%f,' | sed 's/,$//')
+          external_deps=$(manifestoo --select "$bundles" --exclude-core-addons list-external-dependencies python --transitive --separator ' ')
           pip3 install $external_deps pdfminer.six==20220319
       - name: Check licenses
         run: manifestoo -d . check-dev-status --default-dev-status=Beta
