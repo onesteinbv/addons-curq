@@ -8,9 +8,7 @@ class OnboardingWizard(models.TransientModel):
         website = self.env["website"].search(
             [("company_id", "=", self.env.company.id)], limit=1
         )
-        if (
-            not website
-        ):  # Get the first available website if there's no website found for the current active company
+        if not website:  # Get the first available website if there's no website found for the current active company
             website = self.env["website"].search([], limit=1)
         return website
 
