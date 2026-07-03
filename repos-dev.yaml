@@ -8,7 +8,7 @@
 
 ./.repos/addons-generic:
   remotes:
-      onestein: https://github.com/onesteinbv/addons-generic.git
+    onestein: https://github.com/onesteinbv/addons-generic.git
   merges:
     - onestein 18.0
   target: onestein 18.0
