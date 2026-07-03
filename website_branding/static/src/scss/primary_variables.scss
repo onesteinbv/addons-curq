@@ -1,11 +1,19 @@
-$curq-orange: #FFC03D;
-$curq-blue: #1C355E;
+$curq-orange: #ffc03d;
+$curq-blue: #1c355e;
 
-$o-color-palettes: map-merge($o-color-palettes, (
-    "base-1": o-make-palette($curq-orange, $curq-blue, (
-        "menu": 4,
-        "footer": 4,
-        "copyright-custom": "black-15",
-        "o-color-5": $curq-blue,
-    )),
-));
+$o-color-palettes: map-merge(
+    $o-color-palettes,
+    (
+        "base-1":
+            o-make-palette(
+                $curq-orange,
+                $curq-blue,
+                (
+                    "menu": 4,
+                    "footer": 4,
+                    "copyright-custom": "black-15",
+                    "o-color-5": $curq-blue,
+                )
+            ),
+    )
+);
