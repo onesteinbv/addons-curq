@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
 <odoo>
     <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
         <field name="help" type="html">
