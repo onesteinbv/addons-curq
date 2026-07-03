@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
     <record id="mail_alias_jobs" model="mail.alias">
         <field name="alias_name">vacatures</field>
-        <field name="alias_model_id" ref="hr_recruitment.model_hr_applicant"/>
-        <field name="alias_parent_model_id" ref="hr_recruitment.model_hr_job"/>
+        <field name="alias_model_id" ref="hr_recruitment.model_hr_applicant" />
+        <field name="alias_parent_model_id" ref="hr_recruitment.model_hr_job" />
     </record>
 </odoo>
