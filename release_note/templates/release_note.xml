@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="release_note_template">
         <div class="o_release_note_template d-flex flex-column gap-3">
@@ -18,7 +18,7 @@
             </div>
             <div class="card-body">
                 <div class="card-text px-3">
-                    <t t-raw="item['content']"/>
+                    <t t-raw="item['content']" />
                 </div>
             </div>
         </div>
