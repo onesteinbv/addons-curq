@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="release_note_wizard_view" model="ir.ui.view">
         <field name="model">release.note.wizard</field>
         <field name="arch" type="xml">
             <form string="Release Notes">
-                <field name="user_id" invisible="1"/>
+                <field name="user_id" invisible="1" />
                 <field name="news" />
                 <footer>
-                    <button special="cancel" class="btn-primary" string="Close"/>
+                    <button special="cancel" class="btn-primary" string="Close" />
                 </footer>
             </form>
         </field>
