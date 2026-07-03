@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t t-inherit="web.DocumentationLink" t-inherit-mode="extension">
-        <xpath expr="//a" position="replace"></xpath>
+        <xpath expr="//a" position="replace" />
     </t>
 </templates>

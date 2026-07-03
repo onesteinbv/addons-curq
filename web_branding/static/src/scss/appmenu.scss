@@ -15,7 +15,7 @@
 .o-app-menu-item {
     border-radius: 8px;
     &__icon {
-        background-color: rgba($curq-blue, .05);
+        background-color: rgba($curq-blue, 0.05);
         transition:
             ease background-color,
             0.3s;
