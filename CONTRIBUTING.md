@@ -36,7 +36,8 @@ Use:
 
 ### Writing guidelines
 
-Write short, user-facing text (1 to 2 sentences) that explains the outcome for end users.
+Write short, user-facing text (1 to 2 sentences) that explains the outcome for end
+users.
 
 - Focus on what changed for the user, not internal implementation details.
 - Keep wording clear and practical.
