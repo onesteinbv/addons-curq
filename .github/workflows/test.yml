@@ -38,9 +38,11 @@ jobs:
           echo "ADDONS_PATH=$addons_path" >> $GITHUB_ENV
       - name: Install external dependencies
         run: |
+          selection_flags=$(echo $ADDONS_PATH | sed 's/,/ -d /g' | sed 's/^/-d /')
           bundles=$(find . -mindepth 1 -maxdepth 1 -type d -name '*_install' -printf '%f,' | sed 's/,$//')
-          external_deps=$(manifestoo --select "$bundles" --exclude-core-addons list-external-dependencies python --transitive --separator ' ')
+          external_deps=$(manifestoo $selection_flags --select-exclude "$bundles" --exclude-core-addons list-external-dependencies python --transitive --separator ' ')
           pip3 install $external_deps pdfminer.six==20220319
+          echo "EXCLUDE=$bundles" >> $GITHUB_ENV
       - name: Check licenses
         run: manifestoo -d . check-dev-status --default-dev-status=Beta
       - name: Initialize test db
