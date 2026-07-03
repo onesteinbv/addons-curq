@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record
-        id="auditlog_rule_hr_employee"
-        model="auditlog.rule"
-    >
+    <record id="auditlog_rule_hr_employee" model="auditlog.rule">
         <field name="name">Employees</field>
         <field name="model_id" ref="hr.model_hr_employee" />
         <field name="log_type">full</field>
@@ -21,7 +18,8 @@
                     ref('auditlog_rule_hr_employee'),
                 ]),
                 ('state', '=', 'subscribed')]]"
-            model="auditlog.rule" name="search"
+            model="auditlog.rule"
+            name="search"
         />
     </function>
 
@@ -32,6 +30,8 @@
                     ref('auditlog_rule_hr_employee'),
                 ]),
                 ('state', '=', 'draft')]]"
-            model="auditlog.rule" name="search"/>
+            model="auditlog.rule"
+            name="search"
+        />
     </function>
 </odoo>
