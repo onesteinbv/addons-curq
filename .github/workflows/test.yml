@@ -31,6 +31,8 @@ jobs:
       - name: Aggregate repos.yaml
         run: |
           set -x
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           pip install git-aggregator
           gitaggregate -c repos.yaml
           addons_path=$ADDONS_PATH,$(find $(pwd)/* -name .git -exec dirname {} \; -not -name odoo | uniq | tr '\n' ',' | sed 's/,$//'),.
@@ -38,9 +40,11 @@ jobs:
           echo "ADDONS_PATH=$addons_path" >> $GITHUB_ENV
       - name: Install external dependencies
         run: |
+          selection_flags=$(echo $ADDONS_PATH | sed 's/,/ -d /g' | sed 's/^/-d /')
           bundles=$(find . -mindepth 1 -maxdepth 1 -type d -name '*_install' -printf '%f,' | sed 's/,$//')
-          external_deps=$(manifestoo --select "$bundles" --exclude-core-addons list-external-dependencies python --transitive --separator ' ')
+          external_deps=$(manifestoo $selection_flags --select-exclude "$bundles" --exclude-core-addons list-external-dependencies python --transitive --separator ' ')
           pip3 install $external_deps pdfminer.six==20220319
+          echo "EXCLUDE=$bundles" >> $GITHUB_ENV
       - name: Check licenses
         run: manifestoo -d . check-dev-status --default-dev-status=Beta
       - name: Initialize test db
@@ -54,3 +58,7 @@ jobs:
           name: Screenshots of failed JS tests - ${{ matrix.name }}${{ join(matrix.include) }}
           path: /tmp/odoo_tests/${{ env.PGDATABASE }}
           if-no-files-found: ignore
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
