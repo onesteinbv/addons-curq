@@ -27,22 +27,16 @@ class ResPartner(models.Model):
     @api.model
     def _get_hidden_partners(self):
         """Returns the hidden partners for restricted users."""
+        hidden_roles = [
+            self.env.ref("container_accessibility.role_administrator").id,
+            False,
+        ]
+
         hidden_partners = (
             self.env["res.users"]
             .sudo()
             .with_context(active_test=False)
-            .search(
-                [
-                    (
-                        "groups_id",
-                        "not in",
-                        [
-                            self.env.ref("base.group_portal").id,
-                            self.env.ref("container_accessibility.group_restricted").id,
-                        ],
-                    )
-                ]
-            )
+            .search([("role_id", "not in", hidden_roles)])
             .mapped("partner_id")
         )
         return hidden_partners
