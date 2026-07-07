@@ -1,5 +1,7 @@
 [![Pre-commit Status](https://github.com/onesteinbv/addons-container/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/onesteinbv/addons-container/actions/workflows/pre-commit.yml)
 [![Demo](https://img.shields.io/badge/Demo-Try_it_out-blue)](https://demo.curq.nl/web/login)
+[![codecov](https://codecov.io/gh/onesteinbv/addons-curq/graph/badge.svg?token=H9XU175DEU)](https://codecov.io/gh/onesteinbv/addons-curq)
+[![codecov addons-generic](https://codecov.io/gh/onesteinbv/addons-generic/graph/badge.svg?token=RPJDNE71KO)](https://codecov.io/gh/onesteinbv/addons-generic)
 
 # CURQ
 
