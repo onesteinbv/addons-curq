@@ -1,7 +1,7 @@
 from lxml import etree
 
-from odoo import Command, api, fields, models
-from odoo.exceptions import UserError
+from odoo import Command, _, api, fields, models
+from odoo.exceptions import UserError, ValidationError
 from odoo.tools import config
 from odoo.tools.misc import ustr
 
@@ -26,6 +26,18 @@ class ResUsers(models.Model):
             if user.role_id:
                 ops.append(Command.create({"role_id": user.role_id.id}))
             user.role_line_ids = ops
+
+    @api.constrains("role_id")
+    def _constrain_role_id(self):
+        if not self.env.user.has_group("container_accessibility.group_restricted"):
+            return
+
+        if self.filtered(lambda u: not u.role_id):
+            raise ValidationError(
+                _(
+                    "Users must have a role assigned. Please assign a role to the user and try again."
+                )
+            )
 
     @api.model
     def _get_user_limit(self):

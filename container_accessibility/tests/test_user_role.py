@@ -1,3 +1,5 @@
+from odoo.exceptions import ValidationError
+
 from odoo.addons.base.tests.common import BaseCommon
 
 
@@ -99,3 +101,66 @@ class TestUserRole(BaseCommon):
 
         data.name = "group_non_existing_renamed"
         self.assertNotIn(new_group, role.implied_ids)
+
+    def test_inverse_role_id(self):
+        manager_role = self.ref("container_accessibility.role_manager")
+        user_role = self.ref("container_accessibility.role_user")
+        user = self.env["res.users"].create(
+            {
+                "name": "Test User",
+                "login": "testuser",
+                "role_id": manager_role,
+            }
+        )
+        self.assertEqual(user.role_id.id, manager_role)
+        self.assertEqual(user.role_line_ids.role_id.id, manager_role)
+        user.role_id = user_role
+        self.assertEqual(user.role_id.id, user_role)
+        self.assertEqual(len(user.role_line_ids), 1)
+        self.assertEqual(user.role_line_ids.role_id.id, user_role)
+
+    def test_role_id_required_for_restricted_group(self):
+        user = self.env["res.users"].create(
+            {
+                "name": "Test User",
+                "login": "testuser",
+                "group_ids": self.env.ref("container_accessibility.group_restricted"),
+            }
+        )
+
+        with self.assertRaisesRegex(ValidationError, "must have a role assigned"):
+            self.env["res.users"].with_user(user).create(
+                {
+                    "name": "Another Test User",
+                    "login": "anothertestuser",
+                }
+            )
+
+    def test_role_id_optional_for_non_restricted_group(self):
+        user = self.env.ref("base.user_admin")
+
+        self.env["res.users"].with_user(user).create(
+            {
+                "name": "Another Test User",
+                "login": "anothertestuser",
+            }
+        )
+
+    def test_role_copied_to_new_user(self):
+        manager_role = self.ref("container_accessibility.role_manager")
+        user = self.env["res.users"].create(
+            {
+                "name": "Test User",
+                "login": "testuser",
+                "role_id": manager_role,
+            }
+        )
+        new_user = user.copy(
+            {
+                "name": "Copied User",
+                "login": "copieduser",
+            }
+        )
+        self.assertEqual(new_user.role_id.id, manager_role)
+        self.assertEqual(len(new_user.role_line_ids), 1)
+        self.assertEqual(new_user.role_line_ids.role_id.id, manager_role)
