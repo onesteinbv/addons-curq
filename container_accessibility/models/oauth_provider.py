@@ -1,5 +1,5 @@
-from odoo import fields, models
-from odoo.exceptions import AccessError
+from odoo import api, fields, models
+from odoo.exceptions import AccessError, ValidationError
 
 
 class OauthProvider(models.Model):
@@ -7,6 +7,13 @@ class OauthProvider(models.Model):
 
     private = fields.Boolean()
     role_id = fields.Many2one(comodel_name="res.users.role")
+
+    @api.constrains("role_id", "private")
+    def _constrain_private(self):
+        if self.filtered(lambda r: r.private and not r.role_id):
+            raise ValidationError(
+                self.env._("Private OAuth providers must have a role.")
+            )
 
     def write(self, vals):
         if (

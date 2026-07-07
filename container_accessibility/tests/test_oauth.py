@@ -1,3 +1,5 @@
+from odoo.exceptions import ValidationError
+
 from odoo.addons.base.tests.common import BaseCommon
 
 
@@ -30,3 +32,14 @@ class TestOauth(BaseCommon):
         self.assertTrue(new_user.has_group("base.group_portal"))
         self.assertFalse(new_user.has_group("base.group_system"))
         self.assertFalse(new_user.has_group("container_accessibility.group_restricted"))
+
+    def test_private_provider_without_role(self):
+        with self.assertRaises(ValidationError):
+            self.env["auth.oauth.provider"].create(
+                {
+                    "private": True,
+                    "name": "Support oauth",
+                    "auth_endpoint": "http://none",
+                    "body": "Support Login",
+                }
+            )
