@@ -81,6 +81,7 @@ class TestUserLimit(BaseCommon):
             new_count,
             "Active users in role_user should be counted towards the user limit.",
         )
+        current_count = self.env["res.users"]._get_limit_included_user_count()
         new_user.role_id = self.ref("container_accessibility.role_administrator")
         new_count = self.env["res.users"]._get_limit_included_user_count()
         self.assertEqual(

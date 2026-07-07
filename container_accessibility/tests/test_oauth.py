@@ -22,7 +22,7 @@ class TestOauth(BaseCommon):
             }
         )
         self.assertEqual(
-            new_user.role_id, self.ref("container_accessibility.role_administrator")
+            new_user.role_id.id, self.ref("container_accessibility.role_administrator")
         )
 
     def test_new_user_without_private_provider(self):
@@ -33,7 +33,7 @@ class TestOauth(BaseCommon):
         self.assertFalse(new_user.has_group("base.group_system"))
         self.assertFalse(new_user.has_group("container_accessibility.group_restricted"))
         self.assertEqual(
-            new_user.role_id, self.ref("container_accessibility.role_portal")
+            new_user.role_id.id, self.ref("container_accessibility.role_portal")
         )
 
     def test_private_provider_without_role(self):

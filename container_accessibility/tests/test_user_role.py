@@ -124,7 +124,7 @@ class TestUserRole(BaseCommon):
             {
                 "name": "Test User",
                 "login": "testuser",
-                "group_ids": self.env.ref("container_accessibility.group_restricted"),
+                "groups_id": self.env.ref("container_accessibility.group_restricted"),
             }
         )
 
