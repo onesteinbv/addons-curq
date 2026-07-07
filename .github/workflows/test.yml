@@ -58,3 +58,7 @@ jobs:
           name: Screenshots of failed JS tests - ${{ matrix.name }}${{ join(matrix.include) }}
           path: /tmp/odoo_tests/${{ env.PGDATABASE }}
           if-no-files-found: ignore
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
