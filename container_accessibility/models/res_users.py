@@ -45,10 +45,12 @@ class ResUsers(models.Model):
 
     @api.model
     def _get_limit_included_user_count(self):
-        restricted_group = self.env.ref("container_accessibility.group_restricted")
-        count = self.search_count(
-            [("share", "=", False), ("groups_id", "in", restricted_group.ids)]
+        roles = (
+            self.env.ref("container_accessibility.role_manager")
+            + self.env.ref("container_accessibility.role_user")
+            + self.env.ref("container_accessibility.role_accountant")
         )
+        count = self.search_count([("role_id", "in", roles.ids)])
         return count
 
     def _check_user_limit_exceeded(self):
@@ -124,18 +126,7 @@ class ResUsers(models.Model):
                 }
             )
 
-        # When trying to activate / un-archive a user we should check the limit, or when changing the user type
-        if (
-            self._get_user_limit()
-            and self.mapped("groups_id").filtered(lambda g_id: g_id == group_restricted)
-            and (
-                "active" in vals
-                and vals["active"]
-                or "groups_id" in vals
-                or user_type_reified_field in vals
-                or restricted_reified_field in vals
-            )
-        ):
+        if self._get_user_limit():
             self._check_user_limit_exceeded()
 
         return res
@@ -165,9 +156,7 @@ class ResUsers(models.Model):
                     vals[restricted_reified_field] = True
 
         res = super().create(vals_list)
-        if self._get_user_limit() and res.mapped("groups_id").filtered(
-            lambda g_id: g_id == group_restricted
-        ):
+        if self._get_user_limit():
             self._check_user_limit_exceeded()
         return res
 
