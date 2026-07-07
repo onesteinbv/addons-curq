@@ -170,9 +170,10 @@ class ResUsers(models.Model):
             if not provider_record.private:
                 return super()._create_user_from_template(values)
 
-            template_user = provider_record.template_user_id or self.env.ref(
-                "base.template_portal_user_id"
+            role = provider_record.role_id or self.env.ref(
+                "container_accessibility.role_guest"
             )
+            template_user = self.env.ref("base.default_user")
             if not values.get("login"):
                 raise ValueError(self.env._("Signup: no login given for new user"))
             if not values.get("partner_id") and not values.get("name"):
@@ -180,12 +181,12 @@ class ResUsers(models.Model):
                     self.env._("Signup: no name or partner given for new user")
                 )
             values["active"] = True
+            values["role_id"] = role.id
             try:
                 with self.env.cr.savepoint():
                     new_user = template_user.with_context(no_reset_password=True).copy(
                         values
                     )
-                    new_user.groups_id += provider_record.group_ids
                     return new_user
             except Exception as e:
                 raise SignupError(ustr(e)) from e
