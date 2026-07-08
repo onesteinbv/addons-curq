@@ -34,26 +34,28 @@ class TestUserLimit(BaseCommon):
     def test_user_limit_exceeded(self):
         """Should raise UserError if user limit is exceeded"""
         current_count = self.env["res.users"]._get_limit_included_user_count()
-        with (
-            self._mock_user_limit(current_count + 1),
-            patch(
+        role_user = self.ref("container_accessibility.role_user")
+        with self._mock_user_limit(current_count + 1):
+            with patch(
                 "odoo.addons.container_accessibility.models.res_users.ResUsers._check_user_limit_exceeded"
-            ) as _check_user_limit_exceeded,
-        ):
-            new_user = self.env["res.users"].create(
-                {"name": "Test User", "login": "testuser"}
-            )
-            new_user.groups_id = [
-                (4, self.ref("container_accessibility.group_restricted"))
-            ]
-            self.assertEqual(_check_user_limit_exceeded.call_count, 2)
-
+            ) as _check_user_limit_exceeded:
+                new_user = self.env["res.users"].create(
+                    {"name": "Test User", "login": "testuser", "role_id": role_user}
+                )
+                _check_user_limit_exceeded.assert_called()
+            with patch(
+                "odoo.addons.container_accessibility.models.res_users.ResUsers._check_user_limit_exceeded"
+            ) as _check_user_limit_exceeded:
+                new_user.groups_id = [
+                    (4, self.ref("container_accessibility.group_restricted"))
+                ]
+                _check_user_limit_exceeded.assert_called()
             with self.assertRaisesRegex(UserError, "User limit exceeded"):
                 self.env["res.users"].create(
                     {
                         "name": "Test User2",
                         "login": "testuser2",
-                        "role_id": self.ref("container_accessibility.role_user"),
+                        "role_id": role_user,
                     }
                 )
 
@@ -85,7 +87,7 @@ class TestUserLimit(BaseCommon):
         new_user.role_id = self.ref("container_accessibility.role_administrator")
         new_count = self.env["res.users"]._get_limit_included_user_count()
         self.assertEqual(
-            current_count + 1,
+            current_count - 1,
             new_count,
-            "role_administrator should be counted towards the user limit.",
+            "role_administrator should not be counted towards the user limit.",
         )

@@ -13,8 +13,16 @@ class ResPartner(models.Model):
         limit=None,
         order=None,
     ):
-        # Purely for UX purposes
-        if self.env.user.is_restricted_user() and not self.env.su:
+        # Purely for UX purposes, removes all partners related to users outside of the
+        # container_accessibility.role_manager, container_accessibility.role_user, and
+        # container_accessibility.role_accountant roles
+        # from the search results.
+        if (
+            not self.env.su
+            and self.env.user.role_id
+            and self.env.user.role_id
+            != self.env.ref("container_accessibility.role_administrator")
+        ):
             hidden_partners = self._get_hidden_partners()
             domain = expression.AND([domain, [("id", "not in", hidden_partners.ids)]])
         return super()._search(
@@ -27,16 +35,14 @@ class ResPartner(models.Model):
     @api.model
     def _get_hidden_partners(self):
         """Returns the hidden partners for restricted users."""
-        hidden_roles = [
-            self.env.ref("container_accessibility.role_administrator").id,
-            False,
-        ]
+        role_administrator = self.env.ref("container_accessibility.role_administrator")
+        hidden_roles = [role_administrator.id, False]
 
         hidden_partners = (
             self.env["res.users"]
             .sudo()
             .with_context(active_test=False)
-            .search([("role_id", "not in", hidden_roles)])
+            .search([("role_id", "in", hidden_roles)])
             .mapped("partner_id")
         )
         return hidden_partners

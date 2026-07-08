@@ -120,11 +120,17 @@ class TestUserRole(BaseCommon):
         self.assertEqual(user.role_line_ids.role_id.id, user_role)
 
     def test_role_id_required_for_restricted_group(self):
+        group_erp_manager = self.env.ref("base.group_erp_manager")
+        group_restricted = self.env.ref("container_accessibility.group_restricted")
+        group_contact_creation = self.env.ref("base.group_partner_manager")
+
         user = self.env["res.users"].create(
             {
                 "name": "Test User",
                 "login": "testuser",
-                "groups_id": self.env.ref("container_accessibility.group_restricted"),
+                "groups_id": (
+                    group_erp_manager + group_restricted + group_contact_creation
+                ),
             }
         )
 
@@ -135,6 +141,16 @@ class TestUserRole(BaseCommon):
                     "login": "anothertestuser",
                 }
             )
+
+        new_user = self.env["res.users"].create(
+            {
+                "name": "Another Test User",
+                "login": "anothertestuser",
+                "role_id": self.ref("container_accessibility.role_user"),
+            }
+        )
+        with self.assertRaisesRegex(ValidationError, "must have a role assigned"):
+            new_user.with_user(user).write({"role_id": False})
 
     def test_role_id_optional_for_non_restricted_group(self):
         user = self.env.ref("base.user_admin")
@@ -164,3 +180,17 @@ class TestUserRole(BaseCommon):
         self.assertEqual(new_user.role_id.id, manager_role)
         self.assertEqual(len(new_user.role_line_ids), 1)
         self.assertEqual(new_user.role_line_ids.role_id.id, manager_role)
+
+    def test_guest_role(self):
+        pass
+
+    def test_portal_grant_access_wizard(self):
+        partner = self.env.ref("base.res_partner_address_4")
+        wizard = (
+            self.env["portal.wizard"].with_context(active_ids=[partner.id]).create({})
+        )
+        wizard.user_ids.action_grant_access()
+        partner.user_ids.ensure_one()
+        self.assertEqual(
+            partner.user_ids.role_id.id, self.ref("container_accessibility.role_guest")
+        )

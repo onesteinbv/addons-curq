@@ -27,13 +27,13 @@ class TestOauth(BaseCommon):
 
     def test_new_user_without_private_provider(self):
         new_user = self.env["res.users"]._create_user_from_template(
-            {"login": "reseller1", "name": "Reseller 1"}
+            {"login": "someuser", "name": "Someuser 1"}
         )
         self.assertTrue(new_user.has_group("base.group_portal"))
         self.assertFalse(new_user.has_group("base.group_system"))
         self.assertFalse(new_user.has_group("container_accessibility.group_restricted"))
         self.assertEqual(
-            new_user.role_id.id, self.ref("container_accessibility.role_portal")
+            new_user.role_id.id, self.ref("container_accessibility.role_guest")
         )
 
     def test_private_provider_without_role(self):

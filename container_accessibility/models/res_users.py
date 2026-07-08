@@ -27,18 +27,6 @@ class ResUsers(models.Model):
                 ops.append(Command.create({"role_id": user.role_id.id}))
             user.role_line_ids = ops
 
-    @api.constrains("role_id")
-    def _constrain_role_id(self):
-        if not self.env.user.has_group("container_accessibility.group_restricted"):
-            return
-
-        if self.filtered(lambda u: not u.role_id):
-            raise ValidationError(
-                _(
-                    "Users must have a role assigned. Please assign a role to the user and try again."
-                )
-            )
-
     @api.model
     def _get_user_limit(self):
         return int(config.get("user_limit", "0"))
@@ -115,16 +103,25 @@ class ResUsers(models.Model):
             and u in keep_restricted
             and not u.is_restricted_user()
         )
-        if is_restricted and forbidden_users:
-            forbidden_users.write(
-                {
-                    "groups_id": [
-                        Command.link(
-                            self.env.ref("container_accessibility.group_restricted").id
-                        )
-                    ]
-                }
-            )
+        if is_restricted:
+            if forbidden_users:
+                forbidden_users.write(
+                    {
+                        "groups_id": [
+                            Command.link(
+                                self.env.ref(
+                                    "container_accessibility.group_restricted"
+                                ).id
+                            )
+                        ]
+                    }
+                )
+            if self.filtered(lambda u: not u.role_id):
+                raise ValidationError(
+                    _(
+                        "Users must have a role assigned. Please assign a role to the user and try again."
+                    )
+                )
 
         if self._get_user_limit():
             self._check_user_limit_exceeded()
@@ -134,19 +131,28 @@ class ResUsers(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         # Automatically add the restricted group for ux
-        group_restricted = self.env.ref("container_accessibility.group_restricted")
         if self.env.user.is_restricted_user():
+            group_restricted = self.env.ref("container_accessibility.group_restricted")
+            # Find the reified field names for the restricted group and the user type groups
             group_user = self.env.ref("base.group_user")
             user_type_category = self.env.ref("base.module_category_user_type")
             user_type_groups = self.env["res.groups"].search(
                 [("category_id", "=", user_type_category.id)], order="id ASC"
             )
-
             restricted_reified_field = "in_group_%s" % group_restricted.id
             user_type_reified_field = "sel_groups_%s" % (
                 "_".join(str(gid) for gid in user_type_groups.ids)
             )
 
+            # Check if any of the users don't have a role assigned
+            if any(not vals.get("role_id") for vals in vals_list):
+                raise ValidationError(
+                    _(
+                        "Users must have a role assigned. Please assign a role to the user and try again."
+                    )
+                )
+
+            # Add the users being created to the restricted group if they are internal users
             for vals in vals_list:
                 user_type_reified_value = vals.get(
                     user_type_reified_field, group_user.id
@@ -156,6 +162,7 @@ class ResUsers(models.Model):
                     vals[restricted_reified_field] = True
 
         res = super().create(vals_list)
+        # TODO: Should we check the user limit for non-restricted users?
         if self._get_user_limit():
             self._check_user_limit_exceeded()
         return res
@@ -190,6 +197,8 @@ class ResUsers(models.Model):
                     return new_user
             except Exception as e:
                 raise SignupError(ustr(e)) from e
+        guest_role = self.env.ref("container_accessibility.role_guest")
+        values["role_id"] = guest_role.id
         return super()._create_user_from_template(values)
 
     @api.model
@@ -202,7 +211,8 @@ class ResUsers(models.Model):
             )
             if provider_record.private:
                 return self._create_user_from_template(values)
-
+        guest_role = self.env.ref("container_accessibility.role_guest")
+        values["role_id"] = guest_role.id
         return super()._signup_create_user(values)
 
     def _default_groups(self):

@@ -75,7 +75,17 @@ To ensure the managers cannot assign themselves the Administrator role, we have.
 
 User limit functionality is also implemented, which allows us to limit the number of
 users that can be created in the system. This will only check the number of users that
-are assigned to the `Manager` and `User` role.
+are assigned to the `Manager`, `User`, or `Accountant` role.
 
 Partners related to users with `Administrator` or no role will be hidden for users with
-the `Manager` or `User` role.
+the `Manager`, `User`, or `Accountant` role.
+
+The default user template is not altered because that will also affect `base.user_admin`
+and will overall lead to implicit behaviour.
+
+## Roadmap
+
+Can we get rid of the `group_restricted` group and instead purely use the roles to
+restrict access? This would simplify the access rights management, but it would also
+require a lot of changes to the existing codebase. We need to evaluate if this is
+feasible and if it would be worth the effort.

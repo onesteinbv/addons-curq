@@ -23,7 +23,6 @@
     "data": [
         "security/res_groups.xml",
         "security/res_users_role.xml",
-        "security/res_users.xml",
         "security/ir_rule.xml",
         "data/auditlog_rule_data.xml",
         "data/ir_cron_data.xml",

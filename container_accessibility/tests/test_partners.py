@@ -41,14 +41,26 @@ class TestPartners(BaseCommon):
             }
         )
 
-        partners = self.env["res.partner"].with_user(user).search([])
-
+        # User with manager role should be able to see partners related to users with manager, accountant, or user role
+        partners = self.env["res.partner"].with_user(manager_user).search([])
         self.assertIn(user.partner_id, partners)
         self.assertIn(manager_user.partner_id, partners)
         self.assertNotIn(administrator_user.partner_id, partners)
         self.assertNotIn(user_without_role.partner_id, partners)
 
+        # User with administrator role should be able to see all partners
         partners = self.env["res.partner"].with_user(administrator_user).search([])
+        self.assertIn(user.partner_id, partners)
+        self.assertIn(manager_user.partner_id, partners)
+        self.assertIn(administrator_user.partner_id, partners)
+        self.assertIn(user_without_role.partner_id, partners)
+
+        # User without role should be able to see all partners
+        partners = (
+            self.env["res.partner"]
+            .with_user(self.env.ref("base.user_admin"))
+            .search([])
+        )
 
         self.assertIn(user.partner_id, partners)
         self.assertIn(manager_user.partner_id, partners)

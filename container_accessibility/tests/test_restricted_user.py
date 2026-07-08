@@ -10,3 +10,6 @@ class TestRestrictedUser(BaseCommon):
 
     def test_change_itself_to_non_restricted_user(self):
         pass
+
+    def test_cannot_write_non_restricted_user(self):
+        pass
