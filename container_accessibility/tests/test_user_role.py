@@ -182,9 +182,22 @@ class TestUserRole(BaseCommon):
         self.assertEqual(new_user.role_line_ids.role_id.id, manager_role)
 
     def test_guest_role(self):
-        pass
+        """Test wether the guest role is a shared user and isn't an internal user"""
+        group_user = self.ref("base.group_user")
+        group_portal = self.ref("base.group_portal")
+        user = self.env["res.users"].create(
+            {
+                "name": "Test User",
+                "login": "testuser",
+                "role_id": self.ref("container_accessibility.role_guest"),
+            }
+        )
+        self.assertIn(group_portal, user.groups_id.ids)
+        self.assertNotIn(group_user, user.groups_id.ids)
+        self.assertTrue(user.share, "Guest role should be a shared user")
 
     def test_portal_grant_access_wizard(self):
+        """Test that the portal wizard grants assigns the guest role when granting access to a partner."""
         partner = self.env.ref("base.res_partner_address_4")
         wizard = (
             self.env["portal.wizard"].with_context(active_ids=[partner.id]).create({})
