@@ -1,7 +1,7 @@
-from odoo.addons.base.tests.common import BaseCommon
+from odoo.tests.common import TransactionCase
 
 
-class TestPartners(BaseCommon):
+class TestPartners(TransactionCase):
     def test_partners_hidden(self):
         """
         Partners related to users outside of the

@@ -1,9 +1,8 @@
 from odoo.exceptions import ValidationError
+from odoo.tests.common import TransactionCase
 
-from odoo.addons.base.tests.common import BaseCommon
 
-
-class TestOauth(BaseCommon):
+class TestOauth(TransactionCase):
     def test_new_user_with_private_provider(self):
         private_provider = self.env["auth.oauth.provider"].create(
             {

@@ -2,11 +2,10 @@ from contextlib import contextmanager
 from unittest.mock import patch
 
 from odoo.exceptions import UserError
+from odoo.tests.common import TransactionCase
 
-from odoo.addons.base.tests.common import BaseCommon
 
-
-class TestUserLimit(BaseCommon):
+class TestUserLimit(TransactionCase):
     @contextmanager
     def _mock_user_limit(self, limit):
         with patch(

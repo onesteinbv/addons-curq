@@ -1,9 +1,8 @@
 from odoo.exceptions import ValidationError
+from odoo.tests.common import TransactionCase
 
-from odoo.addons.base.tests.common import BaseCommon
 
-
-class TestUserRole(BaseCommon):
+class TestUserRole(TransactionCase):
     def _new_group(self, name, xml_id):
         new_group = self.env["res.groups"].create(
             {
