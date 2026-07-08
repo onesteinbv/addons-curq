@@ -52,6 +52,11 @@ class ResGroups(models.Model):
     _inherit = ["res.groups", "container.restrict.mixin"]
 
 
+class ResUsersRole(models.Model):
+    _name = "res.users.role"
+    _inherit = ["res.users.role", "container.restrict.mixin"]
+
+
 class ActionsActions(models.Model):
     _name = "ir.actions.actions"
     _inherit = ["ir.actions.actions", "container.restrict.mixin"]

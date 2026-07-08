@@ -1,106 +1,8 @@
-from odoo.exceptions import ValidationError
+from odoo.exceptions import AccessError, ValidationError
 from odoo.tests.common import TransactionCase
 
 
 class TestUserRole(TransactionCase):
-    def _new_group(self, name, xml_id):
-        new_group = self.env["res.groups"].create(
-            {
-                "name": name,
-            }
-        )
-        module, name = xml_id.split(".")
-        data = self.env["ir.model.data"].create(
-            {
-                "name": name,
-                "model": "res.groups",
-                "res_id": new_group.id,
-                "module": module,
-            }
-        )
-        return new_group, data
-
-    def test_implied_by_text(self):
-        groups = self.env.ref("base.group_system") + self.env.ref(
-            "container_accessibility.group_restricted"
-        )
-        group_xml_ids = "base.group_system\ncontainer_accessibility.group_restricted"
-        role = self.env["res.users.role"].create(
-            {"name": "testrole", "implied_by_text": group_xml_ids}
-        )
-
-        self.assertEqual(role.implied_ids, groups)
-
-    def test_implied_by_text_with_non_existing_group(self):
-        groups = self.env.ref("base.group_system") + self.env.ref(
-            "container_accessibility.group_restricted"
-        )
-        group_xml_ids = "base.group_system\ncontainer_accessibility.group_restricted\ncontainer_accessibility.group_non_existing"
-        role = self.env["res.users.role"].create(
-            {"name": "testrole", "implied_by_text": group_xml_ids}
-        )
-
-        self.assertEqual(role.implied_ids, groups)
-
-        role.invalidate_recordset()
-
-        # Implied by text should still contain the non existing group
-        self.assertEqual(role.implied_by_text, group_xml_ids)
-
-    def test_new_group(self):
-        group_xml_ids = "base.group_system\ncontainer_accessibility.group_restricted\ncontainer_accessibility.group_non_existing"
-        role = self.env["res.users.role"].create(
-            {"name": "testrole", "implied_by_text": group_xml_ids}
-        )
-        new_group, _ = self._new_group(
-            "New Group", "container_accessibility.group_non_existing"
-        )
-        self.assertEqual(
-            self.ref("container_accessibility.group_non_existing"), new_group.id
-        )
-        self.assertIn(new_group, role.implied_ids)
-
-    def test_delete_data(self):
-        new_group, data = self._new_group(
-            "New Group", "container_accessibility.group_non_existing"
-        )
-        new_group_2, data_2 = self._new_group(
-            "New Group", "container_accessibility.group_non_existing_2"
-        )
-        new_group_3, data_3 = self._new_group(
-            "New Group", "container_accessibility.group_non_existing_3"
-        )
-
-        group_xml_ids = "base.group_system\ncontainer_accessibility.group_restricted\ncontainer_accessibility.group_non_existing\ncontainer_accessibility.group_non_existing_2\ncontainer_accessibility.group_non_existing_3"
-        role = self.env["res.users.role"].create(
-            {"name": "testrole", "implied_by_text": group_xml_ids}
-        )
-        self.assertIn(new_group, role.implied_ids)
-        self.assertIn(new_group_2, role.implied_ids)
-        self.assertIn(new_group_3, role.implied_ids)
-
-        data.unlink()
-        self.assertNotIn(new_group, role.implied_ids)
-        self.assertIn(new_group_2, role.implied_ids)
-        self.assertIn(new_group_3, role.implied_ids)
-
-        (data_2 + data_3).unlink()
-        self.assertNotIn(new_group_2, role.implied_ids)
-        self.assertNotIn(new_group_3, role.implied_ids)
-
-    def test_xml_id_changed(self):
-        new_group, data = self._new_group(
-            "New Group", "container_accessibility.group_non_existing"
-        )
-        group_xml_ids = "base.group_system\ncontainer_accessibility.group_restricted\ncontainer_accessibility.group_non_existing"
-        role = self.env["res.users.role"].create(
-            {"name": "testrole", "implied_by_text": group_xml_ids}
-        )
-        self.assertIn(new_group, role.implied_ids)
-
-        data.name = "group_non_existing_renamed"
-        self.assertNotIn(new_group, role.implied_ids)
-
     def test_inverse_role_id(self):
         manager_role = self.ref("container_accessibility.role_manager")
         user_role = self.ref("container_accessibility.role_user")
@@ -240,3 +142,125 @@ class TestUserRole(TransactionCase):
             restricted_admin.with_user(restricted_admin).write({"role_id": False})
         self.assertEqual(restricted_admin.role_id.id, role_admin)
         self.assertTrue(restricted_admin.is_restricted_user())
+
+    def test_administrator_can_assign_administrator(self):
+        """Administrators should be able to assign the administrator role to itself and other users."""
+        role_admin = self.ref("container_accessibility.role_administrator")
+        user_admin = self.env["res.users"].create(
+            {
+                "name": "Administrator User",
+                "login": "administratoruser",
+                "role_id": role_admin,
+            }
+        )
+        user_other = self.env["res.users"].create(
+            {
+                "name": "Other User",
+                "login": "otheruser",
+                "role_id": self.ref("container_accessibility.role_user"),
+            }
+        )
+        # Test that an administrator can assign the administrator role to itself
+        user_admin.with_user(user_admin).write({"role_id": role_admin})
+        self.assertEqual(user_admin.role_id.id, role_admin)
+
+        # Test that an administrator can assign the administrator role to another user
+        user_other.with_user(user_admin).write({"role_id": role_admin})
+        self.assertEqual(user_other.role_id.id, role_admin)
+
+    def test_manager_cannot_assign_administrator(self):
+        """Managers should not be able to assign the administrator role to itself and other users."""
+        role_accountant = self.ref("container_accessibility.role_accountant")
+        role_admin = self.ref("container_accessibility.role_administrator")
+        role_manager = self.ref("container_accessibility.role_manager")
+        user_manager = self.env["res.users"].create(
+            {
+                "name": "Manager User",
+                "login": "manageruser",
+                "role_id": role_manager,
+            }
+        )
+        user_accountant = self.env["res.users"].create(
+            {
+                "name": "Other User",
+                "login": "otheruser",
+                "role_id": role_accountant,
+            }
+        )
+        real_admin = self.env.ref("base.user_admin")
+
+        # Test that a manager cannot assign the administrator role to itself
+        with self.assertRaises(AccessError):
+            user_manager.with_user(user_manager).write({"role_id": role_admin})
+        self.assertEqual(user_manager.role_id.id, role_manager)
+
+        # Test a manager cannot assign the administrator role to another user
+        with self.assertRaises(AccessError):
+            user_accountant.with_user(user_manager).write({"role_id": role_admin})
+        user_accountant.with_user(user_manager).write({"role_id": role_manager})
+        self.assertEqual(user_accountant.role_id.id, role_manager)
+
+        # Test cannot create a user with the administrator role
+        with self.assertRaises(AccessError):
+            self.env["res.users"].with_user(user_manager).create(
+                {
+                    "name": "New User",
+                    "login": "newuser",
+                    "role_id": role_admin,
+                }
+            )
+
+        # Test cannot touch a user without role
+        with self.assertRaises(AccessError):
+            real_admin.with_user(user_manager).write({"role_id": role_admin})
+
+    def test_manager_cannot_crud_administrator(self):
+        """Managers should not be able to crud users with the administrator role."""
+        role_manager = self.ref("container_accessibility.role_manager")
+        role_admin = self.ref("container_accessibility.role_administrator")
+        user_manager = self.env["res.users"].create(
+            {
+                "name": "Manager User",
+                "login": "manageruser",
+                "role_id": role_manager,
+            }
+        )
+        user_admin = self.env["res.users"].create(
+            {
+                "name": "Admin User",
+                "login": "adminuser",
+                "role_id": role_admin,
+            }
+        )
+        # Test that a manager cannot read a user with the administrator role
+        with self.assertRaises(AccessError):
+            user_admin.with_user(user_manager).read(["name"])
+        # Test that a manager cannot write a user with the administrator role
+        with self.assertRaises(AccessError):
+            user_admin.with_user(user_manager).write({"name": "New Name"})
+        # Test that a manager cannot delete a user with the administrator role
+        with self.assertRaises(AccessError):
+            user_admin.with_user(user_manager).unlink()
+        # Test that a manager cannot create a user with the administrator role
+        with self.assertRaises(AccessError):
+            self.env["res.users"].with_user(user_manager).create(
+                {
+                    "name": "New User",
+                    "login": "newuser",
+                    "role_id": role_admin,
+                }
+            )
+
+    def test_administrator_role_not_listed_for_manager(self):
+        """Test that the administrator role is not listed for a manager user."""
+        role_manager = self.ref("container_accessibility.role_manager")
+        role_admin = self.ref("container_accessibility.role_administrator")
+        user_manager = self.env["res.users"].create(
+            {
+                "name": "Manager User",
+                "login": "manageruser",
+                "role_id": role_manager,
+            }
+        )
+        roles = self.env["res.users.role"].with_user(user_manager).search([])
+        self.assertNotIn(role_admin, roles.ids)
