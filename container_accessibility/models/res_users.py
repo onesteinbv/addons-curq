@@ -1,7 +1,5 @@
-from lxml import etree
-
 from odoo import Command, _, api, fields, models
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import ValidationError
 from odoo.tools import config
 from odoo.tools.misc import ustr
 
@@ -32,140 +30,67 @@ class ResUsers(models.Model):
         return int(config.get("user_limit", "0"))
 
     @api.model
-    def _get_limit_included_user_count(self):
-        roles = (
+    def _get_limit_included_roles(self):
+        return (
             self.env.ref("container_accessibility.role_manager")
             + self.env.ref("container_accessibility.role_user")
             + self.env.ref("container_accessibility.role_accountant")
         )
+
+    @api.model
+    def _get_limit_included_user_count(self):
+        roles = self._get_limit_included_roles()
         count = self.search_count([("role_id", "in", roles.ids)])
         return count
-
-    def _check_user_limit_exceeded(self):
-        user_count = self._get_limit_included_user_count()
-        if user_count > self._get_user_limit():
-            raise UserError(self.env._("User limit exceeded"))
 
     def is_restricted_user(self):
         self.ensure_one()
         return self.sudo().has_group("container_accessibility.group_restricted")
 
-    @api.model
-    def get_view(self, view_id=None, view_type="form", **options):
-        """
-        Remove groups (just container_accessibility.group_restricted atm) from the form view for ux
-        """
-        res = super().get_view(view_id=view_id, view_type=view_type, **options)
-        is_restricted = self.env.user.is_restricted_user()
-        if view_type == "form" and is_restricted:
-            group_restricted_id = self.env.ref(
-                "container_accessibility.group_restricted"
-            ).id
-            sel_xpath = (
-                "//field[contains(@name, 'sel_groups_%s_')]/.." % group_restricted_id
-            )
-            in_xpath = "//field[@name='in_group_%s']" % group_restricted_id
-            xml = etree.XML(res["arch"])
-            xml_groups = xml.xpath(sel_xpath) + xml.xpath(in_xpath)
-            for xml_group in xml_groups:
-                xml_group.getparent().remove(xml_group)
-            res["arch"] = etree.tostring(xml, encoding="unicode")
-        return res
-
     def write(self, vals):
         is_restricted = self.env.user.is_restricted_user()
-        group_restricted = self.env.ref("container_accessibility.group_restricted")
-        restricted_reified_field = "in_group_%s" % group_restricted.id
-        user_type_category = self.env.ref("base.module_category_user_type")
-        user_type_groups = (
-            self.env["res.groups"]
-            .sudo()
-            .search([("category_id", "=", user_type_category.id)], order="id ASC")
-        )
-        user_type_reified_field = "sel_groups_%s" % (
-            "_".join(str(gid) for gid in user_type_groups.ids)
-        )
-
-        # Automatically add the restricted group for ux
-        if is_restricted:
-            group_user = self.env.ref("base.group_user")
-
-            internal_user = vals.get(user_type_reified_field) == group_user.id
-            if internal_user:
-                vals[restricted_reified_field] = True
-
-        # The record rule doesn't care if the record was restricted before
-        # Prevents the current becoming non-restricted
-        keep_restricted = self.filtered(lambda u: u.is_restricted_user())
-        res = super().write(vals)
-        forbidden_users = self.filtered(
-            lambda u: not u.share
-            and u in keep_restricted
-            and not u.is_restricted_user()
-        )
-        if is_restricted:
-            if forbidden_users:
-                forbidden_users.write(
-                    {
-                        "groups_id": [
-                            Command.link(
-                                self.env.ref(
-                                    "container_accessibility.group_restricted"
-                                ).id
-                            )
-                        ]
-                    }
+        if is_restricted and "role_id" in vals and not vals.get("role_id"):
+            raise ValidationError(
+                _(
+                    "Users must have a role assigned. Please assign a role to the user and try again."
                 )
-            if self.filtered(lambda u: not u.role_id):
-                raise ValidationError(
-                    _(
-                        "Users must have a role assigned. Please assign a role to the user and try again."
-                    )
+            )
+        # Check if the user limit is exceeded when changing the role of a user
+        if "role_id" in vals:
+            user_limit = self._get_user_limit()
+            if user_limit:
+                included_roles = self._get_limit_included_roles()
+                current_count = self._get_limit_included_user_count() - len(
+                    self.filtered(lambda u: u.role_id in included_roles)
                 )
-
-        if self._get_user_limit():
-            self._check_user_limit_exceeded()
-
-        return res
+                changing_to_included_role = vals.get("role_id") in included_roles.ids
+                if changing_to_included_role and current_count + len(self) > user_limit:
+                    raise ValidationError(_("User limit exceeded."))
+        return super().write(vals)
 
     @api.model_create_multi
     def create(self, vals_list):
-        # Automatically add the restricted group for ux
-        if self.env.user.is_restricted_user():
-            group_restricted = self.env.ref("container_accessibility.group_restricted")
-            # Find the reified field names for the restricted group and the user type groups
-            group_user = self.env.ref("base.group_user")
-            user_type_category = self.env.ref("base.module_category_user_type")
-            user_type_groups = self.env["res.groups"].search(
-                [("category_id", "=", user_type_category.id)], order="id ASC"
-            )
-            restricted_reified_field = "in_group_%s" % group_restricted.id
-            user_type_reified_field = "sel_groups_%s" % (
-                "_".join(str(gid) for gid in user_type_groups.ids)
+        is_restricted = self.env.user.is_restricted_user()
+        role_ids = [vals.get("role_id") for vals in vals_list]
+        if is_restricted and any(not role_id for role_id in role_ids):
+            raise ValidationError(
+                _(
+                    "Users must have a role assigned. Please assign a role to the user and try again."
+                )
             )
 
-            # Check if any of the users don't have a role assigned
-            if any(not vals.get("role_id") for vals in vals_list):
-                raise ValidationError(
-                    _(
-                        "Users must have a role assigned. Please assign a role to the user and try again."
-                    )
-                )
+        # Check if the user limit is exceeded when creating new users
+        user_limit = self._get_user_limit()
+        if user_limit:
+            included_roles = self._get_limit_included_roles()
+            current_count = self._get_limit_included_user_count()
+            creating_included_role = any(
+                role_id in included_roles.ids for role_id in role_ids
+            )
+            if creating_included_role and current_count + len(vals_list) > user_limit:
+                raise ValidationError(_("User limit exceeded."))
 
-            # Add the users being created to the restricted group if they are internal users
-            for vals in vals_list:
-                user_type_reified_value = vals.get(
-                    user_type_reified_field, group_user.id
-                )
-                internal_user = user_type_reified_value == group_user.id
-                if internal_user:
-                    vals[restricted_reified_field] = True
-
-        res = super().create(vals_list)
-        # TODO: Should we check the user limit for non-restricted users?
-        if self._get_user_limit():
-            self._check_user_limit_exceeded()
-        return res
+        return super().create(vals_list)
 
     def _create_user_from_template(self, values):
         if values.get("oauth_provider_id", False):
@@ -214,12 +139,3 @@ class ResUsers(models.Model):
         guest_role = self.env.ref("container_accessibility.role_guest")
         values["role_id"] = guest_role.id
         return super()._signup_create_user(values)
-
-    def _default_groups(self):
-        res = super()._default_groups()
-        restricted_group = self.env.ref("container_accessibility.group_restricted")
-        if self.env.user.is_restricted_user():
-            if not res:  # In the case default user is deleted somehow it will return a list not a empty recordset
-                return restricted_group
-            res += restricted_group
-        return res

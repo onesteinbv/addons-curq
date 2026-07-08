@@ -77,6 +77,10 @@ class TestRestrictedUser(TransactionCase):
 
         # Test whether the user can make non-restricted user a restricted user
         with self.assertRaises(AccessError):
+            self.admin.with_user(self.restricted_user).write(
+                {"role_id": self.role_manager.id}
+            )
+        with self.assertRaises(AccessError):
             (self.admin + self.new_restricted_user).with_user(
                 self.restricted_user
             ).write({"role_id": self.role_manager.id})
@@ -102,20 +106,3 @@ class TestRestrictedUser(TransactionCase):
             )
         )
         self.assertFalse(new_user.is_restricted_user())
-
-    def test_cannot_change_itself_to_non_restricted(self):
-        restricted_user_without_role = self.env["res.users"].create(
-            {
-                "name": "Restricted User Without Role",
-                "login": "restricted_user_without_role",
-                "groups_id": self.group_erp_manager
-                + self.group_partner_manager
-                + self.group_restricted,
-            }
-        )
-        self.assertFalse(restricted_user_without_role.role_id)
-        self.assertTrue(restricted_user_without_role.is_restricted_user())
-        restricted_user_without_role.with_user(restricted_user_without_role).write(
-            {"role_id": self.role_without_restricted_group.id}
-        )
-        self.assertTrue(restricted_user_without_role.is_restricted_user())

@@ -206,3 +206,37 @@ class TestUserRole(TransactionCase):
         self.assertEqual(
             partner.user_ids.role_id.id, self.ref("container_accessibility.role_guest")
         )
+
+    def test_restricted_user_cannot_remove_role(self):
+        """Test that a restricted user cannot remove the role of another user."""
+        role_user = self.ref("container_accessibility.role_user")
+        role_admin = self.ref("container_accessibility.role_administrator")
+        restricted_admin = self.env["res.users"].create(
+            {
+                "name": "Restricted Admin",
+                "login": "restrictedadmin",
+                "role_id": role_admin,
+            }
+        )
+        other_user = self.env["res.users"].create(
+            {
+                "name": "Other User",
+                "login": "otheruser",
+                "role_id": role_user,
+            }
+        )
+        with self.assertRaisesRegex(
+            ValidationError,
+            "Users must have a role assigned. Please assign a role to the user and try again.",
+        ):
+            other_user.with_user(restricted_admin).write({"role_id": False})
+        self.assertEqual(other_user.role_id.id, role_user)
+        self.assertTrue(other_user.is_restricted_user())
+        # Test that a restricted user cannot remove their own role
+        with self.assertRaisesRegex(
+            ValidationError,
+            "Users must have a role assigned. Please assign a role to the user and try again.",
+        ):
+            restricted_admin.with_user(restricted_admin).write({"role_id": False})
+        self.assertEqual(restricted_admin.role_id.id, role_admin)
+        self.assertTrue(restricted_admin.is_restricted_user())
