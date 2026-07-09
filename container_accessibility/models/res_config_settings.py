@@ -43,24 +43,7 @@ class ResConfigSettings(models.TransientModel):
     def _compute_active_user_count(self):
         res = super()._compute_active_user_count()
         if self.env.user.is_restricted_user():
-            active_user_count = (
-                self.env["res.users"]
-                .sudo()
-                .search_count(
-                    [
-                        ("share", "=", False),
-                        (
-                            "groups_id",
-                            "in",
-                            [
-                                self.env.ref(
-                                    "container_accessibility.group_restricted"
-                                ).id,
-                            ],
-                        ),
-                    ]
-                )
-            )
+            active_user_count = self.env["res.users"]._get_limit_included_user_count()
             for record in self:
                 record.active_user_count = active_user_count
         return res
