@@ -19,6 +19,10 @@ class TestUserRole(TransactionCase):
         self.assertEqual(user.role_id.id, user_role)
         self.assertEqual(len(user.role_line_ids), 1)
         self.assertEqual(user.role_line_ids.role_id.id, user_role)
+        user.role_id = user_role
+        self.assertEqual(user.role_id.id, user_role)
+        self.assertEqual(len(user.role_line_ids), 1)
+        self.assertEqual(user.role_line_ids.role_id.id, user_role)
 
     def test_role_id_required_for_restricted_group(self):
         group_erp_manager = self.env.ref("base.group_erp_manager")
@@ -146,6 +150,7 @@ class TestUserRole(TransactionCase):
     def test_administrator_can_assign_administrator(self):
         """Administrators should be able to assign the administrator role to itself and other users."""
         role_admin = self.ref("container_accessibility.role_administrator")
+        role_user = self.ref("container_accessibility.role_user")
         user_admin = self.env["res.users"].create(
             {
                 "name": "Administrator User",
@@ -157,7 +162,7 @@ class TestUserRole(TransactionCase):
             {
                 "name": "Other User",
                 "login": "otheruser",
-                "role_id": self.ref("container_accessibility.role_user"),
+                "role_id": role_user,
             }
         )
         # Test that an administrator can assign the administrator role to itself
@@ -234,10 +239,11 @@ class TestUserRole(TransactionCase):
         )
         # Test that a manager cannot read a user with the administrator role
         with self.assertRaises(AccessError):
-            user_admin.with_user(user_manager).read(["name"])
+            self.env["res.users"].with_user(user_manager).browse(user_admin.id).read()
         # Test that a manager cannot write a user with the administrator role
         with self.assertRaises(AccessError):
             user_admin.with_user(user_manager).write({"name": "New Name"})
+        self.assertEqual(user_admin.name, "Admin User")
         # Test that a manager cannot delete a user with the administrator role
         with self.assertRaises(AccessError):
             user_admin.with_user(user_manager).unlink()
@@ -264,3 +270,37 @@ class TestUserRole(TransactionCase):
         )
         roles = self.env["res.users.role"].with_user(user_manager).search([])
         self.assertNotIn(role_admin, roles.ids)
+
+    def test_administrator_role_listed_for_administrator(self):
+        """Test that the administrator role is listed for an administrator user."""
+        role_admin = self.ref("container_accessibility.role_administrator")
+        user_admin = self.env["res.users"].create(
+            {
+                "name": "Admin User",
+                "login": "adminuser",
+                "role_id": role_admin,
+            }
+        )
+        roles = self.env["res.users.role"].with_user(user_admin).search([])
+        self.assertIn(role_admin, roles.ids)
+
+    def test_administrator_listed_for_administrator(self):
+        """Test that the administrators are listed for an administrator user."""
+        role_admin = self.ref("container_accessibility.role_administrator")
+        user_admin = self.env["res.users"].create(
+            {
+                "name": "Admin User",
+                "login": "adminuser",
+                "role_id": role_admin,
+            }
+        )
+        other_admin = self.env["res.users"].create(
+            {
+                "name": "Admin User",
+                "login": "otheradminuser",
+                "role_id": role_admin,
+            }
+        )
+        users = self.env["res.users"].with_user(user_admin).search([])
+        self.assertIn(user_admin.id, users.ids)
+        self.assertIn(other_admin.id, users.ids)

@@ -2,7 +2,7 @@
 <odoo>
     <record id="group_administrator" model="res.groups">
         <field name="name">Administrator</field>
-        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="category_id" ref="base_user_role.ir_module_category_role" />
     </record>
     <record id="role_administrator" model="res.users.role">
         <field name="name">Administrator</field>
@@ -17,7 +17,7 @@
 
     <record id="group_manager" model="res.groups">
         <field name="name">Manager</field>
-        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="category_id" ref="base_user_role.ir_module_category_role" />
     </record>
     <record id="role_manager" model="res.users.role">
         <field name="name">Manager</field>
@@ -34,7 +34,7 @@
 
     <record id="group_user" model="res.groups">
         <field name="name">User</field>
-        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="category_id" ref="base_user_role.ir_module_category_role" />
     </record>
     <record id="role_user" model="res.users.role">
         <field name="name">User</field>
@@ -49,7 +49,7 @@
 
     <record id="group_accountant" model="res.groups">
         <field name="name">Accountant</field>
-        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="category_id" ref="base_user_role.ir_module_category_role" />
     </record>
     <record id="role_accountant" model="res.users.role">
         <field name="name">Accountant</field>
@@ -64,7 +64,7 @@
 
     <record id="group_guest" model="res.groups">
         <field name="name">Guest</field>
-        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="category_id" ref="base_user_role.ir_module_category_role" />
     </record>
     <record id="role_guest" model="res.users.role">
         <field name="name">Guest</field>

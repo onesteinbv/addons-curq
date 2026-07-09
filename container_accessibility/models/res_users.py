@@ -10,16 +10,22 @@ class ResUsers(models.Model):
     _inherit = "res.users"
 
     # Simplified role field without the possibility to have multiple roles
-    role_id = fields.Many2one(comodel_name="res.users.role", inverse="_inverse_role_id")
+    role_id = fields.Many2one(
+        comodel_name="res.users.role",
+        inverse="_inverse_role_id",
+        groups="base.group_erp_manager",
+    )
     role_comment = fields.Text(
-        related="role_id.comment",
-        readonly=True,
+        related="role_id.comment", readonly=True, groups="base.group_erp_manager"
     )
 
     def _inverse_role_id(self):
         for user in self:
-            # For now just clear and set the role, we could improve this to end the current role
-            # and start the new one, but for now this is sufficient and simpler
+            active_role = user.role_line_ids.filtered(
+                lambda r: r.role_id == user.role_id and r.is_enabled
+            )
+            if active_role:
+                continue
             ops = [Command.clear()]
             if user.role_id:
                 ops.append(Command.create({"role_id": user.role_id.id}))
