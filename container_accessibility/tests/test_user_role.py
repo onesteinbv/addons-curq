@@ -311,7 +311,7 @@ class TestUserRole(TransactionCase):
 
     def test_crud_role(self):
         role_admin = self.ref("container_accessibility.role_administrator")
-        role_user = self.ref("container_accessibility.role_user")
+        role_user = self.env.ref("container_accessibility.role_user")
         user_admin = self.env["res.users"].create(
             {
                 "name": "Admin User",

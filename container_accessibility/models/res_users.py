@@ -106,6 +106,8 @@ class ResUsers(models.Model):
                 .browse(values["oauth_provider_id"])
             )
             if not provider_record.private:
+                guest_role = self.env.ref("container_accessibility.role_guest")
+                values["role_id"] = guest_role.id
                 return super()._create_user_from_template(values)
 
             role = provider_record.role_id or self.env.ref(

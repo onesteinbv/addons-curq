@@ -14,8 +14,8 @@
         />
     </record>
 
+    <!-- Settings/Technical/User Interface -->
     <record id="base.next_id_2" model="ir.ui.menu">
-        <!-- Settings/Technical/User Interface -->
         <field
             name="excluded_group_ids"
             eval="[Command.link(ref('container_accessibility.group_restricted'))]"
