@@ -89,3 +89,6 @@ Can we get rid of the `group_restricted` group and instead purely use the roles 
 restrict access? This would simplify the access rights management, but it would also
 require a lot of changes to the existing codebase. We need to evaluate if this is
 feasible and if it would be worth the effort.
+
+Remove restrict mixin and instead use record rules to restrict access to certain models.
+The restrict mixin was introduced to fastly restrict access to certain models.

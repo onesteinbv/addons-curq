@@ -308,3 +308,50 @@ class TestUserRole(TransactionCase):
         users = self.env["res.users"].with_user(user_admin).search([])
         self.assertIn(user_admin.id, users.ids)
         self.assertIn(other_admin.id, users.ids)
+
+    def test_crud_role(self):
+        role_admin = self.ref("container_accessibility.role_administrator")
+        role_user = self.ref("container_accessibility.role_user")
+        user_admin = self.env["res.users"].create(
+            {
+                "name": "Admin User",
+                "login": "adminuser",
+                "role_id": role_admin,
+            }
+        )
+        real_admin = self.env.ref("base.user_admin")
+        # Test restricted user cannot create a role
+        with self.assertRaises(AccessError):
+            self.env["res.users.role"].with_user(user_admin).create(
+                {
+                    "name": "New Role",
+                }
+            )
+        # Test restricted user cannot write a role
+        with self.assertRaises(AccessError):
+            role_user.with_user(user_admin).write(
+                {
+                    "name": "Updated Role",
+                }
+            )
+
+        # Test restricted user cannot unlink a role
+        with self.assertRaises(AccessError):
+            role_user.with_user(user_admin).unlink()
+
+        # Test non-restricted user can create a role
+        role_new = (
+            self.env["res.users.role"]
+            .with_user(real_admin)
+            .create(
+                {
+                    "name": "New role",
+                }
+            )
+        )
+        role_new.with_user(real_admin).write(
+            {
+                "name": "Updated New role",
+            }
+        )
+        role_new.with_user(real_admin).unlink()
