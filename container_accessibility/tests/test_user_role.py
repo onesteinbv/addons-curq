@@ -202,8 +202,12 @@ class TestUserRole(TransactionCase):
         # Test a manager cannot assign the administrator role to another user
         with self.assertRaises(AccessError):
             user_accountant.with_user(user_manager).write({"role_id": role_admin})
+
+        # Test that a manager can assign the manager role to another user
         user_accountant.with_user(user_manager).write({"role_id": role_manager})
         self.assertEqual(user_accountant.role_id.id, role_manager)
+        user_accountant.with_user(user_manager).write({"role_id": role_accountant})
+        self.assertEqual(user_accountant.role_id.id, role_accountant)
 
         # Test cannot create a user with the administrator role
         with self.assertRaises(AccessError):
