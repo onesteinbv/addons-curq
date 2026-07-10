@@ -35,6 +35,11 @@
             type="char"
             file="container_accessibility/security/manager/groups"
         />
+        <field
+            name="allowed_config_settings"
+            type="char"
+            file="container_accessibility/security/manager/settings"
+        />
     </record>
 
     <record id="group_user" model="res.groups">

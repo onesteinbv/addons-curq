@@ -41,3 +41,6 @@ class TestAllowedConfigSettings(TransactionCase):
         settings.execute()
         self.assertEqual(not_installed_module.state, "uninstalled")
         self.assertEqual(installed_module.state, "installed")
+
+    def test_execute_disallowed_setting(self):
+        pass
