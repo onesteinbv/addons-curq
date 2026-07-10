@@ -69,9 +69,9 @@ class TestAllowedConfigSettings(TransactionCase):
             True  # This would normally add the group to the internal user group
         )
         settings.execute()
+        self.assertNotIn(group_multi_currency, group_user.implied_ids)
 
         # Allowed
-        self.assertNotIn(group_multi_currency, group_user.implied_ids)
         settings = self.env["res.config.settings"].with_user(real_admin).create({})
         settings.group_multi_currency = True
         settings.execute()

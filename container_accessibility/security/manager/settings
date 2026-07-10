@@ -106,7 +106,7 @@ google_translate_api_key
 # group_lot_on_delivery_slip
 # group_lot_on_invoice
 # group_mass_mailing_campaign
-group_multi_currency
+# group_multi_currency
 group_multi_website
 group_pain_multiple_identifier
 group_product_price_comparison
