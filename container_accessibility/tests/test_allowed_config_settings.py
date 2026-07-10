@@ -43,4 +43,50 @@ class TestAllowedConfigSettings(TransactionCase):
         self.assertEqual(installed_module.state, "installed")
 
     def test_execute_disallowed_setting(self):
-        pass
+        manager = self.env["res.users"].create(
+            {
+                "name": "Manager",
+                "login": "new_manager_user",
+                "role_id": self.ref("container_accessibility.role_manager"),
+            }
+        )
+        administrator = self.env["res.users"].create(
+            {
+                "name": "Administrator",
+                "login": "new_admin_user",
+                "role_id": self.ref("container_accessibility.role_administrator"),
+            }
+        )
+        real_admin = self.env.ref("base.user_admin")
+
+        group_user = self.env.ref("base.group_user")
+        group_multi_currency = self.env.ref("base.group_multi_currency")
+
+        # Disallowed
+        self.assertNotIn(group_multi_currency, group_user.implied_ids)
+        settings = self.env["res.config.settings"].with_user(manager).create({})
+        settings.group_multi_currency = (
+            True  # This would normally add the group to the internal user group
+        )
+        settings.execute()
+
+        # Allowed
+        self.assertNotIn(group_multi_currency, group_user.implied_ids)
+        settings = self.env["res.config.settings"].with_user(real_admin).create({})
+        settings.group_multi_currency = True
+        settings.execute()
+        self.assertIn(group_multi_currency, group_user.implied_ids)
+
+        # Disallowed
+        settings = self.env["res.config.settings"].with_user(manager).create({})
+        settings.group_multi_currency = (
+            False  # This would normally remove the group from the internal user group
+        )
+        settings.execute()
+        self.assertIn(group_multi_currency, group_user.implied_ids)
+
+        # Allowed admin role
+        settings = self.env["res.config.settings"].with_user(administrator).create({})
+        settings.group_multi_currency = False
+        settings.execute()
+        self.assertNotIn(group_multi_currency, group_user.implied_ids)
