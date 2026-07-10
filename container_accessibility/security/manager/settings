@@ -181,7 +181,7 @@ is_l10n_nl_rgs
 # is_membership_multi
 is_newsletter_enabled
 is_root_company
-# is_sendcloud_test_mode  NB: Will this hide the whole block?
+# is_sendcloud_test_mode  NB: This will hide the whole block
 is_stripe_supported_country
 l10n_nl_rgs_disable_allowed_journals
 l10n_nl_tax_invoice_basis

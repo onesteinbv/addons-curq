@@ -1,5 +1,7 @@
 from odoo import api, fields, models
 
+SENTINEL = object()
+
 
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
@@ -44,9 +46,19 @@ class ResConfigSettings(models.TransientModel):
 
         return arch, view
 
+    @api.model
+    def default_get(self, fields):
+        """Override default_get to bypass the allowed config settings filter to prevent warnings"""
+        return super(
+            ResConfigSettings, self.with_context(bypass_allowed_fields=SENTINEL)
+        ).default_get(fields)
+
     def _get_classified_fields(self, fnames=None):
         """Remove all disallowed config settings for restricted users."""
-        if self.env.user.is_restricted_user():
+        if (
+            self.env.user.is_restricted_user()
+            and self.env.context.get("bypass_allowed_fields") is not SENTINEL
+        ):
             role = self.env.user.role_id
             allowed_config_settings = role.get_allowed_config_settings()
             if not allowed_config_settings:
@@ -94,7 +106,3 @@ class ResConfigSettings(models.TransientModel):
             for record in self:
                 record.active_user_count = active_user_count
         return res
-
-    def onchange_module(self, field_value, module_name):
-        """Override the default onchange_module to remove the warning when disabling a module."""
-        return {}
