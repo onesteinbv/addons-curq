@@ -5,13 +5,18 @@ from odoo.osv import expression
 class ModelData(models.Model):
     _inherit = "ir.model.data"
 
-    def create(self, vals):
-        res = super().create(vals)
-        if vals.get("model") == "res.groups":
-            self.env["res.groups"].search(
-                [("implied_by_text", "ilike", res.complete_name)]
-            ).apply_implied_by_text()
-        return res
+    @api.model_create_multi
+    def create(self, vals_list):
+        created_records = super().create(vals_list)
+        affected_roles = self.env["res.groups"]
+        for created_record in created_records.filtered(
+            lambda r: r.model == "res.groups"
+        ):
+            affected_roles |= self.env["res.groups"].search(
+                [("implied_by_text", "ilike", created_record.complete_name)]
+            )
+        affected_roles.apply_implied_by_text()
+        return created_records
 
     def write(self, values):
         xml_ids = self.mapped("complete_name")

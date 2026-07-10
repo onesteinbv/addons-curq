@@ -13,6 +13,11 @@
             type="char"
             file="container_accessibility/security/administrator/groups"
         />
+        <field
+            name="allowed_config_settings"
+            type="char"
+            file="container_accessibility/security/administrator/settings"
+        />
     </record>
 
     <record id="group_manager" model="res.groups">

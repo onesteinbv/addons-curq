@@ -7,29 +7,69 @@ class ResConfigSettings(models.TransientModel):
     module_auth_oauth = fields.Boolean(readonly=True)
 
     @api.model
+    def _get_view_cache_key(self, view_id=None, view_type="form", **options):
+        cache_key = super()._get_view_cache_key(
+            view_id=view_id, view_type=view_type, **options
+        )
+        if self.env.user.is_restricted_user():
+            cache_key += (self.env.user.role_id.id,)
+        return cache_key
+
+    @api.model
     def _get_view(self, view_id=None, view_type="form", **options):
-        """Hide all module options"""
+        """Hide all disallowed config settings for restricted users."""
         arch, view = super()._get_view(view_id, view_type, **options)
         if self.env.user.is_restricted_user() and view_type == "form":
-            nodes = arch.xpath(
-                "//field[starts-with(@name, 'module_') and not(@invisible)]"
-            )
-            for node in nodes:
-                element = node
-                setting_box = None
-                while setting_box is None:
-                    element = element.getparent()
-                    if element is None:
-                        setting_box = node.getparent()
-                        break
-                    if "o_setting_box" in element.attrib.get("class", ""):
-                        setting_box = element
-                if setting_box.getparent() is not None:
-                    setting_box.getparent().remove(setting_box)
-                else:
-                    setting_box.clear()
+            role = self.env.user.role_id
+            disallowed_config_settings = role.get_disallowed_config_settings()
+            for field_name in disallowed_config_settings:
+                nodes = arch.xpath(
+                    "//field[@name='%s' and not(@invisible)]" % field_name
+                )
+                for node in nodes:
+                    element = node
+                    setting_box = None
+                    while setting_box is None:
+                        element = element.getparent()
+                        if element is None:
+                            setting_box = node.getparent()
+                            break
+                        if (
+                            "o_setting_box" in element.attrib.get("class", "")
+                            or element.tag == "setting"
+                        ):
+                            setting_box = element
+                    setting_box.set("class", "bg-danger")
+                    # setting_box.getparent().remove(setting_box)
 
         return arch, view
+
+    def _get_classified_fields(self, fnames=None):
+        """Remove all disallowed config settings for restricted users."""
+        if self.env.user.is_restricted_user():
+            role = self.env.user.role_id
+            allowed_config_settings = role.get_allowed_config_settings()
+            if not allowed_config_settings:
+                return super()._get_classified_fields(fnames=fnames)
+            classified = super()._get_classified_fields(fnames=fnames)
+            for key in ("default", "group", "config"):
+                classified[key] = [
+                    field
+                    for field in classified[key]
+                    if field[0] in allowed_config_settings
+                ]
+
+            # Other fields are not a tuple like the other classified fields
+            classified["other"] = [
+                field
+                for field in classified["other"]
+                if field in allowed_config_settings
+            ]
+
+            # Disallow all module config settings for restricted users
+            classified["module"] = self.env["ir.module.module"]
+            return classified
+        return super()._get_classified_fields(fnames=fnames)
 
     def execute(self):
         sudo_self = self
