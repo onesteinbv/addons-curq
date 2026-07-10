@@ -66,8 +66,15 @@ class ResConfigSettings(models.TransientModel):
                 if field in allowed_config_settings
             ]
 
-            # Disallow all module config settings for restricted users
-            classified["module"] = self.env["ir.module.module"]
+            # Disallow module config settings for restricted users, classified["module"] is a recordset of ir.module.module records
+            allowed_modules = [
+                field_name[7:]
+                for field_name in allowed_config_settings
+                if field_name.startswith("module_")
+            ]
+            classified["module"] = classified["module"].filtered(
+                lambda m: m.name in allowed_modules
+            )
             return classified
         return super()._get_classified_fields(fnames=fnames)
 
@@ -87,3 +94,7 @@ class ResConfigSettings(models.TransientModel):
             for record in self:
                 record.active_user_count = active_user_count
         return res
+
+    def onchange_module(self, field_value, module_name):
+        """Override the default onchange_module to remove the warning when disabling a module."""
+        return {}

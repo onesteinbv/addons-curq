@@ -74,3 +74,4 @@ hr_timesheet.group_hr_timesheet_user
 helpdesk_mgmt.group_helpdesk_user_own
 helpdesk_mgmt.group_helpdesk_user_team
 account.group_validate_bank_account
+base_technical_features.group_technical_features
