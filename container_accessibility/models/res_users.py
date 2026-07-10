@@ -147,3 +147,11 @@ class ResUsers(models.Model):
         guest_role = self.env.ref("container_accessibility.role_guest")
         values["role_id"] = guest_role.id
         return super()._signup_create_user(values)
+
+    @api.model
+    def _get_self_writable_groups(self):
+        groups = super()._get_self_writable_groups()
+        onboarding_group = self.env.ref(
+            "base_onboarding.onboarding_group", raise_if_not_found=False
+        )
+        return groups | onboarding_group if onboarding_group else groups
