@@ -50,7 +50,6 @@ product.group_product_manager
 sale_management.group_sale_order_template
 account.group_account_readonly
 event.group_event_registration_desk
-container_accessibility.group_restricted
 website.group_website_restricted_editor
 purchase.group_send_reminder
 base.group_system
