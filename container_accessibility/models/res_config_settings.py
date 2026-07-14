@@ -41,8 +41,8 @@ class ResConfigSettings(models.TransientModel):
                             or element.tag == "setting"
                         ):
                             setting_box = element
-                    setting_box.set("class", "bg-danger")
-                    # setting_box.getparent().remove(setting_box)
+                    # setting_box.set("class", "bg-danger")
+                    setting_box.getparent().remove(setting_box)
 
         return arch, view
 
