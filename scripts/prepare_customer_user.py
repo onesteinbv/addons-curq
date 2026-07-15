@@ -10,7 +10,6 @@ def main(env, login):
     customer_user = env.ref(
         "base_customer_user.user_customer", raise_if_not_found=False
     )
-    group_ids = []
     if not customer_user:
         return click.echo("Customer user doesn't exists", err=True)
 
@@ -19,8 +18,9 @@ def main(env, login):
         # Use the login as email to ensure the user can receive the reset password email
         customer_user.partner_id.write({"email": login})
 
+    customer_user.role_id = env.ref("container_accessibility.role_manager")
     if customer_user.state == "new":
-        group_ids.append(env.ref("base_onboarding.onboarding_group").id)
+        customer_user.groups_id += env.ref("base_onboarding.onboarding_group")
         try:
             customer_user.action_reset_password()
         except Exception as e:
