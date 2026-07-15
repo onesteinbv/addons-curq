@@ -56,26 +56,29 @@ settings or create users.
 
 `Guest`: portal user
 
-To limit access to certain configuration options, the module uses...
+To limit access to certain configuration options, the module adds a field
+`allowed_config_settings` to the `res.users.role` model, which allows us to define which
+configuration options are allowed for each role. Just like with groups all configuration
+options are assigned to the roles in one place, instead of in the corresponding modules,
+to avoid having to change the configuration options in multiple places when we want to
+change the access rights of a role. This makes it easier to maintain the access rights
+of the roles.
 
 All groups are assigned here instead of in the corresponding modules, to avoid having to
 change the groups in multiple places when we want to change the access rights of a role.
 This makes it easier to maintain the access rights of the roles. Groups are assigned to
 the roles as they are created.
 
-This also enforces the use of the roles, as users cannot be assigned to groups directly,
-but only to roles. This makes it easier to manage the access rights of users, and the
-access rights of that role are defined in one place.
+This enforces the use of the roles, so users cannot be assigned to groups directly, but
+only to roles. This makes it easier to manage the access rights of users.
 
 Normally with `base_user_role` the user can have multiple roles at the same time,
 furthermore you can assign a start and end date for each role, but in CURQ we want to
 have a simplified role system, where each user can only have one role.
 
-To ensure the managers cannot assign themselves the Administrator role, we have...
-
-User limit functionality is also implemented, which allows us to limit the number of
-users that can be created in the system. This will only check the number of users that
-are assigned to the `Manager`, `User`, or `Accountant` role.
+User limit functionality allows us to limit the number of users that can be created in
+the system. This will only check the number of users that are assigned to the `Manager`,
+`User`, or `Accountant` role.
 
 Partners related to users with `Administrator` or no role will be hidden for users with
 the `Manager`, `User`, or `Accountant` role.
