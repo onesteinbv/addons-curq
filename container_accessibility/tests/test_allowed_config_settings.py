@@ -62,6 +62,9 @@ class TestAllowedConfigSettings(TransactionCase):
         group_user = self.env.ref("base.group_user")
         group_multi_currency = self.env.ref("base.group_multi_currency")
 
+        # Make sure the group is not there before starting the test
+        group_user.implied_ids -= group_multi_currency
+
         # Disallowed
         self.assertNotIn(group_multi_currency, group_user.implied_ids)
         settings = self.env["res.config.settings"].with_user(manager).create({})
