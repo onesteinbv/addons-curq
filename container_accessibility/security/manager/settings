@@ -59,7 +59,7 @@ country_code
 # crm_auto_assignment_interval_type
 # crm_auto_assignment_run_datetime
 # crm_use_auto_assignment
-currency_exchange_journal_id
+# currency_exchange_journal_id
 # currency_id
 # currency_rates_autoupdate
 # days_to_purchase
@@ -78,7 +78,7 @@ email_secondary_color
 enabled_buy_now_button
 enabled_extra_checkout_step
 # events_app_name
-expense_currency_exchange_account_id
+# expense_currency_exchange_account_id
 # expense_journal_id
 # expense_outstanding_account_id
 external_email_server_default
@@ -148,7 +148,7 @@ has_google_analytics
 has_google_search_console
 has_matomo_analytics
 has_plausible_shared_key
-helpdesk_mgmt_duplicate_ticket_stage_id
+# helpdesk_mgmt_duplicate_ticket_stage_id
 # helpdesk_mgmt_duplicate_tracking
 # helpdesk_mgmt_portal_category_id_required
 # helpdesk_mgmt_portal_select_team
@@ -159,12 +159,12 @@ helpdesk_mgmt_portal_team_id_required
 hr_expense_alias_domain_id
 hr_expense_alias_prefix
 hr_expense_use_mailgateway
-hr_presence_control_email
-hr_presence_control_email_amount
-hr_presence_control_ip
-hr_presence_control_ip_list
-hr_presence_control_login
-income_currency_exchange_account_id
+# hr_presence_control_email
+# hr_presence_control_email_amount
+# hr_presence_control_ip
+# hr_presence_control_ip_list
+# hr_presence_control_login
+# income_currency_exchange_account_id
 # incoterm_id
 initiating_party_identifier
 initiating_party_issuer
@@ -236,7 +236,7 @@ preview_ready
 # product_volume_volume_in_cubic_feet
 # product_weight_in_lbs
 # profiling_enabled_until
-project_time_mode_id
+# project_time_mode_id
 providers_state
 # purchase_tax_id
 # qr_code
@@ -248,8 +248,8 @@ recaptcha_public_key
 # reconcile_aggregate
 release_note_project
 release_note_version
-reminder_allow
-reminder_user_allow
+# reminder_allow
+# reminder_user_allow
 report_footer
 # resource_calendar_id
 restrict_template_rendering

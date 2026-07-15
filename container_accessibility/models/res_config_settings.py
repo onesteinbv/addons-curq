@@ -17,6 +17,15 @@ class ResConfigSettings(models.TransientModel):
             cache_key += (self.env.user.role_id.id,)
         return cache_key
 
+    def _remove_empty_upstream(self, element):
+        """Recursively remove empty parent elements up the tree."""
+        parent = element.getparent()
+        if parent is not None:
+            parent.remove(element)
+            remaining_children = parent.xpath(".//field")
+            if not remaining_children:
+                self._remove_empty_upstream(parent)
+
     @api.model
     def _get_view(self, view_id=None, view_type="form", **options):
         """Hide all disallowed config settings for restricted users."""
@@ -25,11 +34,10 @@ class ResConfigSettings(models.TransientModel):
             role = self.env.user.role_id
             disallowed_config_settings = role.get_disallowed_config_settings()
             for field_name in disallowed_config_settings:
-                nodes = arch.xpath(
-                    "//field[@name='%s' and not(@invisible)]" % field_name
-                )
+                nodes = arch.xpath("//field[@name='%s']" % field_name)
                 for node in nodes:
                     element = node
+                    # Find the parent setting box of the field
                     setting_box = None
                     while setting_box is None:
                         element = element.getparent()
@@ -41,8 +49,7 @@ class ResConfigSettings(models.TransientModel):
                             or element.tag == "setting"
                         ):
                             setting_box = element
-                    # setting_box.set("class", "bg-danger")
-                    setting_box.getparent().remove(setting_box)
+                    self._remove_empty_upstream(setting_box)
 
         return arch, view
 
