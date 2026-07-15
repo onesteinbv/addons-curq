@@ -23,7 +23,8 @@ def main(env, dry_run):
         exclude_states=("uninstallable",)
     )
     ignore_modules = modules.filtered(
-        lambda m: m.name in ["container_s3"] or m.name.startswith("theme_")
+        lambda m: m.name in ["container_s3", "google_recaptcha"]
+        or m.name.startswith("theme_")
     )
 
     # Exempt payment providers from retirement if the payment module is installed
