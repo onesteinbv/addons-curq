@@ -26,7 +26,7 @@ altcha_timeout
 annual_inventory_day
 annual_inventory_month
 auth_oauth_google_client_id
-auth_oauth_google_enabled
+# auth_oauth_google_enabled
 auth_signup_reset_password
 auth_signup_template_user_id
 # auth_signup_uninvited
@@ -96,7 +96,7 @@ google_maps_static_api_key
 google_maps_static_api_secret
 google_places_api_key
 google_search_console
-google_translate_api_key
+# google_translate_api_key
 # group_analytic_accounting
 # group_applicant_cv_display
 # group_auto_done_setting
@@ -252,7 +252,7 @@ release_note_version
 # reminder_user_allow
 report_footer
 # resource_calendar_id
-restrict_template_rendering
+# restrict_template_rendering
 # route_map_website_id
 # salesperson_id
 # salesteam_id
@@ -296,7 +296,7 @@ use_invoice_terms
 use_po_lead
 # user_default_rights
 use_security_lead
-use_twilio_rtc_servers
+# use_twilio_rtc_servers
 # vat_check_vies
 # web_app_name
 website_block_third_party_domains

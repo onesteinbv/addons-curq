@@ -42,13 +42,14 @@ class ResConfigSettings(models.TransientModel):
                     while setting_box is None:
                         element = element.getparent()
                         if element is None:
-                            setting_box = node.getparent()
                             break
                         if (
                             "o_setting_box" in element.attrib.get("class", "")
                             or element.tag == "setting"
                         ):
                             setting_box = element
+                    if setting_box is None:
+                        continue
                     self._remove_empty_upstream(setting_box)
 
         return arch, view
