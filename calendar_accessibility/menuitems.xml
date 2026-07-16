@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="calendar.menu_calendar_settings" model="ir.ui.menu">
+        <field
+            name="excluded_group_ids"
+            eval="[
+                Command.link(ref('container_accessibility.group_manager')),
+            ]"
+        />
+    </record>
+</odoo>

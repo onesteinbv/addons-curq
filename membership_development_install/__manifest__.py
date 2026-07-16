@@ -13,6 +13,7 @@
         "membership_activity_gitlab",
         "membership_activity_github",
         "membership_nickname",
+        "project_accessibility",
     ],
     "bundle": True,
 }

@@ -17,6 +17,7 @@
         "hr_timesheet_sheet",
         "hr_timesheet_sheet_accessibility",
         "project_timesheet_time_control",
+        "project_accessibility",
     ],
     "bundle": True,
 }

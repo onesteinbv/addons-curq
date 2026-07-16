@@ -1,0 +1,44 @@
+from odoo import api, models
+from odoo.osv import expression
+
+
+class ModelData(models.Model):
+    _inherit = "ir.model.data"
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        created_records = super().create(vals_list)
+        affected_roles = self.env["res.groups"]
+        for created_record in created_records.filtered(
+            lambda r: r.model == "res.groups"
+        ):
+            affected_roles |= self.env["res.groups"].search(
+                [("implied_by_text", "ilike", created_record.complete_name)]
+            )
+        affected_roles.apply_implied_by_text()
+        return created_records
+
+    def write(self, values):
+        xml_ids = self.mapped("complete_name")
+        res = super().write(values)
+        xml_ids += self.mapped("complete_name")
+        if "res.groups" in self.mapped("model"):
+            domain = expression.OR(
+                [[("implied_by_text", "ilike", xml_id)] for xml_id in xml_ids]
+            )
+            affected_roles = self.env["res.groups"].search(domain)
+            affected_roles.apply_implied_by_text()
+        return res
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_affected_roles(self):
+        xml_ids = self.filtered(lambda d: d.model == "res.groups").mapped(
+            "complete_name"
+        )
+        if not xml_ids:
+            return
+        domain = expression.OR(
+            [[("implied_by_text", "ilike", xml_id)] for xml_id in xml_ids]
+        )
+        affected_roles = self.env["res.groups"].search(domain)
+        affected_roles.apply_implied_by_text(ignore=xml_ids)

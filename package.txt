@@ -8,6 +8,7 @@ base_customer_company
 base_customer_user
 base_onboarding
 calendar_branding
+calendar_accessibility
 website_onboarding
 container_accessibility
 container_s3
@@ -15,6 +16,8 @@ digest_configuration
 digest_disable
 hr_accessibility
 hr_timesheet_sheet_accessibility
+hr_recruitment_accessibility
+website_sale_accessibility
 l10n_de_install
 l10n_nl_hr_expense
 l10n_nl_hr_install
@@ -34,8 +37,10 @@ mass_mailing_website_install
 membership_branding
 membership_install
 helpdesk_install
+helpdesk_mgmt_accessibility
 helpdesk_project_install
 project_install
+project_accessibility
 sale_branding
 sale_install
 stock_install

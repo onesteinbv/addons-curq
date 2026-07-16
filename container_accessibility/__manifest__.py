@@ -1,7 +1,7 @@
 {
-    "name": "Container Accessibility",
+    "name": "CURQ Accessibility",
     "category": "Technical",
-    "version": "18.0.1.0.0",
+    "version": "18.0.2.0.0",
     "author": "Onestein",
     "website": "https://onestein.nl",
     "depends": [
@@ -12,6 +12,7 @@
         "web_tour",
         "payment",
         "base_menu_visibility_restriction",
+        "base_user_role",
         "auth_oidc",
         "auditlog",
         "server_environment",
@@ -21,10 +22,13 @@
     ],
     "data": [
         "security/res_groups.xml",
+        "security/res_users_role.xml",
         "security/ir_rule.xml",
         "data/auditlog_rule_data.xml",
         "data/ir_cron_data.xml",
         "views/ir_module_module_view.xml",
+        "views/res_users_view.xml",
+        "views/res_config_settings_view.xml",
         "menuitems.xml",
     ],
     "license": "AGPL-3",

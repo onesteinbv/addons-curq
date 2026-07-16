@@ -14,8 +14,8 @@
         />
     </record>
 
+    <!-- Settings/Technical/User Interface -->
     <record id="base.next_id_2" model="ir.ui.menu">
-        <!-- Settings/Technical/User Interface -->
         <field
             name="excluded_group_ids"
             eval="[Command.link(ref('container_accessibility.group_restricted'))]"
@@ -96,13 +96,14 @@
         />
     </record>
 
+    <!-- Apps -->
     <record id="base.menu_apps" model="ir.ui.menu">
-        <!-- Apps -->
         <field
             name="excluded_group_ids"
             eval="[Command.link(ref('container_accessibility.group_restricted'))]"
         />
     </record>
+    <!-- Custom menu that only show bundles (_install modules)-->
     <menuitem
         id="menu_apps"
         name="Apps"
@@ -111,5 +112,11 @@
         action="container_accessibility.open_module_tree"
         groups="container_accessibility.group_restricted"
     />
-    <!-- Custom menu that only show bundles (_install modules)-->
+
+    <record id="base_user_role.menu_action_res_users_role_tree" model="ir.ui.menu">
+        <field
+            name="excluded_group_ids"
+            eval="[Command.link(ref('container_accessibility.group_restricted'))]"
+        />
+    </record>
 </odoo>

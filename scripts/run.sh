@@ -69,7 +69,7 @@ if [[ -n "$KEYCLOAK_URL" ]]; then
     --client-id "$KEYCLOAK_CLIENT_ID" --client-secret "$KEYCLOAK_CLIENT_SECRET" \
     --xml-id="__export__.__oauth_provider_onestein" \
     --body="Support Login" \
-    --template-user-id="base.user_admin"
+    --role-id="container_accessibility.role_administrator"
 
   if [[ "${KEYCLOAK_RESELLER_REALM:-false}" != "false" ]]; then
     python /odoo/scripts/setup_oauth.py -c "$ODOO_RC" -d "$DB_NAME" --log-level=error \
@@ -77,8 +77,7 @@ if [[ -n "$KEYCLOAK_URL" ]]; then
       --client-id "$KEYCLOAK_CLIENT_ID" --client-secret "$KEYCLOAK_RESELLER_CLIENT_SECRET" \
       --xml-id="__export__.__oauth_provider_reseller" \
       --body="${KEYCLOAK_RESELLER_BUTTON:-Reseller Login}" \
-      --template-user-id="base.user_admin" \
-      --group-id="container_accessibility.group_restricted"
+      --role-id="container_accessibility.role_administrator"
   fi
 fi
 
@@ -87,5 +86,5 @@ if [[ "$UPDATE_COMPANY" == "true" ]]; then
 fi
 
 if [[ "$PREPARE_CUSTOMER_USER" == "true" ]]; then
-  python /odoo/scripts/prepare_customer_user.py -c "$ODOO_RC" -d "$DB_NAME" --log-level=error --login "$CUSTOMER_USER_LOGIN" --group-file /odoo/scripts/groups.txt
+  python /odoo/scripts/prepare_customer_user.py -c "$ODOO_RC" -d "$DB_NAME" --log-level=error --login "$CUSTOMER_USER_LOGIN"
 fi

@@ -38,9 +38,11 @@ class RestrictMixin(models.AbstractModel):
 
     @api.model_create_multi
     def create(self, vals_list):
-        res = super().create(vals_list)
-        res._check_restrict()
-        return res
+        records_to_create = self.browse()
+        for vals in vals_list:
+            records_to_create |= self.new(vals)
+        records_to_create._check_restrict()
+        return super().create(vals_list)
 
     def unlink(self):
         self._check_restrict()

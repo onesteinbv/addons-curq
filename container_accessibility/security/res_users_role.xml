@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="group_administrator" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="base_user_role.ir_module_category_role" />
+    </record>
+    <record id="role_administrator" model="res.users.role">
+        <field name="name">Administrator</field>
+        <field name="comment">Full access to all features and settings of CURQ.</field>
+        <field name="group_id" ref="container_accessibility.group_administrator" />
+        <field
+            name="implied_by_text"
+            type="char"
+            file="container_accessibility/security/administrator/groups"
+        />
+        <field
+            name="allowed_config_settings"
+            type="char"
+            file="container_accessibility/security/administrator/settings"
+        />
+    </record>
+
+    <record id="group_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="base_user_role.ir_module_category_role" />
+    </record>
+    <record id="role_manager" model="res.users.role">
+        <field name="name">Manager</field>
+        <field
+            name="comment"
+        >Access to management features and settings of CURQ.</field>
+        <field name="group_id" ref="container_accessibility.group_manager" />
+        <field
+            name="implied_by_text"
+            type="char"
+            file="container_accessibility/security/manager/groups"
+        />
+        <field
+            name="allowed_config_settings"
+            type="char"
+            file="container_accessibility/security/manager/settings"
+        />
+    </record>
+
+    <record id="group_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="base_user_role.ir_module_category_role" />
+    </record>
+    <record id="role_user" model="res.users.role">
+        <field name="name">User</field>
+        <field name="comment">Access to their own documents.</field>
+        <field name="group_id" ref="container_accessibility.group_user" />
+        <field
+            name="implied_by_text"
+            type="char"
+            file="container_accessibility/security/user/groups"
+        />
+    </record>
+
+    <record id="group_accountant" model="res.groups">
+        <field name="name">Accountant</field>
+        <field name="category_id" ref="base_user_role.ir_module_category_role" />
+    </record>
+    <record id="role_accountant" model="res.users.role">
+        <field name="name">Accountant</field>
+        <field name="comment">Access to accounting features.</field>
+        <field name="group_id" ref="container_accessibility.group_accountant" />
+        <field
+            name="implied_by_text"
+            type="char"
+            file="container_accessibility/security/accountant/groups"
+        />
+    </record>
+
+    <record id="group_guest" model="res.groups">
+        <field name="name">Guest</field>
+        <field name="category_id" ref="base_user_role.ir_module_category_role" />
+    </record>
+    <record id="role_guest" model="res.users.role">
+        <field name="name">Guest</field>
+        <field name="comment">Only access to the portal.</field>
+        <field name="group_id" ref="container_accessibility.group_guest" />
+        <field
+            name="implied_by_text"
+            type="char"
+            file="container_accessibility/security/guest/groups"
+        />
+    </record>
+</odoo>

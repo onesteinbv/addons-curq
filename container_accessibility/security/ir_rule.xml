@@ -1,37 +1,101 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="rule_restricted_users_read" model="ir.rule">
-        <field name="name">rule_restricted_users read</field>
+    <record id="rule_restricted_users_admin_read" model="ir.rule">
+        <field name="name">rule_restricted_users admin read</field>
         <field name="model_id" ref="base.model_res_users" />
         <field
             name="groups"
-            eval="[(4, ref('container_accessibility.group_restricted'))]"
+            eval="[(4, ref('container_accessibility.group_administrator'))]"
         />
         <field
             name="domain_force"
-            eval="['|', '|', ('share', '=', True), ('groups_id', 'in', [ref('container_accessibility.group_restricted')]), ('id', '=', ref('base.default_user'))]"
+            eval="['|', ('role_id', 'in', [
+                ref('container_accessibility.role_administrator'),
+                ref('container_accessibility.role_manager'),
+                ref('container_accessibility.role_user'),
+                ref('container_accessibility.role_accountant'),
+                ref('container_accessibility.role_guest')
+            ]), ('id', '=', ref('base.default_user'))]"
         />
         <field name="perm_read" eval="1" />
         <field name="perm_create" eval="0" />
         <field name="perm_write" eval="0" />
         <field name="perm_unlink" eval="0" />
     </record>
-    <record id="rule_restricted_users" model="ir.rule">
-        <field name="name">rule_restricted_users</field>
+    <record id="rule_restricted_users_admin_cud" model="ir.rule">
+        <field name="name">rule_restricted_users admin cud</field>
         <field name="model_id" ref="base.model_res_users" />
         <field
             name="groups"
-            eval="[(4, ref('container_accessibility.group_restricted'))]"
+            eval="[(4, ref('container_accessibility.group_administrator'))]"
         />
         <field
             name="domain_force"
-            eval="['|', ('share', '=', True), ('groups_id', 'in', [ref('container_accessibility.group_restricted')])]"
+            eval="[('role_id', 'in', [
+                ref('container_accessibility.role_administrator'),
+                ref('container_accessibility.role_manager'),
+                ref('container_accessibility.role_user'),
+                ref('container_accessibility.role_accountant'),
+                ref('container_accessibility.role_guest')
+            ])]"
         />
         <field name="perm_read" eval="0" />
         <field name="perm_create" eval="1" />
         <field name="perm_write" eval="1" />
         <field name="perm_unlink" eval="1" />
     </record>
+
+    <record id="rule_restricted_users_read" model="ir.rule">
+        <field name="name">rule_restricted_users read</field>
+        <field name="model_id" ref="base.model_res_users" />
+        <field
+            name="groups"
+            eval="[
+                (4, ref('container_accessibility.group_manager')),
+                (4, ref('container_accessibility.group_user')),
+                (4, ref('container_accessibility.group_accountant'))
+            ]"
+        />
+        <field
+            name="domain_force"
+            eval="['|', ('role_id', 'in', [
+                ref('container_accessibility.role_manager'),
+                ref('container_accessibility.role_user'),
+                ref('container_accessibility.role_accountant'),
+                ref('container_accessibility.role_guest')
+            ]), ('id', '=', ref('base.default_user'))]"
+        />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_unlink" eval="0" />
+    </record>
+    <record id="rule_restricted_users_cud" model="ir.rule">
+        <field name="name">rule_restricted_users cud</field>
+        <field name="model_id" ref="base.model_res_users" />
+        <field
+            name="groups"
+            eval="[
+                (4, ref('container_accessibility.group_manager')),
+                (4, ref('container_accessibility.group_user')),
+                (4, ref('container_accessibility.group_accountant'))
+            ]"
+        />
+        <field
+            name="domain_force"
+            eval="[('role_id', 'in', [
+                ref('container_accessibility.role_manager'),
+                ref('container_accessibility.role_user'),
+                ref('container_accessibility.role_accountant'),
+                ref('container_accessibility.role_guest')
+            ])]"
+        />
+        <field name="perm_read" eval="0" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+    </record>
+
     <record id="rule_restricted_groups" model="ir.rule">
         <field name="name">rule_restricted_groups</field>
         <field name="model_id" ref="base.model_res_groups" />
@@ -42,63 +106,47 @@
         <field name="perm_unlink" eval="1" />
         <field
             name="groups"
-            eval="[(4,ref('container_accessibility.group_restricted'))]"
+            eval="[(4, ref('container_accessibility.group_restricted'))]"
         />
     </record>
-
-    <record id="rule_restricted_mail_server" model="ir.rule">
-        <field name="name">rule_restricted_mail_server</field>
-        <field name="model_id" ref="base.model_ir_mail_server" />
-        <field name="domain_force">[('private', '=', False)]</field>
-        <field name="perm_read" eval="1" />
-        <field name="perm_create" eval="1" />
-        <field name="perm_write" eval="1" />
-        <field name="perm_unlink" eval="1" />
-        <field
-            name="groups"
-            eval="[(4,ref('container_accessibility.group_restricted'))]"
-        />
-    </record>
-    <record id="rule_restricted_fetchmail_server" model="ir.rule">
-        <field name="name">rule_restricted_fetchmail_server</field>
-        <field name="model_id" ref="mail.model_fetchmail_server" />
-        <field name="domain_force">[('private', '=', False)]</field>
-        <field name="perm_read" eval="1" />
-        <field name="perm_create" eval="1" />
-        <field name="perm_write" eval="1" />
-        <field name="perm_unlink" eval="1" />
-        <field
-            name="groups"
-            eval="[(4,ref('container_accessibility.group_restricted'))]"
-        />
-    </record>
-    <record id="rule_restricted_oauth_provider" model="ir.rule">
-        <field name="name">rule_restricted_oauth.provider</field>
-        <field name="model_id" ref="auth_oauth.model_auth_oauth_provider" />
-        <field name="domain_force">[('private', '=', False)]</field>
-        <field name="perm_read" eval="1" />
-        <field name="perm_create" eval="1" />
-        <field name="perm_write" eval="1" />
-        <field name="perm_unlink" eval="1" />
-        <field
-            name="groups"
-            eval="[(4,ref('container_accessibility.group_restricted'))]"
-        />
-    </record>
-    <record id="rule_restricted_fs_storage" model="ir.rule">
-        <field name="name">rule_restricted_fs_storage</field>
-        <field name="model_id" ref="fs_storage.model_fs_storage" />
+    <record id="rule_restricted_roles" model="ir.rule">
+        <field name="name">rule_restricted_roles</field>
+        <field name="model_id" ref="base_user_role.model_res_users_role" />
         <field name="domain_force">[('id', '=', False)]</field>
-        <field name="perm_read" eval="1" />
+        <field name="perm_read" eval="0" />
         <field name="perm_create" eval="1" />
         <field name="perm_write" eval="1" />
         <field name="perm_unlink" eval="1" />
         <field
             name="groups"
-            eval="[(4,ref('container_accessibility.group_restricted'))]"
+            eval="[(4, ref('container_accessibility.group_restricted'))]"
         />
     </record>
-
+    <record id="rule_restricted_roles_read" model="ir.rule">
+        <field name="name">rule_restricted_roles_read</field>
+        <field name="model_id" ref="base_user_role.model_res_users_role" />
+        <field
+            name="domain_force"
+            eval="[('id', 'in', [
+            ref('container_accessibility.role_guest'),
+            ref('container_accessibility.role_user'),
+            ref('container_accessibility.role_accountant'),
+            ref('container_accessibility.role_manager')
+        ])]"
+        />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_unlink" eval="0" />
+        <field
+            name="groups"
+            eval="[
+                (4, ref('container_accessibility.group_manager')),
+                (4, ref('container_accessibility.group_user')),
+                (4, ref('container_accessibility.group_accountant'))
+            ]"
+        />
+    </record>
     <record id="rule_restricted_ir_module_module" model="ir.rule">
         <field name="name">rule_restricted_ir_module_module</field>
         <field name="model_id" ref="base.model_ir_module_module" />
@@ -128,11 +176,61 @@
         <field name="perm_unlink" eval="0" />
         <field
             name="groups"
+            eval="[(4, ref('container_accessibility.group_restricted'))]"
+        />
+    </record>
+    <record id="rule_restricted_mail_server" model="ir.rule">
+        <field name="name">rule_restricted_mail_server</field>
+        <field name="model_id" ref="base.model_ir_mail_server" />
+        <field name="domain_force">[('private', '=', False)]</field>
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+        <field
+            name="groups"
             eval="[(4,ref('container_accessibility.group_restricted'))]"
         />
     </record>
-
-    <!-- rule to prevent restricted users to delete module records -->
+    <record id="rule_restricted_fetchmail_server" model="ir.rule">
+        <field name="name">rule_restricted_fetchmail_server</field>
+        <field name="model_id" ref="mail.model_fetchmail_server" />
+        <field name="domain_force">[('private', '=', False)]</field>
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+        <field
+            name="groups"
+            eval="[(4, ref('container_accessibility.group_restricted'))]"
+        />
+    </record>
+    <record id="rule_restricted_oauth_provider" model="ir.rule">
+        <field name="name">rule_restricted_oauth.provider</field>
+        <field name="model_id" ref="auth_oauth.model_auth_oauth_provider" />
+        <field name="domain_force">[('private', '=', False)]</field>
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+        <field
+            name="groups"
+            eval="[(4,ref('container_accessibility.group_restricted'))]"
+        />
+    </record>
+    <record id="rule_restricted_fs_storage" model="ir.rule">
+        <field name="name">rule_restricted_fs_storage</field>
+        <field name="model_id" ref="fs_storage.model_fs_storage" />
+        <field name="domain_force">[('id', '=', False)]</field>
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+        <field
+            name="groups"
+            eval="[(4, ref('container_accessibility.group_restricted'))]"
+        />
+    </record>
     <record id="rule_restricted_ir_module_module_unlink" model="ir.rule">
         <field name="name">rule_restricted_ir_module_module_unlink</field>
         <field name="model_id" ref="base.model_ir_module_module" />
@@ -145,10 +243,9 @@
         <field name="perm_unlink" eval="1" />
         <field
             name="groups"
-            eval="[(4,ref('container_accessibility.group_restricted'))]"
+            eval="[(4, ref('container_accessibility.group_restricted'))]"
         />
     </record>
-
     <record id="rule_restricted_ir_config_parameter" model="ir.rule">
         <field name="name">rule_restricted_ir_config_parameter</field>
         <field name="model_id" ref="base.model_ir_config_parameter" />
@@ -161,10 +258,9 @@
         <field name="perm_unlink" eval="1" />
         <field
             name="groups"
-            eval="[(4,ref('container_accessibility.group_restricted'))]"
+            eval="[(4, ref('container_accessibility.group_restricted'))]"
         />
     </record>
-
     <record id="rule_restricted_ir_cron" model="ir.rule">
         <field name="name">rule_restricted_ir_cron</field>
         <field name="model_id" ref="base.model_ir_cron" />
@@ -175,10 +271,9 @@
         <field name="perm_unlink" eval="1" />
         <field
             name="groups"
-            eval="[(4,ref('container_accessibility.group_restricted'))]"
+            eval="[(4, ref('container_accessibility.group_restricted'))]"
         />
     </record>
-
     <record id="rule_restricted_ir_actions_server" model="ir.rule">
         <field name="name">rule_restricted_ir_actions_server</field>
         <field name="model_id" ref="base.model_ir_actions_server" />
@@ -189,10 +284,9 @@
         <field name="perm_unlink" eval="1" />
         <field
             name="groups"
-            eval="[(4,ref('container_accessibility.group_restricted'))]"
+            eval="[(4, ref('container_accessibility.group_restricted'))]"
         />
     </record>
-
     <record id="rule_restricted_ir_actions_actions" model="ir.rule">
         <field name="name">rule_restricted_ir_actions_actions</field>
         <field name="model_id" ref="base.model_ir_actions_actions" />
@@ -203,7 +297,7 @@
         <field name="perm_unlink" eval="1" />
         <field
             name="groups"
-            eval="[(4,ref('container_accessibility.group_restricted'))]"
+            eval="[(4, ref('container_accessibility.group_restricted'))]"
         />
     </record>
 </odoo>

@@ -17,6 +17,8 @@
         "website_partner_privacy",
         "website_branding",
         "membership_branding",
+        # website_membership_registration has an upstream dependency on hr_recruitment
+        "hr_recruitment_accessibility",
     ],
     "bundle": True,
 }
