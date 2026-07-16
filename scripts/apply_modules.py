@@ -14,6 +14,7 @@ def main(env, dry_run):
             err=True,
         )
 
+    env["ir.module.module"].update_list()
     modules = env["ir.module.module"].search([("state", "=", "installed")])
     bundles = modules.filtered(lambda m: m.is_bundle)
     bundles.button_immediate_upgrade()
