@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hr_recruitment.menu_hr_recruitment_global_settings" model="ir.ui.menu">
+        <field
+            name="excluded_group_ids"
+            eval="[
+                Command.link(ref('container_accessibility.group_manager')),
+                Command.link(ref('container_accessibility.group_user')),
+                Command.link(ref('container_accessibility.group_accountant')),
+            ]"
+        />
+    </record>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="project.project_config_settings_menu_action" model="ir.ui.menu">
+        <field
+            name="excluded_group_ids"
+            eval="[
+                Command.link(ref('container_accessibility.group_manager')),
+            ]"
+        />
+    </record>
+</odoo>

@@ -18,6 +18,8 @@
         "hr_timesheet_sheet",
         "hr_timesheet_sheet_accessibility",
         "hr_holidays",
+        # hr_timesheet depends on project, so we need to include project_accessibility as well
+        "project_accessibility",
     ],
     "bundle": True,
 }

@@ -14,6 +14,7 @@
         "helpdesk_ticket_related",
         "helpdesk_ticket_partner_response",
         "helpdesk_mgmt_email",
+        "helpdesk_mgmt_accessibility",
     ],
     "bundle": True,
 }

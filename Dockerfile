@@ -17,6 +17,7 @@ COPY --parents \
 	base_module_bundle \
 	base_onboarding \
 	calendar_branding \
+	calendar_accessibility \
 	container_accessibility \
 	container_install \
 	container_s3 \
@@ -26,9 +27,11 @@ COPY --parents \
 	digest_disable \
 	event_install \
 	helpdesk_install \
+	helpdesk_accessibility \
 	helpdesk_project_install \
 	hr_accessibility \
 	hr_timesheet_sheet_accessibility \
+	hr_recruitment_accessibility \
 	website_sale_accessibility \
 	hr_install \
 	l10n_de_install \
@@ -45,6 +48,7 @@ COPY --parents \
 	membership_development_install \
 	membership_install \
 	project_install \
+	project_accessibility \
 	sale_branding \
 	sale_install \
 	stock_install \
