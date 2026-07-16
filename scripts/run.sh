@@ -77,7 +77,7 @@ if [[ -n "$KEYCLOAK_URL" ]]; then
       --client-id "$KEYCLOAK_CLIENT_ID" --client-secret "$KEYCLOAK_RESELLER_CLIENT_SECRET" \
       --xml-id="__export__.__oauth_provider_reseller" \
       --body="${KEYCLOAK_RESELLER_BUTTON:-Reseller Login}" \
-      --role-id="container_accessibility.role_administrator" \
+      --role-id="container_accessibility.role_administrator"
   fi
 fi
 

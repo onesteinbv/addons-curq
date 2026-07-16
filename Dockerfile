@@ -27,7 +27,7 @@ COPY --parents \
 	digest_disable \
 	event_install \
 	helpdesk_install \
-	helpdesk_accessibility \
+	helpdesk_mgmt_accessibility \
 	helpdesk_project_install \
 	hr_accessibility \
 	hr_timesheet_sheet_accessibility \

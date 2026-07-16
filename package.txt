@@ -37,7 +37,7 @@ mass_mailing_website_install
 membership_branding
 membership_install
 helpdesk_install
-helpdesk_accessibility
+helpdesk_mgmt_accessibility
 helpdesk_project_install
 project_install
 project_accessibility
