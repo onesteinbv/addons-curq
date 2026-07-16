@@ -29,6 +29,7 @@ COPY --parents \
 	helpdesk_project_install \
 	hr_accessibility \
 	hr_timesheet_sheet_accessibility \
+	website_sale_accessibility \
 	hr_install \
 	l10n_de_install \
 	l10n_nl_hr_expense \
