@@ -20,7 +20,7 @@ def migrate(cr, version):
     )
     normal_users.write({"role_id": role_manager.id})
 
-    # Assign restricted users with private oauth to the administrator role
+    # Assign users with private oauth to the administrator role
     admin_users = env["res.users"].search(
         [
             ("oauth_provider_id", "!=", False),
