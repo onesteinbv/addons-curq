@@ -64,6 +64,7 @@ COPY --parents \
 	web_branding \
 	account_branding \
 	website_branding \
+	website_breadcrumb_usability \
 	./
 
 RUN apt-get install git -y
