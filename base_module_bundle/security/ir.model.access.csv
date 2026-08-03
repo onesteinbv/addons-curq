@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+base_module_bundle.access_retired_module_wizard,access_retired_module_wizard,base_module_bundle.model_retired_module_wizard,base.group_system,1,1,1,1

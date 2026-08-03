@@ -5,6 +5,10 @@
     "author": "Onestein",
     "website": "https://onestein.nl",
     "depends": ["base_setup"],
-    "data": [],
+    "data": [
+        "security/ir.model.access.csv",
+        "wizards/retired_module_wizard.xml",
+        "menuitems.xml",
+    ],
     "license": "AGPL-3",
 }
