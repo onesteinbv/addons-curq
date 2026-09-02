@@ -41,7 +41,7 @@ if [[ -n "$INCOMING_MAIL_SERVER" && "$SETUP_INCOMING_MAIL" == "true" ]]; then
   if [[ -n "$INCOMING_MAIL_SERVER_TYPE" ]]; then
     flags+=(--server-type "$INCOMING_MAIL_SERVER_TYPE")
   fi
-  if [[ "$INCOMING_MAIL_SSL" == "true" ]]; then
+  if [[ "${INCOMING_MAIL_SSL:-true}" == "true" ]]; then
     flags+=(--ssl)
   else
     flags+=(--no-ssl)
