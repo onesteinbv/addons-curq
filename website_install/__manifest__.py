@@ -11,6 +11,7 @@
         "website_altcha",
         "website_blog",
         "website_breadcrumb",
+        "website_breadcrumb_usability",
         "website_odoo_debranding",
         "website_onboarding",
         "website_share_blogger",
