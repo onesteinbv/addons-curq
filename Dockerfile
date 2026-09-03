@@ -50,6 +50,7 @@ COPY --parents \
 	subscription_install \
 	survey_install \
 	website_event_install \
+	website_helpdesk_install \
 	website_install \
 	website_membership_install \
 	website_onboarding \
