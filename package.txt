@@ -41,6 +41,7 @@ sale_install
 stock_install
 website_event_install
 website_install
+website_usability
 website_sale_install
 website_membership_install
 membership_development_install

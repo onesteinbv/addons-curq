@@ -51,6 +51,7 @@ COPY --parents \
 	survey_install \
 	website_event_install \
 	website_install \
+	website_usability \
 	website_membership_install \
 	website_onboarding \
 	website_sale_install \
