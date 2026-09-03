@@ -57,6 +57,7 @@ release_note
 web_branding
 website_branding
 account_branding
+website_breadcrumb_usability
 addons-generic/account_journal_subtype
 addons-generic/account_partner_default_account
 addons-generic/account_period_auto_create
