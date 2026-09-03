@@ -1,4 +1,4 @@
-from odoo import conf, fields, models
+from odoo import api, conf, fields, models
 
 
 class IrModuleModule(models.Model):
@@ -8,6 +8,9 @@ class IrModuleModule(models.Model):
         help="A bundle purges dependencies on uninstallation of this module",
         compute="_compute_is_bundle",
     )  # Can't be stored
+    module_type = fields.Selection(
+        selection_add=[("bundles", "Bundles")], ondelete={"bundles": "set default"}
+    )
 
     def _compute_is_bundle(self):
         for module in self:
@@ -51,3 +54,24 @@ class IrModuleModule(models.Model):
             modules_to_remove.write({"state": "to remove"})
 
         return super().button_uninstall()
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        modules = super().create(vals_list)
+        bundle_modules = self
+        for module in modules:
+            if module.get_module_info(module.name).get("bundle", False):
+                bundle_modules += module
+        bundle_modules.write({"module_type": "bundles"})
+        return modules
+
+    def _update_from_terp(self, terp):
+        res = super()._update_from_terp(terp)
+        self._update_module_type(terp)
+        return res
+
+    def _update_module_type(self, terp):
+        if terp.get("bundle", False):
+            self.module_type = "bundles"
+        elif self.module_type == "bundles":
+            self.module_type = "official"
