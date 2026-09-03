@@ -2,18 +2,36 @@
     <record model="ir.ui.view" id="module_view_kanban_apps_inherit">
         <field name="name">Apps Kanban Data Modules</field>
         <field name="model">ir.module.module</field>
-        <field name="inherit_id" ref="base_import_module.module_view_kanban_apps_inherit"/>
+        <field
+            name="inherit_id"
+            ref="base_import_module.module_view_kanban_apps_inherit"
+        />
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='button_immediate_install_app'][1]" position="attributes">
-                <attribute name="invisible">state != 'uninstalled' or module_type in ('official','bundles', False)
+            <xpath
+                expr="//button[@name='button_immediate_install_app'][1]"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >state != 'uninstalled' or module_type in ('official','bundles', False)
                 </attribute>
             </xpath>
-            <xpath expr="//button[@name='button_immediate_install_app'][2]" position="attributes">
-                <attribute name="invisible">state == 'uninstalled' or module_type in ('official','bundles', False)
+            <xpath
+                expr="//button[@name='button_immediate_install_app'][2]"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >state == 'uninstalled' or module_type in ('official','bundles', False)
                 </attribute>
             </xpath>
-            <xpath expr="//button[@name='button_immediate_install']" position="attributes">
-                <attribute name="invisible">state != 'uninstalled' or (module_type and module_type not in
+            <xpath
+                expr="//button[@name='button_immediate_install']"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >state != 'uninstalled' or (module_type and module_type not in
                     ('official','bundles'))
                 </attribute>
             </xpath>
@@ -23,26 +41,48 @@
     <record model="ir.ui.view" id="module_form_apps_inherit">
         <field name="name">Apps</field>
         <field name="model">ir.module.module</field>
-        <field name="inherit_id" ref="base_import_module.module_form_apps_inherit"/>
+        <field name="inherit_id" ref="base_import_module.module_form_apps_inherit" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='technical_data']" position="attributes">
-                <attribute name="invisible">module_type not in ('official','bundles')</attribute>
+                <attribute
+                    name="invisible"
+                >module_type not in ('official','bundles')</attribute>
             </xpath>
-            <xpath expr="//button[@name='button_immediate_install_app'][1]" position="attributes">
-                <attribute name="invisible">state != 'uninstalled' or module_type in ('official','bundles', False)
+            <xpath
+                expr="//button[@name='button_immediate_install_app'][1]"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >state != 'uninstalled' or module_type in ('official','bundles', False)
                 </attribute>
             </xpath>
-            <xpath expr="//button[@name='button_immediate_install_app'][2]" position="attributes">
-                <attribute name="invisible">state == 'uninstalled' or module_type in ('official','bundles', False)
+            <xpath
+                expr="//button[@name='button_immediate_install_app'][2]"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >state == 'uninstalled' or module_type in ('official','bundles', False)
                 </attribute>
             </xpath>
-            <xpath expr="//button[@name='button_immediate_install']" position="attributes">
-                <attribute name="invisible">to_buy or state != 'uninstalled' or (module_type and module_type not in
+            <xpath
+                expr="//button[@name='button_immediate_install']"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >to_buy or state != 'uninstalled' or (module_type and module_type not in
                     ('official','bundles'))
                 </attribute>
             </xpath>
-            <xpath expr="//button[@name='button_immediate_upgrade']" position="attributes">
-                <attribute name="invisible">state == 'uninstalled' or (module_type and module_type not in
+            <xpath
+                expr="//button[@name='button_immediate_upgrade']"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >state == 'uninstalled' or (module_type and module_type not in
                     ('official','bundles'))
                 </attribute>
             </xpath>
