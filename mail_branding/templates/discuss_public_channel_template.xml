@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="discuss_public_channel_template"
+        inherit_id="mail.discuss_public_channel_template"
+        name="Discuss Public Template"
+    >
+        <xpath expr="//head/link[@rel='shortcut icon']" position="attributes">
+            <attribute
+                name="t-att-href"
+            >x_icon or '/mail_branding/static/img/icon.svg'</attribute>
+        </xpath>
+        <xpath expr="//head/title" position="attributes">
+            <attribute name="t-esc">title or 'CURQ'</attribute>
+        </xpath>
+    </template>
+</odoo>

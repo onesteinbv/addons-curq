@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//widget[@name='res_config_edition']" position="before">
+                <setting
+                    id="release_note"
+                    invisible="not release_note_version or release_note_version == '0.0.0'"
+                >
+                    <field
+                        name="release_note_project"
+                        class="oe_inline fw-bold pe-1"
+                        nolabel="1"
+                    />
+                    <field name="release_note_version" class="oe_inline" />
+                    <button
+                        name="%(release_note_wizard_action)d"
+                        string="View Release Notes"
+                        context="{'default_include_read': True}"
+                        class="btn-link d-block"
+                        type="action"
+                    />
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

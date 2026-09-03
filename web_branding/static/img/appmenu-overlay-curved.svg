@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="2000"
+   height="1128"
+   viewBox="0 0 2000 1128"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="appmenu-overlay-curved.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.41843972"
+     inkscape:cx="1480.5"
+     inkscape:cy="762.35593"
+     inkscape:window-width="1920"
+     inkscape:window-height="1120"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <path
+     id="polygon2"
+     style="fill:#ffc03d;fill-opacity:0.152941"
+     d="m 0,1077.844 c 0,0 306.81886,75.3001 528.84734,-282.67219 C 733.69379,464.90177 1504.99,1127.745 1504.99,1127.745 H 0 Z"
+     sodipodi:nodetypes="csccc" />
+  <path
+     id="path12970"
+     style="fill:#ffc03d;fill-opacity:0.152941"
+     d="M 363.53803,501.22267 C 619.10806,476.3163 620.01486,319.55901 619.80244,248.26338 619.09988,12.459836 368.194,0 368.194,0 H 0 v 666.504 c 0,0 140.47238,-143.54265 363.53803,-165.28133 z"
+     sodipodi:nodetypes="sscccs" />
+  <path
+     id="polygon6"
+     style="fill:#ffc03d;fill-opacity:0.152941"
+     d="M 1998,1005.1191 V 440.4668 C 1828.8509,377.95527 1740.9559,243.74882 1748.6543,2 H 1004.7949 C 1507.9311,214.49169 1196.135,842.81389 1998,1005.1191 Z"
+     sodipodi:nodetypes="ccccc" />
+</svg>

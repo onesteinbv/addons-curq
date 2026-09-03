@@ -1,0 +1,108 @@
+name: tag
+
+on:
+  push:
+    tags:
+      - "18.0.*.*"
+
+jobs:
+  notify-start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram message
+        run: |
+          curl \
+            -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_API_TOKEN }}/sendMessage \
+            -H 'Content-Type: application/json' \
+            -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"📢 Testing tag `${{ github.ref_name }}`: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
+            --fail
+  
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      major_tag: ${{ steps.vars.outputs.major_tag }}
+    steps:
+      - id: vars
+        name: Extract major tag
+        run: |
+          echo "major_tag=$(echo '${{ github.ref_name }}' | sed 's/\.[^.]*$//')" >> "$GITHUB_OUTPUT"
+
+  check-dangling-news-fragments:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: Ensure no dangling newsfragments
+          run: |
+            # Count how many files are sitting in newsfragments (excluding .gitkeep)
+            FRAGMENT_COUNT=$(find newsfragments/ -type f ! -name ".gitkeep" | wc -l)
+            
+            if [ "$FRAGMENT_COUNT" -gt 0 ]; then
+              echo "❌ Found $FRAGMENT_COUNT uncompiled news fragments in newsfragments/."
+              echo "Did you forget to run 'towncrier build'?"
+              exit 1
+            fi
+ 
+  build-ci:
+    needs: [check-dangling-news-fragments]
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      tags: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }}
+      target: ci
+
+  migration:
+    needs: [build-ci]
+    uses: ./.github/workflows/test-migration.yml
+    with:
+      from: ghcr.io/${{ github.repository_owner }}/curq-ci:18.0
+      to: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }}
+
+  build:
+    needs: [setup, migration]
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      tags: ghcr.io/${{ github.repository_owner }}/curq:${{ github.ref_name }},ghcr.io/${{ github.repository_owner }}/curq:${{ needs.setup.outputs.major_tag }},ghcr.io/${{ github.repository_owner }}/curq:18.0
+      target: base
+
+  tag-ci-latest:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up Docker
+        uses: docker/setup-docker-action@v4
+      - name: Tag ${{ github.ref_name }} > 18.0
+        run: |
+          docker pull ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }}
+          docker tag ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }} ghcr.io/${{ github.repository_owner }}/curq-ci:18.0
+          docker push ghcr.io/${{ github.repository_owner }}/curq-ci:18.0
+
+  notify-failure:
+    needs: [build-ci, migration, build]
+    if: ${{ failure() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram message
+        run: |
+          curl \
+            -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_API_TOKEN }}/sendMessage \
+            -H 'Content-Type: application/json' \
+            -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"❤️‍🩹 Testing tag `${{ github.ref_name }}` failed: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
+            --fail
+  
+  notify-success:
+    needs: [build-ci, migration, build]
+    if: ${{ success() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram message
+        run: |
+          curl \
+            -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_API_TOKEN }}/sendMessage \
+            -H 'Content-Type: application/json' \
+            -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"✅ Testing tag `${{ github.ref_name }}` succeeded: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
+            --fail
+  

@@ -16,6 +16,7 @@
         "hr_expense",
         "hr_employee_firstname",
         "hr_timesheet_sheet",
+        "hr_timesheet_sheet_accessibility",
         "hr_holidays",
     ],
     "bundle": True,

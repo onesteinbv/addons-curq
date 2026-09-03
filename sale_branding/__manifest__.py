@@ -1,0 +1,21 @@
+{
+    "name": "Sale Branding",
+    "summary": "Remove Odoo sample quotation button/branding from quotation views.",
+    "category": "Sales",
+    "version": "18.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "Onestein",
+    "website": "https://onestein.nl",
+    "depends": [
+        "sale",
+    ],
+    "data": [
+        "views/sale_branding_views.xml",
+    ],
+    "assets": {
+        "web.assets_backend": [
+            "sale_branding/static/src/xml/sale_action_helper.xml",
+        ],
+    },
+    "auto_install": True,
+}

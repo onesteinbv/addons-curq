@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="membership.action_membership_members" model="ir.actions.act_window">
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new member
+            </p>
+            <p>
+                CURQ helps you to easily track all activities related to a member:
+                Current Membership Status, Discussions and History of Membership, etc.
+            </p>
+        </field>
+    </record>
+</odoo>

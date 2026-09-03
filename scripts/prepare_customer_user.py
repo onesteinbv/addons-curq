@@ -4,10 +4,13 @@ import click_odoo
 
 @click.command()
 @click_odoo.env_options(default_log_level="error")
-@click.option("--email")
+@click.option("--login", default="")
 @click.option("--group-file", default=None)
 @click.option("--group", "-g", multiple=True, default=[])
-def main(env, email, group_file, group):
+def main(env, login, group_file, group):
+    # TODO: Remove the groups by file option / remove usage in run.sh, and add these in the bundles instead.
+    #       E.g when helpdesk_install is installed it should automatically add the user to the helpdesk group, when
+    #       website_sale is installed it should automatically add the user to the website group, etc...
     groups = list(group)
     if group_file:
         with open(group_file, "r") as f:
@@ -26,8 +29,9 @@ def main(env, email, group_file, group):
         return click.echo("Customer user doesn't exists", err=True)
 
     if customer_user.login == "customer_user":
-        customer_user.write({"login": email, "lang": "nl_NL"})
-        customer_user.partner_id.write({"email": email})
+        customer_user.write({"login": login, "lang": "nl_NL"})
+        # Use the login as email to ensure the user can receive the reset password email
+        customer_user.partner_id.write({"email": login})
 
     if customer_user.state == "new":
         group_ids.append(env.ref("base_onboarding.onboarding_group").id)

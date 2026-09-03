@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_totp_wizard">
+        <field name="model">auth_totp.wizard</field>
+        <field name="inherit_id" ref="auth_totp.view_totp_wizard" />
+        <field name="priority" eval="99" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//span[contains(., 'Microsoft Authenticator')]"
+                position="replace"
+            >
+                <span class="text-muted">
+                    Popular ones includes Aegis Authenticator, 2FAS, Ente Auth and FreeOTP Authenticator.
+                </span>
+            </xpath>
+
+            <xpath
+                expr="//a[contains(@href, 'https://play.google.com/store')]"
+                position="before"
+            >
+                <a
+                    href="https://open-store.io/?sort=relevance&amp;search=Authenticator"
+                    class="mx-2"
+                    target="blank"
+                >
+                    <img
+                        alt="On Open Store"
+                        style="width: 24px;"
+                        src="/auth_branding/static/img/openstore.svg"
+                    />
+                </a>
+            </xpath>
+        </field>
+    </record>
+</odoo>

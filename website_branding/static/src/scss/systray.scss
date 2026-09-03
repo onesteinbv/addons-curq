@@ -1,0 +1,5 @@
+.o_menu_systray_item {
+    .o-website-btn-custo-primary {
+        @include button-variant($curq-blue, $curq-blue);
+    }
+}

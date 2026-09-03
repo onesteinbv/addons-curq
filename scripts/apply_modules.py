@@ -25,6 +25,15 @@ def main(env, dry_run):
     ignore_modules = modules.filtered(
         lambda m: m.name in ["container_s3"] or m.name.startswith("theme_")
     )
+
+    # Exempt payment providers from retirement if the payment module is installed
+    payment_module = env.ref("base.module_payment")
+    if payment_module.state == "installed":
+        click.echo(
+            "Payment module is installed, exempting payment providers from retirement."
+        )
+        ignore_modules += env["payment.provider"].search([]).mapped("module_id")
+
     target_modules += ignore_modules
     retired_modules = current_modules - target_modules
     if retired_modules:

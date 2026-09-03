@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record
-        id="auditlog_rule_res_users"
-        model="auditlog.rule"
-    >
+    <record id="auditlog_rule_res_users" model="auditlog.rule">
         <field name="name">Users</field>
         <field name="model_id" ref="base.model_res_users" />
         <field name="log_type">full</field>
@@ -14,10 +11,7 @@
         <field name="private" eval="True" />
     </record>
 
-    <record
-        id="auditlog_rule_res_bank_account"
-        model="auditlog.rule"
-    >
+    <record id="auditlog_rule_res_bank_account" model="auditlog.rule">
         <field name="name">Bank Accounts</field>
         <field name="model_id" ref="base.model_res_partner_bank" />
         <field name="log_type">full</field>
@@ -28,10 +22,7 @@
         <field name="private" eval="True" />
     </record>
 
-    <record
-        id="auditlog_rule_res_partner"
-        model="auditlog.rule"
-    >
+    <record id="auditlog_rule_res_partner" model="auditlog.rule">
         <field name="name">Contacts</field>
         <field name="model_id" ref="base.model_res_partner" />
         <field name="log_type">full</field>
@@ -51,7 +42,8 @@
                     ref('auditlog_rule_res_partner')
                 ]),
                 ('state', '=', 'subscribed')]]"
-            model="auditlog.rule" name="search"
+            model="auditlog.rule"
+            name="search"
         />
     </function>
 
@@ -64,6 +56,8 @@
                     ref('auditlog_rule_res_partner')
                 ]),
                 ('state', '=', 'draft')]]"
-            model="auditlog.rule" name="search"/>
+            model="auditlog.rule"
+            name="search"
+        />
     </function>
 </odoo>

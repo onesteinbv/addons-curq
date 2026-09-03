@@ -1,0 +1,33 @@
+:root {
+    .o_grid_apps_menu[data-theme="milk"] {
+        --app-menu-background: url("../../img/appmenu-overlay-curved.svg"), #{$o-white} !important;
+        --app-menu-hover-background: #{rgba($curq-orange, 0.1)} !important;
+        --app-menu-text-shadow: 0;
+    }
+
+    .o_grid_apps_menu[data-theme="community"] {
+        --app-menu-background: url("../../img/appmenu-overlay-curved.svg"), #{$o-white} !important;
+        --app-menu-hover-background: #{rgba($curq-orange, 0.1)} !important;
+        --app-menu-text-shadow: 0;
+    }
+}
+
+.o-app-menu-item {
+    border-radius: 8px;
+    &__icon {
+        background-color: rgba($curq-blue, 0.05);
+        transition:
+            ease background-color,
+            0.3s;
+    }
+
+    &:focus,
+    &:hover {
+        box-shadow: 0 6px 12px -8px transparentize($curq-blue, 0.6);
+        backdrop-filter: blur(4px);
+
+        .o-app-menu-item__icon {
+            background-color: transparentize($o-white, 0.4) !important;
+        }
+    }
+}

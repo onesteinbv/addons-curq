@@ -2,14 +2,18 @@
 <odoo>
     <record id="onboarding_wizard_form" model="ir.ui.view">
         <field name="model">base.onboarding.wizard</field>
-        <field name="inherit_id" ref="base_onboarding.onboarding_wizard_form"/>
+        <field name="inherit_id" ref="base_onboarding.onboarding_wizard_form" />
         <field name="arch" type="xml">
             <xpath expr="//footer" position="before">
                 <field name="website_id" invisible="1" />
 
                 <group name="website" invisible="state != 'website'">
                     <div class="oe_title" colspan="2">
-                        <label for="website_name" string="Website Name" class="oe_edit_only font-weight-bold" />
+                        <label
+                            for="website_name"
+                            string="Website Name"
+                            class="oe_edit_only font-weight-bold"
+                        />
                         <h1>
                             <field name="website_name" required="state == 'website'" />
                         </h1>
@@ -23,49 +27,90 @@
                     </group>
                 </group>
 
-                <group string="Select a theme for your website" invisible="state != 'theme'">
-                    <field name="theme_module_ids" mode="kanban" nolabel="1" colspan="2">
-                        <kanban create="false" can_open="0" default_order="state,sequence,name"
-                                js_class="theme_preview_kanban">
-                            <field name="icon"/>
-                            <field name="summary"/>
-                            <field name="name"/>
-                            <field name="state"/>
-                            <field name="url"/>
-                            <field name="image_ids"/>
-                            <field name="category_id"/>
-                            <field name="display_name"/>
-                            <field name="is_installed_on_current_website"/>
+                <group
+                    string="Select a theme for your website"
+                    invisible="state != 'theme'"
+                >
+                    <field
+                        name="theme_module_ids"
+                        mode="kanban"
+                        nolabel="1"
+                        colspan="2"
+                    >
+                        <kanban
+                            create="false"
+                            can_open="0"
+                            default_order="state,sequence,name"
+                            js_class="theme_preview_kanban"
+                        >
+                            <field name="icon" />
+                            <field name="summary" />
+                            <field name="name" />
+                            <field name="state" />
+                            <field name="url" />
+                            <field name="image_ids" />
+                            <field name="category_id" />
+                            <field name="display_name" />
+                            <field name="is_installed_on_current_website" />
                             <templates>
-                                <div t-name="card"
-                                     t-attf-class="o_theme_preview #{record.is_installed_on_current_website.raw_value? 'o_theme_installed' : ''}">
-                                    <t t-set="has_image" t-value="record.image_ids.raw_value.length > 0"/>
-                                    <t t-set="has_screenshot" t-value="record.image_ids.raw_value.length > 1"/>
-                                    <t t-set="image_url"
-                                       t-value="has_image ? '/web/image/' + record.image_ids.raw_value[0] : record.icon.value"/>
+                                <div
+                                    t-name="card"
+                                    t-attf-class="o_theme_preview #{record.is_installed_on_current_website.raw_value? 'o_theme_installed' : ''}"
+                                >
+                                    <t
+                                        t-set="has_image"
+                                        t-value="record.image_ids.raw_value.length > 0"
+                                    />
+                                    <t
+                                        t-set="has_screenshot"
+                                        t-value="record.image_ids.raw_value.length > 1"
+                                    />
+                                    <t
+                                        t-set="image_url"
+                                        t-value="has_image ? '/web/image/' + record.image_ids.raw_value[0] : record.icon.value"
+                                    />
 
-                                    <div class="o_theme_preview_top position-relative border rounded-3 transition-base">
-                                        <div t-attf-class="bg-gray-lighter #{has_screenshot? 'o_theme_screenshot' : (has_image ? 'o_theme_cover' : 'o_theme_logo')} rounded-3"
-                                             t-attf-style="background-image: url(#{image_url});"/>
-                                        <div class="o_button_area position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center w-100 h-100 bg-dark bg-opacity-50 rounded opacity-0 opacity-100-hover transition-fade">
+                                    <div
+                                        class="o_theme_preview_top position-relative border rounded-3 transition-base"
+                                    >
+                                        <div
+                                            t-attf-class="bg-gray-lighter #{has_screenshot? 'o_theme_screenshot' : (has_image ? 'o_theme_cover' : 'o_theme_logo')} rounded-3"
+                                            t-attf-style="background-image: url(#{image_url});"
+                                        />
+                                        <div
+                                            class="o_button_area position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center w-100 h-100 bg-dark bg-opacity-50 rounded opacity-0 opacity-100-hover transition-fade"
+                                        >
                                             <div class="d-flex flex-column gap-2 w-50">
-                                                <t t-if="record.is_installed_on_current_website.raw_value">
-                                                    <button type="object" name="button_refresh_theme"
-                                                            class="btn btn-primary">Update theme
+                                                <t
+                                                    t-if="record.is_installed_on_current_website.raw_value"
+                                                >
+                                                    <button
+                                                        type="object"
+                                                        name="button_refresh_theme"
+                                                        class="btn btn-primary"
+                                                    >Update theme
                                                     </button>
-                                                    <button type="object" name="button_remove_theme"
-                                                            class="btn btn-secondary">Remove theme
+                                                    <button
+                                                        type="object"
+                                                        name="button_remove_theme"
+                                                        class="btn btn-secondary"
+                                                    >Remove theme
                                                     </button>
                                                 </t>
                                                 <t t-else="">
-                                                    <button type="object" name="button_choose_theme"
-                                                            class="btn btn-primary">Use theme
+                                                    <button
+                                                        type="object"
+                                                        name="button_choose_theme"
+                                                        class="btn btn-primary"
+                                                    >Use theme
                                                     </button>
-                                                    <hr t-if="record.url.value"/>
-                                                    <a role="button"
-                                                       t-if="record.url.value"
-                                                       t-att-href="record.url.value" target="_blank"
-                                                       class="btn btn-secondary"
+                                                    <hr t-if="record.url.value" />
+                                                    <a
+                                                        role="button"
+                                                        t-if="record.url.value"
+                                                        t-att-href="record.url.value"
+                                                        target="_blank"
+                                                        class="btn btn-secondary"
                                                     >
                                                         Live Preview
                                                     </a>
@@ -74,14 +119,21 @@
                                         </div>
                                     </div>
                                     <div class="o_theme_preview_bottom mt-2 mb-3 px-2">
-                                        <small t-if="record.summary.value" class="text-uppercase text-muted">
+                                        <small
+                                            t-if="record.summary.value"
+                                            class="text-uppercase text-muted"
+                                        >
                                             <b>
-                                                <t t-esc="record.summary.value.split(',')[0]"/>
+                                                <t
+                                                    t-esc="record.summary.value.split(',')[0]"
+                                                />
                                             </b>
                                         </small>
                                         <h3 t-if="record.display_name.value">
                                             <b>
-                                                <t t-esc="record.display_name.value.replace('Theme', '').replace('theme', '')"/>
+                                                <t
+                                                    t-esc="record.display_name.value.replace('Theme', '').replace('theme', '')"
+                                                />
                                             </b>
                                         </h3>
                                     </div>

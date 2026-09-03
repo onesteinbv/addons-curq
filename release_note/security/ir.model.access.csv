@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+release_note.access_release_note_wizard,access_release_note_wizard,release_note.model_release_note_wizard,base.group_user,1,1,1,1

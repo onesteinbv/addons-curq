@@ -3,7 +3,7 @@
     <record id="onboarding_wizard_form" model="ir.ui.view">
         <field name="model">base.onboarding.wizard</field>
         <field name="mode">primary</field>
-        <field name="inherit_id" ref="multi_step_wizard.multi_step_wizard_form"/>
+        <field name="inherit_id" ref="multi_step_wizard.multi_step_wizard_form" />
         <field name="arch" type="xml">
             <xpath expr="//button[@special='cancel']" position="attributes">
                 <attribute name="invisible">1</attribute>
@@ -28,71 +28,119 @@
             </xpath>
             <xpath expr="//footer" position="before">
                 <field name="company_id" invisible="1" />
-                <group name="installation" invisible="state != 'start'" >
-                    <p colspan="2">Activating apps can take some time</p>
-                    <field
-                        name="module_ids"
-                        mode="kanban" nolabel="1" colspan="2"
-                    >
-                    <kanban create="false" class="o_modules_kanban">
-                        <field name="icon"/>
-                        <field name="to_buy"/>
-                        <field name="name"/>
-                        <field name="state"/>
-                        <field name="summary"/>
-                        <field name="website"/>
-                        <field name="application"/>
+                <group name="installation" invisible="state != 'start'">
+                    <p colspan="2">Activating bundles can take some time</p>
+                    <field name="module_ids" mode="kanban" nolabel="1" colspan="2">
+                        <kanban create="false" class="o_modules_kanban">
+                            <field name="icon" />
+                            <field name="to_buy" />
+                            <field name="name" />
+                            <field name="state" />
+                            <field name="summary" />
+                            <field name="website" />
+                            <field name="application" />
 
-                        <templates>
-                            <t t-name="card">
-                                <div class="oe_module_vignette">
-                                    <t t-set="installed" t-value="record.state.raw_value == 'installed'"/>
-                                    <img t-attf-src="#{record.icon.value}" class="oe_module_icon" alt="Icon" height="140" width="140"/>
-                                    <div class="oe_module_desc" t-att-title="record.shortdesc.value" style="float: right;width:65%">
-                                        <h4 class="o_kanban_record_title">
-                                            <field name="shortdesc"/>&amp;nbsp;
+                            <templates>
+                                <t t-name="card">
+                                    <div class="oe_module_vignette d-flex">
+                                        <t
+                                            t-set="installed"
+                                            t-value="record.state.raw_value == 'installed'"
+                                        />
+                                        <img
+                                            t-attf-src="#{record.icon.value}"
+                                            class="oe_module_icon m-2"
+                                            alt="Icon"
+                                            height="70"
+                                            width="70"
+                                        />
+                                        <div
+                                            class="oe_module_desc ps-2 flex-grow-1"
+                                            t-att-title="record.shortdesc.value"
+                                        >
+                                            <h4 class="o_kanban_record_title">
+                                            <field name="shortdesc" />&amp;nbsp;
                                         </h4>
-                                        <p class="oe_module_name">
-                                            <field name="summary"/>
-                                        </p>
-                                        <div class="oe_module_action d-flex flex-wrap justify-content-between">
-                                            <button type="object" class="btn btn-primary btn-sm base_onboarding_instant_block" context="{'onboarding_wizard': True}" name="button_immediate_install" invisible="state != 'uninstalled'" groups="base.group_system">
+                                            <p
+                                                class="oe_module_name"
+                                                style="min-height: 3em;"
+                                            >
+                                                <field name="summary" />
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <div
+                                                class="oe_module_action d-flex flex-wrap justify-content-between"
+                                            >
+                                                <button
+                                                    type="object"
+                                                    class="btn btn-primary btn-sm base_onboarding_instant_block"
+                                                    context="{'onboarding_wizard': True}"
+                                                    name="button_immediate_install"
+                                                    invisible="state != 'uninstalled'"
+                                                    groups="base.group_system"
+                                                >
                                                 Activate
                                             </button>
-                                            <button type="object" class="btn btn-secondary btn-sm base_onboarding_instant_block" context="{'onboarding_wizard': True}" name="button_immediate_uninstall" invisible="state != 'installed'" groups="base.group_system">
+                                                <button
+                                                    type="object"
+                                                    class="btn btn-secondary btn-sm base_onboarding_instant_block"
+                                                    context="{'onboarding_wizard': True}"
+                                                    name="button_immediate_uninstall"
+                                                    invisible="state != 'installed'"
+                                                    groups="base.group_system"
+                                                >
                                                 Deactivate
                                             </button>
-                                            <button invisible="state != 'to remove'" type="object" class="btn btn-sm btn-secondary" name="button_uninstall_cancel" groups="base.group_system">
+                                                <button
+                                                    invisible="state != 'to remove'"
+                                                    type="object"
+                                                    class="btn btn-sm btn-secondary"
+                                                    name="button_uninstall_cancel"
+                                                    groups="base.group_system"
+                                                >
                                                 Cancel Uninstall
                                             </button>
-                                            <button invisible="state != 'to install'" type="object" class="btn btn-sm btn-secondary" name="button_install_cancel" groups="base.group_system">
+                                                <button
+                                                    invisible="state != 'to install'"
+                                                    type="object"
+                                                    class="btn btn-sm btn-secondary"
+                                                    name="button_install_cancel"
+                                                    groups="base.group_system"
+                                                >
                                                 Cancel Install
                                             </button>
+                                            </div>
                                         </div>
-                                </div>
-                                </div>
-                            </t>
-                        </templates>
-                    </kanban>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
                     </field>
                 </group>
                 <group name="company" invisible="state != 'company_info'">
                     <group string="Corporate Identity">
                         <p colspan="2">
-                            It's important for your company to have a <b>corporate identity</b>.
-                            A beautiful looking invoice or sale order leads to <b>clients paying faster</b> for your services.
+                            It's important for your company to have a <b
+                        >corporate identity</b>.
+                            A beautiful looking invoice or sale order leads to <b
+                        >clients paying faster</b> for your services.
                             Click the button to personalize your document layout.
                         </p>
                         <button
                             type="action"
                             name="%(web.action_base_document_layout_configurator)d"
                             string="Configure Document Layout"
-                            role="button" colspan="2"
-                            class="oe_link" icon="fa-arrow-right"
+                            role="button"
+                            colspan="2"
+                            class="oe_link"
+                            icon="fa-arrow-right"
                         />
                     </group>
                     <group string="Company Information">
-                        <p colspan="2">This information will be included on documents (e.g. invoices) you'll send to customers.</p>
+                        <p
+                            colspan="2"
+                        >This information will be included on documents (e.g. invoices) you'll send to customers.</p>
                         <field name="company_phone" />
                         <field name="company_email" />
                         <field name="company_website" />
@@ -102,8 +150,11 @@
                     </group>
                 </group>
 
-                <group string="Outgoing and incoming mail"
-                       name="mail" invisible="state != 'mailing'">
+                <group
+                    string="Outgoing and incoming mail"
+                    name="mail"
+                    invisible="state != 'mailing'"
+                >
                     <group>
                         <field name="fetchmail_server_id" />
                         <field name="ir_mail_server_id" />
@@ -112,14 +163,22 @@
 
                 <group name="final" invisible="state != 'final'">
                     <p colspan="2">Welcome and congratulations,</p>
-                    <p colspan="2">You got your own Odoo environment for all your essential company processes. Now you can keep yourself busy with what really matters: doing business!</p>
-                    <p colspan="2">Do you have any questions? That is possible! On our website you can find several tutorials, our FAQ and of course you can always send us an email.</p>
+                    <p
+                        colspan="2"
+                    >You got your own Odoo environment for all your essential company processes. Now you can keep yourself busy with what really matters: doing business!</p>
+                    <p
+                        colspan="2"
+                    >Do you have any questions? That is possible! On our website you can find several tutorials, our FAQ and of course you can always send us an email.</p>
                     <p colspan="2">We want to help you to get started.</p>
                     <p colspan="2">Greetings,</p>
                     <p colspan="2">Onestein</p>
                     <div colspan="2">
-                        <a href="mailto:support@onestein.nl" class="btn btn-link" role="button">
-                            <i class="fa fa-envelope"/>
+                        <a
+                            href="mailto:support@onestein.nl"
+                            class="btn btn-link"
+                            role="button"
+                        >
+                            <i class="fa fa-envelope" />
                             support@onestein.nl
                         </a>
                     </div>
@@ -135,5 +194,4 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
-
 </odoo>

@@ -16,7 +16,9 @@
 
     <!-- By default, allow all users to add a bank number -->
     <record id="base.group_user" model="res.groups">
-        <field name="implied_ids" eval="[(4, ref('account_payment_order.group_account_payment'))]"/>
+        <field
+            name="implied_ids"
+            eval="[(4, ref('account_payment_order.group_account_payment'))]"
+        />
     </record>
-
 </odoo>

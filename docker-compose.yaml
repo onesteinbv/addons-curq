@@ -1,0 +1,66 @@
+name: curq
+
+services:
+  curq:
+    image: ghcr.io/onesteinbv/curq:18.0
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - db
+      - reporting
+    ports:
+      - "8069:8069"
+      - "8072:8072"
+    volumes:
+      - curq-data:/odoo/data
+    environment:
+      DB_HOST: "postgres"
+      DB_NAME: "main"
+      DB_USER: "curq"
+      DB_PASSWORD: "curq"
+      DB_PORT: "5432"
+      LIMIT_TIME_CPU: "600"
+      LIMIT_TIME_REAL: "1200"
+      LIMIT_TIME_REAL_CRON: "1200"
+      MODULES: "container_install,account_install,l10n_nl_install"
+      CHANGE_ADMIN_USER_PWD: "false"
+      SETUP_SMTP: "false"
+      PREPARE_CUSTOMER_USER: "false"
+      DB_FILTER: "^main$"
+      UPDATE_COMPANY: "false"
+      LOG_LEVEL: "warn"
+      LOG_HANDLER: ":WARN"
+      DOCKER: "true"
+      KWKHTMLTOPDF_SERVER_URL: "http://kwkhtmltopdf:8080"
+    restart: unless-stopped
+  postgres:
+    image: postgres:16
+    networks:
+      - db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: curq
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: curq
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "curq", "-d", "postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+  kwkhtmltopdf:
+    image: ghcr.io/acsone/kwkhtmltopdf:0.12.6.1-latest
+    restart: unless-stopped
+    networks:
+      - reporting
+    hostname: kwkhtmltopdf
+
+networks:
+  db:
+  reporting:
+
+volumes:
+  postgres-data:
+  curq-data:

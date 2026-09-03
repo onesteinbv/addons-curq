@@ -1,4 +1,4 @@
-from odoo import models
+from odoo import api, models
 
 
 class PaymentProvider(models.Model):
@@ -11,3 +11,12 @@ class PaymentProvider(models.Model):
         ):
             sudo_self = self.sudo()
         return super(PaymentProvider, sudo_self).button_immediate_install()
+
+    @api.model
+    def _toggle_post_processing_cron(self):
+        sudo_self = self
+        if self.env.user.is_restricted_user() and self.env.user.has_group(
+            "base.group_system"
+        ):
+            sudo_self = self.sudo()
+        return super(PaymentProvider, sudo_self)._toggle_post_processing_cron()

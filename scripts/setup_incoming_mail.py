@@ -7,9 +7,15 @@ import click_odoo
 @click.option("--server")
 @click.option("--user")
 @click.option("--password")
+@click.option("--port", default=993)
+@click.option("--server-type", default="imap")
+@click.option("--ssl/--no-ssl", default=True)
 @click.option("--confirm", is_flag=True, default=False)
-def main(env, server, user, password, confirm):
-    click.echo("Setup Incoming mail (IMAP)...")
+def main(env, server, user, password, port, server_type, ssl, confirm):
+    """Defaults to use IMAP with SSL on port 993, but can be configured with the options.
+    If confirm flag is set, it will try to connect to the server with the provided credentials and will raise an error if it fails.
+    """
+    click.echo(f"Setup Incoming mail ({server_type.upper()})...")
     module_container_accessibility = env.ref("base.module_container_accessibility")
     if module_container_accessibility.state != "installed":
         return click.echo(
@@ -29,10 +35,10 @@ def main(env, server, user, password, confirm):
     fetchmail_server = fetchmail_server_model.search([("private", "=", True)])
     values = {
         "name": "Default Incoming Mail Server",
-        "server_type": "imap",
+        "server_type": server_type,
         "server": server,
-        "port": 993,
-        "is_ssl": True,
+        "port": port,
+        "is_ssl": ssl,
         "priority": 9999999,
         "user": user,
         "password": password,

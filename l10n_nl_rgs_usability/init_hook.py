@@ -12,18 +12,23 @@ def post_init_hook(env):
     journals = env["account.journal"].search([])
     journals._set_journal_bank_payment_credit_account()
 
-    # Auto-install RGS for main company
+    # Ensure RGS is installed for the main company
+    # This is handled normally by `account` module after installation of a chart in `ir.module.write`
     main_company = env.ref("base.main_company", False)
     if (
         main_company
-        and main_company.chart_template != "nl_rgs"
+        and not main_company.chart_template
         and not main_company._existing_accounting()
     ):
-        env["account.chart.template"]._load(
-            "nl_rgs",
-            main_company,
-            install_demo=False,
-        )
+
+        def _load(env):
+            env["account.chart.template"]._load(
+                "nl_rgs",
+                main_company,
+                install_demo=False,
+            )
+
+        env.registry._auto_install_template = _load
 
     # Archive the cash basis tax journal
     journals = env["account.journal"].search([])

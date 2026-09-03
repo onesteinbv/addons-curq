@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        inherit_id="account.report_invoice_document"
+        id="report_invoice_document"
+        priority="99"
+    >
+        <!-- Remove Odoo icon -->
+        <xpath expr="//img[@id='qrcode_odoo_logo']" position="replace" />
+    </template>
+</odoo>

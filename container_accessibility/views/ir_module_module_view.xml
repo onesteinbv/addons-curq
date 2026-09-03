@@ -4,7 +4,7 @@
         <field name="name">Apps</field>
         <field name="res_model">ir.module.module</field>
         <field name="view_mode">kanban,list,form</field>
-        <field name="search_view_id" ref="base.view_module_filter"/>
+        <field name="search_view_id" ref="base.view_module_filter" />
         <field name="domain">
             [('name', 'in', [
                 'website_install',
@@ -21,7 +21,8 @@
                 'website_event_install',
                 'sale_install',
                 'survey_install',
-                'resource_booking_install'
+                'resource_booking_install',
+                'subscription_install'
             ])]
         </field>
     </record>

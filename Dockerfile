@@ -11,20 +11,24 @@ COPY --parents \
 	account_statement_import_online_ponto_log \
 	account_statement_import_online_ponto_statement_creation_mode \
 	account_statement_import_sheet_file_sheet_mappings \
+	base_branding \
 	base_customer_company \
 	base_customer_user \
-	base_mail_security \
 	base_module_bundle \
 	base_onboarding \
+	calendar_branding \
 	container_accessibility \
 	container_install \
 	container_s3 \
 	crm_install \
+	crypto_currency_install \
 	digest_configuration \
 	digest_disable \
 	event_install \
 	helpdesk_install \
+	helpdesk_project_install \
 	hr_accessibility \
+	hr_timesheet_sheet_accessibility \
 	hr_install \
 	l10n_de_install \
 	l10n_nl_hr_expense \
@@ -32,14 +36,18 @@ COPY --parents \
 	l10n_nl_hr_recruitment \
 	l10n_nl_install \
 	l10n_nl_rgs_usability \
+	mail_branding \
 	mass_mailing_force_dedicated_server \
 	mass_mailing_install \
 	mass_mailing_website_install \
+	membership_branding \
 	membership_development_install \
 	membership_install \
 	project_install \
+	sale_branding \
 	sale_install \
 	stock_install \
+	subscription_install \
 	survey_install \
 	website_event_install \
 	website_install \
@@ -48,8 +56,14 @@ COPY --parents \
 	website_sale_install \
 	stock_account_install \
 	sale_stock_install \
+	sales_team_update \
 	resource_booking_install \
     spreadsheet_oca_ux \
+	partner_external_map_usability \
+	release_note \
+	web_branding \
+	account_branding \
+	website_branding \
 	./
 
 RUN apt-get install git -y
@@ -69,18 +83,20 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt-get update \
     && apt-get install -y software-properties-common \
     && add-apt-repository ppa:deadsnakes/ppa \
-    && apt-get install -y python3.12 cython3 libldap2-dev libpq-dev libsasl2-dev gcc python3.12-dev python3.12-venv \
+    && apt-get install -y python3.12 cython3 libldap2-dev libpq-dev libsasl2-dev gcc python3.12-dev python3.12-venv libcairo2-dev libjpeg-dev libgif-dev \
     && python3.12 -m ensurepip --upgrade \
     && pip3.12 install -U wheel setuptools \
     && sed -i -E "s/(gevent==)21\.8\.0( ; sys_platform != 'win32' and python_version == '3.10')/\122.10.2\2/;s/(greenlet==)1.1.2( ; sys_platform != 'win32' and python_version == '3.10')/\12.0.2\2/" /requirements.txt \
     && pip3.12 wheel -r /requirements.txt -r /curq-requirements.txt --wheel-dir=/wheels
 
-FROM ghcr.io/onesteinbv/odoo-docker:18.0-981167e7f1bdb7c0d9f50d194ee9fd66abd85050 AS base
+FROM ghcr.io/onesteinbv/odoo-docker:18.0-slim-467dda4aba36936beba8b94a167e9a8de20a65de AS base
 COPY --from=pack ./odoo /odoo/src/odoo
 COPY --from=pack ./package /odoo/custom
 COPY --from=wheels ./wheels /odoo/wheels
 COPY --from=wheels /curq-requirements.txt /odoo/custom/requirements.txt
 COPY --from=wheels /requirements.txt /odoo/src/odoo/requirements.txt
+COPY ./NEWS.md /odoo/custom/NEWS.md
+COPY ./NEWS.nl_NL.md /odoo/custom/NEWS.nl_NL.md
 COPY ./scripts /odoo/scripts
 RUN pip install --no-cache-dir -r /odoo/src/odoo/requirements.txt -r /odoo/custom/requirements.txt --find-links /odoo/wheels
 RUN pip install -e /odoo/src/odoo

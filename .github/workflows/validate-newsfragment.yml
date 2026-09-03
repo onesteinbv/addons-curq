@@ -1,0 +1,31 @@
+name: validate-newsfragment
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+    branches:
+      - "18.0"
+  
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Towncrier
+        if: "!contains(github.event.pull_request.labels.*.name, 'no-newsfragment')"
+        run: |
+          pip3 install towncrier
+
+      - name: Validate added newsfragment
+        if: "!contains(github.event.pull_request.labels.*.name, 'no-newsfragment')"
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin 18.0:18.0
+          towncrier check --compare-with origin/18.0

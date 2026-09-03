@@ -1,22 +1,21 @@
-name: test
+name: tests
 
 on:
-  workflow_dispatch:
-    inputs:
-      git_commit:
-        required: true
-        type: string
+  pull_request:
+    branches:
+      - "18.0"
+  push:
+    branches:
+      - "18.0"
 
 jobs:
   test:
     runs-on: ubuntu-22.04
-    permissions:
-      statuses: write
-    container:
-      image: ghcr.io/${{ github.repository_owner }}/curq-ci:${{ inputs.git_commit }}
+    container: ghcr.io/oca/oca-ci/py3.10-odoo18.0:latest
+    name: Odoo
     services:
       postgres:
-        image: postgres:13.0
+        image: postgres:13
         env:
           POSTGRES_USER: odoo
           POSTGRES_PASSWORD: odoo
@@ -24,66 +23,42 @@ jobs:
         ports:
           - 5432:5432
     env:
-      DB_HOST: postgres
-      DB_PORT: "5432"
-      DB_USER: odoo
-      DB_PASSWORD: odoo
-      WORKERS: "0"
-      WITHOUT_DEMO: "False"
-      DOCKER: "true"
+      OCA_ENABLE_CHECKLOG_ODOO: "1"
     steps:
-      - name: "Update status: pending"
-        uses: actions/github-script@v7
+      - uses: actions/checkout@v4
         with:
-          script: |
-            github.rest.repos.createCommitStatus({
-              sha: "${{ inputs.git_commit }}",
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: "pending",
-              context: "ci / test",
-              description: "Running...",
-              target_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            })
-      - name: Create config file
+          persist-credentials: false
+      - name: Aggregate repos.yaml
         run: |
-          create_config_file.sh
-      - name: Wait for PostgreSQL
+          set -x
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          pip install git-aggregator
+          gitaggregate -c repos.yaml
+          addons_path=$ADDONS_PATH,$(find $(pwd)/* -name .git -exec dirname {} \; -not -name odoo | uniq | tr '\n' ',' | sed 's/,$//'),.
+          echo "addons_path=${addons_path}" >> ${ODOO_RC}
+          echo "ADDONS_PATH=$addons_path" >> $GITHUB_ENV
+      - name: Install external dependencies
         run: |
-          wait_for_postgres.sh
+          selection_flags=$(echo $ADDONS_PATH | sed 's/,/ -d /g' | sed 's/^/-d /')
+          bundles=$(find . -mindepth 1 -maxdepth 1 -type d -name '*_install' -printf '%f,' | sed 's/,$//')
+          external_deps=$(manifestoo $selection_flags --select-exclude "$bundles" --exclude-core-addons list-external-dependencies python --transitive --separator ' ')
+          pip3 install $external_deps pdfminer.six==20220319
+          echo "EXCLUDE=$bundles" >> $GITHUB_ENV
+      - name: Check licenses
+        run: manifestoo -d . check-dev-status --default-dev-status=Beta
       - name: Initialize test db
-        run: |
-          ADDONS=$(manifestoo -d /odoo/custom list | grep _install | paste -sd,)
-          unbuffer odoo -d odoo -i $ADDONS --stop-after-init | checklog-odoo -i WARNING
+        run: oca_init_test_database
       - name: Run tests
-        run: |
-          ADDONS=$(manifestoo -d /odoo/custom --separator , list)
-          unbuffer odoo -d odoo -u $ADDONS --test-enable --stop-after-init | checklog-odoo -i WARNING
-      - name: "Update status: success"
-        uses: actions/github-script@v7
-        if: success()
+        run: oca_run_tests
+      - name: Upload screenshots from JS tests
+        uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
         with:
-          script: |
-              github.rest.repos.createCommitStatus({
-                sha: "${{ inputs.git_commit }}",
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                state: "success",
-                context: "ci / test",
-                description: "Tests passed",
-                target_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-              })
-      - name: "Update status: failure"
-        uses: actions/github-script@v7
-        if: failure()
+          name: Screenshots of failed JS tests - ${{ matrix.name }}${{ join(matrix.include) }}
+          path: /tmp/odoo_tests/${{ env.PGDATABASE }}
+          if-no-files-found: ignore
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
         with:
-          script: |
-              github.rest.repos.createCommitStatus({
-                sha: "${{ inputs.git_commit }}",
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                state: "failure",
-                context: "ci / test",
-                description: "Tests failed",
-                target_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-              })                
+          token: ${{ secrets.CODECOV_TOKEN }}

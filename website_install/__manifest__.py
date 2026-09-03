@@ -8,7 +8,9 @@
     "license": "AGPL-3",
     "depends": [
         "website",
+        "website_altcha",
         "website_blog",
+        "website_breadcrumb",
         "website_odoo_debranding",
         "website_onboarding",
         "website_share_blogger",
@@ -35,6 +37,7 @@
         "website_two_steps_share_technical",
         "website_snippet_openstreetmap",
         "website_analytics_matomo",
+        "website_branding",
     ],
     "bundle": True,
 }

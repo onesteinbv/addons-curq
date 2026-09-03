@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="release_note_wizard_view" model="ir.ui.view">
+        <field name="model">release.note.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Release Notes">
+                <field name="user_id" invisible="1" />
+                <field name="news" />
+                <footer>
+                    <button special="cancel" class="btn-primary" string="Close" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="release_note_wizard_action" model="ir.actions.act_window">
+        <field name="name">Release Notes</field>
+        <field name="res_model">release.note.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

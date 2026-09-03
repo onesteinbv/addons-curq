@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="default_map_website_id" model="ir.config_parameter">
+        <field name="key">partner_external_map.default_map_website_id</field>
+        <field name="value" eval="ref('partner_external_map.openstreetmap')" />
+    </record>
+
+    <record id="default_route_map_website_id" model="ir.config_parameter">
+        <field name="key">partner_external_map.default_route_map_website_id</field>
+        <field name="value" eval="ref('partner_external_map.openstreetmap')" />
+    </record>
+</odoo>
