@@ -6,7 +6,6 @@
     onesteinbv: https://github.com/onesteinbv/odoo.git
   merges:
     - odoo 18.0
-    - onesteinbv 18.0-fix-web_editor
 
 # onestein
 ./addons-generic:
