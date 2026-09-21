@@ -1,5 +1,6 @@
 import click
 import click_odoo
+from _user_write import password_matches
 
 
 @click.command()
@@ -10,8 +11,15 @@ import click_odoo
 def main(env, xml_id, login, password):
     click.echo("Update user `%s`..." % xml_id)
     user = env.ref(xml_id)
-    user.login = login
-    user.password = password
+    if login and user.login != login:
+        user.login = login
+    elif login:
+        # Writing the same login still sends a security notification.
+        click.echo("Login of `%s` is already set; skipping write." % xml_id)
+    if password and not password_matches(env, user, password):
+        user.password = password
+    elif password:
+        click.echo("Password of `%s` is already set; skipping write." % xml_id)
 
 
 if __name__ == "__main__":
