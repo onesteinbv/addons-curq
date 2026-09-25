@@ -62,6 +62,7 @@ COPY --parents \
     spreadsheet_oca_ux \
 	partner_external_map_usability \
 	release_note \
+	auth_branding \
 	web_branding \
 	account_branding \
 	website_branding \
