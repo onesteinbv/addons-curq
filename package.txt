@@ -103,6 +103,7 @@ addons-generic/website_event_altcha
 addons-generic/website_hide_navbar_technical
 addons-generic/website_html_sitemap
 addons-generic/website_mailing_to_blogpost
+addons-generic/website_mass_mailing_altcha
 addons-generic/website_mass_mailing_membership_group
 addons-generic/website_membership_group
 addons-generic/website_membership_group_partner_privacy
