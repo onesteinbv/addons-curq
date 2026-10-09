@@ -62,7 +62,7 @@ class OnboardingWizard(models.TransientModel):
 
     def _reopen_self(self):
         action = super()._reopen_self()
-        action["name"] = self.env._("Welcome to Odoo")
+        action["name"] = self.env._("Welcome to CURQ")
         return action
 
     @api.model
