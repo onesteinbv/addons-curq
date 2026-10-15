@@ -6,6 +6,7 @@
     onesteinbv: https://github.com/onesteinbv/odoo.git
   merges:
     - odoo 18.0
+    - onesteinbv 18-captcha-donations
 
 # onestein
 ./addons-generic:
@@ -15,7 +16,7 @@
     onestein: https://github.com/onesteinbv/addons-generic.git
   merges:
     - remote: onestein
-      ref: 39d31d38e62be20f322cc606fcaccb44d1276132
+      ref: 1fca254653b1003043d2ad18997cfd746e33714d
 
 # oca
 ./oca:
