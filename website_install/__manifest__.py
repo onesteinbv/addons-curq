@@ -39,6 +39,7 @@
         "website_snippet_openstreetmap",
         "website_analytics_matomo",
         "website_branding",
+        "website_geoengine_store_locator",
     ],
     "bundle": True,
 }
