@@ -319,6 +319,7 @@ oca/partner_contact_birthdate
 oca/partner_contact_personal_information_page
 oca/partner_external_map
 oca/partner_firstname
+oca/partner_store
 oca/product_analytic
 oca/product_category_product_link
 oca/product_category_tax
@@ -377,6 +378,8 @@ oca/website_mass_mailing_altcha
 oca/website_event_calendar
 oca/website_sale_resource_booking
 oca/website_snippet_openstreetmap
+oca/website_geoengine
+oca/website_geoengine_store_locator
 oca/operating_unit
 oca/analytic_operating_unit
 oca/account_operating_unit
