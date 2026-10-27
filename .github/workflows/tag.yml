@@ -6,17 +6,6 @@ on:
       - "18.0.*.*"
 
 jobs:
-  notify-start:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Send Telegram message
-        run: |
-          curl \
-            -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_API_TOKEN }}/sendMessage \
-            -H 'Content-Type: application/json' \
-            -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"📢 Testing tag `${{ github.ref_name }}`: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
-            --fail
-  
   setup:
     runs-on: ubuntu-latest
     outputs:
@@ -79,30 +68,3 @@ jobs:
           docker pull ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }}
           docker tag ghcr.io/${{ github.repository_owner }}/curq-ci:${{ github.ref_name }} ghcr.io/${{ github.repository_owner }}/curq-ci:18.0
           docker push ghcr.io/${{ github.repository_owner }}/curq-ci:18.0
-
-  notify-failure:
-    needs: [build-ci, migration, build]
-    if: ${{ failure() }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Send Telegram message
-        run: |
-          curl \
-            -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_API_TOKEN }}/sendMessage \
-            -H 'Content-Type: application/json' \
-            -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"❤️‍🩹 Testing tag `${{ github.ref_name }}` failed: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
-            --fail
-  
-  notify-success:
-    needs: [build-ci, migration, build]
-    if: ${{ success() }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Send Telegram message
-        run: |
-          curl \
-            -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_API_TOKEN }}/sendMessage \
-            -H 'Content-Type: application/json' \
-            -d '{"chat_id":"${{ secrets.TELEGRAM_CHAT_ID }}","text":"✅ Testing tag `${{ github.ref_name }}` succeeded: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "parse_mode": "markdown"}' \
-            --fail
-  
