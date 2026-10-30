@@ -59,8 +59,6 @@ else
   python /odoo/scripts/apply_modules.py -c "$ODOO_RC" -d "$DB_NAME" --log-level=error --dry-run
 fi
 
-python /odoo/scripts/uninstall_auto_install_modules.py -c "$ODOO_RC" -d "$DB_NAME" --log-level=error
-
 python /odoo/scripts/remove_odoo_oauth_provider.py -c "$ODOO_RC" -d "$DB_NAME" --log-level=error
 
 if [[ -n "$KEYCLOAK_URL" ]]; then
