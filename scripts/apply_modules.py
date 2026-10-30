@@ -46,14 +46,23 @@ def main(env, dry_run):
             retired_modules.button_immediate_uninstall()
     else:
         click.echo("No retired modules.")
+
+    # Uninstall the website_share_filter_option_skype module if it is installed
     website_share_filter_option_skype_module = env.ref(
         "base.module_website_share_filter_option_skype", False
     )
-    if (
-        website_share_filter_option_skype_module
-        and website_share_filter_option_skype_module.state == "installed"
-    ):
-        website_share_filter_option_skype_module.button_immediate_uninstall()
+
+    if website_share_filter_option_skype_module:
+        if website_share_filter_option_skype_module.state == "installed":
+            website_share_filter_option_skype_module.button_immediate_uninstall()
+        elif website_share_filter_option_skype_module.state == "to install":
+            website_share_filter_option_skype_module.button_install_cancel()
+        elif website_share_filter_option_skype_module.state == "to upgrade":
+            website_share_filter_option_skype_module.button_upgrade_cancel()
+            website_share_filter_option_skype_module.button_immediate_uninstall()
+        elif website_share_filter_option_skype_module.state == "to remove":
+            website_share_filter_option_skype_module.button_uninstall_cancel()
+            website_share_filter_option_skype_module.button_immediate_uninstall()
 
 
 if __name__ == "__main__":
