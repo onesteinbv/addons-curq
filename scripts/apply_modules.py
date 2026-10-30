@@ -12,6 +12,7 @@ AUTO_INSTALL_MODULES_TO_UNINSTALL = [
     "partner_autocomplete",
     "website_share_filter_option_skype",
 ]
+AUTO_INSTALL_MODULES_TO_INSTALL = ["website_mass_mailing_altcha"]
 
 
 @click.command()
@@ -64,7 +65,7 @@ def main(env, dry_run):
         [
             ("state", "=", "uninstalled"),
             ("auto_install", "=", True),
-            ("name", "not in", AUTO_INSTALL_MODULES_TO_UNINSTALL),
+            ("name", "in", AUTO_INSTALL_MODULES_TO_INSTALL),
         ]
     )
     installed_module_names = set(
