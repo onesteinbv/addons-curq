@@ -15,6 +15,7 @@ AUTO_INSTALL_MODULES_TO_UNINSTALL = [
 AUTO_INSTALL_MODULES_TO_INSTALL = [
     "website_mass_mailing_altcha",
     "website_payment_altcha",
+    "website_event_altcha",
 ]
 
 
