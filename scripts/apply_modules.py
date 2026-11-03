@@ -12,7 +12,10 @@ AUTO_INSTALL_MODULES_TO_UNINSTALL = [
     "partner_autocomplete",
     "website_share_filter_option_skype",
 ]
-AUTO_INSTALL_MODULES_TO_INSTALL = ["website_mass_mailing_altcha"]
+AUTO_INSTALL_MODULES_TO_INSTALL = [
+    "website_mass_mailing_altcha",
+    "website_payment_altcha",
+]
 
 
 @click.command()
