@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <function model="res.config.settings" name="create">
+        <value
+            model="res.config.settings"
+            eval="dict(
+            obj().default_get(list(obj().fields_get())),
+            **{
+                'outgoing_report_config_ids': [
+                    (4, obj().env.ref('account.account_invoices').id),
+                    (4, obj().env.ref('account.account_invoices_without_payment').id),
+                    (4, obj().env.ref('account.action_report_payment_receipt').id),
+                ],
+            })"
+        />
+        <value name="context" eval="{'watermark_append_mode': True}" />
+    </function>
+</odoo>
