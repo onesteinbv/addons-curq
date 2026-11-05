@@ -1,3 +1,52 @@
+# CURQ 18.0.10.0 (05-11-2026)
+
+## Nieuwe functionaliteiten
+
+- Nieuw websiteblok dat winkellocaties op een kaart toont.
+  ([#422](https://github.com/onesteinbv/addons-curq/pull/422))
+- Ondersteuning toegevoegd voor dynamische lidmaatschapstypen. Typen die voorheen
+  statisch waren, zoals volger, kandidaat en commissie, kunnen nu dynamisch worden
+  aangemaakt. Ook is er een website-indeling toegevoegd waarmee alle groepsleden in één
+  lijst worden weergegeven, met hun lidmaatschapstype naast hun naam.
+
+## Verbeteringen
+
+- De rasterindeling van bundels in de onboardingwizard verbeterd.
+  ([#397](https://github.com/onesteinbv/addons-curq/pull/397))
+- Een Thunderbird- en algemene ICS-knop toegevoegd aan de evenementpagina.
+  ([#398](https://github.com/onesteinbv/addons-curq/pull/398))
+- Breadcrumbs op de website zijn nu opt-in in plaats van opt-out. Dat betekent dat
+  breadcrumbs standaard op alle pagina's verborgen zijn, tenzij de gebruiker ze
+  expliciet inschakelt. ([#406](https://github.com/onesteinbv/addons-curq/pull/406))
+- De pagina _/website/info_ is nu standaard uitgeschakeld.
+  ([#407](https://github.com/onesteinbv/addons-curq/pull/407))
+- Ondersteuning toegevoegd om de actie van een websiteformulier in te stellen op het
+  aanmaken van een helpdeskticket.
+- De categorie 'Bundels' toegevoegd aan de Apps-weergave.
+  ([#414](https://github.com/onesteinbv/addons-curq/pull/414))
+- Spambeveiliging toegevoegd aan het nieuwsbriefwebsiteblok.
+- Spambeveiliging toegevoegd aan het betalingsformulier voor donaties.
+  ([#421](https://github.com/onesteinbv/addons-curq/pull/421))
+- Het lidmaatschapsveld voor samenwerking ('Wants To Collaborate') verplaatst naar een
+  geschiktere plek.
+
+## Opgelost
+
+- Sessie-intrekking opgelost: deze gaf eerder een foutmelding en deed niets, maar trekt
+  nu de sessie van de gebruiker correct in.
+  ([#401](https://github.com/onesteinbv/addons-curq/pull/401))
+- Sortering op basis van de sorteercode verwijderd.
+  ([#405](https://github.com/onesteinbv/addons-curq/pull/405))
+- Probleem met de CoinGecko-wisselkoersen opgelost. De datum 'Last Successful Update'
+  van valutakoersaanbieders wordt alleen bijgewerkt als er voor die datum koersen zijn
+  gevonden. Zo worden koersen voor gemiste datums opnieuw opgehaald.
+- Rollback tijdens lidmaatschapsregistratie afgehandeld om ongewenste aanmaak en
+  wijzigingen van records te voorkomen.
+- Vertaalprobleem op het lidmaatschapsregistratieformulier opgelost.
+- Op de registratiepagina wordt voor lidmaatschapsgroepen nu een afbeelding gebruikt in
+  plaats van een pictogram. ([#423](https://github.com/onesteinbv/addons-curq/pull/423))
+- Skype verwijderd als share-optie, omdat Microsoft dit niet langer ondersteunt.
+
 # CURQ 18.0.9.2 (19-06-2026)
 
 ## Features
