@@ -10,10 +10,7 @@
             <attribute name="t-esc">title or 'CURQ'</attribute>
         </xpath>
     </template>
-    <template
-        id="webclient_bootstrap"
-        inherit_id="web.webclient_bootstrap"
-    >
+    <template id="webclient_bootstrap" inherit_id="web.webclient_bootstrap">
         <xpath expr="//meta[@name='theme-color']" position="attributes">
             <attribute name="content">#ffc03d</attribute>
         </xpath>
