@@ -10,6 +10,11 @@
         "base",
         "mail",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "mail_branding/static/src/js/install_notification.esm.js",
+        ],
+    },
     "data": [
         "data/res_company_data.xml",
         "data/res_users_data.xml",

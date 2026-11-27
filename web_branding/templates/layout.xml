@@ -4,10 +4,15 @@
         <xpath expr="//head/link[@rel='shortcut icon']" position="attributes">
             <attribute
                 name="t-att-href"
-            >x_icon or '/web_branding/static/img/icon.svg'</attribute>
+            >x_icon or '/web_branding/static/img/favicon.svg'</attribute>
         </xpath>
         <xpath expr="//head/title" position="attributes">
             <attribute name="t-esc">title or 'CURQ'</attribute>
+        </xpath>
+    </template>
+    <template id="webclient_bootstrap" inherit_id="web.webclient_bootstrap">
+        <xpath expr="//meta[@name='theme-color']" position="attributes">
+            <attribute name="content">#ffc03d</attribute>
         </xpath>
     </template>
 </odoo>
