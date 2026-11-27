@@ -72,6 +72,7 @@
         "calendar",
         "calendar_branding",
         "release_note",
+        "auth_password_policy",
     ],
     "bundle": True,
 }
